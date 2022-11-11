@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.button-carino{
+  @apply px-5 bg-sky-600 h-full text-white
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light;
+  }
+  body {
+    color: black;
+    background: white;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: black;
+    background: white;
+  }
+}
+
+
+.btn{
+  @apply bg-primary text-white px-5 py-4
+}
+
+.btn:hover{
+  @apply bg-primary-dark
+}
+
+.btn-arrow{
+  @apply bg-gray-300 font-medium pl-5 pr-4 py-3 text-black flex flex-row flex-nowrap
+}
+
+.img-abo{
+  @apply h-full object-cover
+}
+
+
+
+.postItem{
+  @apply bg-gray-200 pb-4
+}
+
+.postItem__text{
+  @apply px-8 pt-6
+}
+
+.postItem__link{
+  @apply text-primary-light underline-offset-4 font-medium block mr-0 ml-auto w-fit flex flex-nowrap my-6 items-end
+}
+
+.postItem__link:hover{
+  @apply text-primary
+}
+
+
+.postPage__image{
+  height:50vh;
+  min-height: 450px;
+  @apply w-full object-cover mb-8 mt-16
+ }
+
+.postPage__categories{
+  @apply flex flex-row justify-start flex-wrap pt-4
+}
+
+.postPage__category{
+  @apply px-4 py-2 bg-primary-100 flex w-fit text-primary mr-3 mb-3
+}
+
+.postPage__category:last-child{
+  @apply mb-3
+}
+.postPage__content{
+  @apply flex flex-row justify-between
+}
+
+.breadCrumb{
+  @apply flex flex-row
+}
+
+.breadCrumb .breadCrumb__element:after{
+  content: "/";
+}
+.breadCrumb .breadCrumb__element:last-child::after{
+  content: "";
+  @apply hidden
+}

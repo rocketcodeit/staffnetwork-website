@@ -1,0 +1,10 @@
+
+.headerMenu {
+    @apply flex flex-row h-full;
+}
+.headerMenu {
+    @apply h-full;
+}
+.headerMenu > li a {
+    @apply h-full flex items-center px-3;
+}
