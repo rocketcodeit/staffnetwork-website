@@ -1,5 +1,7 @@
 import {IHeaderConfiguration} from "./IHeaderConfiguration";
+import {IFooterConfiguration} from "./IFooterConfiguration";
 
 export interface IWebsiteConfiguration{
-    headerConfiguration : IHeaderConfiguration
+    headerConfiguration : IHeaderConfiguration,
+    footerConfiguration : IFooterConfiguration
 }

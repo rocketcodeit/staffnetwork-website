@@ -17,7 +17,7 @@ function Layout(props: LayoutProps){
         <React.Fragment>
             <Header {...WebsiteConfig.headerConfiguration} />
             <main>{props.children}</main>
-            <Footer/>
+            <Footer {...WebsiteConfig.footerConfiguration}/>
         </React.Fragment>
     )
 }
