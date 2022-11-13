@@ -28,7 +28,12 @@ const configuration : IWebsiteConfiguration = {
             {name: "Termini e Condizioni",  url: "/termini-e-condizioni"}
         ],
         logo: "/vercel-white.svg"
-    }
+
+    },
+    positionOffice : "Via Genova,59\n 70022 Altamura BA",
+    openingDaysHours : "Lunedi - Venerdi\n" + "09:00-13:00, 15:00-17:00",
+    emailContact : "info@staffnetwork.it",
+    phoneContact : "0803146422",
 }
 
 export default  configuration;

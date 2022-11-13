@@ -3,5 +3,9 @@ import {IFooterConfiguration} from "./IFooterConfiguration";
 
 export interface IWebsiteConfiguration{
     headerConfiguration : IHeaderConfiguration,
-    footerConfiguration : IFooterConfiguration
+    footerConfiguration : IFooterConfiguration,
+    positionOffice? : string,
+    openingDaysHours? : string,
+    emailContact : string,
+    phoneContact : string,
 }
