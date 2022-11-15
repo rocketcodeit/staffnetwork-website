@@ -4,7 +4,7 @@ const configuration : IWebsiteConfiguration = {
     headerConfiguration : {
         menuItems : [
             { name : "Home",    url: "/" },
-            { name:"About",     url: "/about" }
+            { name:"Blog",     url: "/post" }
         ],
         logo : "/vercel.svg"
     },
@@ -30,6 +30,11 @@ const configuration : IWebsiteConfiguration = {
         logo: "/vercel-white.svg"
 
     },
+    socialMenu : [
+        {name: "/assets/drawable/facebook.svg",    url: "https://www.facebook.com"},
+        {name: "/assets/drawable/instagram.svg",     url: "https://www.instagram.com"},
+        {name: "/assets/drawable/twitter.svg",  url: "https://www.twitter.com"}
+    ],
     positionOffice : "Via Genova,59\n 70022 Altamura BA",
     openingDaysHours : "Lunedi - Venerdi\n" + "09:00-13:00, 15:00-17:00",
     emailContact : "info@staffnetwork.it",

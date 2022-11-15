@@ -32,9 +32,10 @@ function Footer(props : IWebsiteConfiguration){
 
                             <div className="w-2/12 bg-primary py-4">
                                 <div className="icons flex flex-col justify-evenly items-center h-full">
-                                    <img className="mx-auto" src="/assets/drawable/facebook.svg" />
-                                    <img className="mx-auto" src="/assets/drawable/instagram.svg" />
-                                    <img className="mx-auto" src="/assets/drawable/twitter.svg" />
+                                    {props.socialMenu?.map((item) => {
+                                       return <a href={item.url}><img className="mx-auto" src={item.name} /> </a>
+                                    })}
+
                                 </div>
                             </div>
                         </div>

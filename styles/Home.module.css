@@ -1,11 +1,37 @@
 
 .containerRight{
-  @apply container mr-0 pr-0
+  @apply container pr-0 relative
 }
 
 .containerLeft{
-  @apply container ml-0 pl-0
+  @apply container pl-0 relative
 }
+.bgContainerBefore:before{
+  content: "";
+  @apply bg-primary-dark;
+}
+.containerLeft:before{
+  content: "";
+  position: absolute;
+  width: 300%;
+
+  @apply bg-primary-dark absolute h-full right-12  -z-10
+
+}
+
+.containerRightBefore:before{
+  content: "";
+  position: absolute;
+  width: 200%;
+
+  @apply bg-gray-200 h-full -z-10 top-0;
+}
+@media only screen and (min-width: 2400px) {
+  .containerLeft{
+    @apply container pl-0
+  }
+}
+
 .main {
   min-height: 100vh;
   padding: 4rem 0;

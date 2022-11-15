@@ -104,7 +104,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="mt-48">
+            <section className="mt-48 overflow-hidden">
                 <div className="w-6/12 container ml-0">
                     <h2 className="text-3xl font-medium mb-8">Staff Network in cifre</h2>
                 </div>
@@ -112,7 +112,7 @@ export default function Home() {
                     <div className="w-7/12 bg-[url('/assets/img/stephen-dawson-qwtCeJ5cLYs-unsplash.png')]">
 
                     </div>
-                    <div className="w-6/12 mb-20 bg-gray-200 ml-[-8.333%] pl-16 py-12">
+                    <div className={`${styles.containerRightBefore}  w-6/12 mb-20 bg-gray-200 ml-[-8.333%] pl-16 py-12 relative`}>
                         <div className="counter flex flex-flow items-center mb-4">
                             <h4 className="font-medium text-4xl mr-2">37</h4>
                             <p className="text-xl">Anni di esperienza</p>
