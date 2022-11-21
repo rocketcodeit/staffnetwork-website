@@ -23,9 +23,7 @@ module.exports = {
       }
     },
     extend: {
-      height:{
-        'screen-90': '90vh'
-      },
+
       colors:{
         primary:{
           '100': '#d1dbe7',
@@ -46,7 +44,22 @@ module.exports = {
           '3xl': '1600px',
           '4xl': '2000px'
         }
-      }
+      },
+      flex:{
+        '3-1': '0 0 calc(33.33% - 8px)',
+        '3-1.125': '0 0 calc(33.33% - 12px)',
+        '3-1.25': '0 0 calc(33.33% - 14px)',
+        '3-1.5': '0 0 calc(33.33% - 18px)',
+
+        '2-1': '0 0 calc(50% - 8px)',
+        '2-1.125': '0 0 calc(50% - 12px)',
+        '2-1.25': '0 0 calc(50% - 14px)',
+        '2-1.5': '0 0 calc(50% - 18px)',
+
+      },
+      height:{
+        'screen-90': '90vh'
+      },
     },
   },
   plugins: [

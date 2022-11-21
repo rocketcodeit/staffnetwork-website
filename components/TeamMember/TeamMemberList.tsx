@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {ITeamMember} from "../../models/ITeamMember";
 import TeamMember from "./TeamMember";
+import styles from "../../styles/TeamMember.module.css"
 
 export interface ITeamMemberProps{
     itemsCount? : number
@@ -24,7 +25,7 @@ function TeamMemberList (props : ITeamMemberProps){
             })
     },[]);
     return(
-        <div className="container TeamMemberListArray grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-5 gap-4" >
+        <div className={styles.list} >
             {teamMembers.map((item) => {
                // return <TeamMember key={item.nimpame}>{item}</TeamMember>
                 return <TeamMember  {...item} />

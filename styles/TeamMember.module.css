@@ -1,0 +1,18 @@
+.list{
+    @apply container flex flex-wrap lg:gap-5 gap-4 justify-center
+}
+.item{
+    @apply  lg:w-4/12 md:w-6/12 w-full flex flex-col items-center lg:items-stretch
+            lg:flex-3-1.25 md:flex-2-1
+}
+.item img{
+    @apply max-h-[650px] object-cover
+}
+.item__name{
+    @apply text-2xl font-medium
+}
+
+.item__profession{
+    @apply text-primary-700
+}
+

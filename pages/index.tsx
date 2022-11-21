@@ -151,8 +151,8 @@ export default function Home() {
             </section>
 
             <section className="bg-primary-100 mt-24">
-                <div className="container flex flex-flow justify-between">
-                    <div className="w-5/12 py-32">
+                <div className="container flex flex-flow justify-between flex-wrap lg:flex-wrap flex-wrap-reverse  ">
+                    <div className="lg:w-5/12 w-full lg:py-32 pt-8 pb-12">
                         <h2 className="text-3xl font-medium mb-5">Network & Partnership</h2>
                         <p>Siamo alla ricerca costante di studi e professionisti con cui intessere solidi rapporti di
                             collaborazione e interscambio di competenze.
@@ -161,7 +161,7 @@ export default function Home() {
                         </p>
                         <a className="btn block w-fit mt-4" href="/chi-siamo">Conosci i professionisti</a>
                     </div>
-                    <div className="w-6/12 bg-cover bg-[url('/assets/img/pexels-gustavo-fring-628510.png')]" >
+                    <div className="lg:w-6/12 w-full h-32 lg:h-auto bg-cover bg-[url('/assets/img/pexels-gustavo-fring-628510.png')] bg-center" >
                     </div>
                 </div>
             </section>
