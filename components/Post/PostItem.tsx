@@ -6,7 +6,7 @@ import moment from "moment";
 
 function PostItem(props : IPost){
     return(
-        <div className="postItem basis-1/3">
+        <div className="postItem">
             <img className="w-full pr-8" src={props.img}/>
 
             <div className="postItem__text">

@@ -138,6 +138,9 @@
   margin-left: 0.5rem;
 }
 
+.bgListItemDigits{
+  @apply w-full h-[400px] absolute lg:w-7/12 lg:relative
+}
 @media (max-width: 600px) {
   .grid {
     width: 100%;

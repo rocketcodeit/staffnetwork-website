@@ -24,7 +24,7 @@ function TeamMemberList (props : ITeamMemberProps){
             })
     },[]);
     return(
-        <div className="container TeamMemberListArray flex flex-flow flex-wrap" >
+        <div className="container TeamMemberListArray grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-5 gap-4" >
             {teamMembers.map((item) => {
                // return <TeamMember key={item.nimpame}>{item}</TeamMember>
                 return <TeamMember  {...item} />

@@ -25,7 +25,7 @@ function PostList (props : IPostProps){
         }, []);
 
     return(
-        <div className="PostListArray grid grid-cols-3 gap-5">
+        <div className="PostListArray grid lg:grid-cols-3 grid-cols-1 gap-5">
             {
                 posts.map((item) =>{
                     return <PostItem {...item} />
