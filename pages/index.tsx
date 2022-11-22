@@ -14,9 +14,9 @@ export default function Home() {
                 <div className="h-screen-90 container">
                     <div className="h-full bg-[url('/assets/img/home_header.png')]"></div>
                     <div className="drop-shadow-xl bg-zinc-900/80 absolute max-h-full lg:top-48 md:top-24 top-16 left-0 right-36 md:w-9/12 w-11/12 lg:p-20  md:p-12 p-8">
-                        <h2 className="text-4xl font-medium text-white mb-6">La crescita aziendale è un percorso di cui
+                        <h1 className="text-white mb-6">La crescita aziendale è un percorso di cui
                             conosciamo
-                            la strada</h2>
+                            la strada</h1>
                         <p className="text-white lg:w-9/12  w-full mb-5">Siamo un’organizzazione multidisciplinare di
                             professionisti con l’obiettivo di rendere
                             effettiva la crescita della tua impresa attraverso un piano strategico di azioni concrete e

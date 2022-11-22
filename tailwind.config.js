@@ -23,7 +23,6 @@ module.exports = {
       }
     },
     extend: {
-
       colors:{
         primary:{
           '100': '#d1dbe7',
@@ -36,7 +35,6 @@ module.exports = {
           '700': '#0f2d51',
           '800': '#0a1e36',
           '900': '#050f1b',
-          dark: '#12335D',
         }
       },
       container:{
@@ -60,6 +58,12 @@ module.exports = {
       height:{
         'screen-90': '90vh'
       },
+      fontSize:{
+        '4.5xl':['2.5rem',{
+          lineHeight: '3rem',
+          fontWeight: '500'
+        }]
+      }
     },
   },
   plugins: [

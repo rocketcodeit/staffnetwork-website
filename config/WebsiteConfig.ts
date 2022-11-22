@@ -3,8 +3,11 @@ import {IWebsiteConfiguration} from "./models/IWebsiteConfiguration";
 const configuration : IWebsiteConfiguration = {
     headerConfiguration : {
         menuItems : [
-            { name : "Home",    url: "/" },
-            { name:"Blog",     url: "/post" }
+            {name: "Home",              url: "/"},
+            {name: "Come lavoriamo",    url: "/come-lavoriamo"},
+            {name: "Clienti",           url: "/clienti"},
+            {name: "Risorse",           url: "/risorse"},
+            {name: "Servizi",           url: "/servizi"}
         ],
         logo : "/vercel.svg"
     },

@@ -1,10 +1,11 @@
 
-.headerMenu {
-    @apply flex flex-row h-full;
+.menu {
+    @apply flex flex-row h-full mr-8
 }
-.headerMenu {
-    @apply h-full;
+
+.menu > li  {
+    @apply flex items-center;
 }
-.headerMenu > li a {
-    @apply h-full flex items-center px-3;
+.menu > li a {
+    @apply flex items-center p-3;
 }

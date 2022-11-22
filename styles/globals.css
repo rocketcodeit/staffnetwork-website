@@ -2,14 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+@font-face {
+  font-family: "Albert Sans";
+  src: url("../public/assets/fonts/HKGrotesk-Thin.woff2");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Albert Sans";
+  src: url("../public/assets/fonts/HKGrotesk-Light.woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Albert Sans";
+  src: url("../public/assets/fonts/AlbertSans-Regular.woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Albert Sans";
+  src: url("../public/assets/fonts/AlbertSans-Medium.woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Albert Sans";
+  src: url("../public/assets/fonts/AlbertSans-SemiBold.woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Albert Sans";
+  src: url("../public/assets/fonts/AlbertSans-Bold.woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Albert Sans", sans-serif;
 }
 
+h1{
+  @apply text-4.5xl font-medium
+}
+
+h2{
+  @apply text-4xl font-medium
+}
+
+h3{
+  @apply text-3xl font-medium
+}
+h4{
+  @apply text-2xl font-medium
+}
+
+p{
+  @apply text-base font-normal
+}
 .button-carino{
   @apply px-5 bg-sky-600 h-full text-white
 }
@@ -44,14 +108,28 @@ a {
   }
 }
 
+/*#region .btn */
 
 .btn{
-  @apply bg-primary text-white px-5 py-4
+  @apply bg-primary text-white px-5 py-4 font-medium z-10 relative overflow-hidden
+}
+.btn:after{
+  content: "";
+  width: 0px;
+  z-index: -1;
+  transform: skewX(345deg) scaleX(1.2);
+  transition: all 0.35s cubic-bezier(.88,.1,.21,.86);
+  @apply absolute top-0 right-[-10px] h-full bg-primary-700
 }
 
-.btn:hover{
-  @apply bg-primary-dark
+.btn p, .btn-arrow p{
+  @apply font-medium
 }
+.btn:hover:after{
+  @apply w-[110%] left-[-10px]
+}
+
+/*endregion */
 
 .btn-arrow{
   @apply bg-gray-300 font-medium pl-5 pr-4 py-3 text-black flex flex-row flex-nowrap
