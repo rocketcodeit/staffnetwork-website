@@ -1,11 +1,40 @@
-
+.imgLink{
+    @apply flex items-center h-full
+}
+.imgLink img{
+    @apply lg:max-h-20  max-h-16 py-3
+}
 .menu {
-    @apply flex flex-row h-full mr-8
+    @apply  lg:flex flex-row h-full lg:mr-8 transition lg:relative lg:top-0 lg:justify-end lg:w-full lg:px-0
+            absolute top-16 left-0 container bg-white z-20
 }
 
 .menu > li  {
-    @apply flex items-center;
+    @apply flex items-center lg:w-auto
+            w-full;
 }
 .menu > li a {
-    @apply flex items-center p-3;
+    @apply  flex items-center p-3 lg:w-auto
+            w-full justify-end;
+}
+
+.hamburgerButton{
+    @apply w-8 h-8
+}
+
+.hamburgerButton:hover{
+    @apply text-primary
+}
+
+.hamburgerButton {
+    @apply bg-primary-100 text-primary
+}
+
+.btn{
+    @apply h-full
+}
+
+.btn:hover::after{
+    content:"";
+    width: 125%;
 }

@@ -1,26 +1,76 @@
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {IHeaderConfiguration} from "../../config/models/IHeaderConfiguration";
 import {useRouter} from "next/router";
 import styles from "../../styles/Header.module.css"
-
+import {Bars2Icon} from "@heroicons/react/24/outline";
+import { Cross as Hamburger } from 'hamburger-react'
 
 function Header(props : IHeaderConfiguration){
+    const [isActive, setIsActive] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+    const [isOpen, setOpen] = useState(true);
+
+
+
+    useEffect( () => {
+        handleWindowCheck();
+
+        window.addEventListener('resize', handleWindowCheck);
+
+        return () => {
+            window.removeEventListener('resize', handleWindowCheck);
+        }
+    }, []);
+
+    function handleWindowCheck(){
+        console.log(window.outerWidth);
+        if(window.outerWidth >= 1024){
+            setIsMobile(false);
+            setOpen(true);
+        }
+        else{
+            setOpen(false);
+            setIsMobile(true);
+        }
+
+    }
+
+    const handleButtonClick  = () => {
+        setIsActive(current => !current);
+        //setMenuClass(current => !current      oppure direttamente active)
+    }
+
     return (
         <nav className="container">
             <div className="flex flex-row justify-between">
-                <div className="basis-2/12">
-                    <a href="/">
+                <div className="lg:basis-2/12 basis-7/12">
+                    <a href="/" className={styles.imgLink}>
                         <img src={props.logo} />
                     </a>
                 </div>
-                <div className="basis-9/12 flex justify-end items-center">
-                    <ul className={styles.menu}>
+                <div className="lg:basis-9/12 basis-4/12 flex justify-end items-center">
+
+                    { isOpen && <ul className={styles.menu}>
                         { props.menuItems.map((item) => {
                             return <li key={item.name} > <a href={item.url}>{item.name}</a> </li>
                         })}
                     </ul>
-                    <HeaderButtonCta  name={"Bello"} link={"pippo"}/>
+                    }
+                    { isMobile &&
+                        <Hamburger toggled={isOpen} toggle={setOpen} direction="right" size={26} rounded onToggle={toggled => {
+                            if(toggled){
+
+                                console.log("menu aperto");
+                                //open a menu
+                            }
+                            else{
+                                //close a menu
+                                console.log("menu chiuso");
+                            }
+                        }} />
+                    }
+                    <HeaderButtonCta  name={"Bello"} link={"pippo"} />
                 </div>
 
             </div>
@@ -30,6 +80,8 @@ function Header(props : IHeaderConfiguration){
 
         </nav>
 
+
+
     );
 }
 
@@ -37,7 +89,7 @@ function HeaderButtonCta(props : {name: string, link : string }){
     const router = useRouter();
 
     return(
-        <button className="btn" onClick={() => router.push(`/${props.link}`)}>
+        <button className={styles.btn +` btn`} onClick={() => router.push(`/${props.link}`)}>
             {props.name}
         </button>
     )

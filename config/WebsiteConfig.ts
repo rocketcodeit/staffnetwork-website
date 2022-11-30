@@ -9,7 +9,7 @@ const configuration : IWebsiteConfiguration = {
             {name: "Risorse",           url: "/risorse"},
             {name: "Servizi",           url: "/servizi"}
         ],
-        logo : "/vercel.svg"
+        logo : "/logo-staff_network.svg"
     },
     footerConfiguration : {
         primaryMenu : [

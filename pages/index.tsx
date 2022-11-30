@@ -11,9 +11,9 @@ export default function Home() {
     return (
         <div className={styles.container}>
             <section>
-                <div className="h-screen-90 container">
+                <div className={styles.aboveTheFold}>
                     <div className="h-full bg-[url('/assets/img/home_header.png')]"></div>
-                    <div className="drop-shadow-xl bg-zinc-900/80 absolute max-h-full lg:top-48 md:top-24 top-16 left-0 right-36 md:w-9/12 w-11/12 lg:p-20  md:p-12 p-8">
+                    <div className="drop-shadow-xl bg-zinc-900/80 absolute max-h-full lg:top-48 md:top-24 top-16 left-0 right-36 lg:w-9/12 md:w-10/12 w-11/12 lg:p-20  md:p-12 p-8">
                         <h1 className="text-white mb-6">La crescita aziendale è un percorso di cui
                             conosciamo
                             la strada</h1>
@@ -34,7 +34,7 @@ export default function Home() {
                     <div
                         className="lg:bg-[url('/assets/img/pexels-faris-al-orfali-1697160%202.png')] bg-none w-full bg-primary-dark flex flex-flow flex-wrap justify-between bg-no-repeat bg-right">
                         <div className="xl:w-5/12 lg:w-7/12 w-11/12 lg:pt-32 md:pt-20 pt-12 container ml-0 mb-8">
-                            <h3 className="text-3xl font-medium text-white">Aree di intervento</h3>
+                            <h2 className="text-white">Aree di intervento</h2>
                             <p className="mt-5 text-white">Ognuna delle aree aziendali intrattiene relazioni di
                                 dipendenza e scambio con numerose altre
                                 e non può essere trattata come entità isolata. In accordo con tale visione, i nostri
@@ -106,7 +106,7 @@ export default function Home() {
 
             <section className="mt-48 overflow-hidden">
                 <div className="lg:w-6/12 container ml-0">
-                    <h2 className="text-3xl font-medium mb-8">Staff Network in cifre</h2>
+                    <h2 className="mb-8">Staff Network in cifre</h2>
                 </div>
                 <div className={`${styles.containerRight} flex flex-flow  flex-wrap lg:flex-nowrap `}>
                     <div className={`${styles.bgListItemDigits} bg-[url('/assets/img/stephen-dawson-qwtCeJ5cLYs-unsplash.png')]`}>
@@ -136,7 +136,7 @@ export default function Home() {
 
             <section className="mt-24">
                 <div className="container mb-10">
-                    <h2 className="text-center text-3xl font-medium mb-5">Lo Staff</h2>
+                    <h2 className="text-center mb-5">Lo Staff</h2>
                     <p className="lg:w-6/12 w-full  mx-auto text-center">L’elevata specializzazione dei singoli professionisti
                         unita alla multidisciplinarietà
                         dell’insieme ci consente di annullare la dispersione informativa e documentale ed essere al
@@ -144,7 +144,7 @@ export default function Home() {
                         progetti.</p>
                 </div>
                 <TeamMemberList itemsCount={3}/>
-                <div className="w-full  ">
+                <div className="w-full">
                     <a className="btn mx-auto block w-fit mt-6" href="/chi-siamo">Conosci i professionisti</a>
 
                 </div>
@@ -153,7 +153,7 @@ export default function Home() {
             <section className="bg-primary-100 mt-24">
                 <div className="container flex flex-flow justify-between flex-wrap lg:flex-wrap flex-wrap-reverse  ">
                     <div className="lg:w-5/12 w-full lg:py-32 pt-8 pb-12">
-                        <h2 className="text-3xl font-medium mb-5">Network & Partnership</h2>
+                        <h2 className="mb-5">Network & Partnership</h2>
                         <p>Siamo alla ricerca costante di studi e professionisti con cui intessere solidi rapporti di
                             collaborazione e interscambio di competenze.
 
@@ -168,7 +168,7 @@ export default function Home() {
 
             <section className="mt-24">
                 <div className="container">
-                    <h2 className="text-3xl font-medium mb-5">Le Risorse</h2>
+                    <h2 className=" mb-5">Le Risorse</h2>
                     <PostList itemsCount={3} />
                     <a className="btn block w-fit mt-8 mx-auto" href="/post/index.tsx">Vai alle risorse</a>
                 </div>

@@ -8,10 +8,6 @@
 .item img{
     @apply max-h-[650px] object-cover
 }
-.item__name{
-    @apply text-2xl font-medium
-}
-
 .item__profession{
     @apply text-primary-700
 }

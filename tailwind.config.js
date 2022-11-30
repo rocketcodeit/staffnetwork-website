@@ -59,10 +59,14 @@ module.exports = {
         'screen-90': '90vh'
       },
       fontSize:{
+        '3.5xl':['2rem',{
+          lineHeight: '2.25rem',
+          fontWeight: '500'
+        }],
         '4.5xl':['2.5rem',{
           lineHeight: '3rem',
           fontWeight: '500'
-        }]
+        }],
       }
     },
   },
