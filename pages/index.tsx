@@ -21,7 +21,7 @@ export default function Home() {
                             professionisti con l’obiettivo di rendere
                             effettiva la crescita della tua impresa attraverso un piano strategico di azioni concrete e
                             mirate per l’efficientamento
-                            aziendale.</p>
+                            aziendale .</p>
                         <button className="btn">
                             Scopri i servizi
                         </button>
