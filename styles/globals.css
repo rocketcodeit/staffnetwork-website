@@ -64,7 +64,7 @@ h1{
 
 h2{
   @apply  text-4xl font-medium
-          lg:text-3.5xl
+          md:text-3.5xl
 }
 
 h3{

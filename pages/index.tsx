@@ -5,7 +5,14 @@ import {ArrowRightIcon} from '@heroicons/react/24/outline'
 import TeamMemberList from '../components/TeamMember/TeamMemberList'
 import {ITeamMember} from "../models/ITeamMember";
 import PostList from "../components/Post/PostList";
+import {IWebsiteConfiguration} from "../config/models/IWebsiteConfiguration";
+import ServiceList from "../components/Service/ServiceList";
 
+export interface IServices {
+    name: string,
+    description : string,
+    url : string
+}
 
 export default function Home() {
     return (
@@ -21,7 +28,7 @@ export default function Home() {
                             professionisti con l’obiettivo di rendere
                             effettiva la crescita della tua impresa attraverso un piano strategico di azioni concrete e
                             mirate per l’efficientamento
-                            aziendale .</p>
+                            aziendale.</p>
                         <button className="btn">
                             Scopri i servizi
                         </button>
@@ -41,64 +48,8 @@ export default function Home() {
                                 servizi
                                 agiscono in maniera trasversale e integrata sui comparti cruciali di un business.</p>
                         </div>
-                        <div className="z-10 container pr-0 w-full grid xl:grid-cols-3 md:grid-cols-2 gap-4 mb-[-96px]">
-                            <div className="bg-gray-200 h-48 flex flex-col justify-end p-10 pb-0 pr-0">
-                                <h4 className="text-2xl font-medium pr-4">Amministrazione</h4>
-                                <p className="pr-4">Attività amministrative, contabili e di gestione delle risorse umane
-                                    dell'impresa</p>
-                                <button className="btn-arrow self-end">
-                                    <p className="mr-2">Scopri di più</p>
-                                    <ArrowRightIcon className="w-6 stroke-primary-dark"/>
-                                </button>
-                            </div>
-                            <div className="bg-gray-200 h-48 flex flex-col justify-end p-10 pb-0 pr-0">
-                                <h4 className="text-2xl font-medium pr-4">Amministrazione</h4>
-                                <p className="pr-4">Attività amministrative, contabili e di gestione delle risorse umane
-                                    dell'impresa</p>
-                                <button className="btn-arrow self-end">
-                                    <p className="mr-2">Scopri di più</p>
-                                    <ArrowRightIcon className="w-6 stroke-primary-dark"/>
-                                </button>
-                            </div>
-                            <div className="bg-gray-200 h-48 flex flex-col justify-end p-10 pb-0 pr-0">
-                                <h4 className="text-2xl font-medium pr-4">Amministrazione</h4>
-                                <p className="pr-4">Attività amministrative, contabili e di gestione delle risorse umane
-                                    dell'impresa</p>
-                                <button className="btn-arrow self-end">
-                                    <p className="mr-2">Scopri di più</p>
-                                    <ArrowRightIcon className="w-6 stroke-primary-dark"/>
-                                </button>
-                            </div>
-                            <div className="bg-gray-200 h-48 flex flex-col justify-end p-10 pb-0 pr-0">
-                                <h4 className="text-2xl font-medium pr-4">Amministrazione</h4>
-                                <p className="pr-4">Attività amministrative, contabili e di gestione delle risorse umane
-                                    dell'impresa</p>
-                                <button className="btn-arrow self-end">
-                                    <p className="mr-2">Scopri di più</p>
-                                    <ArrowRightIcon className="w-6 stroke-primary-dark"/>
-                                </button>
-                            </div>
-                            <div className="bg-gray-200 h-48 flex flex-col justify-end p-10 pb-0 pr-0">
-                                <h4 className="text-2xl font-medium pr-4">Amministrazione</h4>
-                                <p className="pr-4">Attività amministrative, contabili e di gestione delle risorse umane
-                                    dell'impresa</p>
-                                <button className="btn-arrow self-end">
-                                    <p className="mr-2">Scopri di più</p>
-                                    <ArrowRightIcon className="w-6 stroke-primary-dark"/>
-                                </button>
-                            </div>
-                            <div className="bg-gray-200 h-48 flex flex-col justify-end p-10 pb-0 pr-0">
-                                <h4 className="text-2xl font-medium pr-4">Amministrazione</h4>
-                                <p className="pr-4">Attività amministrative, contabili e di gestione delle risorse umane
-                                    dell'impresa</p>
+                        <ServiceList />
 
-                                <button className="btn-arrow self-end">
-                                    <p className="mr-2">Scopri di più</p>
-                                    <ArrowRightIcon className="w-6 stroke-primary-dark"/>
-                                </button>
-                            </div>
-
-                        </div>
                     </div>
 
                 </div>
