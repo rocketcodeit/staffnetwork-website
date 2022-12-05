@@ -4,6 +4,7 @@ export interface IService {
     img? : string,
     short_description : string,
     description? : string,
+    activities? : IServiceMethod[],
     methods? : IServiceMethod[],
     results? : IServiceResult[],
     url? : string
@@ -15,7 +16,8 @@ export interface IServiceMethod{
 }
 
 export interface IServiceResult{
-    number: string,
+    number: number,
+    term : string,
     title?: string
-    description: string
+    description?: string
 }

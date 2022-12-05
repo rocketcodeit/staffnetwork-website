@@ -73,6 +73,9 @@ h3{
 h4{
   @apply text-2xl font-medium
 }
+h5{
+  @apply text-1.5xl
+}
 
 p{
   @apply text-base font-normal
@@ -141,9 +144,16 @@ a {
 .img-abo{
   @apply h-full object-cover
 }
+/*#region .container */
 
+.containerRight{
+  @apply container pr-0 relative
+}
 
-
+.containerLeft{
+  @apply container pl-0 relative
+}
+/*endregion */
 .postItem{
   @apply bg-gray-200 pb-4
 }

@@ -42,7 +42,7 @@ export default function Home() {
                                 servizi
                                 agiscono in maniera trasversale e integrata sui comparti cruciali di un business.</p>
                         </div>
-                        <div className="z-10 container mb-[-96px]">
+                        <div className="z-10 pr-0 container mb-[-96px]">
                             <ServiceList />
                         </div>
 

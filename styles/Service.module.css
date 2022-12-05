@@ -1,0 +1,53 @@
+.img{
+    @apply w-[50vw] max-w-none h-full absolute object-cover
+}
+
+.description{
+    @apply columns-2
+}
+
+.activities{
+    @apply mt-12 ml-5
+}
+
+.activities .activity{
+    @apply list-disc
+}
+.activity::marker{
+    float:left;
+}
+.activity .content{
+    @apply w-full mb-3
+}
+/*#region Methods */
+
+.methods{
+    @apply flex flex-col
+}
+.methods .method{
+    @apply flex mb-5
+}
+.methods .method .number{
+    @apply bg-gray-300 text-primary-600 rounded-full w-12 h-12 flex justify-center items-center text-2xl font-medium mr-3
+}
+
+.methods .method .content{
+    width: calc(100% -  64px);
+}
+/*#endregion */
+
+/*#region Results */
+.resultsContainer{
+    @apply bg-gray-200 p-8 h-fit
+}
+.results{
+    @apply flex flex-col
+}
+.results .result{
+    @apply flex flex-row items-center my-2
+}
+
+.results .result .number{
+    @apply text-3xl font-medium mr-2
+}
+/*#endregion */
