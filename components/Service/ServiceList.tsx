@@ -25,7 +25,7 @@ function ServiceList (props : IServiceProps){
             })
     },[]);
     return(
-        <div className="z-10 container pr-0 w-full grid xl:grid-cols-3 md:grid-cols-2 gap-4 mb-[-96px]" >
+        <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-4" >
             {services.map((item) => {
                 // return <TeamMember key={item.nimpame}>{item}</TeamMember>
                 return <Service  {...item} />

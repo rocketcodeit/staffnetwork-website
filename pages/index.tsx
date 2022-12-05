@@ -8,12 +8,6 @@ import PostList from "../components/Post/PostList";
 import {IWebsiteConfiguration} from "../config/models/IWebsiteConfiguration";
 import ServiceList from "../components/Service/ServiceList";
 
-export interface IServices {
-    name: string,
-    description : string,
-    url : string
-}
-
 export default function Home() {
     return (
         <div className={styles.container}>
@@ -48,7 +42,10 @@ export default function Home() {
                                 servizi
                                 agiscono in maniera trasversale e integrata sui comparti cruciali di un business.</p>
                         </div>
-                        <ServiceList />
+                        <div className="z-10 container mb-[-96px]">
+                            <ServiceList />
+                        </div>
+
 
                     </div>
 

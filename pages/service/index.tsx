@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "../../styles/Home.module.css";
-import PostList from "../../components/Post/PostList";
 import {config} from "../../config/breadcrumbs.config";
 import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
+import ServiceList from "../../components/Service/ServiceList";
 
 export default function I2ndex(){
     return (
@@ -11,8 +11,8 @@ export default function I2ndex(){
             <section>
                 <div className="container">
                     <BreadCrumbs mappedPaths={config} showHome={true}  />
-                    <h1 className="text-4xl">Articoli</h1>
-                    <PostList />
+                    <h1>Servizi</h1>
+                    <ServiceList />
                 </div>
 
             </section>
