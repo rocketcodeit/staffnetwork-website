@@ -1,9 +1,10 @@
 .img{
-    @apply w-[50vw] max-w-none h-full absolute object-cover
+    @apply  lg:w-[50vw] max-w-none h-full lg:absolute object-cover lg:mt-0
+            w-full relative mt-4
 }
 
 .description{
-    @apply columns-2
+    @apply lg:columns-2
 }
 
 .activities{
@@ -28,7 +29,8 @@
     @apply flex mb-5
 }
 .methods .method .number{
-    @apply bg-gray-300 text-primary-600 rounded-full w-12 h-12 flex justify-center items-center text-2xl font-medium mr-3
+    @apply bg-gray-300 text-primary-600 rounded-full w-10 h-10 flex justify-center items-center text-2xl font-medium mr-3
+            sm:w-12 sm:h-12
 }
 
 .methods .method .content{

@@ -12,17 +12,18 @@ export default function ServicePage(props:{service : IService}){
     return(
         <section className="overflow-hidden mt-4 mb-12">
             <div className="containerRight flex flex-wrap justify-between">
-                <div className="w-full">
+                <div className="w-full order-1">
                     <BreadCrumbs mappedPaths={config} showHome={true} transformDynamicPath={path => {
                         if(path === "[slug]"){
                             return props.service.name
                         }
                         return path;
                     }} />
+                    <h1>{props.service.name}</h1>
                 </div>
 
-                <div className="w-6/12">
-                    <h1>{props.service.name}</h1>
+                <div className="w-full lg:w-6/12 order-last lg:order-2">
+
                     <ul className={styles.activities}>{props.service.activities?.map((i) =>{
                             return  <li className={styles.activity}>
                                         <div className={styles.content}>
@@ -33,7 +34,7 @@ export default function ServicePage(props:{service : IService}){
                                     </li>
                     })}</ul>
                 </div>
-                <div className={`w-5/12 backgroundRight bg-cover relative`}>
+                <div className={`w-full lg:w-5/12 backgroundRight bg-cover relative h-56 lg:h-auto order-2 lg:order-last`}>
                     <img className={styles.img} src={props.service.img} />
                 </div>
             </div>
@@ -44,8 +45,8 @@ export default function ServicePage(props:{service : IService}){
                     <p className={styles.description}>{props.service.description}</p>
                 </div>
             </div>
-            <div className="container mt-12 flex justify-between">
-                <div className="w-6/12">
+            <div className="container mt-12 flex justify-between flex-wrap lg:flex-nowrap">
+                <div className=" w-full lg:w-6/12">
                     <h2 className={`mb-8`}> Come lo facciamo</h2>
                     <div className={styles.methods}>
                         {props.service.methods?.map((i) =>{
@@ -62,7 +63,7 @@ export default function ServicePage(props:{service : IService}){
                         })}
                     </div>
                 </div>
-                <div className={`w-5/12 ${styles.resultsContainer}`}>
+                <div className={` w-full lg:w-5/12 ${styles.resultsContainer}`}>
                     <h2 className={`mb-3`}> Risultati</h2>
                     <div className={styles.results}>
                         {props.service.results?.map((result) =>{

@@ -63,6 +63,10 @@ module.exports = {
           lineHeight:'1.5rem',
           fontWeight: '500'
         }],
+        '2.5xl':['1.75rem',{
+          lineHeight:'2rem',
+          fontWeight: '500'
+        }],
         '3.5xl':['2rem',{
           lineHeight: '2.25rem',
           fontWeight: '500'
