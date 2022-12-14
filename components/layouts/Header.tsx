@@ -53,7 +53,7 @@ function Header(props : IHeaderConfiguration){
 
                     { isOpen && <ul className={styles.menu}>
                         { props.menuItems.map((item) => {
-                            return <li key={item.name} > <a href={item.url}>{item.name}</a> </li>
+                            return <li key={item.name}  className="linkItem" > <a href={item.url}>{item.name}</a> </li>
                         })}
                     </ul>
                     }

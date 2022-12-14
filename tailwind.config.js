@@ -23,6 +23,11 @@ module.exports = {
       }
     },
     extend: {
+      screens:{
+        '3xs': '320px',
+        '2xs': '375px',
+        'xs': '480px',
+      },
       colors:{
         primary:{
           '100': '#d1dbe7',

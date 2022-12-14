@@ -209,3 +209,23 @@ a {
   content: "";
   @apply hidden
 }
+
+.linkItem a{
+  @apply relative no-underline
+}
+
+.linkItem a::after{
+  content: "";
+  transform: scale(0,1);
+  @apply absolute left-0 w-full h-[1.15px] bg-black -bottom-1 transition duration-300 origin-top-right
+}
+.linkItem a:hover::after{
+  content: "";
+  transform: scale(1,1);
+  @apply origin-top-left
+}
+
+.linkItemWhite.linkItem a::after{
+  content: "";
+  @apply bg-white
+}

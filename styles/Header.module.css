@@ -18,6 +18,10 @@
             w-full justify-end;
 }
 
+.menu > li a::after {
+    @apply  bottom-1;
+}
+
 .hamburgerButton{
     @apply w-8 h-8
 }
