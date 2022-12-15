@@ -5,24 +5,25 @@ import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {GetServerSideProps} from "next";
 import {services} from "../api/service/ServiceData";
 import styles from "../../styles/Service.module.css";
-
+import {motion} from "framer-motion";
+import {fadeInUp, opacityAnimation} from "../../animations";
 
 export default function ServicePage(props:{service : IService}){
 
     return(
-        <section className="overflow-hidden mt-4 mb-12">
-            <div className="containerRight flex flex-wrap justify-between">
-                <div className="w-full order-1">
-                    <BreadCrumbs mappedPaths={config} showHome={true} transformDynamicPath={path => {
+        <motion.section variants={opacityAnimation} initial="initial" animate="final" className="overflow-hidden mt-4 mb-12">
+            <motion.div className="containerRight flex flex-wrap justify-between">
+                <motion.div variants={fadeInUp} className="w-full order-1">
+                    <BreadCrumbs  mappedPaths={config} showHome={true} transformDynamicPath={path => {
                         if(path === "[slug]"){
                             return props.service.name
                         }
                         return path;
                     }} />
                     <h1>{props.service.name}</h1>
-                </div>
+                </motion.div>
 
-                <div className="w-full lg:w-6/12 order-last lg:order-2">
+                <motion.div variants={fadeInUp} className="w-full lg:w-6/12 order-last lg:order-2">
 
                     <ul className={styles.activities}>{props.service.activities?.map((i) =>{
                             return  <li className={styles.activity}>
@@ -33,19 +34,19 @@ export default function ServicePage(props:{service : IService}){
 
                                     </li>
                     })}</ul>
-                </div>
-                <div className={`w-full lg:w-5/12 backgroundRight bg-cover relative h-56 lg:h-auto order-2 lg:order-last`}>
+                </motion.div>
+                <motion.div variants={fadeInUp} className={`w-full lg:w-5/12 backgroundRight bg-cover relative h-56 lg:h-auto order-2 lg:order-last`}>
                     <img className={styles.img} src={props.service.img} />
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
 
-            <div className="container mt-12">
+            <motion.div className="container mt-12" variants={fadeInUp}>
                 <div className="w-12/12">
                     <h2 className={`mb-3`}> Cosa facciamo</h2>
                     <p className={styles.description}>{props.service.description}</p>
                 </div>
-            </div>
-            <div className="container mt-12 flex justify-between flex-wrap lg:flex-nowrap">
+            </motion.div>
+            <motion.div variants={fadeInUp} className="container mt-12 flex justify-between flex-wrap lg:flex-nowrap" >
                 <div className=" w-full lg:w-6/12">
                     <h2 className={`mb-8`}> Come lo facciamo</h2>
                     <div className={styles.methods}>
@@ -76,8 +77,8 @@ export default function ServicePage(props:{service : IService}){
                         })}
                     </div>
                 </div>
-            </div>
-        </section>
+            </motion.div>
+        </motion.section>
     )
 }
 

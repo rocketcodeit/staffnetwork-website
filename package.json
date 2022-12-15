@@ -11,6 +11,7 @@
   "dependencies": {
     "@heroicons/react": "^2.0.12",
     "@next/font": "^13.0.4",
+    "framer-motion": "^7.10.0",
     "hamburger-react": "^2.5.0",
     "moment": "^2.29.4",
     "next": "13.0.0",

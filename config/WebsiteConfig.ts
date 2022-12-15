@@ -6,7 +6,7 @@ const configuration : IWebsiteConfiguration = {
             {name: "Home",              url: "/"},
             {name: "Come lavoriamo",    url: "/come-lavoriamo"},
             {name: "Clienti",           url: "/clienti"},
-            {name: "Risorse",           url: "/risorse"},
+            {name: "Risorse",           url: "/blog"},
             {name: "Servizi",           url: "/servizi"}
         ],
         logo : "/logo-staff_network.svg"
@@ -16,7 +16,7 @@ const configuration : IWebsiteConfiguration = {
             {name: "Home",              url: "/"},
             {name: "Come lavoriamo",    url: "/come-lavoriamo"},
             {name: "Clienti",           url: "/clienti"},
-            {name: "Risorse",           url: "/risorse"},
+            {name: "Risorse",           url: "/blog"},
             {name: "Servizi",           url: "/servizi"}
         ],
         secondaryMenu : [

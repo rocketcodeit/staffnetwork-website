@@ -5,6 +5,7 @@ import {IPost} from "../../models/IPost";
 export interface IPostProps{
     itemsCount? : number
     //come faccio per il featured
+    onPostsLoaded?: () => void;
 }
 
 function PostList (props : IPostProps){
@@ -21,6 +22,8 @@ function PostList (props : IPostProps){
                     res.json().then((res2) => {
                         setPosts(res2)
                     })
+                    if(props.onPostsLoaded)
+                        props.onPostsLoaded();
                 })
         }, []);
 

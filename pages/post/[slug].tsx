@@ -7,13 +7,14 @@ import {posts} from "../api/post/PostData";
 import moment from "moment/moment";
 import BreadCrumbs, {IBreadCrumbsMapLabel} from "../../components/Breadcrumbs/BreadCrumbs";
 import {config} from "../../config/breadcrumbs.config";
+import {motion} from "framer-motion";
 
 export default function PostPage(props : { post : IPost}){
 
 
 
     return(
-        <section>
+        <motion.section initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 0.4,ease: "easeOut"}}>
             <div className="container">
                 <BreadCrumbs mappedPaths={config} showHome={true} transformDynamicPath={path => {
                     if(path === "[slug]"){
@@ -40,7 +41,7 @@ export default function PostPage(props : { post : IPost}){
                 </div>
 
             </div>
-        </section>
+        </motion.section>
     )
 }
 

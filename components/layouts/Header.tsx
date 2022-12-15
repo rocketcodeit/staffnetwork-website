@@ -5,6 +5,7 @@ import {useRouter} from "next/router";
 import styles from "../../styles/Header.module.css"
 import {Bars2Icon} from "@heroicons/react/24/outline";
 import { Cross as Hamburger } from 'hamburger-react'
+import Link from "next/link";
 
 function Header(props : IHeaderConfiguration){
     const [isActive, setIsActive] = useState(false);
@@ -42,18 +43,18 @@ function Header(props : IHeaderConfiguration){
     }
 
     return (
-        <nav className="container">
+        <nav className="container sticky top-0 bg-white z-[99999]">
             <div className="flex flex-row justify-between">
                 <div className="lg:basis-2/12 basis-7/12">
-                    <a href="/" className={styles.imgLink}>
+                    <Link href={'/'} className={styles.imgLink}>
                         <img src={props.logo} />
-                    </a>
+                    </Link>
                 </div>
                 <div className="lg:basis-9/12 basis-4/12 flex justify-end items-center">
 
                     { isOpen && <ul className={styles.menu}>
                         { props.menuItems.map((item) => {
-                            return <li key={item.name}  className="linkItem" > <a href={item.url}>{item.name}</a> </li>
+                            return <li key={item.name}  className="linkItem" > <Link href={item.url}>{item.name}</Link> </li>
                         })}
                     </ul>
                     }

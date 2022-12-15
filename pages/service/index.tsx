@@ -3,10 +3,11 @@ import styles from "../../styles/Home.module.css";
 import {config} from "../../config/breadcrumbs.config";
 import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import ServiceList from "../../components/Service/ServiceList";
-
+import {motion} from "framer-motion";
+import {opacityAnimation} from "../../animations";
 export default function I2ndex(){
     return (
-        <div className={styles.container}>
+        <motion.div variants={opacityAnimation} initial="initial" animate="final" className={styles.container}>
 
             <section>
                 <div className="container">
@@ -17,6 +18,6 @@ export default function I2ndex(){
 
             </section>
 
-        </div>
+        </motion.div>
     )
 }

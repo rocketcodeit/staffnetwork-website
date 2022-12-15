@@ -7,26 +7,33 @@ import {ITeamMember} from "../models/ITeamMember";
 import PostList from "../components/Post/PostList";
 import {IWebsiteConfiguration} from "../config/models/IWebsiteConfiguration";
 import ServiceList from "../components/Service/ServiceList";
+import {motion} from "framer-motion";
+import {container, fadeInUp, item, stagger} from "../animations";
 
 export default function Home() {
     return (
-        <div className={styles.container}>
+        <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeOut"}}
+                    className={styles.container}>
             <section>
                 <div className={styles.aboveTheFold}>
                     <div className="h-full bg-[url('/assets/img/home_header.png')]"></div>
-                    <div className="drop-shadow-xl bg-zinc-900/80 absolute max-h-full lg:top-48 md:top-24 top-16 left-0 right-36 lg:w-9/12 md:w-10/12 w-11/12 lg:p-20  md:p-12 p-8">
-                        <h1 className="text-white mb-6">La crescita aziendale è un percorso di cui
-                            conosciamo
-                            la strada</h1>
-                        <p className="text-white lg:w-9/12  w-full mb-5">Siamo un’organizzazione multidisciplinare di
-                            professionisti con l’obiettivo di rendere
-                            effettiva la crescita della tua impresa attraverso un piano strategico di azioni concrete e
-                            mirate per l’efficientamento
-                            aziendale.</p>
+                    <motion.div variants={stagger} initial="initial" animate="final" className="drop-shadow-xl bg-zinc-900/80 absolute max-h-full lg:top-48 md:top-24 top-16 left-0 right-36 lg:w-9/12 md:w-10/12 w-11/12 lg:p-20  md:p-12 p-8">
+                        <div  className="overflow-hidden">
+                            <motion.h1 variants={fadeInUp} initial="initial" animate="final" className="text-white mb-6">La crescita aziendale è un percorso di cui
+                                conosciamo
+                                la strada</motion.h1>
+                        </div>
+                        <div className="overflow-hidden">
+                            <motion.p variants={fadeInUp} initial="initial" animate="final" className="text-white lg:w-9/12  w-full mb-5">Siamo un’organizzazione multidisciplinare di
+                                professionisti con l’obiettivo di rendere
+                                effettiva la crescita della tua impresa attraverso un piano strategico di azioni concrete e
+                                mirate per l’efficientamento
+                                aziendale.</motion.p>
+                        </div>
                         <button className="btn">
                             Scopri i servizi
                         </button>
-                    </div>
+                    </motion.div>
                 </div>
 
             </section>
@@ -60,25 +67,26 @@ export default function Home() {
                     <div className={`${styles.bgListItemDigits} bg-[url('/assets/img/stephen-dawson-qwtCeJ5cLYs-unsplash.png')]`}>
 
                     </div>
-                    <div className={`${styles.containerRightBefore}  lg:w-6/12 w-11/12 mb-20 bg-gray-200 lg:ml-[-8.333%] lg:pl-16 lg:py-12  pl-12 py-8 relative`}>
-                        <div className="counter flex flex-flow items-center mb-4">
-                            <h4 className="font-medium text-4xl mr-2">37</h4>
-                            <p className="text-xl">Anni di esperienza</p>
-                        </div>
-                        <div className="counter flex flex-flow items-center mb-4">
-                            <h4 className="font-medium text-4xl mr-2">37</h4>
-                            <p className="text-xl">Anni di esperienza</p>
-                        </div>
-                        <div className="counter flex flex-flow items-center mb-4">
-                            <h4 className="font-medium text-4xl mr-2">37</h4>
-                            <p className="text-xl">Anni di esperienza</p>
-                        </div>
-                        <div className="counter flex flex-flow items-center mb-4">
-                            <h4 className="font-medium text-4xl mr-2">37</h4>
-                            <p className="text-xl">Anni di esperienza</p>
-                        </div>
+                    <motion.div variants={container} initial="hidden" animate="show" className={`${styles.containerRightBefore}  lg:w-6/12 w-11/12 mb-20 bg-gray-200 lg:ml-[-8.333%] lg:pl-16 lg:py-12  pl-12 py-8 relative`}>
 
-                    </div>
+                        <motion.div variants={item}  className="counter flex flex-flow items-center mb-4">
+                            <h4 className="font-medium text-4xl mr-2">37</h4>
+                            <p className="text-xl">Anni di esperienza</p>
+                        </motion.div>
+                        <motion.div variants={item}  className="counter flex flex-flow items-center mb-4">
+                            <h4 className="font-medium text-4xl mr-2">37</h4>
+                            <p className="text-xl">Anni di esperienza</p>
+                        </motion.div>
+                        <motion.div variants={item}  className="counter flex flex-flow items-center mb-4">
+                            <h4 className="font-medium text-4xl mr-2">37</h4>
+                            <p className="text-xl">Anni di esperienza</p>
+                        </motion.div>
+                        <motion.div variants={item}  className="counter flex flex-flow items-center mb-4">
+                            <h4 className="font-medium text-4xl mr-2">37</h4>
+                            <p className="text-xl">Anni di esperienza</p>
+                        </motion.div>
+
+                    </motion.div>
                 </div>
             </section>
 
@@ -121,7 +129,7 @@ export default function Home() {
                     <a className="btn block w-fit mt-8 mx-auto" href="/post/index.tsx">Vai alle risorse</a>
                 </div>
             </section>
-        </div>
+        </motion.div>
     )
 }
 
