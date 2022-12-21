@@ -217,7 +217,7 @@ a {
 .linkItem a::after{
   content: "";
   transform: scale(0,1);
-  @apply absolute left-0 w-full h-[1.15px] bg-black -bottom-1 transition duration-300 origin-top-right
+  @apply absolute left-0 w-full h-[1.15px] bg-black -bottom-[3.75px] transition duration-300 origin-top-right
 }
 .linkItem a:hover::after{
   content: "";
@@ -228,4 +228,50 @@ a {
 .linkItemWhite.linkItem a::after{
   content: "";
   @apply bg-white
+}
+
+.effectAnimationReveal{
+  @apply relative w-fit
+}
+.effectAnimationReveal:after {
+  content: "";
+  animation: effect-block 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation-delay: 0.3s;
+  @apply top-0 left-0 absolute w-0 h-full bg-gray-300
+ }
+
+.effectAnimationReveal > * {
+  animation: text-visible 0.0001s linear forwards;
+  animation-delay: 0.9s;
+  @apply opacity-0
+}
+
+
+@keyframes effect-block {
+  0% {
+    left: 0;
+    width: 0%;
+  }
+  50% {
+    left: 0;
+    width: 100%;
+  }
+  100% {
+    left: 100%;
+    width: 0%;
+  }
+}
+
+@keyframes text-visible {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.blockOverText{
+  @apply absolute left-0 h-full w-0 z-20
 }
