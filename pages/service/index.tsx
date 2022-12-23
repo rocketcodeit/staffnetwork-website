@@ -5,7 +5,8 @@ import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import ServiceList from "../../components/Service/ServiceList";
 import {motion} from "framer-motion";
 import {opacityAnimation} from "../../animations";
-export default function I2ndex(){
+
+export default function ServicesPage(){
     return (
         <motion.div variants={opacityAnimation} initial="initial" animate="final" className={styles.container}>
 

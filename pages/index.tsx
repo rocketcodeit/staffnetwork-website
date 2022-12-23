@@ -8,7 +8,7 @@ import PostList from "../components/Post/PostList";
 import {IWebsiteConfiguration} from "../config/models/IWebsiteConfiguration";
 import ServiceList from "../components/Service/ServiceList";
 import {motion} from "framer-motion";
-import {container, fadeInUp, item, stagger} from "../animations";
+import {container, fadeInUp, item, stagger, blockReveal, blockTextReveal} from "../animations";
 import Link from "next/link";
 
 export default function Home() {
@@ -44,13 +44,13 @@ export default function Home() {
                         className="lg:bg-[url('/assets/img/pexels-faris-al-orfali-1697160%202.png')] bg-none w-full bg-primary-dark flex flex-flow flex-wrap justify-between bg-no-repeat bg-right">
                         <div className="xl:w-5/12 lg:w-7/12 w-11/12 lg:pt-32 md:pt-20 pt-12 container ml-0 mb-8">
                             <div className="relative w-fit">
-                                <motion.div whileInView={{left:["0%","0%","100%"], width:["0%","100%","0%"] }} viewport={{ once: true }} transition={{ duration:1, ease: [0.19, 1, 0.22, 1]}} className="blockOverText bg-primary-600"></motion.div>
-                                <h2 className="text-white">Aree di intervento</h2>
+                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-600"></motion.div>
+                                <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="text-white">Aree di intervento</motion.h2>
                             </div>
 
                             <motion.div className="mt-5 text-white relative">
-                                <motion.div whileInView={{left:["0%","0%","100%"], width:["0%","100%","0%"] }} viewport={{ once: true }} transition={{ duration:1, ease: [0.19, 1, 0.22, 1]}} className="blockOverText bg-primary-600"></motion.div>
-                                <motion.p initial={{opacity:0}} whileInView={{opacity:1}} transition={{duration:0.1,delay:0.4}} className="relative">Ognuna delle aree aziendali intrattiene relazioni di
+                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-600"></motion.div>
+                                <motion.p variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="relative">Ognuna delle aree aziendali intrattiene relazioni di
                                 dipendenza e scambio con numerose altre
                                 e non può essere trattata come entità isolata. In accordo con tale visione, i nostri
                                 servizi
@@ -70,8 +70,8 @@ export default function Home() {
             <section className="mt-48 overflow-hidden">
                 <div className="lg:w-6/12 container ml-0">
                     <div className="relative w-fit">
-                        <motion.div whileInView={{left:["0%","0%","100%"], width:["0%","100%","0%"] }} viewport={{ once: true }} transition={{ duration:1, ease: [0.19, 1, 0.22, 1]}} className="blockOverText bg-gray-100"></motion.div>
-                        <h2 className="mb-8">Staff Network in cifre</h2>
+                        <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                        <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-8">Staff Network in cifre</motion.h2>
                     </div>
                 </div>
                 <div className={`${styles.containerRight} flex flex-flow  flex-wrap lg:flex-nowrap `}>
@@ -104,17 +104,17 @@ export default function Home() {
             <section className="mt-24">
                 <div className="container mb-10">
                     <div className="relative w-fit mx-auto">
-                        <motion.div whileInView={{left:["0%","0%","100%"], width:["0%","100%","0%"] }} viewport={{ once: true }} transition={{ duration:1, ease: [0.19, 1, 0.22, 1]}} className="blockOverText bg-gray-100"></motion.div>
-                        <h2 className="text-center mb-5">Lo Staff</h2>
+                        <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                        <motion.h2  variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="text-center mb-5">Lo Staff</motion.h2>
                     </div>
 
                     <div className="relative w-fit mx-auto">
-                        <motion.div whileInView={{left:["0%","0%","100%"], width:["0%","100%","0%"] }} viewport={{ once: true }} transition={{ duration:1, ease: [0.19, 1, 0.22, 1]}} className="blockOverText bg-gray-100"></motion.div>
-                        <p className="lg:w-6/12 w-full  mx-auto text-center">L’elevata specializzazione dei singoli professionisti
+                        <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                        <motion.p variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}  className="lg:w-6/12 w-full  mx-auto text-center">L’elevata specializzazione dei singoli professionisti
                             unita alla multidisciplinarietà
                             dell’insieme ci consente di annullare la dispersione informativa e documentale ed essere al
                             tempo stesso più precisi, rapidi ed efficaci nell’esecuzione dei servizi e nell’avanzamento dei
-                            progetti.</p>
+                            progetti.</motion.p>
                     </div>
 
 
@@ -130,16 +130,16 @@ export default function Home() {
                 <div className="container flex flex-flow justify-between flex-wrap lg:flex-wrap flex-wrap-reverse  ">
                     <div className="lg:w-5/12 w-full lg:py-32 pt-8 pb-12">
                         <div className="relative w-fit">
-                            <motion.div whileInView={{left:["0%","0%","100%"], width:["0%","100%","0%"] }} viewport={{ once: true }} transition={{ duration:1, ease: [0.19, 1, 0.22, 1]}} className="blockOverText bg-primary-50"></motion.div>
-                            <h2 className="mb-5">Network & Partnership</h2>
+                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-50"></motion.div>
+                            <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-5">Network & Partnership</motion.h2>
                         </div>
                         <div className="relative w-fit">
-                            <motion.div whileInView={{left:["0%","0%","100%"], width:["0%","100%","0%"] }} viewport={{ once: true }} transition={{ duration:1, ease: [0.19, 1, 0.22, 1]}} className="blockOverText bg-primary-50"></motion.div>
-                            <p>Siamo alla ricerca costante di studi e professionisti con cui intessere solidi rapporti di
+                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-50"></motion.div>
+                            <motion.p variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >Siamo alla ricerca costante di studi e professionisti con cui intessere solidi rapporti di
                                 collaborazione e interscambio di competenze.
 
                                 Scopri come entrare nella nostra rete ad alto valore aggiunto.
-                            </p>
+                            </motion.p>
                         </div>
 
                         <a className="btn block w-fit mt-4" href="/chi-siamo">Conosci i professionisti</a>
@@ -152,12 +152,12 @@ export default function Home() {
             <section className="mt-24">
                 <div className="container">
                     <div className="relative w-fit">
-                        <motion.div whileInView={{left:["0%","0%","100%"], width:["0%","100%","0%"] }} viewport={{ once: true }} transition={{ duration:1, ease: [0.19, 1, 0.22, 1]}} className="blockOverText bg-gray-100"></motion.div>
-                        <h2 className="mb-5">Le Risorse</h2>
+                        <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                        <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-5">Le Risorse</motion.h2>
                     </div>
 
                     <PostList itemsCount={3} />
-                    <a className="btn block w-fit mt-8 mx-auto" href="/post/index.tsx">Vai alle risorse</a>
+                    <Link className="btn block w-fit mt-8 mx-auto" href="/blog">Vai alle risorse</Link>
                 </div>
             </section>
         </motion.div>

@@ -4,10 +4,12 @@ import {ArrowRightIcon} from "@heroicons/react/24/outline";
 import styles from "../../styles/Home.module.css";
 import moment from "moment";
 import Link from "next/link";
+import {motion} from "framer-motion";
+import {itemFade} from "../../animations";
 
 function PostItem(props : IPost){
     return(
-        <div className="postItem">
+        <motion.div variants={itemFade} className="postItem">
             <img className="w-full pr-8" src={props.img}/>
 
             <div className="postItem__text">
@@ -20,7 +22,7 @@ function PostItem(props : IPost){
             </div>
 
 
-        </div>
+        </motion.div>
     );
 }
 

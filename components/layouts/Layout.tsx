@@ -17,7 +17,7 @@ function Layout(props: LayoutProps){
         // <Header menuItems={WebsiteConfig.headerConfiguration.menuItems} />
         <React.Fragment>
             <Header {...WebsiteConfig.headerConfiguration} />
-            <AnimatePresence mode={'sync'}>
+            <AnimatePresence mode="wait" initial={false} >
                 <main>{props.children}</main>
             </AnimatePresence>
             <Footer {...WebsiteConfig}/>

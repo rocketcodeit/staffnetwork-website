@@ -229,6 +229,15 @@ a {
   content: "";
   @apply bg-white
 }
+.linkItem.active a{
+  @apply text-primary
+}
+
+.linkItem.active a::after{
+  content: "";
+  transform: scale(1,1);
+  @apply origin-top-left bg-primary
+}
 
 .effectAnimationReveal{
   @apply relative w-fit

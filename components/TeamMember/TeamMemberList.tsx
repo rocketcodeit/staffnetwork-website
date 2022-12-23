@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import {ITeamMember} from "../../models/ITeamMember";
 import TeamMember from "./TeamMember";
 import styles from "../../styles/TeamMember.module.css"
+import {containerSlideUp} from "../../animations";
+import {motion} from "framer-motion";
 
 export interface ITeamMemberProps{
     itemsCount? : number
@@ -25,12 +27,12 @@ function TeamMemberList (props : ITeamMemberProps){
             })
     },[]);
     return(
-        <div className={styles.list} >
+        <motion.div variants={containerSlideUp} initial="hidden" whileInView="show" viewport={{once:true}} className={styles.list} >
             {teamMembers.map((item) => {
                // return <TeamMember key={item.nimpame}>{item}</TeamMember>
                 return <TeamMember  {...item} />
             })}
-        </div>
+        </motion.div>
     )
 }
 

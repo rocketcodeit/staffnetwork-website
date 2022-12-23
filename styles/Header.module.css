@@ -5,8 +5,8 @@
     @apply lg:max-h-20  max-h-16 py-3
 }
 .menu {
-    @apply  lg:flex flex-row h-full lg:mr-8 transition lg:relative lg:top-0 lg:justify-end lg:w-full lg:px-0
-            absolute top-16 left-0 container bg-white z-20
+    @apply  lg:flex flex-row lg:h-full lg:mr-8 transition lg:relative lg:top-0 lg:justify-end lg:w-full lg:px-0
+            absolute top-16 left-0 container bg-white z-20 h-screen
 }
 
 .menu > li  {

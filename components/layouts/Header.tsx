@@ -12,6 +12,7 @@ function Header(props : IHeaderConfiguration){
     const [isMobile, setIsMobile] = useState(false);
     const [isOpen, setOpen] = useState(true);
 
+    const router = useRouter();
 
 
     useEffect( () => {
@@ -54,7 +55,9 @@ function Header(props : IHeaderConfiguration){
 
                     { isOpen && <ul className={styles.menu}>
                         { props.menuItems.map((item) => {
-                            return <li key={item.name}  className="linkItem" > <Link href={item.url}>{item.name}</Link> </li>
+                            return <li key={item.name}  className={`linkItem ${router.asPath == item.url ? "active" : ""}`} >
+                                <Link href={item.url}>{item.name}</Link>
+                            </li>
                         })}
                     </ul>
                     }

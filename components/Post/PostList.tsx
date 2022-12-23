@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import PostItem from "./PostItem";
 import {IPost} from "../../models/IPost";
+import {motion} from "framer-motion";
+import {containerSlideUp} from "../../animations";
 
 export interface IPostProps{
     itemsCount? : number
@@ -28,13 +30,12 @@ function PostList (props : IPostProps){
         }, []);
 
     return(
-        <div className="PostListArray grid lg:grid-cols-3 grid-cols-1 gap-5">
-            {
-                posts.map((item) =>{
+        <motion.div variants={containerSlideUp} initial="hidden" whileInView="show" viewport={{once:true}} className="PostListArray grid lg:grid-cols-3 grid-cols-1 gap-5">
+            {posts.map((item) =>{
                     return <PostItem {...item} />
                 })
             }
-        </div>
+        </motion.div>
     )
 }
 

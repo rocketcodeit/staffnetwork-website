@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {IService} from "../../config/models/IService";
 import Service from "./Service";
-import {container} from "../../animations";
+import {container, containerSlideUp} from "../../animations";
 import {motion} from "framer-motion";
 
 
@@ -28,9 +28,8 @@ function ServiceList (props : IServiceProps){
     },[]);
     return(
 
-            <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true}} className="grid xl:grid-cols-3 md:grid-cols-2 gap-4" >
+            <motion.div variants={containerSlideUp} initial="hidden" whileInView="show" viewport={{once:true}} className="grid xl:grid-cols-3 md:grid-cols-2 gap-4" >
                 {services.map((item) => {
-                    // return <TeamMember key={item.nimpame}>{item}</TeamMember>
                     return <Service  {...item} />
                 })}
             </motion.div>
