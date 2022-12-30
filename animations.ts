@@ -79,16 +79,15 @@ export const opacityAnimation = {
 }
 export const fadeInUp = {
     initial: {
-        y:80,
+        top:80,
         opacity: 0
     },
     final: {
-        y:0,
+        top:0,
         opacity: 1,
         transition:{
-
             delay:0.2,
-            duration: 0.4,
+            duration: 1,
             ease: [.6,-.05,.01,.99]
         }
     }
@@ -139,5 +138,20 @@ export const blockTextReveal = {
         viewport:{
             once:true
         }
+    }
+}
+
+export const lineLeftToRight = {
+    initial:{
+        width:'0%'
+    },
+    final: {
+        width:'120%',
+        transition:{
+            duration:3,
+            delay:0.4,
+            ease: [0.19, 1, 0.22, 1]
+        },
+
     }
 }

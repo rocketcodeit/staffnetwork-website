@@ -11,6 +11,8 @@ export interface IServiceProps{
 }
 
 function ServiceList (props : IServiceProps){
+    // Stato per tenere traccia dello stato del fetch dei dati
+    const [loading, setLoading] = useState(true);
 
     const [services,setServices] = useState<IService[]>([]);
 
@@ -23,13 +25,14 @@ function ServiceList (props : IServiceProps){
             .then((res) => {
                 res.json().then((res2) =>{
                     setServices(res2);
+                    setLoading(false);
                 })
             })
-    },[]);
+    },[loading]);
     return(
 
             <motion.div variants={containerSlideUp} initial="hidden" whileInView="show" viewport={{once:true}} className="grid xl:grid-cols-3 md:grid-cols-2 gap-4" >
-                {services.map((item) => {
+                {loading ? "Caricamento" : services.map((item) => {
                     return <Service  {...item} />
                 })}
             </motion.div>

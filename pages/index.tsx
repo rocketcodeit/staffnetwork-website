@@ -119,10 +119,9 @@ export default function Home() {
 
 
                 </div>
-                <TeamMemberList itemsCount={3}/>
                 <div className="w-full">
-                    <Link className="btn mx-auto block w-fit mt-6" href="/chi-siamo">Conosci i professionisti</Link>
-
+                    <TeamMemberList itemsCount={3} />
+                    <Link className="btn mx-auto block w-fit mt-6" href="/come_lavoriamo">Conosci i professionisti</Link>
                 </div>
             </section>
 
@@ -141,7 +140,6 @@ export default function Home() {
                                 Scopri come entrare nella nostra rete ad alto valore aggiunto.
                             </motion.p>
                         </div>
-
                         <a className="btn block w-fit mt-4" href="/chi-siamo">Conosci i professionisti</a>
                     </div>
                     <div className="lg:w-6/12 w-full h-32 lg:h-auto bg-cover bg-[url('/assets/img/pexels-gustavo-fring-628510.png')] bg-center" >

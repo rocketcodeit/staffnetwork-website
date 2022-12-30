@@ -12,3 +12,11 @@
     @apply text-primary-700
 }
 
+.imgCover{
+    @apply  lg:w-[50vw] max-w-none h-full max-h-[500px] lg:absolute object-cover lg:mt-0
+            w-full relative mt-4
+}
+
+.links{
+    @apply flex flex-col gap-3 mt-6
+}

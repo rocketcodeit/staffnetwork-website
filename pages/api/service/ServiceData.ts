@@ -1,6 +1,5 @@
 import {IService} from "../../../config/models/IService";
 import {number} from "prop-types";
-
 export const services: IService[] = [
     {
         slug: "amministrazione",

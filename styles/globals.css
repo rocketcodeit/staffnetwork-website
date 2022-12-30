@@ -217,7 +217,7 @@ a {
 .linkItem a::after{
   content: "";
   transform: scale(0,1);
-  @apply absolute left-0 w-full h-[1.15px] bg-black -bottom-[3.75px] transition duration-300 origin-top-right
+  @apply absolute left-0 w-full h-[1.15px] bg-black -bottom-[3.5px] transition duration-300 origin-top-right
 }
 .linkItem a:hover::after{
   content: "";
@@ -283,4 +283,9 @@ a {
 
 .blockOverText{
   @apply absolute left-0 h-full w-0 z-20
+}
+
+.lineDivisor{
+
+  @apply h-[1.25px] bg-gray-300 relative w-0
 }
