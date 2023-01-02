@@ -13,8 +13,8 @@
 }
 
 .imgCover{
-    @apply  lg:w-[50vw] max-w-none h-full max-h-[500px] lg:absolute object-cover lg:mt-0
-            w-full relative mt-4
+    @apply  lg:w-[50vw] max-w-none h-full max-h-[500px] absolute object-cover lg:mt-0
+            w-[120vw] mt-6
 }
 
 .links{

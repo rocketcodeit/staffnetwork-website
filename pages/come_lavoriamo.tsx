@@ -122,6 +122,7 @@ export default function AboutUs() {
                             </div>
                             <div className="w-12/12">
                                 <TeamMemberList />
+
                             </div>
                         </div>
 

@@ -1,0 +1,44 @@
+.item{
+    @apply bg-gray-200 pb-4
+}
+
+.text{
+    @apply px-8 pt-6
+}
+
+.link{
+    @apply text-primary-light underline-offset-4 font-medium block mr-0 ml-auto w-fit flex flex-nowrap my-6 items-end
+}
+
+.link:hover{
+    @apply text-primary
+}
+
+
+.image{
+    @apply  w-full object-cover md:mb-8 md:mt-4 h-[50vh] min-h-[400px]
+            mb-5 mt-7
+}
+
+.categories{
+    @apply flex flex-row justify-start flex-wrap pt-4
+}
+
+.category{
+    @apply px-4 py-2 bg-primary-100 flex w-fit text-primary mr-3 mb-3
+}
+
+.category:last-child{
+    @apply mb-3
+}
+.content{
+    @apply flex flex-row justify-between flex-wrap md:mb-12 mb-8
+}
+
+.date{
+    @apply text-primary-600 my-2
+}
+
+.shareLinks{
+    @apply flex flex-row bg-primary-600 w-fit px-3 gap-3 py-4
+}

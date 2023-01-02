@@ -42,6 +42,11 @@ const configuration : IWebsiteConfiguration = {
     openingDaysHours : "Lunedi - Venerdi\n" + "09:00-13:00, 15:00-17:00",
     emailContact : "info@staffnetwork.it",
     phoneContact : "0803146422",
+    shareSocial : [
+        {name: "/assets/drawable/facebook.svg",    url: "https://www.facebook.com"},
+        {name: "/assets/drawable/instagram.svg",     url: "https://www.instagram.com"},
+        {name: "/assets/drawable/twitter.svg",  url: "https://www.twitter.com"}
+    ],
 }
 
-export default  configuration;
+export default configuration;

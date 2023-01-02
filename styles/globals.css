@@ -160,43 +160,6 @@ a {
   @apply container pl-0 relative
 }
 /*endregion */
-.postItem{
-  @apply bg-gray-200 pb-4
-}
-
-.postItem__text{
-  @apply px-8 pt-6
-}
-
-.postItem__link{
-  @apply text-primary-light underline-offset-4 font-medium block mr-0 ml-auto w-fit flex flex-nowrap my-6 items-end
-}
-
-.postItem__link:hover{
-  @apply text-primary
-}
-
-
-.postPage__image{
-  height:50vh;
-  min-height: 450px;
-  @apply w-full object-cover mb-8 mt-16
- }
-
-.postPage__categories{
-  @apply flex flex-row justify-start flex-wrap pt-4
-}
-
-.postPage__category{
-  @apply px-4 py-2 bg-primary-100 flex w-fit text-primary mr-3 mb-3
-}
-
-.postPage__category:last-child{
-  @apply mb-3
-}
-.postPage__content{
-  @apply flex flex-row justify-between
-}
 
 .breadCrumb{
   @apply flex flex-row

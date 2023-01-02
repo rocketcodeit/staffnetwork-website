@@ -10,4 +10,5 @@ export interface IWebsiteConfiguration{
     openingDaysHours? : string,
     emailContact : string,
     phoneContact : string,
+    shareSocial?: IMenuItem[],
 }
