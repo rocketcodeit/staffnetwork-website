@@ -44,45 +44,48 @@ function Header(props : IHeaderConfiguration){
     }
 
     return (
-        <nav className="container sticky top-0 bg-white z-[99999]">
-            <div className="flex flex-row justify-between">
-                <div className="lg:basis-2/12 basis-7/12">
-                    <Link href={'/'} className={styles.imgLink}>
-                        <img src={props.logo} />
-                    </Link>
+        <div className={"bg-white sticky top-0 bg-white z-[99999]"}>
+            <nav className="container">
+                <div className="flex flex-row justify-between">
+                    <div className="lg:basis-2/12 basis-7/12">
+                        <Link href={'/'} className={styles.imgLink}>
+                            <img src={props.logo} />
+                        </Link>
+                    </div>
+                    <div className="lg:basis-9/12 basis-4/12 flex justify-end items-center">
+
+                        { isOpen && <ul className={styles.menu}>
+                            { props.menuItems.map((item) => {
+                                return <li key={item.name}  className={`linkItem ${router.asPath == item.url ? "active" : ""}`} >
+                                    <Link href={item.url} >{item.name}</Link>
+                                </li>
+                            })}
+                        </ul>
+                        }
+                        { isMobile &&
+                            <Hamburger toggled={isOpen} toggle={setOpen} direction="right" size={26} rounded onToggle={toggled => {
+                                if(toggled){
+
+                                    console.log("menu aperto");
+                                    //open a menu
+                                }
+                                else{
+                                    //close a menu
+                                    console.log("menu chiuso");
+                                }
+                            }} />
+                        }
+                        <HeaderButtonCta  name={"Contattaci"} link={"contatti"} />
+                    </div>
+
                 </div>
-                <div className="lg:basis-9/12 basis-4/12 flex justify-end items-center">
-
-                    { isOpen && <ul className={styles.menu}>
-                        { props.menuItems.map((item) => {
-                            return <li key={item.name}  className={`linkItem ${router.asPath == item.url ? "active" : ""}`} >
-                                <Link href={item.url}>{item.name}</Link>
-                            </li>
-                        })}
-                    </ul>
-                    }
-                    { isMobile &&
-                        <Hamburger toggled={isOpen} toggle={setOpen} direction="right" size={26} rounded onToggle={toggled => {
-                            if(toggled){
-
-                                console.log("menu aperto");
-                                //open a menu
-                            }
-                            else{
-                                //close a menu
-                                console.log("menu chiuso");
-                            }
-                        }} />
-                    }
-                    <HeaderButtonCta  name={"Bello"} link={"pippo"} />
-                </div>
-
-            </div>
 
 
 
 
-        </nav>
+            </nav>
+        </div>
+
 
 
 

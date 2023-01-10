@@ -192,6 +192,16 @@ a {
   content: "";
   @apply bg-white
 }
+
+.linkItemPrimary.linkItem a::after{
+  content: "";
+  @apply bg-primary
+}
+.linkItemPrimary.linkItem a:hover::after{
+  content: "";
+  @apply bg-primary-600
+}
+
 .linkItem.active a{
   @apply text-primary
 }
@@ -252,3 +262,28 @@ a {
 
   @apply h-[1.25px] bg-gray-300 relative w-0
 }
+
+
+
+.floatingInputOutLineBox input{
+  @apply block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-600 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 bg-white
+}
+
+.floatingInputOutLineBox label {
+  @apply absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 left-1
+}
+
+.floatingInput input,select,textarea{
+  @apply block bg-transparent appearance-none focus:outline-none focus:ring-0 border-b-2 py-2.5 px-0 w-full resize-none
+         border-gray-500 focus:border-primary-light
+}
+
+.floatingInput select{
+  -webkit-appearance: listbox !important
+}
+
+.floatingInput label{
+  @apply absolute duration-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]
+  text-gray-400
+}
+

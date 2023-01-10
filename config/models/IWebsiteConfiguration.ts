@@ -8,7 +8,7 @@ export interface IWebsiteConfiguration{
     socialMenu? : IMenuItem[],
     positionOffice? : string,
     openingDaysHours? : string,
-    emailContact : string,
-    phoneContact : string,
+    emailContact : IMenuItem,
+    phoneContact : IMenuItem,
     shareSocial?: IMenuItem[],
 }

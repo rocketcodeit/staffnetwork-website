@@ -35,7 +35,7 @@
 }
 
 .btn{
-    @apply h-full
+    @apply h-full min-w-[175px]
 }
 
 .btn:hover::after{

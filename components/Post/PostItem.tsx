@@ -18,7 +18,7 @@ function PostItem(props : IPost){
                 <h4 className="text-2xl font-medium">{props.name}</h4>
                 <p className="line-clamp-3 mt-3">{props.description}</p>
 
-                <Link className={styles.link} href={`/post/${props.slug}`}><p>Continua a leggere </p>
+                <Link className={styles.link} href={`/post/${encodeURIComponent(props.slug)}`}><p>Continua a leggere </p>
                     <ArrowRightIcon className="ml-1 w-4 stroke-[2.5px] mb-[3px]"/></Link>
             </div>
 

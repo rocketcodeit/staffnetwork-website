@@ -39,9 +39,9 @@ const configuration : IWebsiteConfiguration = {
         {name: "/assets/drawable/twitter.svg",  url: "https://www.twitter.com"}
     ],
     positionOffice : "Via Genova,59\n 70022 Altamura BA",
-    openingDaysHours : "Lunedi - Venerdi\n" + "09:00-13:00, 15:00-17:00",
-    emailContact : "info@staffnetwork.it",
-    phoneContact : "0803146422",
+    openingDaysHours : "Lunedi - Venerdi\n"+ "09:00-13:00, 15:00-17:00",
+    emailContact : {name:"info@staffnetwork.it", url:"mailto:info@staffnetwork.it"},
+    phoneContact : {name:"0803146422", url:"tel:+390803146422"},
     shareSocial : [
         {name: "/assets/drawable/facebook.svg",    url: "https://www.facebook.com"},
         {name: "/assets/drawable/instagram.svg",     url: "https://www.instagram.com"},
