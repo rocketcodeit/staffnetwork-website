@@ -54,6 +54,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Albert Sans", sans-serif;
+
 }
 
 h1{
@@ -139,6 +140,13 @@ a {
 }
 .btn:hover:after{
   @apply w-[110%] left-[-10px]
+}
+
+.btn.black{
+  @apply bg-black
+}
+.btn.black:after{
+  @apply bg-gray-800
 }
 
 /*endregion */
@@ -280,6 +288,9 @@ a {
 
 .floatingInput select{
   -webkit-appearance: listbox !important
+}
+ input:-internal-autofill-selected, input:-webkit-autofill{
+  @apply !bg-transparent !text-inherit
 }
 
 .floatingInput label{

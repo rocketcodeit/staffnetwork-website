@@ -3,10 +3,13 @@ import React from 'react';
 import {IFooterConfiguration} from "../../config/models/IFooterConfiguration";
 import styles from "../../styles/Header.module.css";
 import {IWebsiteConfiguration} from "../../config/models/IWebsiteConfiguration";
+import Link from "next/link";
+import NewLineText from '../../models/NewLineText';
+
 
 function Footer(props : IWebsiteConfiguration){
     return (
-        <div className="bg-stone-800">
+        <section className="bg-stone-800">
             <div className="container flex flex-wrap">
                 <div className="w-full flex">
                     <div className="lg:w-5/12 w-full lg:mt-8 mt-4">
@@ -22,18 +25,18 @@ function Footer(props : IWebsiteConfiguration){
                             <div className="w-10/12 flex bg-white sm:flex-nowrap lg:gap-x-6 sm:gap-x-3  gap-3 flex-wrap xs:p-8 p-5">
                                 <div className="sm:w-6/12 w-full flex sm:gap-4 gap-3 flex-col">
                                     <p>Staff Network srl</p>
-                                    <p>{props.positionOffice}</p>
+                                    <div><NewLineText text={props.positionOffice} /></div>
                                 </div>
                                 <div className="sm:w-6/12 w-full sm:gap-4 gap-3 flex flex-col">
-                                    <p>{props.openingDaysHours}</p>
-                                    <p>Telefono: <a href={`tel:+39${props.phoneContact}`}>{props.phoneContact}</a></p>
+                                    <div><NewLineText text={props.openingDaysHours} /></div>
+                                    <p className={"linkItem"}>Telefono: <Link href={props.phoneContact.url}>{props.phoneContact.name}</Link></p>
                                 </div>
                             </div>
 
                             <div className="xs:w-2/12 w-3/12 bg-primary lg:py-7 py-4">
                                 <div className="icons flex flex-col justify-center gap-5 items-center h-full xs:p-0 ">
                                     {props.socialMenu?.map((item) => {
-                                       return <a href={item.url}><img className="mx-auto" src={item.name} /> </a>
+                                       return <Link href={item.url}><img className="mx-auto" src={item.name} /> </Link>
                                     })}
 
                                 </div>
@@ -66,7 +69,7 @@ function Footer(props : IWebsiteConfiguration){
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }
 

@@ -1,0 +1,36 @@
+.item{
+    @apply flex flex-row items-stretch
+}
+
+.itemImg{
+
+}
+
+.itemTitle{
+
+}
+
+.itemArea{
+    @apply text-primary-600 mt-1
+}
+
+.itemDescription{
+    @apply mt-3 max-w-4xl
+}
+
+.itemBoxText{
+    @apply bg-gray-200 p-6 relative
+
+}
+
+.itemLink{
+    @apply absolute right-6 bottom-6
+}
+
+.list{
+    @apply flex flex-col gap-4
+}
+
+.buttonsContainer{
+    @apply flex items-end justify-end relative
+}

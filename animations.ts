@@ -21,7 +21,7 @@ export const containerSlideUp = {
     show: {
         opacity: 1,
         transition: {
-            delayChildren: 0.3,
+            delayChildren: 0.3, //0.3 0.1
             staggerChildren: 0.1
         }
     }
@@ -49,7 +49,7 @@ export const itemFade = {
         opacity: 1,
         transition:{
             duration:0.3,
-            ease: [1,0,.71,1.02]
+            ease: [1,0,.71,1.02],
         }
     }
 }

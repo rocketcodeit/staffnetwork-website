@@ -5,5 +5,13 @@ export default function NewlineText(props : any) {
 
     useEffect(() => setText(props.text),[])
 
-    return text.valueOf().split('\n').map((str : string) => <div key={str}>{str}</div>);
+
+    const textRender = () => {
+        return text.valueOf().split('\n').map((str : string) => <div key={str}>{str}</div>);
+    }
+    return (
+        <>
+            {textRender()}
+        </>
+    )
 }

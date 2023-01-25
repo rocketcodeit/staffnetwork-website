@@ -1,4 +1,5 @@
 export interface IService {
+    id?:number,
     slug: string,
     name: string,
     img? : string,

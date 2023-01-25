@@ -7,8 +7,15 @@ import {services} from "../api/service/ServiceData";
 import styles from "../../styles/Service.module.css";
 import {motion} from "framer-motion";
 import {fadeInUp, opacityAnimation} from "../../animations";
+import {AnnouncementList} from "../../components/Announcement/AnnouncementList";
+import {IAnnouncementArea} from "../../models/IAnnouncement";
 
 export default function ServicePage(props:{service : IService}){
+    const detailsService : IAnnouncementArea ={
+        id:1,
+        slug:"amministrazione",
+        title:"Amministrazione"
+    }
 
     return(
         <motion.section variants={opacityAnimation} initial="initial" animate="final" className="overflow-hidden mt-4 mb-12">
@@ -77,6 +84,9 @@ export default function ServicePage(props:{service : IService}){
                         })}
                     </div>
                 </div>
+            </motion.div>
+            <motion.div>
+                <AnnouncementList areaCategory={detailsService} />
             </motion.div>
         </motion.section>
     )

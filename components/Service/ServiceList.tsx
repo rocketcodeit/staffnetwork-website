@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {IService} from "../../config/models/IService";
 import Service from "./Service";
 import {container, containerSlideUp} from "../../animations";
-import {motion} from "framer-motion";
+import {motion, useInView} from "framer-motion";
 
 
 export interface IServiceProps{
@@ -15,6 +15,10 @@ function ServiceList (props : IServiceProps){
     const [loading, setLoading] = useState(true);
 
     const [services,setServices] = useState<IService[]>([]);
+
+    const ref = useRef(null)
+    const isInView = useInView(ref, { once: true });
+
 
     useEffect(() => {
         let url = "/api/service"
@@ -31,8 +35,13 @@ function ServiceList (props : IServiceProps){
     },[loading]);
     return(
 
-            <motion.div variants={containerSlideUp} initial="hidden" whileInView="show" viewport={{once:true}} className="grid xl:grid-cols-3 md:grid-cols-2 gap-4" >
-                {loading ? "Caricamento" : services.map((item) => {
+            <motion.div variants={containerSlideUp}
+                        initial="hidden" whileInView="show" viewport={{once:true}}
+                        className="grid xl:grid-cols-3 md:grid-cols-2 gap-4"
+                        style={{
+                            opacity: isInView ? 1 : 0,
+                        }}>
+                {services.map((item) => {
                     return <Service  {...item} />
                 })}
             </motion.div>

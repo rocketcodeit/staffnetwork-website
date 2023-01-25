@@ -4,16 +4,19 @@ import styles from '../styles/Home.module.css'
 import {ArrowRightIcon} from '@heroicons/react/24/outline'
 import TeamMemberList from '../components/TeamMember/TeamMemberList'
 import {ITeamMember} from "../models/ITeamMember";
-import PostList from "../components/Post/PostList";
+import PostList, {IPostProps} from "../components/Post/PostList";
 import {IWebsiteConfiguration} from "../config/models/IWebsiteConfiguration";
 import ServiceList from "../components/Service/ServiceList";
 import {motion} from "framer-motion";
 import {container, fadeInUp, item, stagger, blockReveal, blockTextReveal} from "../animations";
 import Link from "next/link";
+import {GetServerSideProps, InferGetServerSidePropsType} from "next";
+import {IPost} from "../models/IPost";
 
-export default function Home() {
+
+export default function Home({data} : InferGetServerSidePropsType<typeof getServerSideProps>) {
     return (
-        <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeOut"}}
+        <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}}
                     className={styles.container}>
             <section>
                 <div className={styles.aboveTheFold}>
@@ -154,7 +157,7 @@ export default function Home() {
                         <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-5">Le Risorse</motion.h2>
                     </div>
 
-                    <PostList itemsCount={3} />
+                    <PostList  data={data}  />
                     <Link className="btn block w-fit mt-8 mx-auto" href="/blog">Vai alle risorse</Link>
                 </div>
             </section>
@@ -163,3 +166,38 @@ export default function Home() {
 }
 
 
+
+// This gets called on every request
+export const getServerSideProps: GetServerSideProps<IPostProps> = async (context) => {
+    // Fetch data from external API
+    let url = "http://localhost:1337";
+    const res = await fetch(url + "/api/posts?pagination[page]=1&pagination[pageSize]=3&populate=*");
+    const data = await res.json();
+
+    const posts: IPost[] = data.data.map((item: any) => {
+        return {
+            slug: item.attributes.slug,
+            name: item.attributes.title,
+            date: item.attributes.date,
+            img: url + item.attributes.cover.data.attributes.url,
+            description: item.attributes.content,
+            featured: item.attributes.featured,
+            categories :
+                item.attributes.post_categories.data.map((category : any) => {
+                    return {
+                        name: category.attributes.name,
+                        slug: category.attributes.slug
+                    }
+                })
+        }
+    })
+
+    const result: IPostProps = {
+        data: posts
+    }
+
+    // Pass data to the page via props
+    return {
+        props: result
+    };
+}
