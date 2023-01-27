@@ -59,7 +59,7 @@
     @apply flex flex-row items-center w-full gap-5 my-5
 }
 
-.paginationItem a{
+.paginationItem div{
     @apply px-4 py-2 cursor-pointer block
 }
 .paginationItem:hover{
