@@ -15,7 +15,22 @@ export const item = {
     hidden:{y:'100%', opacity:0},
     show: {y: '0%',opacity: 1, transition: {duration:0.5}}
 }
+export const pageAnimation = {
+    hidden: { opacity: 0 },
+    show: {
+        opacity: 1,
+        transition: {
+            duration:0.3,
+        }
+    },
+    exit:{
+        opacity:0,
+        transition: {
+            duration:0.3,
+        }
+    }
 
+}
 export const containerSlideUp = {
     hidden: { opacity: 0 },
     show: {

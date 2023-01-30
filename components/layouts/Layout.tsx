@@ -3,7 +3,8 @@ import React, {useState} from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import WebsiteConfig from '../../config/WebsiteConfig';
-import {AnimatePresence} from "framer-motion";
+import {motion,AnimatePresence} from "framer-motion";
+import {pageAnimation} from "../../animations";
 
 export interface LayoutProps{
     children : any
@@ -18,9 +19,7 @@ function Layout(props: LayoutProps){
         // <Header menuItems={WebsiteConfig.headerConfiguration.menuItems} />
         <React.Fragment>
             <Header {...WebsiteConfig.headerConfiguration} />
-            <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo(0, 0)} >
-                <main>{props.children}</main>
-            </AnimatePresence>
+            <main>{props.children}</main>
             <Footer {...WebsiteConfig}/>
         </React.Fragment>
     )

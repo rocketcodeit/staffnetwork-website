@@ -5,7 +5,6 @@ const configuration : IWebsiteConfiguration = {
         menuItems : [
             {name: "Home",              url: "/"},
             {name: "Come lavoriamo",    url: "/come_lavoriamo"},
-            {name: "Clienti",           url: "/clienti"},
             {name: "Risorse",           url: "/blog"},
             {name: "Servizi",           url: "/servizi"}
         ],
@@ -15,7 +14,6 @@ const configuration : IWebsiteConfiguration = {
         primaryMenu : [
             {name: "Home",              url: "/"},
             {name: "Come lavoriamo",    url: "/come-lavoriamo"},
-            {name: "Clienti",           url: "/clienti"},
             {name: "Risorse",           url: "/blog"},
             {name: "Servizi",           url: "/servizi"}
         ],

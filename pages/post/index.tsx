@@ -32,7 +32,7 @@ export default function PostsPage({posts, pageCount,currentPage, categories} : I
     useEffect(() => {
 
         setLoading(true);
-        fetch(`${url}/api/posts?populate=*&pagination[page]=${effectivePage}&pagination[pageSize]=1`)
+        fetch(`${url}/api/posts?populate=*&pagination[page]=${effectivePage}`)
             .then((res) => {
 
                 res.json().then((data) => {
@@ -51,7 +51,7 @@ export default function PostsPage({posts, pageCount,currentPage, categories} : I
                 })
             });
 
-    }, [effectivePage,])
+    }, [effectivePage])
 
 
     return (
@@ -59,20 +59,14 @@ export default function PostsPage({posts, pageCount,currentPage, categories} : I
 
                 <div className={styles.container}>
                     <section>
-
-                        <p></p>
-                        <div className="container">
+                        <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}} className="container">
                             <BreadCrumbs mappedPaths={config} showHome={true}  />
-                            <h1 className="text-4xl">Articoli</h1>
-                            <Select
-                                options={categories}
-                                isMulti
-                                placeholder="Filtra per categoria"
-                                onChange={values => handleCategories(values.map((category : any) => category.name))}
-                            />
+                            <h1 className={"mb-3"}>Articoli</h1>
 
 
-                            <PostList loading={loading} posts={data} />
+                            {loading && <motion.div  initial={{opacity:0}}  animate={{opacity:1}} transition={{duration:0.3}}
+                                className={"h-full w-full  flex l-0 bg-white items-center justify-center text-center justify-items-center"}>sta caricando..</motion.div>}
+                            {!loading && <PostList posts={data} /> }
 
                             <ul className={styles.paginationItems}>
                                 {[...Array(pageCount)].map((e, i) =>
@@ -84,7 +78,7 @@ export default function PostsPage({posts, pageCount,currentPage, categories} : I
                                 }
                             </ul>
 
-                        </div>
+                        </motion.div>
 
                     </section>
                 </div>
@@ -101,18 +95,20 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
 
     const effectivePage = page ?? 1;
     let url ="http://localhost:1337";
-    const resPosts = await fetch(`${url}/api/posts?populate=*&pagination[page]=${effectivePage}&pagination[pageSize]=1`);
+    const resPosts = await fetch(`${url}/api/posts?populate=*&pagination[page]=${effectivePage}`);
+
+    //const resPosts = await fetch(`${url}/api/posts?populate=*&pagination[page]=${effectivePage}&pagination[pageSize]=1`);
     const postsData  =  await resPosts.json();
     const pageCount = postsData.meta.pagination.pageCount;
 
     const resCategories =  await fetch(`${url}/api/post-categories`);
     const categoriesData = await resCategories.json();
 
-    if(effectivePage > pageCount || effectivePage <= 0 ){
+    /*if(effectivePage > pageCount || effectivePage <= 0 ){
         return {
             notFound: true
         }
-    }
+    } */
      const posts :  IPost[] =  postsData.data.map((item : any) =>{
         return {
             slug : item.attributes.slug,

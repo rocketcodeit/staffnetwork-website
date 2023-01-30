@@ -7,6 +7,8 @@ import {motion, useInView} from "framer-motion";
 
 export interface IServiceProps{
     itemsCount? : number
+    currentPage? : number,
+    services : IService[]
     //chiedere a ignazio
 }
 
@@ -41,8 +43,8 @@ function ServiceList (props : IServiceProps){
                         style={{
                             opacity: isInView ? 1 : 0,
                         }}>
-                {services.map((item) => {
-                    return <Service  {...item} />
+                {props.services.map((item, index) => {
+                    return <Service key={index} {...item} />
                 })}
             </motion.div>
 

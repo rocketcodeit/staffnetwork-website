@@ -12,9 +12,10 @@ import {container, fadeInUp, item, stagger, blockReveal, blockTextReveal} from "
 import Link from "next/link";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {IPost} from "../models/IPost";
+import {IService} from "../config/models/IService";
 
 
-export default function Home({data} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({posts,services} : InferGetServerSidePropsType<typeof getServerSideProps>) {
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}}
                     className={styles.container}>
@@ -61,7 +62,7 @@ export default function Home({data} : InferGetServerSidePropsType<typeof getServ
                             </motion.div>
                         </div>
                         <div className="z-10 pr-0 container mb-[-96px]">
-                            <ServiceList />
+                            <ServiceList services={services} />
                         </div>
 
 
@@ -157,7 +158,7 @@ export default function Home({data} : InferGetServerSidePropsType<typeof getServ
                         <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-5">Le Risorse</motion.h2>
                     </div>
 
-                    <PostList  data={data}  />
+                    <PostList posts={posts}  />
                     <Link className="btn block w-fit mt-8 mx-auto" href="/blog">Vai alle risorse</Link>
                 </div>
             </section>
@@ -168,11 +169,14 @@ export default function Home({data} : InferGetServerSidePropsType<typeof getServ
 
 
 // This gets called on every request
-export const getServerSideProps: GetServerSideProps<IPostProps> = async (context) => {
+export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     // Fetch data from external API
     let url = "http://localhost:1337";
     const res = await fetch(url + "/api/posts?pagination[page]=1&pagination[pageSize]=3&populate=*");
     const data = await res.json();
+
+    const resServices = await fetch(`${url}/api/services?populate=*`);
+    const servicesData  =  await resServices.json();
 
     const posts: IPost[] = data.data.map((item: any) => {
         return {
@@ -192,9 +196,22 @@ export const getServerSideProps: GetServerSideProps<IPostProps> = async (context
         }
     })
 
-    const result: IPostProps = {
-        data: posts
+    const services :  IService[] =  servicesData.data.map((item : any) =>{
+        return {
+            slug : item.attributes.slug,
+            name : item.attributes.title,
+            short_description : item.attributes.summary,
+            description : item.attributes.description,
+
+        }
+    })
+
+
+    const result: any = {
+        posts : posts,
+        services : services
     }
+
 
     // Pass data to the page via props
     return {

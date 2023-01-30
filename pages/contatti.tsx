@@ -24,7 +24,7 @@ export default function Contatti() {
                 <title>Contatti</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <main>
+            <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}}>
                 <section>
                     <motion.div className="containerRight flex flex-wrap justify-between">
                         <motion.div variants={fadeInUp} className="w-full order-1">
@@ -131,7 +131,7 @@ export default function Contatti() {
 
                     </motion.div>
                 </section>
-            </main>
+            </motion.div>
         </>
     )
 }

@@ -20,7 +20,7 @@ export default function PostPage({post} : InferGetServerSidePropsType<typeof get
     //const dataConfiguration : IWebsiteConfiguration = configuration;
 
     return(
-        <motion.section initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 0.4,ease: "easeOut"}}>
+        <motion.section initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}} >
             <Head>
                 <title>{post.name}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />

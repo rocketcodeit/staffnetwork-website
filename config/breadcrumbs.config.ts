@@ -4,5 +4,9 @@ export const config : IBreadCrumbsMapLabel[] = [
     {
         originalPath : 'post',
         label : 'blog'
+    },
+    {
+        originalPath : 'service',
+        label : 'servizi'
     }
 ]
