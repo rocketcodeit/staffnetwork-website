@@ -1,5 +1,6 @@
 
 export interface IMenuItem {
     name: string,
-    url: string 
+    url: string,
+    subMenuItems?: IMenuItem[]
 }

@@ -26,8 +26,7 @@ function Header(props : IHeaderConfiguration){
     }, []);
 
     function handleWindowCheck(){
-        console.log(window.outerWidth);
-        if(window.outerWidth >= 1024){
+        if(window.innerWidth >= 1024){
             setIsMobile(false);
             setOpen(true);
         }
@@ -54,14 +53,21 @@ function Header(props : IHeaderConfiguration){
                     </div>
                     <div className="lg:basis-9/12 basis-4/12 flex justify-end items-center">
 
-                        { isOpen && <ul className={styles.menu}>
+                         <ul className={`${styles.menu} ${(isOpen && isMobile) ? styles.menuMobileOpen : ""}`}>
                             { props.menuItems.map((item) => {
-                                return <li key={item.name}  className={`linkItem ${router.asPath == item.url ? "active" : ""}`} >
+                                return <li key={item.name}  className={`linkItem ${router.asPath == item.url ? "active" : ""}${item.subMenuItems ? styles.subMenuChild : "" }`} >
                                     <Link href={item.url} >{item.name}</Link>
+                                    {item.subMenuItems &&
+                                        <ul className={`${styles.subMenu}`}>
+                                            {item.subMenuItems.map((subItem,index) => {
+                                                return <li className={`delay-[${index*75 + 175}ms]`} key={subItem.name}><Link href={subItem.url}>{subItem.name}</Link></li>
+                                            })}
+                                        </ul>
+                                    }
                                 </li>
                             })}
                         </ul>
-                        }
+
                         { isMobile &&
                             <Hamburger toggled={isOpen} toggle={setOpen} direction="right" size={26} rounded onToggle={toggled => {
                                 if(toggled){

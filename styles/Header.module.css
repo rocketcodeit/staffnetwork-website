@@ -5,10 +5,12 @@
     @apply lg:max-h-20  max-h-16 py-3
 }
 .menu {
-    @apply  lg:flex flex-row lg:h-full lg:mr-8 transition lg:relative lg:top-0 lg:justify-end lg:w-full lg:px-0
-            absolute top-16 left-0 container bg-white z-20 h-screen
+    @apply  lg:flex flex-row lg:h-full lg:mr-8 transition lg:relative lg:top-0 lg:justify-end lg:w-full lg:px-0 lg:opacity-100 h-full lg:overflow-visible
+            absolute top-16 left-0 container bg-white z-20 h-screen transition-all h-0 overflow-hidden
 }
-
+.menu.menuMobileOpen{
+    @apply  h-screen
+}
 .menu > li  {
     @apply flex items-center lg:w-auto
             w-full;
@@ -41,4 +43,24 @@
 .btn:hover::after{
     content:"";
     width: 125%;
+}
+
+.subMenuChild{
+   @apply lg:flex-row flex-col lg:!items-center  !items-end
+}
+.subMenuChild:hover  .subMenu{
+    @apply opacity-100 scale-y-100 pointer-events-auto flex
+}
+
+
+.subMenuChild:hover  .subMenu > li{
+    @apply opacity-100
+}
+.subMenu{
+    @apply lg:flex flex-col items-start lg:p-4 lg:absolute lg:top-16  bg-white opacity-0 lg:w-fit
+    transition-all scale-y-0 origin-top pointer-events-none relative top-0 hidden p-2 w-full
+}
+
+.subMenu li{
+    @apply w-full transition-all delay-[175ms] opacity-0
 }

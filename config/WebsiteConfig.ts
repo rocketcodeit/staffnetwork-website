@@ -5,6 +5,12 @@ const configuration : IWebsiteConfiguration = {
         menuItems : [
             {name: "Home",              url: "/"},
             {name: "Come lavoriamo",    url: "/come_lavoriamo"},
+            {name:"Lo studio",          url: "/lo-studio",
+                subMenuItems:[
+                    { name:"La storia", url:"/storia"},
+                    { name:"L'ufficio", url:"/ufficio"},
+                ]
+            },
             {name: "Risorse",           url: "/blog"},
             {name: "Servizi",           url: "/servizi"}
         ],
