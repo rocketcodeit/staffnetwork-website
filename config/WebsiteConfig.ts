@@ -4,7 +4,7 @@ const configuration : IWebsiteConfiguration = {
     headerConfiguration : {
         menuItems : [
             {name: "Home",              url: "/"},
-            {name: "Servizi",           url: "/servizi",
+            {name: "Aree",           url: "/area",
                 subMenuItems:[
                     { name:"Amministrazione", url:"/amministrazione"},
                     { name:"Consulenza di direzione aziendale", url:"/storia"},

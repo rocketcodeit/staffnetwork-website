@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
-import {IService} from "../../config/models/IService";
-import Service from "./Service";
+import {IArea} from "../../config/models/IArea";
+import AreaItem from "./AreaItem";
 import {container, containerSlideUp} from "../../animations";
 import {motion, useInView} from "framer-motion";
 
@@ -8,22 +8,22 @@ import {motion, useInView} from "framer-motion";
 export interface IServiceProps{
     itemsCount? : number
     currentPage? : number,
-    services : IService[]
+    services : IArea[]
     //chiedere a ignazio
 }
 
-function ServiceList (props : IServiceProps){
+function AreaList (props : IServiceProps){
     // Stato per tenere traccia dello stato del fetch dei dati
     const [loading, setLoading] = useState(true);
 
-    const [services,setServices] = useState<IService[]>([]);
+    const [services,setServices] = useState<IArea[]>([]);
 
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true });
 
 
     useEffect(() => {
-        let url = "/api/service"
+        let url = "/api/area"
         if(props.itemsCount){
             url+="?limit="+props.itemsCount;
         }
@@ -44,7 +44,7 @@ function ServiceList (props : IServiceProps){
                             opacity: isInView ? 1 : 0,
                         }}>
                 {props.services.map((item, index) => {
-                    return <Service key={index} {...item} />
+                    return <AreaItem key={index} {...item} />
                 })}
             </motion.div>
 
@@ -52,5 +52,5 @@ function ServiceList (props : IServiceProps){
     )
 }
 
-export default ServiceList;
+export default AreaList;
 

@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/ComeLavoriamo.module.css'
 import {ArrowRightIcon} from '@heroicons/react/24/outline'
 import TeamMemberList from '../components/TeamMember/TeamMemberList'
 import {ITeamMember} from "../models/ITeamMember";
 import PostList from "../components/Post/PostList";
 import {IWebsiteConfiguration} from "../config/models/IWebsiteConfiguration";
-import ServiceList from "../components/Service/ServiceList";
+import AreaList from "../components/Area/AreaList";
 import {motion} from "framer-motion";
 import {
     container,
@@ -16,7 +16,7 @@ import {
     blockReveal,
     blockTextReveal,
     lineLeftToRight,
-    textReveal, numberStepOpacity
+    textReveal, numberStepOpacity, scaleDownAnimation
 } from "../animations";
 import Link from "next/link";
 import BreadCrumbs from "../components/Breadcrumbs/BreadCrumbs";
@@ -24,7 +24,7 @@ import {config} from "../config/breadcrumbs.config";
 import React from "react";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {IPost} from "../models/IPost";
-import {IService} from "../config/models/IService";
+import {IArea} from "../config/models/IArea";
 
 let url = "http://localhost:1337";
 
@@ -92,7 +92,7 @@ export default function comeLavoriamo({data} : InferGetServerSidePropsType<typeo
                     </div>
                 </section>
 
-                <section className="mt-24">
+                <section id={"team"} className="mt-24">
                     <div className={"container flex flex-row justify-center relative z-20"}>
                         <div className={"w-8/12"}>
                             <div className={"w-fit relative mx-auto"}>
@@ -105,9 +105,9 @@ export default function comeLavoriamo({data} : InferGetServerSidePropsType<typeo
                     </div>
                     <div className={"container flex flex-row justify-center "}>
                         <div className={"w-full pt-20 -mt-12 mb-16 relative z-10 "}>
-                            <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"w-10/12 bg-gray-100 h-[96%] left-0 right-0 -mt-20  mx-auto absolute"}>
+                            <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"w-11/12 md:w-10/12 bg-gray-100 h-[96%] left-0 right-0 -mt-20  mx-auto absolute"}>
                             </motion.div>
-                            <div className="relative w-5/12 mb-6 mx-auto">
+                            <div className="relative w-10/12 md:w-5/12 mb-6 mx-auto">
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
                                 <motion.p variants={fadeInUp} initial="initial" whileInView="final" viewport={{ once: true }}  className="w-full  mx-auto text-center">
                                     La specializzazione dei singoli professionisti unita alla multidisciplinarietà dell’insieme ci consente di annullare la dispersione informativa e documentale ed essere al tempo stesso più precisi, rapidi ed efficaci nell’esecuzione.
@@ -123,9 +123,10 @@ export default function comeLavoriamo({data} : InferGetServerSidePropsType<typeo
 
                     </div>
                 </section>
+
                 <section className="mt-24">
                     <div className={"container"}>
-                        <div className={"w-5/12 mx-auto relative "}>
+                        <div className={"w-11/12 md:w-5/12 mx-auto relative "}>
                             <div className={"w-fit relative mx-auto"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
                                 <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-center"} >{data.blocco1.titolo}</motion.h2>
@@ -156,63 +157,74 @@ export default function comeLavoriamo({data} : InferGetServerSidePropsType<typeo
                                 })}
                             </div>
                         </div>
-                        <div className={"w-full flex flex-row justify-between items-stretch bg-gray-200 mt-8 "}>
-                            <div className={"flex flex-3 gap-0 flex-wrap w-full h-full"}>
-                                <div className={"basis-1/3"}>
-                                    <div className={"w-fit relative"}>
-                                        <motion.div variants={blockReveal} whileInView="final" className="blockOverText bg-primary-700"></motion.div>
-                                        <motion.div className={"directiveBox z-40 p-6 pr-12"}>
-                                            <div className={"w-fit relative"}>
-                                                <motion.h4 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{data.metodo.step[0].titolo}</motion.h4>
-                                            </div>
-                                            <div className={"w-fit relative mt-2"}>
-                                                <motion.div dangerouslySetInnerHTML={{__html:data.metodo.step[0].descrizione}} variants={blockTextReveal}  initial="initial" whileInView="final" viewport={{ once: true }} />
-                                            </div>
-                                        </motion.div>
-                                    </div>
 
-                                </div>
-                                <div className={"basis-1/3 relative"}>
+                    </div>
+                </section>
+                <section id={"step"} className={"mt-12"}>
+                    <div className={"container"}>
+                        <div className={"w-fit relative mx-auto"}>
+                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                            <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-center"} >{data.blocco1.titolo}</motion.h2>
+                        </div>
+                        <div className={"w-full md:w-6/12 mx-auto relative mt-2"}>
+                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                            <motion.div dangerouslySetInnerHTML={{__html:data.blocco1.descrizione}} variants={blockTextReveal} className={"text-center"} initial="initial" whileInView="final" viewport={{ once: true }} />
+                        </div>
+                        <div className={"flex flex-3 gap-0 flex-wrap w-full h-full mt-8"}>
+                            <div className={"md:basis-1/3 stepContainer"}>
+                                <div className={"w-fit relative"}>
+                                    <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-700"></motion.div>
+                                    <motion.div className={styles.stepBox}>
+                                        <motion.div variants={scaleDownAnimation} initial="initial" whileInView="final" className={styles.stepBoxLine} />
 
-                                </div>
-                                <div className={"basis-1/3"}>03</div>
-                                <div className={"basis-1/3"}>04</div>
-                                <div className={"basis-1/3"}>
-                                    <div className={"w-fit relative"}>
-                                        <motion.div variants={blockReveal} whileInView="final" transition={{duration:1,ease: [0.19, 1, 0.22, 1],delay:0.4}} className="blockOverText bg-primary-700"></motion.div>
-                                        <motion.div className={"directiveBox  p-6 pr-12"}>
+                                        <div className={"w-fit relative"}>
+                                            <motion.div className={styles.stepBoxNumber}>01.</motion.div>
+                                            <motion.div className={styles.stepBoxLine} />
+                                            <motion.h4 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{data.metodo.step[0].titolo}</motion.h4>
+                                            <motion.div dangerouslySetInnerHTML={{__html:data.metodo.step[0].descrizione}} variants={blockTextReveal}  initial="initial" whileInView="final" viewport={{ once: true }} />
+                                        </div>
 
-                                            <div className={"w-fit relative"}>
-                                                <motion.h4 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{data.metodo.step[1].titolo}</motion.h4>
-                                            </div>
-                                            <div className={"w-fit relative mt-2"}>
-                                                <motion.div dangerouslySetInnerHTML={{__html:data.metodo.step[1].descrizione}} variants={blockTextReveal}  initial="initial" whileInView="final" viewport={{ once: true }} />
-                                            </div>
-                                        </motion.div>
-                                    </div>
-                                </div>
-                                <div className={"basis-1/3"}>06</div>
-                                <div className={"basis-1/3"}>07</div>
-                                <div className={"basis-1/3"}>08</div>
-                                <div className={"basis-1/3"}>
-                                    <div className={"w-fit relative"}>
-                                        <motion.div variants={blockReveal} whileInView="final" transition={{duration:1,ease: [0.19, 1, 0.22, 1],delay:0.4}} className="blockOverText bg-primary-700"></motion.div>
-                                        <motion.div className={"directiveBox p-6 pr-12"}>
-                                            <div className={"w-fit relative"}>
-                                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                                <motion.h4 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{data.metodo.step[2].titolo}</motion.h4>
-                                            </div>
-                                            <div className={"w-fit relative mt-2"}>
-                                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                                <motion.div dangerouslySetInnerHTML={{__html:data.metodo.step[2].descrizione}} variants={blockTextReveal}  initial="initial" whileInView="final" viewport={{ once: true }} />
-                                            </div>
-                                        </motion.div>
-                                    </div>
-
+                                    </motion.div>
                                 </div>
                             </div>
+                            <div className={"md:basis-1/3"}></div>
+                            <div className={"md:basis-1/3"}></div>
+                            <div className={"md:basis-1/3"}></div>
+                            <div className={"md:basis-1/3 stepContainer"}>
+                                <div className={"w-fit relative"}>
+                                    <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-700"></motion.div>
+                                    <motion.div className={styles.stepBox}>
+                                        <motion.div variants={scaleDownAnimation} initial="initial" whileInView="final" className={styles.stepBoxLine} />
+                                        <div className={"w-fit relative"}>
+                                            <motion.div className={styles.stepBoxNumber}>02.</motion.div>
+                                            <motion.h4 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{data.metodo.step[1].titolo}</motion.h4>
+                                            <motion.div dangerouslySetInnerHTML={{__html:data.metodo.step[1].descrizione}} variants={blockTextReveal}  initial="initial" whileInView="final" viewport={{ once: true }} />
+                                        </div>
 
+                                    </motion.div>
+                                </div>
+                            </div>
+                            <div className={"md:basis-1/3"}></div>
+                            <div className={"md:basis-1/3"}></div>
+                            <div className={"md:basis-1/3"}></div>
+                            <div className={"md:basis-1/3 stepContainer"}>
+                                <div className={"w-fit relative"}>
+                                    <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-700"></motion.div>
+                                    <motion.div className={styles.stepBox}>
+                                        <motion.div variants={scaleDownAnimation} initial="initial" whileInView="final" className={styles.stepBoxLine} />
+                                        <div className={"w-fit relative"}>
+                                            <motion.div className={styles.stepBoxNumber}>03.</motion.div>
+
+                                            <motion.h4 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{data.metodo.step[2].titolo}</motion.h4>
+                                            <motion.div dangerouslySetInnerHTML={{__html:data.metodo.step[2].descrizione}} variants={blockTextReveal}  initial="initial" whileInView="final" viewport={{ once: true }} />
+                                        </div>
+                                        <div className={"w-fit relative mt-2"}>
+                                        </div>
+                                    </motion.div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </section>
                 <section className={"mt-12"}>

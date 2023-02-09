@@ -34,14 +34,6 @@ const nextConfig = {
           destination: '/post/:path*'
         },
         {
-          source: '/servizi',
-          destination: '/service'
-        },
-        {
-          source: '/servizi/:path*',
-          destination: '/service/:path*'
-        },
-        {
           source: '/bandi',
           destination: '/announcement'
         },
@@ -57,6 +49,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/lo-studio',
+        destination: '/chi-siamo',
+        permanent: true
+      },
+      {
         source: '/post',
         destination: '/blog',
         permanent: true
@@ -66,16 +63,7 @@ const nextConfig = {
         destination: '/blog/:path*',
         permanent: true
       },
-      {
-        source: '/service',
-        destination: '/servizi',
-        permanent : true
-      },
-      {
-        source: '/service/:path*',
-        destination: '/servizi/:path*',
-        permanent : true
-      },
+
       {
         source: '/announcement',
         destination: '/bandi',

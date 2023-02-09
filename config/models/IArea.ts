@@ -1,4 +1,4 @@
-export interface IService {
+export interface IArea {
     id?:number,
     slug: string,
     name: string,

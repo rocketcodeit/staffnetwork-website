@@ -2,12 +2,12 @@ import React from "react";
 import styles from "../../styles/Home.module.css";
 import {config} from "../../config/breadcrumbs.config";
 import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
-import ServiceList from "../../components/Service/ServiceList";
+import AreaList from "../../components/Area/AreaList";
 import {motion} from "framer-motion";
 import {opacityAnimation} from "../../animations";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {IPost, IPostCategory} from "../../models/IPost";
-import {IService} from "../../config/models/IService";
+import {IArea} from "../../config/models/IArea";
 
 export default function ServicesPage({services} : InferGetServerSidePropsType<typeof getServerSideProps>){
     return (
@@ -16,8 +16,8 @@ export default function ServicesPage({services} : InferGetServerSidePropsType<ty
             <section className={"mb-16"}>
                 <div className="container">
                     <BreadCrumbs mappedPaths={config} showHome={true}  />
-                    <h1 className={"mb-3"}>Servizi</h1>
-                    <ServiceList  services={services} />
+                    <h1 className={"mb-3"}>Aree</h1>
+                    <AreaList services={services} />
                 </div>
 
             </section>
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
 
     const effectivePage = page ?? 1;
     let url ="http://localhost:1337";
-    const resServices = await fetch(`${url}/api/services?populate=*&pagination[page]=${effectivePage}`);
+    const resServices = await fetch(`${url}/api/areas?populate=*&pagination[page]=${effectivePage}`);
     const servicesData  =  await resServices.json();
     //const pageCount = resServices.meta.pagination.pageCount; effectivePage > pageCount ||
 
@@ -46,10 +46,10 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
             notFound: true
         }
     }
-    const services :  IService[] =  servicesData.data.map((item : any) =>{
+    const services :  IArea[] =  servicesData.data.map((item : any) =>{
         return {
             slug : item.attributes.slug,
-            name : item.attributes.title,
+            name : item.attributes.titolo,
             short_description : item.attributes.summary,
             description : item.attributes.description,
 

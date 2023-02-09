@@ -6,13 +6,13 @@ import TeamMemberList from '../components/TeamMember/TeamMemberList'
 import {ITeamMember} from "../models/ITeamMember";
 import PostList, {IPostProps} from "../components/Post/PostList";
 import {IWebsiteConfiguration} from "../config/models/IWebsiteConfiguration";
-import ServiceList from "../components/Service/ServiceList";
+import AreaList from "../components/Area/AreaList";
 import {motion} from "framer-motion";
 import {container, fadeInUp, item, stagger, blockReveal, blockTextReveal} from "../animations";
 import Link from "next/link";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {IPost} from "../models/IPost";
-import {IService} from "../config/models/IService";
+import {IArea} from "../config/models/IArea";
 
 
 export default function Home({posts,services, home} : InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -52,7 +52,7 @@ export default function Home({posts,services, home} : InferGetServerSidePropsTyp
                             </motion.div>
                         </div>
                         <div className="z-10 pr-0 container mb-[-96px]">
-                            <ServiceList services={services} />
+                            <AreaList services={services} />
                         </div>
 
 
@@ -167,12 +167,12 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
         }
     })
 
-    const resServices = await fetch(`${url}/api/services?populate=*`);
+    const resServices = await fetch(`${url}/api/areas?populate=*`);
     const servicesData  =  await resServices.json();
-    const services :  IService[] =  servicesData.data.map((item : any) =>{
+    const services :  IArea[] =  servicesData.data.map((item : any) =>{
         return {
             slug : item.attributes.slug,
-            name : item.attributes.title,
+            name : item.attributes.titolo,
             short_description : item.attributes.summary,
             description : item.attributes.description,
 

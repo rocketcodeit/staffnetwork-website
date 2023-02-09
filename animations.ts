@@ -186,3 +186,17 @@ export const numberStepOpacity = {
         }
     }
 }
+
+export const scaleDownAnimation = {
+    initial :{
+         scaleY:0
+    },
+    final:{
+        scaleY:1,
+        transition:{
+            duration:0.3,
+            ease: [.6,-.05,.01,.99],
+            delay:0.8
+        }
+    }
+}

@@ -1,16 +1,16 @@
 import React from "react";
-import {IService} from "../../config/models/IService";
+import {IArea} from "../../config/models/IArea";
 import {config} from "../../config/breadcrumbs.config";
 import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {GetServerSideProps} from "next";
 import {services} from "../api/service/ServiceData";
-import styles from "../../styles/Service.module.css";
+import styles from "../../styles/Area.module.css";
 import {motion} from "framer-motion";
 import {fadeInUp, opacityAnimation} from "../../animations";
 import {AnnouncementList} from "../../components/Announcement/AnnouncementList";
 import {IAnnouncementArea} from "../../models/IAnnouncement";
 
-export default function ServicePage(props:{service : IService}){
+export default function ServicePage(props:{service : IArea}){
     const detailsService : IAnnouncementArea ={
         id:1,
         slug:"amministrazione",
