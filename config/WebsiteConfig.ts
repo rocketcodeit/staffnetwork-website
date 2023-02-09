@@ -4,6 +4,15 @@ const configuration : IWebsiteConfiguration = {
     headerConfiguration : {
         menuItems : [
             {name: "Home",              url: "/"},
+            {name: "Servizi",           url: "/servizi",
+                subMenuItems:[
+                    { name:"Amministrazione", url:"/amministrazione"},
+                    { name:"Consulenza di direzione aziendale", url:"/storia"},
+                    { name:"Finanza Ordinaria", url:"/ufficio"},
+                    { name:"Finanza Agevolata", url:"/ufficio"},
+                    { name:"Green & Sostenibilità", url:"/ufficio"},
+                    { name:"Innovazione", url:"/ufficio"},
+                ]},
             {name: "Come lavoriamo",    url: "/come_lavoriamo"},
             {name:"Lo studio",          url: "/lo-studio",
                 subMenuItems:[
@@ -12,7 +21,7 @@ const configuration : IWebsiteConfiguration = {
                 ]
             },
             {name: "Risorse",           url: "/blog"},
-            {name: "Servizi",           url: "/servizi"}
+            {name: "Bandi",             url: "/bandi"}
         ],
         logo : "/logo-staff_network.svg"
     },

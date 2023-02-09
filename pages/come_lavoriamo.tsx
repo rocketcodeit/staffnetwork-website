@@ -16,14 +16,20 @@ import {
     blockReveal,
     blockTextReveal,
     lineLeftToRight,
-    textReveal
+    textReveal, numberStepOpacity
 } from "../animations";
 import Link from "next/link";
 import BreadCrumbs from "../components/Breadcrumbs/BreadCrumbs";
 import {config} from "../config/breadcrumbs.config";
 import React from "react";
+import {GetServerSideProps, InferGetServerSidePropsType} from "next";
+import {IPost} from "../models/IPost";
+import {IService} from "../config/models/IService";
 
-export default function AboutUs() {
+let url = "http://localhost:1337";
+
+
+export default function comeLavoriamo({data} : InferGetServerSidePropsType<typeof getServerSideProps>) {
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeOut"}}
                     className={styles.container}>
@@ -41,7 +47,7 @@ export default function AboutUs() {
                             }} />
                             <div className="relative w-fit">
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}> Favorire l’avanzamento dell’imprenditoria italia</motion.h1>
+                                <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}> {data.titolo}</motion.h1>
                             </div>
                         </motion.div>
                     </motion.div>
@@ -50,7 +56,7 @@ export default function AboutUs() {
                         <div className={"w-12/12 mx-auto"}>
                             <div className={"relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                <motion.img variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"w-full max-h-[32rem] mt-6 -mb-[20rem] object-cover"} src={"/assets/img/post_image.png"} />
+                                <motion.img variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"w-full max-h-[32rem] mt-6 -mb-[20rem] object-cover"} src={url + data.img.data.attributes.url} />
                             </div>
                         </div>
                     </motion.div>
@@ -58,12 +64,7 @@ export default function AboutUs() {
                         <div className={"container"}>
                             <div className={"w-6/12 mx-auto relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-600"></motion.div>
-                                <motion.p variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-white text-center"}>38 anni fa la nostra storia si è intrecciata e indissolubilmente legata al tessuto imprenditoriale italiano.
-
-                                    In questo tempo abbiamo affiancato gli imprenditori nelle decisioni routinarie e straordinarie della propria impresa, per comprendere quanto entrambe siano fondamentali per un consolidamento duraturo.
-
-                                    Il mondo dell’impresa presenta ampi margini di miglioramento, ma altrettante possibilità potrebbero colmarli, a patto che si sia nelle condizioni di affrontare la complessità che il loro sfruttamento determina.
-                                </motion.p>
+                                <motion.div dangerouslySetInnerHTML={{__html:data.descrizione}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-white text-center"} />
                             </div>
                         </div>
                     </motion.div>
@@ -77,22 +78,14 @@ export default function AboutUs() {
                         <div className={"w-5/12 relative "}>
                             <div className={"w-fit relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >Viviamo di crescita come te</motion.h2>
+                                <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{data.blocco1.titolo}</motion.h2>
+
                             </div>
                         </div>
                         <div className={"w-6/12"}>
                             <div className={"w-fit relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                <motion.p variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >L’idea di Staff Network nasce nel 1985 ad Altamura come studio di consulenza fiscale e consulenza del lavoro, per volontà del fondatore e attuale senior partner Roberto Loiudice.
-
-                                    Nel 2000 nascono le divisioni specializzate nella Finanza d’impresa, Finanza agevolata e ordinaria.
-
-                                    Con il passare del tempo e con la crescita del know-how ha preso avvio un’intensa e sostenuta attività di partnership con studi di commercialisti, istituti di credito, enti territoriali e associazioni.
-
-                                    Nel 2015 viene costituita la divisione Innovazione con l’obiettivo di supportare progetti di innovazione tecnologica e digitalizzazione, mettendo a disposizione l’esperienza in ambito di Innovazione, Finanziamenti Agevolati e d’impresa e Internazionalizzazione.
-
-                                    Nel 2020 nasce la divisione Green con l’obiettivo di affiancare imprese e privati in progetti di sviluppo e investimento sul tema energia, efficientamento energetico e investimento in  impianti di energie rinnovabili.
-                                </motion.p>
+                                <motion.div dangerouslySetInnerHTML={{__html:data.blocco1.descrizione}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} />
                             </div>
 
                         </div>
@@ -130,6 +123,112 @@ export default function AboutUs() {
 
                     </div>
                 </section>
+                <section className="mt-24">
+                    <div className={"container"}>
+                        <div className={"w-5/12 mx-auto relative "}>
+                            <div className={"w-fit relative mx-auto"}>
+                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                                <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-center"} >{data.blocco1.titolo}</motion.h2>
+                            </div>
+                            <div className={"w-fit relative mt-2"}>
+                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                                <motion.div dangerouslySetInnerHTML={{__html:data.blocco1.descrizione}} variants={blockTextReveal} className={"text-center"} initial="initial" whileInView="final" viewport={{ once: true }} />
+                            </div>
+                        </div>
+                        <div className={"w-6/12"}>
+
+
+                        </div>
+                        <div className={"w-full flex flex-row justify-between"}>
+                            <div className={"directiveImage w-6/12"}></div>
+                            <div className={"directiveBoxsContainer w-5/12"}>
+                                {data.metodo.direttiva.map((dir : any, index : number) =>{
+                                    return  <motion.div key={index} className={"directiveBox mb-6"}>
+                                                <div className={"w-fit relative"}>
+                                                    <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                                                    <motion.h4 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{dir.titolo}</motion.h4>
+                                                </div>
+                                                <div className={"w-fit relative mt-2"}>
+                                                    <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                                                    <motion.div dangerouslySetInnerHTML={{__html:dir.descrizione}} variants={blockTextReveal}  initial="initial" whileInView="final" viewport={{ once: true }} />
+                                                </div>
+                                            </motion.div>
+                                })}
+                            </div>
+                        </div>
+                        <div className={"w-full flex flex-row justify-between items-stretch bg-gray-200 mt-8 "}>
+                            <div className={"flex flex-3 gap-0 flex-wrap w-full h-full"}>
+                                <div className={"basis-1/3"}>
+                                    <div className={"w-fit relative"}>
+                                        <motion.div variants={blockReveal} whileInView="final" className="blockOverText bg-primary-700"></motion.div>
+                                        <motion.div className={"directiveBox z-40 p-6 pr-12"}>
+                                            <div className={"w-fit relative"}>
+                                                <motion.h4 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{data.metodo.step[0].titolo}</motion.h4>
+                                            </div>
+                                            <div className={"w-fit relative mt-2"}>
+                                                <motion.div dangerouslySetInnerHTML={{__html:data.metodo.step[0].descrizione}} variants={blockTextReveal}  initial="initial" whileInView="final" viewport={{ once: true }} />
+                                            </div>
+                                        </motion.div>
+                                    </div>
+
+                                </div>
+                                <div className={"basis-1/3 relative"}>
+
+                                </div>
+                                <div className={"basis-1/3"}>03</div>
+                                <div className={"basis-1/3"}>04</div>
+                                <div className={"basis-1/3"}>
+                                    <div className={"w-fit relative"}>
+                                        <motion.div variants={blockReveal} whileInView="final" transition={{duration:1,ease: [0.19, 1, 0.22, 1],delay:0.4}} className="blockOverText bg-primary-700"></motion.div>
+                                        <motion.div className={"directiveBox  p-6 pr-12"}>
+
+                                            <div className={"w-fit relative"}>
+                                                <motion.h4 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{data.metodo.step[1].titolo}</motion.h4>
+                                            </div>
+                                            <div className={"w-fit relative mt-2"}>
+                                                <motion.div dangerouslySetInnerHTML={{__html:data.metodo.step[1].descrizione}} variants={blockTextReveal}  initial="initial" whileInView="final" viewport={{ once: true }} />
+                                            </div>
+                                        </motion.div>
+                                    </div>
+                                </div>
+                                <div className={"basis-1/3"}>06</div>
+                                <div className={"basis-1/3"}>07</div>
+                                <div className={"basis-1/3"}>08</div>
+                                <div className={"basis-1/3"}>
+                                    <div className={"w-fit relative"}>
+                                        <motion.div variants={blockReveal} whileInView="final" transition={{duration:1,ease: [0.19, 1, 0.22, 1],delay:0.4}} className="blockOverText bg-primary-700"></motion.div>
+                                        <motion.div className={"directiveBox p-6 pr-12"}>
+                                            <div className={"w-fit relative"}>
+                                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                                                <motion.h4 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{data.metodo.step[2].titolo}</motion.h4>
+                                            </div>
+                                            <div className={"w-fit relative mt-2"}>
+                                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                                                <motion.div dangerouslySetInnerHTML={{__html:data.metodo.step[2].descrizione}} variants={blockTextReveal}  initial="initial" whileInView="final" viewport={{ once: true }} />
+                                            </div>
+                                        </motion.div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+                <section className={"mt-12"}>
+                    <div className={"container"}>
+                        <div className={"w-6/12 mx-auto"}>
+                            <div className={"w-fit relative mx-auto"}>
+                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                                <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-center"} >{data.contatti.titolo}</motion.h2>
+                            </div>
+                            <div className={"w-fit relative mt-2 mx-auto"}>
+                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                                <motion.div dangerouslySetInnerHTML={{__html:data.contatti.descrizione}} variants={blockTextReveal} className={"text-center"} initial="initial" whileInView="final" viewport={{ once: true }} />
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </main>
 
 
@@ -140,4 +239,17 @@ export default function AboutUs() {
     )
 }
 
+export const getServerSideProps: GetServerSideProps<any> = async (context) => {
+    // Fetch data from external API
 
+    const resComeLavoriamo = await fetch(`${url}/api/come-lavoriamo?populate=*&populate[0]=metodo,contatti,blocco1,staff,img,&populate[1]=metodo.direttiva,metodo.step,contatti.form`);
+    const comeLavoriamoData = await resComeLavoriamo.json();
+
+    const result: any = {
+        data : comeLavoriamoData.data.attributes
+    }
+    // Pass data to the page via props
+    return {
+        props: result
+    };
+}

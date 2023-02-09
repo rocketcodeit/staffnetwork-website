@@ -46,7 +46,7 @@
 }
 
 .subMenuChild{
-   @apply lg:flex-row flex-col lg:!items-center  !items-end
+   @apply lg:flex-row flex-col lg:!items-center  !items-start
 }
 .subMenuChild:hover  .subMenu{
     @apply opacity-100 scale-y-100 pointer-events-auto flex
@@ -63,4 +63,7 @@
 
 .subMenu li{
     @apply w-full transition-all delay-[175ms] opacity-0
+}
+.subMenu li a{
+    @apply justify-end lg:justify-start
 }

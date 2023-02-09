@@ -170,3 +170,19 @@ export const lineLeftToRight = {
 
     }
 }
+
+export const numberStepOpacity = {
+    initial:{
+        opacity:1
+    },
+    final:{
+        opacity: 0,
+
+        transition:{
+            duration: 0.4,
+            ease: [.6,-.05,.01,.99],
+            delayChildren: 0.5,
+            staggerChildren:0.2,
+        }
+    }
+}
