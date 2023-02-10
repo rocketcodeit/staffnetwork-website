@@ -5,6 +5,8 @@ import {config} from "../../config/breadcrumbs.config";
 import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {motion} from "framer-motion";
 import {AnnouncementList} from "../../components/Announcement/AnnouncementList";
+import {GetServerSideProps} from "next";
+import {IPost, IPostCategory} from "../../models/IPost";
 
 export default function PostsPage(){
     const [loading, setLoading] = useState(false);
@@ -25,4 +27,37 @@ export default function PostsPage(){
                 </div>
         </>
     );
+}
+
+
+// This gets called on every request
+export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
+    // Fetch data from external API
+    const {page} = context.query;
+
+    const effectivePage = page ?? 1;
+    let url ="http://localhost:1337";
+    const resService = await fetch(`${url}/api/services?populate=*&pagination[page]=${effectivePage}`);
+
+    //const resPosts = await fetch(`${url}/api/posts?populate=*&pagination[page]=${effectivePage}&pagination[pageSize]=1`);
+    const serviceData  =  await resService.json();
+    const pageCount = serviceData.meta.pagination.pageCount;
+
+    if(!serviceData.data) {
+        return {
+            notFound: true,
+        }
+    }
+
+
+    const result: any = {
+        data: serviceData.data.attributes
+    }
+
+
+
+    // Pass data to the page via props
+    return {
+        props: result
+    };
 }

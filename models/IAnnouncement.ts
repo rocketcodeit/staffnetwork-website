@@ -2,10 +2,10 @@ export interface IAnnouncement{
     title: string,
     slug: string,
     area : IAnnouncementArea[],
-    img: string
+    img?: string
     details : IAnnouncementDetails,
     description: string,
-    recipients: string,
+    recipients?: string,
     link?: {
         text: string,
         href: string
@@ -69,7 +69,7 @@ export interface IAnnouncementDetails{
 }
 
 export interface IAnnouncementArea{
-    id: number,
+    id?: number,
     slug: string,
     title:string,
     default?: boolean

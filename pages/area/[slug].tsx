@@ -2,112 +2,133 @@ import React from "react";
 import {IArea} from "../../config/models/IArea";
 import {config} from "../../config/breadcrumbs.config";
 import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
-import {GetServerSideProps} from "next";
+import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {services} from "../api/service/ServiceData";
 import styles from "../../styles/Area.module.css";
 import {motion} from "framer-motion";
-import {fadeInUp, opacityAnimation} from "../../animations";
+import {blockReveal, blockTextReveal, fadeInUp, opacityAnimation} from "../../animations";
 import {AnnouncementList} from "../../components/Announcement/AnnouncementList";
-import {IAnnouncementArea} from "../../models/IAnnouncement";
+import {IAnnouncement, IAnnouncementArea} from "../../models/IAnnouncement";
+import Link from "next/link";
 
-export default function ServicePage(props:{service : IArea}){
-    const detailsService : IAnnouncementArea ={
-        id:1,
-        slug:"amministrazione",
-        title:"Amministrazione"
+let url = "http://localhost:1337";
+
+
+export default function AreaPage({data,services} : InferGetServerSidePropsType<typeof getServerSideProps>){
+    const areaFound : IArea ={
+        slug:data.slug,
+        name:data.titolo,
+        short_description:data.summary,
+        description: data.description ? data.description : undefined ,
+        img: data.image.data ? url+data.image.data.attributes.url : undefined,
     }
+
+
+    const servicesFound : IAnnouncement[] = services.map((i : any) => {
+        return {
+            title: i.attributes.title,
+            slug: i.attributes.slug,
+            area:
+                i.attributes.aree.data.map((area : any) => {
+                    return{
+                        slug:area.attributes.slug,
+                        title:area.attributes.title
+                    }
+                }),
+            details:{
+                summary: i.attributes.summary
+            },
+            description: i.attributes.description
+        }
+    })
 
     return(
         <motion.section variants={opacityAnimation} initial="initial" animate="final" className="overflow-hidden mt-4 mb-12">
-            <motion.div className="containerRight flex flex-wrap justify-between">
-                <motion.div variants={fadeInUp} className="w-full order-1">
-                    <BreadCrumbs  mappedPaths={config} showHome={true} transformDynamicPath={path => {
-                        if(path === "[slug]"){
-                            return props.service.name
-                        }
-                        return path;
-                    }} />
-                    <h1>{props.service.name}</h1>
-                </motion.div>
-
-                <motion.div variants={fadeInUp} className="w-full lg:w-6/12 order-last lg:order-2">
-
-                    <ul className={styles.activities}>{props.service.activities?.map((i) =>{
-                            return  <li className={styles.activity}>
-                                        <div className={styles.content}>
-                                            <h5>{i.title}</h5>
-                                            <p>{i.description}</p>
-                                        </div>
-
-                                    </li>
-                    })}</ul>
-                </motion.div>
-                <motion.div variants={fadeInUp} className={`w-full lg:w-5/12 backgroundRight bg-cover relative h-56 lg:h-auto order-2 lg:order-last`}>
-                    <img className={styles.img} src={props.service.img} />
-                </motion.div>
-            </motion.div>
-
-            <motion.div className="container mt-12" variants={fadeInUp}>
-                <div className="w-12/12">
-                    <h2 className={`mb-3`}> Cosa facciamo</h2>
-                    <p className={styles.description}>{props.service.description}</p>
-                </div>
-            </motion.div>
-            <motion.div variants={fadeInUp} className="container mt-12 flex justify-between flex-wrap lg:flex-nowrap" >
-                <div className=" w-full lg:w-6/12">
-                    <h2 className={`mb-8`}> Come lo facciamo</h2>
-                    <div className={styles.methods}>
-                        {props.service.methods?.map((i) =>{
-                            let count = 0, active;
-                            count++;
-                            return  <div className={styles.method}>
-                                        <div className={styles.number}>{count}</div>
-                                        <div className={styles.content}>
-                                            <h4 className="mb-2">{i.title}</h4>
-                                            <p>{i.description}</p>
-                                        </div>
-
+            <section id={"abo"}>
+                <motion.div className="containerRight flex flex-wrap justify-between">
+                    <motion.div variants={fadeInUp} className="w-full order-1">
+                        <BreadCrumbs  mappedPaths={config} showHome={true} transformDynamicPath={path => {
+                            if(path === "[slug]"){
+                                return areaFound.slug
+                            }
+                            return path;
+                        }} />
+                        <div className="relative w-fit">
+                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                            <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}> {areaFound.name}</motion.h1>
+                        </div>
+                    </motion.div>
+                    <motion.div variants={fadeInUp} className="w-full lg:w-6/12 order-2 lg:order-2">
+                        <div className={"w-fit relative mt-2"}>
+                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                            <motion.div dangerouslySetInnerHTML={{__html:areaFound.description ? areaFound.description : ""}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={""} />
+                        </div>
+                        <div className={"w-fit relative mt-2"}>
+                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                            <ul className={styles.activities}>{data.servizi?.map((service : any, index : number) =>{
+                                return  <li key={index} className={styles.activity}>
+                                    <div className={styles.content}>
+                                        <h5>{service.titolo}</h5>
+                                        <motion.div dangerouslySetInnerHTML={{__html:service.descrizione}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={""} />
                                     </div>
-                        })}
+
+                                </li>
+                            })}</ul>
+                        </div>
+
+                    </motion.div>
+                    <motion.div variants={fadeInUp} className={"w-full relative lg:w-5/12 containerRightBefore flex flex-row items-start order-last lg:order-3"}>
+                        <Link  className={"btn !sticky top-6 "} href={"Contattaci"} >Contattaci</Link>
+                    </motion.div>
+                </motion.div>
+            </section>
+
+            <section id={"services"} className={"mt-16"}>
+                <div className={"container"}>
+                    <div className={"w-full lg:w-8/12"}>
+                        <motion.h3 className={"mb-3"}>Servizi</motion.h3>
+                        <AnnouncementList services={servicesFound} />
                     </div>
                 </div>
-                <div className={` w-full lg:w-5/12 ${styles.resultsContainer}`}>
-                    <h2 className={`mb-3`}> Risultati</h2>
-                    <div className={styles.results}>
-                        {props.service.results?.map((result) =>{
-                            let count = 0, active;
-                            count++;
-                            return  <div className={styles.result}>
-                                <div className={styles.number}>{result.number}{result.term}</div>
-                                <div className={styles.title}>{result.title}</div>
-                            </div>
-                        })}
-                    </div>
-                </div>
-            </motion.div>
-            <motion.div>
-                <AnnouncementList areaCategory={detailsService} />
-            </motion.div>
+            </section>
+
         </motion.section>
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
 
-    const { slug } = context.query
+// This gets called on every request
+export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
 
-    const serviceFound = services.find( (service) => service.slug === slug);
+    const {slug} = context.query;
 
-    if(serviceFound){
-        return{
-            props : {
-                service : serviceFound
-            }
+    let url ="http://localhost:1337";
+    const resArea = await fetch(`${url}/api/areas/${slug}?populate=*`);
+    const areaData  =  await resArea.json();
+    //const pageCount = resServices.meta.pagination.pageCount; effectivePage > pageCount ||
+
+
+    if(!areaData.data) {
+        return {
+            notFound: true,
         }
     }
 
+
+    const resServices = await fetch(`${url}/api/services?populate=*&&populate[0]=aree&filters[aree][slug][$containsi]=${areaData.data.attributes.slug}`);
+    const servicesData  =  await resServices.json();
+
+
+
+
+    const result: any = {
+        data: areaData.data.attributes,
+        services : servicesData.data
+    }
+
+
+    // Pass data to the page via props
     return {
-        notFound : true
+        props: result
     };
-    // return {props : { a : 3 }}
 }

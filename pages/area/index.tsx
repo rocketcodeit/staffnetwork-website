@@ -9,7 +9,7 @@ import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {IPost, IPostCategory} from "../../models/IPost";
 import {IArea} from "../../config/models/IArea";
 
-export default function ServicesPage({services} : InferGetServerSidePropsType<typeof getServerSideProps>){
+export default function AreasPage({services} : InferGetServerSidePropsType<typeof getServerSideProps>){
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}} className={styles.container}>
 
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
 
     const effectivePage = page ?? 1;
     let url ="http://localhost:1337";
-    const resServices = await fetch(`${url}/api/areas?populate=*&pagination[page]=${effectivePage}`);
+    const resServices = await fetch(`${url}/api/areas?populate=*&sort=id&pagination[page]=${effectivePage}`);
     const servicesData  =  await resServices.json();
     //const pageCount = resServices.meta.pagination.pageCount; effectivePage > pageCount ||
 

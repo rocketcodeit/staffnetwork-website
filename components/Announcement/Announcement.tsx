@@ -13,7 +13,7 @@ interface IAnnouncementItem{
     summary:string
 }
 
-export function Announcement(props : IAnnouncementItem){
+export function AnnouncementItem(props : IAnnouncementItem){
     return(
 
         <motion.div variants={itemFade} className={styles.item}>
@@ -23,8 +23,10 @@ export function Announcement(props : IAnnouncementItem){
                     <h4 className={styles.itemTitle}>{props.title}</h4>
                     {props.subtitle && <h5  className={styles.itemArea}>{props.subtitle}</h5>}
 
-                    <p className={styles.itemDescription}> {props.summary}</p>
-                    <div className={`linkItem linkItemPrimary ${styles.itemLink}`}><a className={"text-primary-600"}>Scopri di più</a></div>
+                    <div className={styles.itemDescription} dangerouslySetInnerHTML={{__html:props.summary}} />
+                    <div className={`linkItem linkItemPrimary ${styles.itemLink}`}>
+                        <a className={"text-primary-600"}>Scopri di più</a>
+                    </div>
                 </Link>
             </div>
 

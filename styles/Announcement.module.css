@@ -19,7 +19,7 @@
 }
 
 .itemBoxText{
-    @apply bg-gray-200 p-6 relative
+    @apply bg-gray-200 p-6 relative w-full max-w-full
 
 }
 

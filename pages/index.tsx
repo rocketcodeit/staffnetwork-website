@@ -169,7 +169,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
 
     const resServices = await fetch(`${url}/api/areas?populate=*`);
     const servicesData  =  await resServices.json();
-    const services :  IArea[] =  servicesData.data.map((item : any) =>{
+    const areas :  IArea[] =  servicesData.data.map((item : any) =>{
         return {
             slug : item.attributes.slug,
             name : item.attributes.titolo,
@@ -185,7 +185,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
 
     const result: any = {
         posts : posts,
-        services : services,
+        services : areas,
         home : homeData.data.attributes
     }
 

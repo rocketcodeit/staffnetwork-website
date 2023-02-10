@@ -22,6 +22,7 @@
 .aboveTheFold{
   @apply h-screen-90 container max-h-[600px]
 }
+
 .containerRightBefore:before{
   content: "";
   position: absolute;

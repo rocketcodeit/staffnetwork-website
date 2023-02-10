@@ -167,6 +167,29 @@ a {
 .containerLeft{
   @apply container pl-0 relative
 }
+
+.containerRightBefore:before{
+  content: "";
+  position: absolute;
+  width: 200%;
+
+  @apply bg-gray-200 h-full -z-10 top-0;
+}
+
+
+.bgContainerBefore:before{
+  content: "";
+  @apply bg-primary-700;
+}
+.containerLeft:before{
+  content: "";
+  position: absolute;
+  width: 300%;
+
+  @apply bg-primary-700 absolute h-full right-12  -z-10
+
+}
+
 /*endregion */
 
 .breadCrumb{

@@ -8,7 +8,7 @@
 }
 
 .activities{
-    @apply mt-12 ml-5
+    @apply mt-4 ml-5
 }
 
 .activities .activity{
@@ -52,4 +52,30 @@
 .results .result .number{
     @apply text-3xl font-medium mr-2
 }
+/*#endregion */
+
+
+/*#region AreaItem */
+
+.item{
+    @apply bg-gray-200 h-48 flex flex-col justify-end p-10 pb-0 pr-0
+}
+.item .title{
+    @apply pr-4 mb-1
+}
+.item .except{
+    @apply pr-4 mb-3
+}
+.item .except p {
+    @apply line-clamp-3
+}
+.item .button{
+    @apply self-end cursor-pointer
+}
+
+.item .button p{
+    @apply mr-2
+}
+
+
 /*#endregion */
