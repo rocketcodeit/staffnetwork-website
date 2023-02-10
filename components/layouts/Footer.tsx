@@ -5,16 +5,21 @@ import styles from "../../styles/Header.module.css";
 import {IWebsiteConfiguration} from "../../config/models/IWebsiteConfiguration";
 import Link from "next/link";
 import NewLineText from '../../models/NewLineText';
+import {GetServerSideProps, InferGetServerSidePropsType} from "next";
+import {IPost} from "../../models/IPost";
+import {IArea} from "../../config/models/IArea";
+
+let url = "http://localhost:1337";
 
 
-function Footer(props : IWebsiteConfiguration){
+function Footer(props : IWebsiteConfiguration, {data} : InferGetServerSidePropsType<typeof getServerSideProps>){
     return (
         <section className="bg-stone-800">
             <div className="container flex flex-wrap">
                 <div className="w-full flex">
                     <div className="lg:w-5/12 w-full lg:mt-8 mt-4">
                         <div className="footer_logo mb-4">
-                            <img src={props.footerConfiguration.logo} />
+                            <img className={" max-h-16 md:max-h-20"} src={props.footerConfiguration.logo} />
                         </div>
                     </div>
                     <div className="w-7/12"></div>
@@ -72,5 +77,26 @@ function Footer(props : IWebsiteConfiguration){
         </section>
     );
 }
+
+
+
+// This gets called on every request
+export const getServerSideProps: GetServerSideProps<any> = async (context) => {
+    // Fetch data from external API
+    let url = "http://localhost:1337";
+
+    const resData = await fetch(url + "/api/configurazione?&populate=*");
+    const configurationData = await resData.json();
+
+    const result: any = {
+        data : configurationData.data.attributes
+    }
+
+    // Pass data to the page via props
+    return {
+        props: result
+    };
+}
+
 
 export default Footer;

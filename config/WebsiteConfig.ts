@@ -43,7 +43,7 @@ const configuration : IWebsiteConfiguration = {
             {name: "Cookie Policy",     url: "/cookie-policy"},
             {name: "Termini e Condizioni",  url: "/termini-e-condizioni"}
         ],
-        logo: "/vercel-white.svg"
+        logo: "/logo-staff_network-white.svg"
 
     },
     socialMenu : [

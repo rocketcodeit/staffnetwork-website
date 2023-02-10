@@ -69,61 +69,7 @@ export default function comeLavoriamo({data} : InferGetServerSidePropsType<typeo
                         </div>
                     </motion.div>
                 </section>
-
-                <section className="mt-24 overflow-hidden">
-                    <motion.div className={"containerRight"}>
-                        <motion.div variants={lineLeftToRight} initial="initial" whileInView="final" viewport={{ once: true }}  className={"lineDivisor"}></motion.div>
-                    </motion.div>
-                    <div className={"container flex flex-row justify-between py-6"}>
-                        <div className={"w-5/12 relative "}>
-                            <div className={"w-fit relative"}>
-                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{data.blocco1.titolo}</motion.h2>
-
-                            </div>
-                        </div>
-                        <div className={"w-6/12"}>
-                            <div className={"w-fit relative"}>
-                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                <motion.div dangerouslySetInnerHTML={{__html:data.blocco1.descrizione}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} />
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
-
-                <section id={"team"} className="mt-24">
-                    <div className={"container flex flex-row justify-center relative z-20"}>
-                        <div className={"w-8/12"}>
-                            <div className={"w-fit relative mx-auto"}>
-                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                                <motion.h3  variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-center z-20"}>Ogni grande progetto <br /> ha bisogno di un grande staff</motion.h3>
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div className={"container flex flex-row justify-center "}>
-                        <div className={"w-full pt-20 -mt-12 mb-16 relative z-10 "}>
-                            <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"w-11/12 md:w-10/12 bg-gray-100 h-[96%] left-0 right-0 -mt-20  mx-auto absolute"}>
-                            </motion.div>
-                            <div className="relative w-10/12 md:w-5/12 mb-6 mx-auto">
-                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                                <motion.p variants={fadeInUp} initial="initial" whileInView="final" viewport={{ once: true }}  className="w-full  mx-auto text-center">
-                                    La specializzazione dei singoli professionisti unita alla multidisciplinarietà dell’insieme ci consente di annullare la dispersione informativa e documentale ed essere al tempo stesso più precisi, rapidi ed efficaci nell’esecuzione.
-                                </motion.p>
-                            </div>
-                            <div className="w-12/12">
-                                <TeamMemberList />
-
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                </section>
-
+                
                 <section className="mt-24">
                     <div className={"container"}>
                         <div className={"w-11/12 md:w-5/12 mx-auto relative "}>
@@ -229,7 +175,7 @@ export default function comeLavoriamo({data} : InferGetServerSidePropsType<typeo
                 </section>
                 <section className={"mt-12"}>
                     <div className={"container"}>
-                        <div className={"w-6/12 mx-auto"}>
+                        <div className={"w-11/12 md:w-8/12 lg:w-6/12 mx-auto"}>
                             <div className={"w-fit relative mx-auto"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
                                 <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-center"} >{data.contatti.titolo}</motion.h2>
@@ -237,6 +183,50 @@ export default function comeLavoriamo({data} : InferGetServerSidePropsType<typeo
                             <div className={"w-fit relative mt-2 mx-auto"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
                                 <motion.div dangerouslySetInnerHTML={{__html:data.contatti.descrizione}} variants={blockTextReveal} className={"text-center"} initial="initial" whileInView="final" viewport={{ once: true }} />
+                            </div>
+
+
+
+
+                        </div>
+                        <div className={"xl:w-7/12 lg:w-8/12 w-11/12 mx-auto"}>
+                            <div className={"w-fit relative mx-auto"}>
+                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
+                                <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={" bg-gray-200 lg:p-12 md:p-8 px-6 py-4 mx-auto flex gap-x-9 gap-y-6 flex-2-1.5 flex-wrap mt-8 mb-20"}>
+
+
+                                    <div className="relative md:flex-2-1.5 flex-auto z-0 floatingInput">
+                                        <input type="text" id="floating_standard" className="peer" placeholder=" "/>
+                                        <label htmlFor="floating_standard"  className=" peer-focus:left-0 peer-focus:text-primary-light peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nome</label>
+                                    </div>
+                                    <div className="relative md:flex-2-1.5 flex-auto z-0 floatingInput">
+                                        <input type="text" id="floating_standard" className="peer" placeholder=" "/>
+                                        <label htmlFor="floating_standard"  className=" peer-focus:left-0 peer-focus:text-primary-light peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Cognome</label>
+                                    </div>
+                                    <div className="relative md:flex-2-1.5 flex-auto z-0 floatingInput">
+                                        <input type="tel" id="floating_standard" className="peer" placeholder=" "/>
+                                        <label htmlFor="floating_standard"  className=" peer-focus:left-0 peer-focus:text-primary-light peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Telefono*</label>
+                                    </div>
+                                    <div className="relative md:flex-2-1.5 flex-auto z-0 floatingInput">
+                                        <input type="email" id="floating_standard" className="peer" placeholder=" "/>
+                                        <label htmlFor="floating_standard"  className=" peer-focus:left-0 peer-focus:text-primary-light peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email*</label>
+                                    </div>
+                                    <div className="relative w-full z-0 floatingInput">
+                                        <select id="underline_select" className="peer">
+                                            <option selected>In quale categoria ti riconosci?</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                    <div className="relative w-full z-0 floatingInput">
+                                        <textarea id="floating_standard" className={"w-full"} placeholder="Richiesta"></textarea>
+                                    </div>
+                                    <div className={"w-fit mx-auto mt-2"}>
+                                        <button type={"submit"} className={"btn"}>Invia</button>
+                                    </div>
+                                </motion.div>
                             </div>
                         </div>
                     </div>

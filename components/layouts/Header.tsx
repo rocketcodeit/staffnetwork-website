@@ -51,7 +51,7 @@ function Header(props : IHeaderConfiguration){
                             <img src={props.logo} />
                         </Link>
                     </div>
-                    <div className="lg:basis-9/12 basis-4/12 flex justify-end items-center">
+                    <div className="basis-4/12 lg:basis-10/12  flex justify-end items-center">
 
                          <ul className={`${styles.menu} ${(isOpen && isMobile) ? styles.menuMobileOpen : ""}`}>
                             { props.menuItems.map((item) => {

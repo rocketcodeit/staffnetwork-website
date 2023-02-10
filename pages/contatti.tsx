@@ -10,13 +10,21 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { RiInstagramLine,RiFacebookBoxLine,RiTwitterLine} from "react-icons/ri";
 import { ReactSVG } from "react-svg";
 import NewLineText from "../models/NewLineText";
+import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 
-export default function Contatti() {
+
+
+let url = "http://localhost:1337";
+
+
+export default function Contatti({data} : InferGetServerSidePropsType<typeof getServerSideProps>) {
 
     const Map = ReactMapboxGl({
         accessToken:
             'pk.eyJ1Ijoibmljb2xhY2lhbm8iLCJhIjoiY2t4cHYweGg3MWptaDJ2a28weTMzZWZ2bSJ9.X9i3oJ567Pl9OP3rjuyGxw'
     });
+    console.log(data);
+
 
     return (
         <>
@@ -30,7 +38,7 @@ export default function Contatti() {
                         <motion.div variants={fadeInUp} className="w-full order-1">
                             <div className={"w-fit relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                                <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"mb-4"}>Contatti</motion.h1>
+                                <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"mb-4 mt-8"}>Contatti</motion.h1>
                             </div>
                         </motion.div>
 
@@ -38,21 +46,34 @@ export default function Contatti() {
                             <div className={"w-fit relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
                                 <motion.ul variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"flex flex-col gap-4"}>
-                                    <li><NewLineText text={configuration.positionOffice} /></li>
-                                    <li><NewLineText text={configuration.openingDaysHours} /></li>
-                                    <li className={"linkItem linkItemPrimary"}>Email: <Link  className="text-primary hover:text-primary-600" href={configuration.emailContact.url}>{configuration.emailContact.name}</Link></li>
-                                    <li className={"linkItem linkItemPrimary"}>Telefono: <Link className="text-primary hover:text-primary-600" href={configuration.phoneContact.url}>{configuration.phoneContact.name}</Link></li>
+                                    <li>
+                                        <motion.div dangerouslySetInnerHTML={{__html:data.indirizzo}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={""} />
+                                    </li>
+                                    <li>
+                                        <motion.div dangerouslySetInnerHTML={{__html:data.orariApertura}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={""} />
+                                    </li>
+                                    {data.informazioniContatto.collegamenti.map((i : any, index: number) => {
+                                        return <li key={index} className={"linkItem linkItemPrimary"}>
+                                            {i.beforeTitle ? i.beforeTitle : ""}
+                                            <Link  className="text-primary hover:text-primary-600" href={i.href}>{i.title}</Link>
+                                            {i.afterTitle ? i.afterTitle : ""}
+                                        </li>
+
+                                    })}
                                 </motion.ul>
                             </div>
-                            <div className={"w-fit relative"}>
+                            <div id={"social"} className={"w-fit relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
                                 <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="icons flex flex-row justify-start gap-5 items-center xs:p-0 mt-7 ">
-                                    {configuration.socialMenu?.map((item) => {
-                                        return <Link href={item.url}>
+                                    {data.informazioniContatto.social.map((i : any, index: number) => {
+                                        return <Link key={index} href={i.href}>
+                                            {i.beforeTitle ? i.beforeTitle : ""}
                                             <ReactSVG beforeInjection={(svg) => {
                                                 svg.classList.add('stroke-primary')}}
-                                                      className={"text-primary stroke-primary"} src={item.name} />
+                                                      className={"text-primary stroke-primary"} src={url + i.icon.data.attributes.url} />
+                                            {i.afterTitle ? i.afterTitle : ""}
                                         </Link>
+
                                     })}
                                 </motion.div>
                             </div>
@@ -82,11 +103,12 @@ export default function Contatti() {
                         <div className={"lg:w-5/12 md:w-8/12  w-11/12 mx-auto"}>
                             <div className={"w-fit relative mx-auto"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                                <motion.h3 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-center mb-4"}>Scrivi qui la tua richiesta</motion.h3>
+                                <motion.h3 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-center mb-4"}>{data.titoloForm}</motion.h3>
                             </div>
                             <div className={"w-fit relative mx-auto"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                                <motion.p variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-center"}>Hai domande alle quali questa piattaforma non ha dato risposta? Sottoponi la tua richiesta utilizzando il modulo. Un responsabile dedicato si metterà in contatto con te per fornirti le informazioni di cui hai bisogno. </motion.p>
+                                <motion.div dangerouslySetInnerHTML={{__html:data.descrizioneForm}} variants={blockTextReveal} className={"text-center"} initial="initial" whileInView="final" viewport={{ once: true }} />
+
                             </div>
                         </div>
                         <div className={"w-fit relative mx-auto"}>
@@ -134,6 +156,27 @@ export default function Contatti() {
             </motion.div>
         </>
     )
+}
+
+
+
+export const getServerSideProps: GetServerSideProps<any> = async (context) => {
+    // Fetch data from external API
+
+    const resContatti = await fetch(`${url}/api/contatti?populate=*&populate[0]=informazioniContatto&populate[1]=informazioniContatto.collegamenti,informazioniContatto.social&populate[2]=informazioniContatto.social.icon`);
+    const contattiData = await resContatti.json();
+
+
+    const result: any = {
+        data : contattiData.data.attributes
+    }
+
+    console.log(result);
+
+    // Pass data to the page via props
+    return {
+        props: result
+    };
 }
 
 
