@@ -32,8 +32,15 @@ const nextConfig = {
         {
           source: '/blog/:path*',
           destination: '/post/:path*'
+        },
+        {
+          source: '/bandi',
+          destination: '/announcement'
+        },
+        {
+          source: '/bandi/:path*',
+          destination: '/announcement/:path*'
         }
-
       ]
 
     }
@@ -54,6 +61,16 @@ const nextConfig = {
       {
         source: '/post/:path*',
         destination: '/blog/:path*',
+        permanent: true
+      },
+      {
+        source: '/announcement',
+        destination: '/bandi',
+        permanent: true
+      },
+      {
+        source: '/announcement/:path*',
+        destination: '/bandi/:path*',
         permanent: true
       }
     ]

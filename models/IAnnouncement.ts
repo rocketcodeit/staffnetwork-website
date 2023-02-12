@@ -1,11 +1,15 @@
 export interface IAnnouncement {
     title: string,
     slug: string,
-    area : IAnnouncementArea[],
+    area? : IAnnouncementArea,
     img?: string
     details : IAnnouncementDetails,
     description: string,
-    recipients?: string,
+    recipients?: IAnnouncementRecipient[],
+    regions? :  string[],
+    provinces? :  string[],
+    investimentType : string,
+    contributionType : string,
     link?: {
         text: string,
         href: string
@@ -15,15 +19,7 @@ export interface IAnnouncement {
         title: string
         value: any
     }[],
-    buyable?:{
-        field?:{
-          id: string,
-          type: string,
-          placeholder?: string
-        }[]
-        price : number,
-        discountPrice?: number
-    }
+    buyable?:IAnnouncementeCost,
     requestForm?:{
         title:string,
         text: string,
@@ -55,13 +51,12 @@ export interface IAnnouncement {
 }
 
 export interface IAnnouncementDetails {
-    territory?:string,
     publicationDate?: string,
     summary: string
+    startDate?:string,
     expirationDate?:string,
-    recipients?: string,
     financialCosts?: string,
-    obj?:{
+    other?:{
         id: string,
         title: string
         value: any
@@ -70,7 +65,28 @@ export interface IAnnouncementDetails {
 
 export interface IAnnouncementArea {
     id?: number,
-    slug: string,
+    slug?: string,
     title:string,
     default?: boolean
+}
+
+export interface IAnnouncementeCost{
+    title?: string,
+    description?: string,
+    price : number,
+    discountPrice?: number
+    currency : string
+}
+
+export interface IAnnouncementRecipient{
+    id?:number,
+    title: string | any
+    description?: string,
+}
+
+export interface IAnnouncementTerritory{
+    id?: number,
+    slug?: string,
+    region: string,
+    province?: string,
 }
