@@ -4,12 +4,33 @@ import PostList from "../../components/Post/PostList";
 import {config} from "../../config/breadcrumbs.config";
 import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {motion} from "framer-motion";
-import {AnnouncementList} from "../../components/Announcement/AnnouncementList";
-import {GetServerSideProps} from "next";
+import {ServiceList} from "../../components/Service/ServiceList";
+import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {IPost, IPostCategory} from "../../models/IPost";
+import {IService} from "../../models/IService";
 
-export default function PostsPage(){
-    const [loading, setLoading] = useState(false);
+let url ="http://localhost:1337";
+
+export default function ServicesPage({data} : InferGetServerSidePropsType<typeof getServerSideProps>){
+    console.log(data);
+    const servicesFound : IService[] = data.map((i : any) => {
+        return {
+            title: i.attributes.title,
+            slug: i.attributes.slug,
+            area:
+                i.attributes.aree.data.map((area : any) => {
+                    return{
+                        slug:area.attributes.slug,
+                        title:area.attributes.title
+                    }
+                }),
+            details:{
+                summary: i.attributes.summary
+            },
+            description: i.attributes.description
+        }
+    })
+
 
     return (
         <>
@@ -20,7 +41,7 @@ export default function PostsPage(){
                         <div className="container">
                             <BreadCrumbs mappedPaths={config} showHome={true}  />
                             <h1 className="text-4xl">Bandi</h1>
-                            <AnnouncementList   />
+                            <ServiceList services={servicesFound} />
                         </div>
 
                     </section>
@@ -37,7 +58,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
 
     const effectivePage = page ?? 1;
     let url ="http://localhost:1337";
-    const resService = await fetch(`${url}/api/services?populate=*&pagination[page]=${effectivePage}`);
+    const resService = await fetch(`${url}/api/services?populate=*&populate[0]=aree&pagination[page]=${effectivePage}`);
 
     //const resPosts = await fetch(`${url}/api/posts?populate=*&pagination[page]=${effectivePage}&pagination[pageSize]=1`);
     const serviceData  =  await resService.json();
@@ -51,9 +72,8 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
 
 
     const result: any = {
-        data: serviceData.data.attributes
+        data: serviceData.data
     }
-
 
 
     // Pass data to the page via props

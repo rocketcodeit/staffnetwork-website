@@ -7,8 +7,8 @@ import {services} from "../api/service/ServiceData";
 import styles from "../../styles/Area.module.css";
 import {motion} from "framer-motion";
 import {blockReveal, blockTextReveal, fadeInUp, opacityAnimation} from "../../animations";
-import {AnnouncementList} from "../../components/Announcement/AnnouncementList";
-import {IAnnouncement, IAnnouncementArea} from "../../models/IAnnouncement";
+import {ServiceList} from "../../components/Service/ServiceList";
+import {IService, IServiceArea} from "../../models/IService";
 import Link from "next/link";
 
 let url = "http://localhost:1337";
@@ -24,7 +24,7 @@ export default function AreaPage({data,services} : InferGetServerSidePropsType<t
     }
 
 
-    const servicesFound : IAnnouncement[] = services.map((i : any) => {
+    const servicesFound : IService[] = services.map((i : any) => {
         return {
             title: i.attributes.title,
             slug: i.attributes.slug,
@@ -87,7 +87,7 @@ export default function AreaPage({data,services} : InferGetServerSidePropsType<t
                 <div className={"container"}>
                     <div className={"w-full lg:w-8/12"}>
                         <motion.h3 className={"mb-3"}>Servizi</motion.h3>
-                        <AnnouncementList services={servicesFound} />
+                        <ServiceList services={servicesFound} />
                     </div>
                 </div>
             </section>

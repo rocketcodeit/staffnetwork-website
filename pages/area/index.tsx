@@ -9,7 +9,7 @@ import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {IPost, IPostCategory} from "../../models/IPost";
 import {IArea} from "../../config/models/IArea";
 
-export default function AreasPage({services} : InferGetServerSidePropsType<typeof getServerSideProps>){
+export default function AreasPage({areas} : InferGetServerSidePropsType<typeof getServerSideProps>){
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}} className={styles.container}>
 
@@ -17,7 +17,7 @@ export default function AreasPage({services} : InferGetServerSidePropsType<typeo
                 <div className="container">
                     <BreadCrumbs mappedPaths={config} showHome={true}  />
                     <h1 className={"mb-3"}>Aree</h1>
-                    <AreaList services={services} />
+                    <AreaList services={areas} />
                 </div>
 
             </section>
@@ -36,8 +36,8 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
 
     const effectivePage = page ?? 1;
     let url ="http://localhost:1337";
-    const resServices = await fetch(`${url}/api/areas?populate=*&sort=id&pagination[page]=${effectivePage}`);
-    const servicesData  =  await resServices.json();
+    const resAreas = await fetch(`${url}/api/areas?populate=*&sort=id&pagination[page]=${effectivePage}`);
+    const areasData  =  await resAreas.json();
     //const pageCount = resServices.meta.pagination.pageCount; effectivePage > pageCount ||
 
 
@@ -46,7 +46,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
             notFound: true
         }
     }
-    const services :  IArea[] =  servicesData.data.map((item : any) =>{
+    const areas :  IArea[] =  areasData.data.map((item : any) =>{
         return {
             slug : item.attributes.slug,
             name : item.attributes.titolo,
@@ -58,7 +58,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
 
 
     const result: any = {
-        services: services,
+        areas: areas,
         currentPage : +effectivePage,
     }
 

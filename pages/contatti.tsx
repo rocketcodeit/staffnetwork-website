@@ -98,7 +98,7 @@ export default function Contatti({data} : InferGetServerSidePropsType<typeof get
                         </motion.div>
                     </motion.div>
                 </section>
-                <section className={"lg:mt-20 mt-10"}>
+                <section id={"form"} className={"lg:mt-20 mt-10"}>
                     <motion.div>
                         <div className={"lg:w-5/12 md:w-8/12  w-11/12 mx-auto"}>
                             <div className={"w-fit relative mx-auto"}>

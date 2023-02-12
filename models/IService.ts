@@ -1,9 +1,9 @@
-export interface IAnnouncement {
+export interface IService {
     title: string,
     slug: string,
-    area : IAnnouncementArea[],
+    area : IServiceArea[],
     img?: string
-    details : IAnnouncementDetails,
+    details : IServiceDetails,
     description: string,
     recipients?: string,
     link?: {
@@ -54,7 +54,7 @@ export interface IAnnouncement {
     }
 }
 
-export interface IAnnouncementDetails {
+export interface IServiceDetails {
     territory?:string,
     publicationDate?: string,
     summary: string
@@ -68,7 +68,7 @@ export interface IAnnouncementDetails {
     } []
 }
 
-export interface IAnnouncementArea {
+export interface IServiceArea {
     id?: number,
     slug: string,
     title:string,

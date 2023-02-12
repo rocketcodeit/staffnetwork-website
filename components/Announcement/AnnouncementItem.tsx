@@ -1,11 +1,10 @@
 import React from "react";
-import {IAnnouncement} from "../../models/IAnnouncement";
-import styles from "../../styles/Announcement.module.css"
+import styles from "../../styles/Service.module.css"
 import {itemFade, itemSlideUp} from "../../animations";
 import {motion} from "framer-motion";
 import Link from "next/link";
 
-interface IAnnouncementItem{
+interface IAnnouncementItemProps{
     img?: string,
     link: string,
     title:string,
@@ -13,7 +12,7 @@ interface IAnnouncementItem{
     summary:string
 }
 
-export function AnnouncementItem(props : IAnnouncementItem){
+export function AnnouncementItem(props : IAnnouncementItemProps){
     return(
 
         <motion.div variants={itemFade} className={styles.item}>
@@ -25,7 +24,7 @@ export function AnnouncementItem(props : IAnnouncementItem){
 
                     <div className={styles.itemDescription} dangerouslySetInnerHTML={{__html:props.summary}} />
                     <div className={`linkItem linkItemPrimary ${styles.itemLink}`}>
-                        <a className={"text-primary-600"}>Scopri di più</a>
+                        <div className={"text-primary-600"}>Scopri di più</div>
                     </div>
                 </Link>
             </div>
