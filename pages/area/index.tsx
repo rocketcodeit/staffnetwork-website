@@ -4,7 +4,7 @@ import {config} from "../../config/breadcrumbs.config";
 import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import AreaList from "../../components/Area/AreaList";
 import {motion} from "framer-motion";
-import {opacityAnimation} from "../../animations";
+import {blockReveal, blockTextReveal, opacityAnimation} from "../../animations";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {IPost, IPostCategory} from "../../models/IPost";
 import {IArea} from "../../config/models/IArea";
@@ -13,14 +13,23 @@ export default function AreasPage({areas} : InferGetServerSidePropsType<typeof g
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}} className={styles.container}>
 
-            <section className={"mb-16"}>
+            <main className={"mb-16"}>
+
+                <section className={"mt-8"}>
+                    <div className="container">
+                        <BreadCrumbs mappedPaths={config} showHome={true}  />
+                        <div className={"w-fit relative"}>
+                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
+                            <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-6">Aree</motion.h1>
+                        </div>
+                    </div>
+                </section>
+
                 <div className="container">
-                    <BreadCrumbs mappedPaths={config} showHome={true}  />
-                    <h1 className={"mb-3"}>Aree</h1>
                     <AreaList services={areas} />
                 </div>
 
-            </section>
+            </main>
 
         </motion.div>
     )

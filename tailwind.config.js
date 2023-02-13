@@ -23,6 +23,9 @@ module.exports = {
       }
     },
     extend: {
+      keyframes:{
+
+      },
       screens:{
         '3xs': '320px',
         '2xs': '375px',

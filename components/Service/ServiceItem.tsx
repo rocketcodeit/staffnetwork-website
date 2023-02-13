@@ -25,7 +25,7 @@ export function ServiceItem(props : IServiceItemProps){
 
                     <div className={styles.itemDescription} dangerouslySetInnerHTML={{__html:props.summary}} />
                     <div className={`linkItem linkItemPrimary ${styles.itemLink}`}>
-                        <a className={"text-primary-600"}>Scopri di più</a>
+                        <div className={"text-primary-600 w-fit mr-0 ml-auto"}>Scopri di più</div>
                     </div>
                 </Link>
             </div>

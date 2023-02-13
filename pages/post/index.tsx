@@ -58,10 +58,10 @@ export default function PostsPage({posts, pageCount,currentPage, categories} : I
         <>
 
                 <div className={styles.container}>
-                    <section>
+                    <section className={"mt-8"}>
                         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}} className="container">
                             <BreadCrumbs mappedPaths={config} showHome={true}  />
-                            <h1 className={"mb-3"}>Articoli</h1>
+                            <h1 className={"mb-6"}>Articoli</h1>
 
 
                             {loading && <motion.div  initial={{opacity:0}}  animate={{opacity:1}} transition={{duration:0.3}}

@@ -8,40 +8,47 @@ import {ServiceList} from "../../components/Service/ServiceList";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {IPost, IPostCategory} from "../../models/IPost";
 import {IService} from "../../models/IService";
+import {IAnnouncement} from "../../models/IAnnouncement";
 
 let url ="http://localhost:1337";
 
 export default function ServicesPage({data} : InferGetServerSidePropsType<typeof getServerSideProps>){
-    console.log(data);
-    const servicesFound : IService[] = data.map((i : any) => {
-        return {
-            title: i.attributes.title,
-            slug: i.attributes.slug,
-            area:
-                i.attributes.aree.data.map((area : any) => {
-                    return{
-                        slug:area.attributes.slug,
-                        title:area.attributes.title
-                    }
-                }),
-            details:{
-                summary: i.attributes.summary
-            },
-            description: i.attributes.description
-        }
-    })
+
+    const castServicesData = (dataEntry : any) : IService[] => {
+        return dataEntry?.map((i : any) => {
+            return {
+                title: i.attributes.title,
+                slug: i.attributes.slug,
+                area:
+                    i.attributes.aree.data.map((area : any) => {
+                        return{
+                            slug:area.attributes.slug,
+                            title:area.attributes.title
+                        }
+                    }),
+                details:{
+                    summary: i.attributes.summary
+                },
+                description: i.attributes.description
+            }
+        })
+    }
+
+
+
+    const servicesData = castServicesData(data);
+    const [services, setServices] = useState<IService[]>(servicesData);
 
 
     return (
         <>
 
                 <div className={styles.container}>
-                    <section>
-                        <p></p>
+                    <section className={"mt-8"}>
                         <div className="container">
                             <BreadCrumbs mappedPaths={config} showHome={true}  />
-                            <h1 className="text-4xl">Servizi</h1>
-                            <ServiceList services={servicesFound} />
+                            <h1 className="mb-6">Servizi</h1>
+                            <ServiceList services={services} />
                         </div>
 
                     </section>

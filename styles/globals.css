@@ -204,36 +204,36 @@ a {
   @apply hidden
 }
 
-.linkItem a{
+.linkItem a,.linkItem div{
   @apply relative no-underline
 }
 
-.linkItem  a::after{
+.linkItem  a::after,.linkItem div::after{
   content: "";
   transform: scale(0,1);
   @apply absolute left-0 w-full h-[1.15px] bg-black -bottom-[3.5px] transition duration-300 origin-top-right
 }
-.linkItem  a:hover::after{
+.linkItem  a:hover::after,.linkItem div:hover::after{
   content: "";
   transform: scale(1,1);
   @apply origin-top-left
 }
 
-.linkItemWhite.linkItem a::after{
+.linkItemWhite.linkItem a::after, .linkItemWhite.linkItem div::after{
   content: "";
   @apply bg-white
 }
 
-.linkItemPrimary.linkItem a::after{
+.linkItemPrimary.linkItem a::after, .linkItemPrimary.linkItem div::after{
   content: "";
   @apply bg-primary
 }
-.linkItemPrimary.linkItem a:hover::after{
+.linkItemPrimary.linkItem a:hover::after .linkItemPrimary.linkItem div:hover::after{
   content: "";
   @apply bg-primary-600
 }
 
-.linkItem.active a{
+.linkItem.active a, .linkItem.active div{
   @apply text-primary
 }
 
@@ -321,3 +321,20 @@ a {
   text-gray-400
 }
 
+/*#region Pagination Elements */
+
+.paginationItems{
+  @apply flex flex-row items-center w-full gap-5 my-5
+}
+
+.paginationItem div{
+  @apply px-4 py-2 cursor-pointer block
+}
+.paginationItem:hover{
+  @apply bg-gray-200
+}
+.paginationItem.selected{
+  @apply bg-primary-600 text-white
+}
+
+/* endregion */

@@ -18,7 +18,7 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
     const announcementFound : IAnnouncement = {
         title: announcement.titolo,
         slug: announcement.slug,
-        img : url + announcement.image.data.attributes.url,
+        img : announcement.image.data && url + announcement.image.data.attributes.url,
         details:{
             summary: announcement.summary,
             startDate : announcement.inizio ?? announcement.inizio,
@@ -66,27 +66,29 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
             <main>
                 <div className="container">
 
+                    <section id={"abo"} className={"mt-8"}>
+                        <BreadCrumbs mappedPaths={config} showHome={true} transformDynamicPath={path => {
+                            if(path === "[slug]"){
+                                return announcementFound.title
+                            }
+                            return path;
+                        }} />
+                        <div className={"w-fit relative"}>
+                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
+                            <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-4">{announcementFound.title}</motion.h1>
+                        </div>
+                        <div className={"w-6/12 relative"}>
+                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
+                            <motion.div dangerouslySetInnerHTML={{__html:announcementFound.details.summary}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}/>
+                        </div>
+                    </section>
 
-                    <BreadCrumbs mappedPaths={config} showHome={true} transformDynamicPath={path => {
-                        if(path === "[slug]"){
-                            return announcementFound.title
-                        }
-                        return path;
-                    }} />
-                    <div className={"w-fit relative"}>
-                        <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                        <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-4">{announcementFound.title}</motion.h1>
-                    </div>
-                    <div className={"w-6/12 relative"}>
-                        <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                        <motion.div dangerouslySetInnerHTML={{__html:announcementFound.details.summary}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}/>
-                    </div>
 
                     <section id={"dettagli"}>
                         <div className={"w-12/12 bg-gray-200 p-6 pb-0 pr-0  mt-4" }>
                             <h4 className={""}>Dettagli della misura</h4>
 
-                            <div className={"mt-4 flex gap-10"}>
+                            <div className={"mt-4 flex gap-10 flex-wrap mb-8 pr-8"}>
 
                                 {(announcementFound.regions) &&
                                 <div className={"regionsBox"}>
@@ -151,9 +153,10 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
                     </section>
 
                     <section id={"descrizione"}>
-                        <div dangerouslySetInnerHTML={{__html:announcementFound.description}} />
-                        <div className={"flex justify-between"}>
-                            <div className={"w-7/12"}>
+
+                        <div className={"flex flex-wrap justify-between"}>
+                            <div className={"w-12/12 lg:w-7/12"}>
+                                <div className={"mt-8"} dangerouslySetInnerHTML={{__html:announcementFound.description}} />
                                 {announcementFound.obj?.map((o) =>{
                                     return <div key={o.id} className={"mt-8"}>
                                         <h3 className={"mb-3"}>{o.title}</h3>
@@ -161,7 +164,7 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
                                     </div>
                                 })}
                             </div>
-                            <div className={"w-4/12"}>
+                            <div className={"w-11/12 lg:w-4/12"}>
                                 <img className={"mt-8"} src={announcementFound.img} />
                             </div>
                         </div>
@@ -193,7 +196,7 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
                                 <Link href={""} className={"btn w-full text-center"}>Acquista</Link>
                             </div>
                         </div> }
-                        <div id={"contattaci"} className={"w-6/12 relative "}>
+                        <div id={"contattaci"} className={"md:w-10/12 lg:w-7/12 xl:w-6/12 relative "}>
                             <div className={"mx-auto"}>
                                 <h3 className={`${announcementFound.buyable ? "text-left" : "text-center"}`}>{announcementFound.requestForm?.title}</h3>
                                 <p className={`max-w-xl  mt-2 ${announcementFound.buyable ? "text-left" : "text-center mx-auto"}`}>{announcementFound.requestForm?.text}</p>

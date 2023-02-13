@@ -68,3 +68,5 @@
 .paginationItem.selected{
     @apply bg-primary-600 text-white
 }
+
+/* endregion */

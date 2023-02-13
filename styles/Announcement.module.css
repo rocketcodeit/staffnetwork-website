@@ -1,9 +1,12 @@
 .item{
-    @apply flex flex-row items-stretch
+    @apply flex flex-row items-stretch border-primary-100 border-2 transition-all duration-200 ease-linear bg-primary-50
 }
 
+.item:hover{
+    @apply border-primary-400
+}
 .itemImg{
-
+    @apply max-w-[120px] object-contain bg-white
 }
 
 .itemTitle{
@@ -15,11 +18,14 @@
 }
 
 .itemDescription{
-    @apply mt-3 max-w-4xl
+    @apply mt-3 w-10/12
+}
+.itemDescription p{
+    @apply line-clamp-4
 }
 
 .itemBoxText{
-    @apply bg-gray-200 p-6 relative w-full max-w-full
+    @apply p-6 relative w-full max-w-full
 
 }
 
@@ -31,6 +37,12 @@
     @apply flex flex-col gap-4
 }
 
+.itemDetails{
+    @apply flex flex-row flex-wrap gap-5 mt-5
+}
+.itemSingleDetail{
+    @apply flex gap-2 items-center bg-primary-100 p-2 w-fit
+}
 .buttonsContainer{
     @apply flex items-end justify-end relative
 }
