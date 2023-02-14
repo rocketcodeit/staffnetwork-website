@@ -25,6 +25,7 @@ import React from "react";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {IPost} from "../models/IPost";
 import {IArea} from "../config/models/IArea";
+import {ReactSVG} from "react-svg";
 
 let url = "http://localhost:1337";
 
@@ -86,9 +87,13 @@ export default function comeLavoriamo({data} : InferGetServerSidePropsType<typeo
 
 
                         </div>
-                        <div className={"w-full flex flex-row justify-between flex-wrap"}>
-                            <div className={"directiveImage w-full lg:w-6/12"}></div>
-                            <div className={"directiveBoxsContainer w-full lg:w-5/12 mt-5 lg:mt-10"}>
+                        <div className={"w-full flex flex-row justify-between flex-wrap lg:mt-10"}>
+                            <div className={"directiveImage w-full lg:w-6/12 mt-12 lg:mt-0"}>
+                                <img className={"max-h-[500px] mx-auto"} src={url + data.metodo.imgDirettiva.data.attributes.url} />
+
+
+                            </div>
+                            <div className={`${styles.directiveBoxsContainer} `}>
                                 {data.metodo.direttiva.map((dir : any, index : number) =>{
                                     return  <motion.div key={index} className={"directiveBox mb-6"}>
                                                 <div className={"w-fit relative"}>
@@ -244,7 +249,7 @@ export default function comeLavoriamo({data} : InferGetServerSidePropsType<typeo
 export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     // Fetch data from external API
 
-    const resComeLavoriamo = await fetch(`${url}/api/come-lavoriamo?populate=*&populate[0]=metodo,contatti,blocco1,staff,img,&populate[1]=metodo.direttiva,metodo.step,contatti.form`);
+    const resComeLavoriamo = await fetch(`${url}/api/come-lavoriamo?populate=*&populate[0]=metodo,contatti,blocco1,staff,img,&populate[1]=metodo.direttiva,metodo.step,metodo.imgDirettiva,contatti.form`);
     const comeLavoriamoData = await resComeLavoriamo.json();
 
     const result: any = {
