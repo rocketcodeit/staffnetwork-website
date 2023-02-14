@@ -40,7 +40,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     }
 
     const result: any = {
-        layoutData : configurazioneData
+        layoutData : configurazioneData.data
     }
 
 

@@ -15,8 +15,10 @@ import {IPost} from "../models/IPost";
 import {IArea} from "../config/models/IArea";
 
 
-export default function Home({posts,services, home} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({posts,services, home, layoutData} : InferGetServerSidePropsType<typeof getServerSideProps>) {
     let url = "http://localhost:1337";
+    console.log(layoutData);
+
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}}
                     className={styles.container}>
@@ -181,6 +183,10 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
         }
     })
 
+    const resConfigurazione = await fetch(`${url}/api/configurazione?populate=*`);
+    const configurazioneData  =  await resConfigurazione.json();
+
+
 
     const resHome = await fetch(`${url}/api/home?populate=*&populate[0]=datiStatistici,staff,partnership,servizi,imgAboveTheFold,imgAree,imgDati,imgPartnership&populate[1]=datiStatistici.dati,partnership.link`);
     const homeData = await resHome.json();
@@ -188,7 +194,9 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     const result: any = {
         posts : posts,
         services : areas,
-        home : homeData.data.attributes
+        home : homeData.data.attributes,
+        layoutData : configurazioneData.data
+
     }
 
 

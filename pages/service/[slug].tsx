@@ -10,12 +10,15 @@ import Head from "next/head";
 import {IService} from "../../models/IService";
 import moment from "moment";
 import Link from "next/link";
+let url ="http://localhost:1337";
 
 export default function ServicePage({service} : InferGetServerSidePropsType<typeof getServerSideProps>){
     console.log(service);
     const serviceFound : IService = {
         title: service.title,
         slug: service.slug,
+        img : service.image.data && url + service.image.data.attributes.url,
+
         area:  service.aree.data.map((area : any) => {
             return{
                 slug: area.attributes.slug,
@@ -23,7 +26,14 @@ export default function ServicePage({service} : InferGetServerSidePropsType<type
             }
         }),
         details:{
-            summary: service.summary
+            summary: service.summary,
+            obj: service.dettagli.map((det : any, index: number) => {
+                return {
+                   id: +index,
+                    title: det.titolo,
+                    value : det.descrizione
+                }
+            })
         },
         description: service.description,
         obj : service.specifiche.map((spec : any, index : number) => {
@@ -34,6 +44,8 @@ export default function ServicePage({service} : InferGetServerSidePropsType<type
             }
         }),
         buyable : service.prezzo && {
+            title: service.prezzo.titolo,
+            description: service.prezzo.descrizione,
             price : service.prezzo?.prezzo,
             discountPrice : service.prezzo?.prezzoScontato,
             currency : "€"
@@ -70,14 +82,14 @@ export default function ServicePage({service} : InferGetServerSidePropsType<type
 
                     <section id={"dettagli"}>
                         <div className={"w-12/12 bg-gray-200 p-6 pb-0 pr-0  mt-4" }>
-                            <h4 className={""}>Dettagli del servizo</h4>
+                            <h4 className={""}>Dettagli del servizio</h4>
 
                             <div className={"mt-4 flex gap-10 flex-wrap mb-8 pr-8"}>
 
                                 {serviceFound.details.obj?.map((o, index) => {
                                     return <div key={index}>
                                         <div>{o.title}</div>
-                                        <h5>{o.value}</h5>
+                                        <div className={styles.childDescriptionList} dangerouslySetInnerHTML={{__html:o.value}} />
                                     </div>
                                 })}
                             </div>
@@ -89,7 +101,7 @@ export default function ServicePage({service} : InferGetServerSidePropsType<type
                                         <Link href={"#acquista"} className={"btn black"}>Acquista</Link>
                                     </div>
                                 }
-                                {serviceFound.requestForm && <Link href={"#contattaci"} className={"btn"}>Contattaci</Link>}
+                                 <Link href={"#contattaci"} className={"btn"}>Contattaci</Link>
                             </div>
 
                         </div>
@@ -120,8 +132,8 @@ export default function ServicePage({service} : InferGetServerSidePropsType<type
                             <div className={"flex flex-row flex-wrap w-full justify-between"}>
                                 <div className={"w-full flex flex-row justify-between px-4 pt-6 pb-3"}>
                                     <div className={"w-6/12"}>
-                                        <h4 className={"mb-2"}>Cosa offriamo</h4>
-                                    <p>Il prezzo è riferito al bando. </p>
+                                        <h4 className={"mb-2"}>{serviceFound.buyable.title}</h4>
+                                        { serviceFound.buyable?.description && <div  dangerouslySetInnerHTML={{__html:serviceFound.buyable?.description}} /> }
                                     </div>
                                     {
                                         serviceFound.buyable?.discountPrice ?

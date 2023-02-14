@@ -19,8 +19,10 @@ export interface IService {
         field?:{
           id: string,
           type: string,
-          placeholder?: string
-        }[]
+          description?: string
+        }[],
+        title?:string,
+        description?: string
         price : number,
         discountPrice?: number
     }

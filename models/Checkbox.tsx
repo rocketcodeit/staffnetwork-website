@@ -1,3 +1,5 @@
+import styles from '../styles/Checkbox.module.css'
+
 
 export interface CheckboxProps{
     id?: number,
@@ -11,7 +13,7 @@ export default function Checkbox (props : CheckboxProps){
 
 
         return (
-            <div>
+            <div className={styles.item}>
                 <input
                     type="checkbox"
                     name={props.name}

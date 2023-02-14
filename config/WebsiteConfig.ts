@@ -16,8 +16,8 @@ const configuration : IWebsiteConfiguration = {
             {name: "Come lavoriamo",    url: "/come_lavoriamo"},
             {name:"Lo studio",          url: "/lo-studio",
                 subMenuItems:[
-                    { name:"La storia", url:"/storia"},
-                    { name:"L'ufficio", url:"/ufficio"},
+                    { name:"La storia", url:"/lo-studio#storia"},
+                    { name:"Team", url:"/lo-studio#team"},
                 ]
             },
             {name: "Risorse",           url: "/blog"},

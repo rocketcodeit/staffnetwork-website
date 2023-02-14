@@ -34,3 +34,11 @@
 .buttonsContainer{
     @apply flex items-end justify-end relative
 }
+
+.childDescriptionList{
+
+}
+
+.childDescriptionList p{
+    @apply text-1.5xl
+}
