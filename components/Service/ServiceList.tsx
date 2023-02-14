@@ -21,7 +21,7 @@ export function ServiceList (props : IServiceListProps){
     return(
         <motion.div variants={containerSlideUp} initial="hidden" whileInView="show" viewport={{once:true}} className={styles.list} >
             {props.services.map((item, index) => {
-                return <ServiceItem key={item.slug} img={item.img} link={`/service/${item.slug}`} title={item.title} subtitle={item.title} summary={item.details.summary}  />
+                return <ServiceItem key={item.slug} img={item.img} link={`/servizi/${item.slug}`} title={item.title} subtitle={item.title} summary={item.details.summary}  />
                 }
             )}
         </motion.div>

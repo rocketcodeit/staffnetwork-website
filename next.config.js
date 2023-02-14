@@ -48,6 +48,14 @@ const nextConfig = {
         {
           source: '/bandi/:path*',
           destination: '/announcement/:path*'
+        },
+        {
+          source: '/servizi',
+          destination: '/service'
+        },
+        {
+          source: '/servizi/:path*',
+          destination: '/service/:path*'
         }
       ]
 
@@ -84,6 +92,16 @@ const nextConfig = {
       {
         source: '/announcement/:path*',
         destination: '/bandi/:path*',
+        permanent: true
+      },
+      {
+        source: '/service',
+        destination: '/servizi',
+        permanent: true
+      },
+      {
+        source: '/service/:path*',
+        destination: '/servizi/:path*',
         permanent: true
       }
     ]
