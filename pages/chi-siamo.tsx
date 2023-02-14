@@ -60,7 +60,7 @@ export default function ChiSiamo({data, membersTeam} : InferGetServerSidePropsTy
                     </motion.div>
                 </section>
 
-                <section id={"storia"} className="mt-24 overflow-hidden">
+                <section id={"storia"} className=" pt-24 overflow-hidden">
                     <motion.div className={"containerRight"}>
                         <motion.div variants={lineLeftToRight} initial="initial" whileInView="final" viewport={{ once: true }}  className={"lineDivisor"}></motion.div>
                     </motion.div>
@@ -82,7 +82,7 @@ export default function ChiSiamo({data, membersTeam} : InferGetServerSidePropsTy
                     </div>
                 </section>
 
-                <section id={"team"} className="mt-24">
+                <section id={"team"} className="mt-4 pt-20">
                     <div className={"container flex flex-row justify-center relative z-20"}>
                         <div className={"w-8/12"}>
                             <div className={"w-fit relative mx-auto"}>
