@@ -9,12 +9,17 @@ export interface ITeamMember{
     education? : string,
     link?: ICommercialLink[],
     linkedin? : string,
+    obj?: {
+        id: string,
+        title: string
+        value: any
+    }[],
 
 
 }
 
 export interface ICommercialLink {
-    name: string,
+    name?: string,
     icon? : string,
     text : string,
     url : string,

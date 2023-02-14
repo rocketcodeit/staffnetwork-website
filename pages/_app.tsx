@@ -9,7 +9,6 @@ import {IArea} from "../config/models/IArea";
 
 
 export default function App({ Component, pageProps, router }: AppProps, {layoutData} : InferGetServerSidePropsType<typeof getServerSideProps>) {
-    console.log(layoutData);
     const [loading, setLoading] = useState(false);
     return(
 

@@ -15,7 +15,7 @@ import {IPost} from "../models/IPost";
 import {IArea} from "../config/models/IArea";
 
 
-export default function Home({posts,services, home, layoutData} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({posts,services, home, layoutData,membersTeam} : InferGetServerSidePropsType<typeof getServerSideProps>) {
     let url = "http://localhost:1337";
     console.log(layoutData);
 
@@ -105,7 +105,7 @@ export default function Home({posts,services, home, layoutData} : InferGetServer
 
                 </div>
                 <div className="w-full">
-                    <TeamMemberList itemsCount={3} />
+                    <TeamMemberList members={membersTeam} itemsCount={3} />
                     <Link className="btn mx-auto block w-fit mt-6" href="/come_lavoriamo">Conosci i professionisti</Link>
                 </div>
             </section>
@@ -171,7 +171,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
         }
     })
 
-    const resServices = await fetch(`${url}/api/areas?populate=*`);
+    const resServices = await fetch(`${url}/api/areas?populate=*&sort=id`);
     const servicesData  =  await resServices.json();
     const areas :  IArea[] =  servicesData.data.map((item : any) =>{
         return {
@@ -191,11 +191,26 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     const resHome = await fetch(`${url}/api/home?populate=*&populate[0]=datiStatistici,staff,partnership,servizi,imgAboveTheFold,imgAree,imgDati,imgPartnership&populate[1]=datiStatistici.dati,partnership.link`);
     const homeData = await resHome.json();
 
+
+    const resMembers = await fetch(`${url}/api/members?populate=*&pagination[page]=1&pagination[pageSize]=3`);
+    const membersData = await resMembers.json();
+
+    const members : ITeamMember[] = membersData.data.map((item : any) =>{
+        return {
+            slug: item.attributes.slug,
+            name: item.attributes.nome,
+            surname : item.attributes.cognome,
+            img : url + item.attributes.image.data.attributes.url,
+            profession: item.attributes.ruolo
+        }
+    })
+
     const result: any = {
         posts : posts,
         services : areas,
         home : homeData.data.attributes,
-        layoutData : configurazioneData.data
+        layoutData : configurazioneData.data,
+        membersTeam : members
 
     }
 

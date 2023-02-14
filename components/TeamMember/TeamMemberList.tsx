@@ -4,13 +4,16 @@ import TeamMember from "./TeamMember";
 import styles from "../../styles/TeamMember.module.css"
 import {containerSlideUp} from "../../animations";
 import {motion} from "framer-motion";
+import {GetServerSideProps} from "next";
+import {IArea} from "../../config/models/IArea";
 
 export interface ITeamMemberProps{
     itemsCount? : number
+    members : ITeamMember[],
      //chiedere a ignazio
 }
 
-function TeamMemberList (props : ITeamMemberProps){
+export default function TeamMemberList (props : ITeamMemberProps){
 
     const [teamMembers,setTeamMembers] = useState<ITeamMember[]>([]);
 
@@ -28,13 +31,15 @@ function TeamMemberList (props : ITeamMemberProps){
     },[]);
     return(
         <motion.div variants={containerSlideUp} initial="hidden" whileInView="show" viewport={{once:true}} className={styles.list} >
-            {teamMembers.map((item) => {
+            {props.members.map((item, index ) => {
                // return <TeamMember key={item.nimpame}>{item}</TeamMember>
-                return <TeamMember  {...item} />
+                return <TeamMember  key={index} {...item} />
             })}
         </motion.div>
     )
 }
 
-export default TeamMemberList;
+
+
+
 

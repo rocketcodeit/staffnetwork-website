@@ -12,11 +12,15 @@ import BreadCrumbs from "../components/Breadcrumbs/BreadCrumbs";
 import {config} from "../config/breadcrumbs.config";
 import React from "react";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
+import {ITeamMember} from "../models/ITeamMember";
 
 let url = "http://localhost:1337";
 
 
-export default function ChiSiamo({data} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function ChiSiamo({data, membersTeam} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+
+    console.log(membersTeam);
+
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeOut"}}>
             <Head>
@@ -96,7 +100,7 @@ export default function ChiSiamo({data} : InferGetServerSidePropsType<typeof get
                                 <motion.div dangerouslySetInnerHTML={{__html:data.staff.descrizione}} variants={blockTextReveal} initial="initial" whileInView="final" className={"text-center"} viewport={{ once: true }} />
                             </div>
                             <div className="w-12/12">
-                                <TeamMemberList />
+                                <TeamMemberList members={membersTeam} />
                             </div>
                         </div>
 
@@ -122,8 +126,21 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     const resChiSiamo = await fetch(`${url}/api/chi-siamo?populate=*`);
     const chiSiamoData = await resChiSiamo.json();
 
+    const resMembers = await fetch(`${url}/api/members?populate=*`);
+    const membersData = await resMembers.json();
+
+    const members : ITeamMember[] = membersData.data.map((item : any) =>{
+        return {
+            slug: item.attributes.slug,
+            name: item.attributes.nome,
+            surname : item.attributes.cognome,
+            img : url + item.attributes.image.data.attributes.url,
+            profession: item.attributes.ruolo
+        }
+    })
     const result: any = {
-        data : chiSiamoData.data.attributes
+        data : chiSiamoData.data.attributes,
+        membersTeam : members
     }
     // Pass data to the page via props
     return {
