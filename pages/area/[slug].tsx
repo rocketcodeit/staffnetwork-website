@@ -77,8 +77,8 @@ export default function AreaPage({data,services} : InferGetServerSidePropsType<t
                         </div>
 
                     </motion.div>
-                    <motion.div variants={fadeInUp} className={"w-full relative lg:w-5/12 containerRightBefore flex flex-row items-start order-last lg:order-3"}>
-                        <Link  className={"btn !sticky top-6 "} href={"Contattaci"} >Contattaci</Link>
+                    <motion.div variants={fadeInUp} className={"w-full relative lg:w-5/12 bg-cover bg-center flex flex-row items-start order-last lg:order-3"}>
+                        <img className={"max-h-[500px] w-full object-cover"} src={areaFound.img} />
                     </motion.div>
                 </motion.div>
             </section>
