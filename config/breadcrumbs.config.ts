@@ -10,6 +10,10 @@ export const config : IBreadCrumbsMapLabel[] = [
         label : 'servizi'
     },
     {
+        originalPath : 'aree',
+        label : 'aree'
+    },
+    {
         originalPath : 'bandi',
         label : 'bandi'
     }

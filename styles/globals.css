@@ -168,6 +168,14 @@ a {
   @apply container pl-0 relative
 }
 
+.containerLeftBefore:before{
+  content: "";
+  position: absolute;
+  width: 200%;
+
+  @apply bg-gray-200 h-full -z-10 top-0 right-0;
+}
+
 .containerRightBefore:before{
   content: "";
   position: absolute;
@@ -321,20 +329,24 @@ a {
   text-gray-400
 }
 
+/*#region Filters Elements */
+.filters{
+  @apply bg-gray-200 px-4 py-6
+}
+/*endregion*/
+
 /*#region Pagination Elements */
+  .paginationItems{
+    @apply flex flex-row items-center w-full gap-5 my-5
+  }
 
-.paginationItems{
-  @apply flex flex-row items-center w-full gap-5 my-5
-}
-
-.paginationItem div{
-  @apply px-4 py-2 cursor-pointer block
-}
-.paginationItem:hover{
-  @apply bg-gray-200
-}
-.paginationItem.selected{
-  @apply bg-primary-600 text-white
-}
-
-/* endregion */
+  .paginationItem div{
+    @apply px-4 py-2 cursor-pointer block
+  }
+  .paginationItem:hover{
+    @apply bg-gray-200
+  }
+  .paginationItem.selected{
+    @apply bg-primary-600 text-white
+  }
+/*endregion */

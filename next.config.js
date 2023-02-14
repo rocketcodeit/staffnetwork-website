@@ -34,6 +34,14 @@ const nextConfig = {
           destination: '/post/:path*'
         },
         {
+          source: '/aree',
+          destination: '/area'
+        },
+        {
+          source: '/aree/:path*',
+          destination: '/area/:path*'
+        },
+        {
           source: '/bandi',
           destination: '/announcement'
         },
@@ -51,6 +59,11 @@ const nextConfig = {
       {
         source: '/lo-studio',
         destination: '/chi-siamo',
+        permanent: true
+      },
+      {
+        source: '/area',
+        destination: '/aree',
         permanent: true
       },
       {

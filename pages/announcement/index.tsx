@@ -103,8 +103,8 @@ export default function AnnouncementPage({data, pageCount, currentPage, regions}
                             <h1 className="mb-6">Bandi</h1>
 
                             <div className={"flex flex-row flex-wrap justify-between"}>
-                                <div className={"w-full w-3/12"}>
-                                    <div className={"filters"}>
+                                <div className={"w-full lg:w-3/12 mb-6 lg:mb-0 relative h-fit"}>
+                                    <div className={"filters containerLeftBefore"}>
                                         <h4 className={"mb-3"}>Filtri</h4>
                                         {regions?.map((i: string) =>
                                             <div key={i}>

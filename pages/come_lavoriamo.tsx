@@ -86,9 +86,9 @@ export default function comeLavoriamo({data} : InferGetServerSidePropsType<typeo
 
 
                         </div>
-                        <div className={"w-full flex flex-row justify-between"}>
-                            <div className={"directiveImage w-6/12"}></div>
-                            <div className={"directiveBoxsContainer w-5/12"}>
+                        <div className={"w-full flex flex-row justify-between flex-wrap"}>
+                            <div className={"directiveImage w-full lg:w-6/12"}></div>
+                            <div className={"directiveBoxsContainer w-full lg:w-5/12 mt-5 lg:mt-10"}>
                                 {data.metodo.direttiva.map((dir : any, index : number) =>{
                                     return  <motion.div key={index} className={"directiveBox mb-6"}>
                                                 <div className={"w-fit relative"}>

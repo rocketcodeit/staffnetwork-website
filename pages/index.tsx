@@ -16,7 +16,6 @@ import {IArea} from "../config/models/IArea";
 
 
 export default function Home({posts,services, home} : InferGetServerSidePropsType<typeof getServerSideProps>) {
-    console.log(home);
     let url = "http://localhost:1337";
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}}
@@ -41,7 +40,7 @@ export default function Home({posts,services, home} : InferGetServerSidePropsTyp
             <section className="mt-24">
                 <div className={`${styles.containerLeft} `}>
                     <div
-                        className="lg:bg-[url('/assets/img/pexels-faris-al-orfali-1697160%202.png')] bg-none w-full bg-primary-dark flex flex-flow flex-wrap justify-between bg-no-repeat bg-right"
+                        className="lg:bg-[url('/assets/img/pexels-faris-al-orfali-1697160%202.png')] bg-none w-full bg-primary-dark flex flex-flow flex-wrap justify-between bg-no-repeat bg-contain bg-right"
                         style={{backgroundImage: `url("${url + home.imgAree.data.attributes.url}")`}}>
                         <div className="xl:w-5/12 lg:w-7/12 w-11/12 lg:pt-32 md:pt-20 pt-12 container ml-0 mb-8">
                             <div className="relative w-fit">
@@ -72,7 +71,7 @@ export default function Home({posts,services, home} : InferGetServerSidePropsTyp
                     </div>
                 </div>
                 <div className={`${styles.containerRight} flex flex-flow  flex-wrap lg:flex-nowrap `}>
-                    <div className={`${styles.bgListItemDigits} object-cover bg-cover no-repeat `}  style={{backgroundImage: `url("${url + home.imgAree.data.attributes.url}")`}}>
+                    <div className={`${styles.bgListItemDigits} object-cover bg-cover no-repeat `}  style={{backgroundImage: `url("${url + home.imgDati.data.attributes.url}")`}}>
 
                     </div>
                     <motion.div variants={container} initial="hidden" animate="show" className={`${styles.containerRightBefore}  lg:w-6/12 w-11/12 mb-20 bg-gray-200 lg:ml-[-8.333%] lg:pl-16 lg:py-12  pl-12 py-8 relative`}>
@@ -120,15 +119,15 @@ export default function Home({posts,services, home} : InferGetServerSidePropsTyp
                             <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-50"></motion.div>
                             <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} dangerouslySetInnerHTML={{__html:home.partnership.descrizione}} />
                         </div>
-                    {home.partnership.link.map((a : any) => <a key={a.id} className="btn block w-fit mt-4" href={a.href}>{a.titolo}</a>
+                    {home.partnership.link.map((a : any) => <a key={a.id} className="btn block w-fit mt-4" href={a.href}>{a.title}</a>
                         )}
                     </div>
-                    <div className="lg:w-6/12 w-full h-32 lg:h-auto bg-cover bg-[url('/assets/img/pexels-gustavo-fring-628510.png')] bg-center" >
+                    <div className="lg:w-6/12 w-full h-32 lg:h-auto bg-cover bg-[url('/assets/img/pexels-gustavo-fring-628510.png')] bg-center"  style={{backgroundImage: `url("${url + home.imgPartnership.data.attributes.url}")`}}>
                     </div>
                 </div>
             </section>
 
-            <section className="mt-24">
+            <section className="lg:my-24 mt-12 ">
                 <div className="container">
                     <div className="relative w-fit">
                         <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>

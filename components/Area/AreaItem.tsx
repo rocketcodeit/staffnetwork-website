@@ -12,7 +12,7 @@ function AreaItem(props : IArea){
             <motion.div variants={itemSlideUp} className={styles.item}>
                 <h4 className={styles.title}>{props.name}</h4>
                 <motion.div className={styles.except} dangerouslySetInnerHTML={{__html:props.short_description}}/>
-                <Link href={`/area/${props.slug}`} className={`btn-arrow ${styles.button}`}>
+                <Link href={`/aree/${props.slug}`} className={`btn-arrow ${styles.button}`}>
                     <p>Scopri di più</p>
                     <ArrowRightIcon className="w-6 stroke-primary-600"/>
                 </Link>

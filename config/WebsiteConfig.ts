@@ -4,14 +4,14 @@ const configuration : IWebsiteConfiguration = {
     headerConfiguration : {
         menuItems : [
             {name: "Home",              url: "/"},
-            {name: "Aree",           url: "/area",
+            {name: "Aree",           url: "/aree",
                 subMenuItems:[
-                    { name:"Amministrazione", url:"/amministrazione"},
-                    { name:"Consulenza di direzione aziendale", url:"/storia"},
-                    { name:"Finanza Ordinaria", url:"/ufficio"},
-                    { name:"Finanza Agevolata", url:"/ufficio"},
-                    { name:"Green & Sostenibilità", url:"/ufficio"},
-                    { name:"Innovazione", url:"/ufficio"},
+                    { name:"Amministrazione", url:"/aree/amministrazione"},
+                    { name:"Consulenza di direzione aziendale", url:"/aree/consulenza-di-direzione-aziendale"},
+                    { name:"Innovazione", url:"/aree/innovazione"},
+                    { name:"Finanza Ordinaria", url:"/aree/finanza-ordinaria"},
+                    { name:"Finanza Agevolata", url:"/aree/finanza-agevolata"},
+                    { name:"Green e Sostenibilità", url:"/aree/green-e-sostenibilita"},
                 ]},
             {name: "Come lavoriamo",    url: "/come_lavoriamo"},
             {name:"Lo studio",          url: "/lo-studio",
