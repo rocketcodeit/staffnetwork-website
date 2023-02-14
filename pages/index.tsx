@@ -192,7 +192,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     const homeData = await resHome.json();
 
 
-    const resMembers = await fetch(`${url}/api/members?populate=*&pagination[page]=1&pagination[pageSize]=3`);
+    const resMembers = await fetch(`${url}/api/members?populate=*&pagination[page]=1&pagination[pageSize]=4`);
     const membersData = await resMembers.json();
 
     const members : ITeamMember[] = membersData.data.map((item : any) =>{
