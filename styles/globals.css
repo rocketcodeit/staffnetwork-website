@@ -57,30 +57,30 @@ body {
 }
 
 h1{
-  @apply xl:text-4.5xl font-medium
+  @apply xl:text-4.5xl font-medium text-[#102c51]
          md:text-4xl
          text-3.5xl
 
 }
 
 h2{
-  @apply  xl:text-4xl font-medium
+  @apply  xl:text-4xl font-medium text-[#102c51]
           md:text-3.5xl
           text-3xl
 }
 
 h3{
-  @apply  xl:text-3xl font-medium
+  @apply  xl:text-3xl font-medium text-[#102c51]
           md:text-2.5xl
           text-2xl
 }
 h4{
-  @apply  xl:text-2xl font-medium
+  @apply  xl:text-2xl font-medium text-[#102c51]
           text-xl
 
 }
 h5{
-  @apply text-1.5xl
+  @apply text-1.5xl text-[#102c51]
 }
 
 p{
