@@ -6,8 +6,9 @@ import AreaList from "../../components/Area/AreaList";
 import {motion} from "framer-motion";
 import {blockReveal, blockTextReveal, opacityAnimation} from "../../animations";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {IPost, IPostCategory} from "../../models/IPost";
+import {Post} from "../../models/post";
 import {IArea} from "../../config/models/IArea";
+import {PostCategory} from "../../models/post-category";
 
 export default function AreasPage({areas} : InferGetServerSidePropsType<typeof getServerSideProps>){
     return (

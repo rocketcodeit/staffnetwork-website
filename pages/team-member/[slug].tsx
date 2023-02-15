@@ -9,10 +9,10 @@ import Link from "next/link";
 import { RiLinkedinBoxLine } from "react-icons/ri";
 import Head from "next/head";
 import {TeamMemberService} from "../../services/team-member.service";
-import {ITeamMember} from "../../models/ITeamMember";
+import {TeamMember} from "../../models/team-member";
 
 interface MemberPageProps {
-    member: ITeamMember,
+    member: TeamMember,
 }
 
 export default function MemberPage({member}: MemberPageProps){

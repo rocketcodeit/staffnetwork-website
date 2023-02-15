@@ -1,5 +1,5 @@
 
-export interface ITeamMember{
+export interface TeamMember {
     slug: string,
     name : string,
     surname : string,

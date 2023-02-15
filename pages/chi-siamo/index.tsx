@@ -1,18 +1,18 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import TeamMemberList from '../components/TeamMember/TeamMemberList'
+import TeamMemberList from '../../components/TeamMember/TeamMemberList'
 import {motion} from "framer-motion";
 import {
     fadeInUp,
     blockReveal,
     blockTextReveal,
-    lineLeftToRight} from "../animations";
+    lineLeftToRight} from "../../animations";
 import Link from "next/link";
-import BreadCrumbs from "../components/Breadcrumbs/BreadCrumbs";
-import {config} from "../config/breadcrumbs.config";
+import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
+import {config} from "../../config/breadcrumbs.config";
 import React from "react";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {ITeamMember} from "../models/ITeamMember";
+import {TeamMember} from "../../models/team-member";
 
 let url = "http://localhost:1337";
 
@@ -129,7 +129,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     const resMembers = await fetch(`${url}/api/members?populate=*`);
     const membersData = await resMembers.json();
 
-    const members : ITeamMember[] = membersData.data.map((item : any) =>{
+    const members : TeamMember[] = membersData.data.map((item : any) =>{
         return {
             slug: item.attributes.slug,
             name: item.attributes.nome,

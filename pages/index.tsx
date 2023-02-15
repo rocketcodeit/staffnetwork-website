@@ -1,13 +1,12 @@
 import styles from '../styles/Home.module.css'
 import TeamMemberList from '../components/TeamMember/TeamMemberList'
-import {ITeamMember} from "../models/ITeamMember";
 import PostList from "../components/Post/PostList";
 import AreaList from "../components/Area/AreaList";
 import {motion} from "framer-motion";
 import {container, fadeInUp, item, stagger, blockReveal, blockTextReveal} from "../animations";
 import Link from "next/link";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {IPost} from "../models/IPost";
+import {Post} from "../models/post";
 import {IArea} from "../config/models/IArea";
 import {TeamMemberService} from "../services/team-member.service";
 
@@ -102,7 +101,7 @@ export default function Home({posts,services, home, layoutData,membersTeam} : In
                 </div>
                 <div className="w-full">
                     <TeamMemberList members={membersTeam} />
-                    <Link className="btn mx-auto block w-fit mt-6" href="/come_lavoriamo">Conosci i professionisti</Link>
+                    <Link className="btn mx-auto block w-fit mt-6" href="/come-lavoriamo">Conosci i professionisti</Link>
                 </div>
             </section>
 
@@ -149,7 +148,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
 
     const resData = await fetch(url + "/api/posts?pagination[page]=1&pagination[pageSize]=3&populate=*");
     const postsData = await resData.json();
-    const posts: IPost[] = postsData.data.map((item: any) => {
+    const posts: Post[] = postsData.data.map((item: any) => {
         return {
             slug: item.attributes.slug,
             name: item.attributes.title,

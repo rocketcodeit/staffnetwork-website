@@ -2,17 +2,18 @@ import React, {useEffect, useState} from "react";
 import styles from "../../styles/Service.module.css"
 import {containerSlideUp} from "../../animations";
 import {motion} from "framer-motion";
-import {IService, IServiceArea} from "../../models/IService";
+import {Service} from "../../models/service";
 import {AnnouncementItem} from "./AnnouncementItem";
-import {IAnnouncement} from "../../models/IAnnouncement";
+import {Announcement} from "../../models/announcement";
 import moment from "moment/moment";
+import {ServiceArea} from "../../models/service-area";
 
 export interface IAnnouncementListProps {
     itemsCount? : number,
     pageCount?: number,
     currentPage? : number
-    areaCategory? : IServiceArea
-    announcements: IAnnouncement[],
+    areaCategory? : ServiceArea
+    announcements: Announcement[],
     loading? : boolean
 }
 

@@ -5,10 +5,10 @@ import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {motion} from "framer-motion";
 import {ServiceList} from "../../components/Service/ServiceList";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {IAnnouncement} from "../../models/IAnnouncement";
+import {Announcement} from "../../models/announcement";
 import {AnnouncementList} from "../../components/Announcement/AnnouncementList";
-import {IPost} from "../../models/IPost";
-import Checkbox from "../../models/Checkbox";
+import {Post} from "../../models/post";
+import Checkbox from "../../components/Checkbox/Checkbox";
 
 let url ="http://localhost:1337";
 
@@ -19,7 +19,7 @@ export default function AnnouncementPage({data, pageCount, currentPage, regions}
     const [effectivePage,setEffectivePage] = useState(currentPage);
     const [loading, setLoading] = useState(false);
 
-    const castAnnouncementData = (dataEntry: any): IAnnouncement[] => {
+    const castAnnouncementData = (dataEntry: any): Announcement[] => {
           return dataEntry?.map((i : any) => {
             return {
                 title: i.attributes.titolo,
@@ -72,7 +72,7 @@ export default function AnnouncementPage({data, pageCount, currentPage, regions}
 
 
 
-    const [announcements, setAnnouncements] = useState<IAnnouncement[]>(announcementsData);
+    const [announcements, setAnnouncements] = useState<Announcement[]>(announcementsData);
 
     useEffect(() => {
 

@@ -1,11 +1,16 @@
-export interface IAnnouncement {
+import {AnnouncementDetails} from "./announcement-details";
+import {AnnouncementaArea} from "./announcementa-area";
+import {AnnouncementeCost} from "./announcemente-cost";
+import {AnnouncementRecipient} from "./announcement-recipient";
+
+export interface Announcement {
     title: string,
     slug: string,
-    area? : IAnnouncementArea,
+    area? : AnnouncementaArea,
     img?: string
-    details : IAnnouncementDetails,
+    details : AnnouncementDetails,
     description: string,
-    recipients?: IAnnouncementRecipient[],
+    recipients?: AnnouncementRecipient[],
     regions? :  string[],
     provinces? :  string[],
     investimentType : string,
@@ -19,7 +24,7 @@ export interface IAnnouncement {
         title: string
         value: any
     }[],
-    buyable?:IAnnouncementeCost,
+    buyable?:AnnouncementeCost,
     requestForm?:{
         title:string,
         text: string,
@@ -50,43 +55,3 @@ export interface IAnnouncement {
     }
 }
 
-export interface IAnnouncementDetails {
-    publicationDate?: string,
-    summary: string
-    startDate?:string,
-    expirationDate?:string,
-    financialCosts?: string,
-    other?:{
-        id: string,
-        title: string
-        value: any
-    } []
-}
-
-export interface IAnnouncementArea {
-    id?: number,
-    slug?: string,
-    title:string,
-    default?: boolean
-}
-
-export interface IAnnouncementeCost{
-    title?: string,
-    description?: string,
-    price : number,
-    discountPrice?: number
-    currency : string
-}
-
-export interface IAnnouncementRecipient{
-    id?:number,
-    title: string | any
-    description?: string,
-}
-
-export interface IAnnouncementTerritory{
-    id?: number,
-    slug?: string,
-    region: string,
-    province?: string,
-}

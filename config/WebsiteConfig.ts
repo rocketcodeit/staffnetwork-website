@@ -13,7 +13,7 @@ const configuration : IWebsiteConfiguration = {
                     { name:"Finanza Agevolata", url:"/aree/finanza-agevolata"},
                     { name:"Green e Sostenibilità", url:"/aree/green-e-sostenibilita"},
                 ]},
-            {name: "Come lavoriamo",    url: "/come_lavoriamo"},
+            {name: "Come lavoriamo",    url: "/come-lavoriamo"},
             {name:"Lo studio",          url: "/lo-studio",
                 subMenuItems:[
                     { name:"La storia", url:"/lo-studio#storia"},

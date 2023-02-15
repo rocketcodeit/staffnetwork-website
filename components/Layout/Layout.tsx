@@ -1,10 +1,7 @@
-
-import React, {useState} from 'react';
+import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import WebsiteConfig from '../../config/WebsiteConfig';
-import {motion,AnimatePresence} from "framer-motion";
-import {pageAnimation} from "../../animations";
+import WebsiteConfig from "../../config/WebsiteConfig";
 
 export interface LayoutProps{
     children : any

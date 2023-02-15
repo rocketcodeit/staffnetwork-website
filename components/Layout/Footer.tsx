@@ -1,13 +1,8 @@
-
 import React from 'react';
-import {IFooterConfiguration} from "../../config/models/IFooterConfiguration";
-import styles from "../../styles/Header.module.css";
 import {IWebsiteConfiguration} from "../../config/models/IWebsiteConfiguration";
 import Link from "next/link";
-import NewLineText from '../../models/NewLineText';
+import NewLineText from '../NewLineText/NewLineText';
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {IPost} from "../../models/IPost";
-import {IArea} from "../../config/models/IArea";
 
 let url = "http://localhost:1337";
 
@@ -40,8 +35,8 @@ function Footer(props : IWebsiteConfiguration, {data} : InferGetServerSidePropsT
 
                             <div className="xs:w-2/12 w-3/12 bg-primary lg:py-7 py-4">
                                 <div className="icons flex flex-col justify-center gap-5 items-center h-full xs:p-0 ">
-                                    {props.socialMenu?.map((item) => {
-                                       return <Link href={item.url}><img className="mx-auto" src={item.name} /> </Link>
+                                    {props.socialMenu?.map((item, i) => {
+                                       return <Link key={i} href={item.url}><img className="mx-auto" src={item.name} /> </Link>
                                     })}
 
                                 </div>
@@ -51,15 +46,15 @@ function Footer(props : IWebsiteConfiguration, {data} : InferGetServerSidePropsT
                     <div className="lg:w-1/12 w-0"></div>
                     <div className="sm:w-2/12 w-6/12 lg:mt-0 mt-6 pr-3">
                         <ul className="text-white">
-                            { props.footerConfiguration.primaryMenu.map((item) => {
-                                return <li  className="linkItemWhite linkItem mb-2" key={item.name} > <a href={item.url}>{item.name}</a> </li>
+                            { props.footerConfiguration.primaryMenu.map((item, i) => {
+                                return <li key={i} className="linkItemWhite linkItem mb-2"> <a href={item.url}>{item.name}</a> </li>
                             })}
                         </ul>
                     </div>
                     <div className="sm:w-2/12 w-6/12 lg:mt-0 mt-6 pr-3">
                         <ul className="text-white">
-                            { props.footerConfiguration.secondaryMenu.map((item) => {
-                                return <li  className="linkItemWhite linkItem mb-2" key={item.name} > <a href={item.url}>{item.name}</a> </li>
+                            { props.footerConfiguration.secondaryMenu.map((item, i) => {
+                                return <li key={i} className="linkItemWhite linkItem mb-2" > <a href={item.url}>{item.name}</a> </li>
                             })}
                         </ul>
                     </div>
@@ -67,8 +62,8 @@ function Footer(props : IWebsiteConfiguration, {data} : InferGetServerSidePropsT
                 <div className="w-full flex justify-end mt-6 mb-12">
                     <div className="w-full">
                         <ul className="text-white flex xs:flex-row flex-col justify-end 2xs:flex-nowrap flex-wrap items-end gap-4">
-                            { props.footerConfiguration.privacyMenu.map((item) => {
-                                return <li  className="text-sm linkItemWhite linkItem" key={item.name} > <a href={item.url}>{item.name}</a> </li>
+                            { props.footerConfiguration.privacyMenu.map((item, i) => {
+                                return <li key={i} className="text-sm linkItemWhite linkItem" > <a href={item.url}>{item.name}</a> </li>
                             })}
                         </ul>
                     </div>

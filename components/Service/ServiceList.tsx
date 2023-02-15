@@ -2,16 +2,18 @@ import React, {useEffect, useState} from "react";
 import styles from "../../styles/Service.module.css"
 import {containerSlideUp} from "../../animations";
 import {motion} from "framer-motion";
-import {IService, IServiceArea} from "../../models/IService";
+import {Service} from "../../models/service";
 import {ServiceItem} from "./ServiceItem";
-import {IPost, IPostCategory} from "../../models/IPost";
+import {Post} from "../../models/post";
+import {ServiceArea} from "../../models/service-area";
+import {PostCategory} from "../../models/post-category";
 
 export interface IServiceListProps {
     itemsCount? : number,
     pageCount?: number,
     currentPage? : number
-    areaCategory? : IServiceArea
-    services: IService[],
+    areaCategory? : ServiceArea
+    services: Service[],
     loading? : boolean
 }
 

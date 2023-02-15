@@ -1,9 +1,7 @@
-
 import React, {useEffect, useState} from 'react';
 import {IHeaderConfiguration} from "../../config/models/IHeaderConfiguration";
 import {useRouter} from "next/router";
 import styles from "../../styles/Header.module.css"
-import {Bars2Icon} from "@heroicons/react/24/outline";
 import { Cross as Hamburger } from 'hamburger-react'
 import Link from "next/link";
 

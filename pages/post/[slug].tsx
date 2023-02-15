@@ -1,5 +1,5 @@
 import React from "react";
-import {IPost, IPostCategory} from "../../models/IPost";
+import {Post} from "../../models/post";
 import {useRouter} from "next/router";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {notFound} from "next/navigation";
@@ -15,6 +15,7 @@ import configuration from "../../config/WebsiteConfig"
 import {IWebsiteConfiguration} from "../../config/models/IWebsiteConfiguration";
 import post from "../api/post";
 import Link from "next/link";
+import {PostCategory} from "../../models/post-category";
 
 export default function PostPage({post} : InferGetServerSidePropsType<typeof getServerSideProps>){
     //const dataConfiguration : IWebsiteConfiguration = configuration;
@@ -64,7 +65,7 @@ export default function PostPage({post} : InferGetServerSidePropsType<typeof get
                             </div>
                             <div className={styles.categories}>
                                 {
-                                    post.categories.map((category : IPostCategory,index : any) => {
+                                    post.categories.map((category : PostCategory, index : any) => {
                                         return  <motion.div key={index} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={styles.category}> {category.slug} </motion.div>
                                     })
                                 }
@@ -80,7 +81,7 @@ export default function PostPage({post} : InferGetServerSidePropsType<typeof get
 }
 
 
-export const getServerSideProps: GetServerSideProps<{post : IPost}> = async (context) => {
+export const getServerSideProps: GetServerSideProps<{post : Post}> = async (context) => {
 
     const { slug } = context.query
     let url ="http://localhost:1337";
@@ -92,7 +93,7 @@ export const getServerSideProps: GetServerSideProps<{post : IPost}> = async (con
         }
     }
 
-    const postFound : IPost = {
+    const postFound : Post = {
         slug : data.data.attributes.slug,
         name : data.data.attributes.title,
         img : url + data.data.attributes.cover.data.attributes.url,

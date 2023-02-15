@@ -1,9 +1,12 @@
-export interface IService {
+import {ServiceDetails} from "./service-details";
+import {ServiceArea} from "./service-area";
+
+export interface Service {
     title: string,
     slug: string,
-    area : IServiceArea[],
+    area : ServiceArea[],
     img?: string
-    details : IServiceDetails,
+    details : ServiceDetails,
     description: string,
     recipients?: string,
     link?: {
@@ -56,23 +59,3 @@ export interface IService {
     }
 }
 
-export interface IServiceDetails {
-    territory?:string,
-    publicationDate?: string,
-    summary: string
-    expirationDate?:string,
-    recipients?: string,
-    financialCosts?: string,
-    obj?:{
-        id: string,
-        title: string
-        value: any
-    } []
-}
-
-export interface IServiceArea {
-    id?: number,
-    slug: string,
-    title:string,
-    default?: boolean
-}

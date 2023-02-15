@@ -1,25 +1,22 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import Layout from "../components/layouts/Layout";
+import Layout from "../components/Layout/Layout";
 import {AnimatePresence} from "framer-motion";
 import {useState} from "react";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {IPost} from "../models/IPost";
-import {IArea} from "../config/models/IArea";
 
 
 export default function App({ Component, pageProps, router }: AppProps, {layoutData} : InferGetServerSidePropsType<typeof getServerSideProps>) {
     const [loading, setLoading] = useState(false);
     return(
-
-      <Layout>
+        <Layout>
             <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)} >
-                {!loading && <Component key={router.pathname} {...pageProps} />
-                }
+              {!loading &&
+                  <Component key={router.pathname} {...pageProps} />
+              }
             </AnimatePresence>
-      </Layout>
-      )
-
+        </Layout>
+    );
 }
 
 // This gets called on every request

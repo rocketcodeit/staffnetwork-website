@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/ComeLavoriamo.module.css'
+import styles from '../../styles/ComeLavoriamo.module.css'
 import {ArrowRightIcon} from '@heroicons/react/24/outline'
-import TeamMemberList from '../components/TeamMember/TeamMemberList'
-import {ITeamMember} from "../models/ITeamMember";
-import PostList from "../components/Post/PostList";
-import {IWebsiteConfiguration} from "../config/models/IWebsiteConfiguration";
-import AreaList from "../components/Area/AreaList";
+import TeamMemberList from '../../components/TeamMember/TeamMemberList'
+import {TeamMember} from "../../models/team-member";
+import PostList from "../../components/Post/PostList";
+import {IWebsiteConfiguration} from "../../config/models/IWebsiteConfiguration";
+import AreaList from "../../components/Area/AreaList";
 import {motion} from "framer-motion";
 import {
     container,
@@ -17,20 +17,20 @@ import {
     blockTextReveal,
     lineLeftToRight,
     textReveal, numberStepOpacity, scaleDownAnimation
-} from "../animations";
+} from "../../animations";
 import Link from "next/link";
-import BreadCrumbs from "../components/Breadcrumbs/BreadCrumbs";
-import {config} from "../config/breadcrumbs.config";
+import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
+import {config} from "../../config/breadcrumbs.config";
 import React from "react";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {IPost} from "../models/IPost";
-import {IArea} from "../config/models/IArea";
+import {Post} from "../../models/post";
+import {IArea} from "../../config/models/IArea";
 import {ReactSVG} from "react-svg";
 
 let url = "http://localhost:1337";
 
 
-export default function comeLavoriamo({data} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function ComeLavoriamo({data} : InferGetServerSidePropsType<typeof getServerSideProps>) {
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeOut"}}
                     className={styles.container}>
@@ -70,7 +70,7 @@ export default function comeLavoriamo({data} : InferGetServerSidePropsType<typeo
                         </div>
                     </motion.div>
                 </section>
-                
+
                 <section className="mt-24">
                     <div className={"container"}>
                         <div className={"w-11/12 md:w-5/12 mx-auto relative "}>

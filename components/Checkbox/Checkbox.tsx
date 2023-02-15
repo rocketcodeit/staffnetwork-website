@@ -1,4 +1,4 @@
-import styles from '../styles/Checkbox.module.css'
+import styles from '../../styles/Checkbox.module.css'
 
 
 export interface CheckboxProps{

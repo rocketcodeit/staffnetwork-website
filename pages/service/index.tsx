@@ -6,12 +6,13 @@ import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {motion} from "framer-motion";
 import {ServiceList} from "../../components/Service/ServiceList";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {IPost, IPostCategory} from "../../models/IPost";
-import {IService} from "../../models/IService";
-import {IAnnouncement} from "../../models/IAnnouncement";
+import {Post} from "../../models/post";
+import {Service} from "../../models/service";
+import {Announcement} from "../../models/announcement";
 import {IArea} from "../../config/models/IArea";
-import Checkbox from "../../models/Checkbox";
+import Checkbox from "../../components/Checkbox/Checkbox";
 import {AnnouncementList} from "../../components/Announcement/AnnouncementList";
+import {PostCategory} from "../../models/post-category";
 
 let url ="http://localhost:1337";
 
@@ -22,7 +23,7 @@ export default function ServicesPage({data, pageCount, currentPage, areas} : Inf
     const [loading, setLoading] = useState(false);
 
 
-    const castServicesData = (dataEntry : any) : IService[] => {
+    const castServicesData = (dataEntry : any) : Service[] => {
         return dataEntry?.map((i : any) => {
             return {
                 title: i.attributes.title,
@@ -43,7 +44,7 @@ export default function ServicesPage({data, pageCount, currentPage, areas} : Inf
     }
 
     const servicesData = castServicesData(data);
-    const [services, setServices] = useState<IService[]>(servicesData);
+    const [services, setServices] = useState<Service[]>(servicesData);
 
     const filterCategories = (event : any) => {
         if (event.target.checked) {

@@ -1,12 +1,12 @@
 import React from "react";
-import {ITeamMember} from "../../models/ITeamMember";
+import {TeamMember} from "../../models/team-member";
 import TeamMemberSingle from "./TeamMemberItem";
 import styles from "../../styles/TeamMember.module.css"
 import {containerSlideUp} from "../../animations";
 import {motion} from "framer-motion";
 
 export interface TeamMemberListProps{
-    members : ITeamMember[],
+    members : TeamMember[],
 }
 
 export default function TeamMemberList (props : TeamMemberListProps){

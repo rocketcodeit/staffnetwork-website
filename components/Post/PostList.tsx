@@ -1,18 +1,19 @@
 import React, {useEffect, useRef, useState} from 'react';
 import PostItem from "./PostItem";
-import {IPost, IPostCategory} from "../../models/IPost";
+import {Post} from "../../models/post";
 import {motion, useInView} from "framer-motion";
 import {containerSlideUp} from "../../animations";
 import {posts} from "../../pages/api/post/PostData";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {set} from "immutable";
+import {PostCategory} from "../../models/post-category";
 
 export interface IPostProps{
     itemsCount? : number,
     pageCount?: number,
     currentPage? : number
-    categories? : IPostCategory[]
-    posts: IPost[],
+    categories? : PostCategory[]
+    posts: Post[],
     loading? : boolean
 }
 

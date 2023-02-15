@@ -1,5 +1,5 @@
 import React from "react";
-import {IService} from "../../models/IService";
+import {Service} from "../../models/service";
 import styles from "../../styles/Service.module.css"
 import {itemFade, itemSlideUp} from "../../animations";
 import {motion} from "framer-motion";

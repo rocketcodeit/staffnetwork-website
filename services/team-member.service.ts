@@ -1,5 +1,5 @@
 import httpClient from "./http-client";
-import {ITeamMember} from "../models/ITeamMember";
+import {TeamMember} from "../models/team-member";
 import {StrapiUrlBuilder} from "./strapi-url-builder";
 
 export class TeamMemberService {
@@ -8,7 +8,7 @@ export class TeamMemberService {
      * Get team member by slug
      * @param slug Slug of team member, ex: pippo-rossi
      */
-    public getBySlug(slug: string): Promise<ITeamMember | undefined> {
+    public getBySlug(slug: string): Promise<TeamMember | undefined> {
 
         const url =
             new StrapiUrlBuilder("members")
@@ -29,7 +29,7 @@ export class TeamMemberService {
      * Get a list of team members
      * @param limit limit the results
      */
-    public find(limit?: number): Promise<ITeamMember[] | undefined> {
+    public find(limit?: number): Promise<TeamMember[] | undefined> {
 
         const url =
             new StrapiUrlBuilder("members")
@@ -46,8 +46,8 @@ export class TeamMemberService {
             });
     }
 
-    public mapServerResultToModel(res: any): ITeamMember {
-        const obj: ITeamMember = {
+    public mapServerResultToModel(res: any): TeamMember {
+        const obj: TeamMember = {
             slug: res.attributes.slug,
             name: res.attributes.nome,
             surname: res.attributes.cognome,

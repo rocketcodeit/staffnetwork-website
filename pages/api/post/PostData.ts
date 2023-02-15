@@ -1,6 +1,6 @@
-import {IPost} from "../../../models/IPost";
+import {Post} from "../../../models/post";
 
-export const posts: IPost[] = [
+export const posts: Post[] = [
     {
         slug: "articolo_1",
         name: "Articolo1",

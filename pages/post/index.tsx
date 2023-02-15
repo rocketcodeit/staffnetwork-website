@@ -5,18 +5,19 @@ import {config} from "../../config/breadcrumbs.config";
 import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {AnimatePresence, motion} from "framer-motion";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {IPost, IPostCategory} from "../../models/IPost";
+import {Post} from "../../models/post";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import Select from 'react-select'
 import {useQuery,useQueryClient} from 'react-query'
+import {PostCategory} from "../../models/post-category";
 
 export default function PostsPage({posts, pageCount,currentPage, categories} : InferGetServerSidePropsType<typeof getServerSideProps>){
     const [effectivePage,setEffectivePage] = useState(currentPage);
     const [loading, setLoading] = useState(false);
 
     let url ="http://localhost:1337";
-    const [data, setData] = useState<IPost[]>(posts);
+    const [data, setData] = useState<Post[]>(posts);
 
     const [blogFilter, setBlogFilter] = useState<{category: any[], pageNumber: number}>({
         category: [],
@@ -105,7 +106,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
             notFound: true
         }
     } */
-     const posts :  IPost[] =  postsData.data.map((item : any) =>{
+     const posts :  Post[] =  postsData.data.map((item : any) =>{
         return {
             slug : item.attributes.slug,
             name : item.attributes.title,
@@ -116,7 +117,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
         }
     })
 
-    const categories : IPostCategory[] = categoriesData.data.map((category : any) =>{
+    const categories : PostCategory[] = categoriesData.data.map((category : any) =>{
       return {
           id:category.id,
           name: category.attributes.name,

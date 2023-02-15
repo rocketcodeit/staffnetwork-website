@@ -8,8 +8,9 @@ import styles from "../../styles/Area.module.css";
 import {motion} from "framer-motion";
 import {blockReveal, blockTextReveal, fadeInUp, opacityAnimation} from "../../animations";
 import {ServiceList} from "../../components/Service/ServiceList";
-import {IService, IServiceArea} from "../../models/IService";
+import {Service} from "../../models/service";
 import Link from "next/link";
+import {ServiceArea} from "../../models/service-area";
 
 let url = "http://localhost:1337";
 
@@ -24,7 +25,7 @@ export default function AreaPage({data,services} : InferGetServerSidePropsType<t
     }
 
 
-    const servicesFound : IService[] = services.map((i : any) => {
+    const servicesFound : Service[] = services.map((i : any) => {
         return {
             title: i.attributes.title,
             slug: i.attributes.slug,

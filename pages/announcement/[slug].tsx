@@ -9,13 +9,13 @@ import Head from "next/head";
 
 import moment from "moment";
 import Link from "next/link";
-import {IAnnouncement} from "../../models/IAnnouncement";
+import {Announcement} from "../../models/announcement";
 
 let url ="http://localhost:1337";
 
 export default function AnnouncementPage({announcement} : InferGetServerSidePropsType<typeof getServerSideProps>){
 
-    const announcementFound : IAnnouncement = {
+    const announcementFound : Announcement = {
         title: announcement.titolo,
         slug: announcement.slug,
         img : announcement.image.data && url + announcement.image.data.attributes.url,
