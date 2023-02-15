@@ -55,8 +55,6 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
         })
 }
 
-    console.log(announcementFound);
-
     return(
         <motion.section initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 0.4,ease: "easeOut"}}>
             <Head>

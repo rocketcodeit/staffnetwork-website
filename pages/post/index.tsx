@@ -11,12 +11,6 @@ import {useRouter} from "next/router";
 import Select from 'react-select'
 import {useQuery,useQueryClient} from 'react-query'
 
-
-const handleCategories = (values : any) =>{
-    console.log(values);
-}
-
-
 export default function PostsPage({posts, pageCount,currentPage, categories} : InferGetServerSidePropsType<typeof getServerSideProps>){
     const [effectivePage,setEffectivePage] = useState(currentPage);
     const [loading, setLoading] = useState(false);

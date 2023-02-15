@@ -9,7 +9,7 @@ export interface ITeamMember{
     education? : string,
     link?: ICommercialLink[],
     linkedin? : string,
-    obj?: {
+    customFields?: {
         id: string,
         title: string
         value: any

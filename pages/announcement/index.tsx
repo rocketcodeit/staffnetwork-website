@@ -77,8 +77,6 @@ export default function AnnouncementPage({data, pageCount, currentPage, regions}
     useEffect(() => {
 
         setLoading(true);
-        console.log(categories)
-
 
         fetch(`${url}/api/announcements?populate=*${categories?.map((i: any) => `&filters[regioni][nome][$containsi]=${i}`).join('')}&pagination[page]=${effectivePage}`)
             .then((res) => {

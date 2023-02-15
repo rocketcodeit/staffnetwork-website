@@ -1,11 +1,7 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import {ArrowRightIcon} from '@heroicons/react/24/outline'
 import TeamMemberList from '../components/TeamMember/TeamMemberList'
 import {ITeamMember} from "../models/ITeamMember";
-import PostList, {IPostProps} from "../components/Post/PostList";
-import {IWebsiteConfiguration} from "../config/models/IWebsiteConfiguration";
+import PostList from "../components/Post/PostList";
 import AreaList from "../components/Area/AreaList";
 import {motion} from "framer-motion";
 import {container, fadeInUp, item, stagger, blockReveal, blockTextReveal} from "../animations";
@@ -13,11 +9,11 @@ import Link from "next/link";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {IPost} from "../models/IPost";
 import {IArea} from "../config/models/IArea";
+import {TeamMemberService} from "../services/team-member.service";
 
 
 export default function Home({posts,services, home, layoutData,membersTeam} : InferGetServerSidePropsType<typeof getServerSideProps>) {
     let url = "http://localhost:1337";
-    console.log(layoutData);
 
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}}
@@ -105,7 +101,7 @@ export default function Home({posts,services, home, layoutData,membersTeam} : In
 
                 </div>
                 <div className="w-full">
-                    <TeamMemberList members={membersTeam} itemsCount={3} />
+                    <TeamMemberList members={membersTeam} />
                     <Link className="btn mx-auto block w-fit mt-6" href="/come_lavoriamo">Conosci i professionisti</Link>
                 </div>
             </section>
@@ -187,23 +183,13 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     const configurazioneData  =  await resConfigurazione.json();
 
 
-
     const resHome = await fetch(`${url}/api/home?populate=*&populate[0]=datiStatistici,staff,partnership,servizi,imgAboveTheFold,imgAree,imgDati,imgPartnership&populate[1]=datiStatistici.dati,partnership.link`);
     const homeData = await resHome.json();
 
 
-    const resMembers = await fetch(`${url}/api/members?populate=*&pagination[page]=1&pagination[pageSize]=4`);
-    const membersData = await resMembers.json();
-
-    const members : ITeamMember[] = membersData.data.map((item : any) =>{
-        return {
-            slug: item.attributes.slug,
-            name: item.attributes.nome,
-            surname : item.attributes.cognome,
-            img : url + item.attributes.image.data.attributes.url,
-            profession: item.attributes.ruolo
-        }
-    })
+    // Team Members
+    const teamMemberService = new TeamMemberService();
+    const members = await teamMemberService.find(4);
 
     const result: any = {
         posts : posts,
@@ -211,9 +197,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
         home : homeData.data.attributes,
         layoutData : configurazioneData.data,
         membersTeam : members
-
     }
-
 
     // Pass data to the page via props
     return {

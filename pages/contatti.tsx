@@ -23,8 +23,6 @@ export default function Contatti({data} : InferGetServerSidePropsType<typeof get
         accessToken:
             'pk.eyJ1Ijoibmljb2xhY2lhbm8iLCJhIjoiY2t4cHYweGg3MWptaDJ2a28weTMzZWZ2bSJ9.X9i3oJ567Pl9OP3rjuyGxw'
     });
-    console.log(data);
-
 
     return (
         <>
@@ -170,8 +168,6 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     const result: any = {
         data : contattiData.data.attributes
     }
-
-    console.log(result);
 
     // Pass data to the page via props
     return {
