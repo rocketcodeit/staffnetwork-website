@@ -59,3 +59,10 @@ export interface IService {
     }
 }
 
+export interface IServiceList{
+    title: string,
+    slug: string,
+    area?: ServiceArea[],
+    details : ServiceDetails,
+    description: string,
+}

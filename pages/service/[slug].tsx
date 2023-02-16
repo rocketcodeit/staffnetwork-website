@@ -10,53 +10,21 @@ import Head from "next/head";
 import {IService} from "../../models/IService";
 import moment from "moment";
 import Link from "next/link";
+import {IArea} from "../../config/models/IArea";
+import {ProductService} from "../../services/service.service";
+import {NextjsUtils} from "../../services/nextjs-utils";
 let url ="http://localhost:1337";
 
-export default function ServicePage({service} : InferGetServerSidePropsType<typeof getServerSideProps>){
-    console.log(service);
-    const serviceFound : IService = {
-        title: service.title,
-        slug: service.slug,
-        img : service.image.data && url + service.image.data.attributes.url,
+interface ServicePageProps{
+    service : IService,
+}
 
-        area:  service.aree.data.map((area : any) => {
-            return{
-                slug: area.attributes.slug,
-                title:area.attributes.title
-            }
-        }),
-        details:{
-            summary: service.summary,
-            obj: service.dettagli.map((det : any, index: number) => {
-                return {
-                   id: +index,
-                    title: det.titolo,
-                    value : det.descrizione
-                }
-            })
-        },
-        description: service.description,
-        obj : service.specifiche.map((spec : any, index : number) => {
-            return{
-                id: index,
-                title : spec.titolo,
-                value : spec.descrizione,
-            }
-        }),
-        buyable : service.prezzo && {
-            title: service.prezzo.titolo,
-            description: service.prezzo.descrizione,
-            price : service.prezzo?.prezzo,
-            discountPrice : service.prezzo?.prezzoScontato,
-            currency : "€"
-        },
-    }
-
+export default function ServicePage({service} : ServicePageProps){
 
     return(
         <motion.section initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 0.4,ease: "easeOut"}}>
             <Head>
-                <title>{serviceFound.title}</title>
+                <title>{service.title}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <main>
@@ -65,17 +33,17 @@ export default function ServicePage({service} : InferGetServerSidePropsType<type
                 <section className={"mt-8"}>
                     <BreadCrumbs mappedPaths={config} showHome={true} transformDynamicPath={path => {
                         if(path === "[slug]"){
-                            return serviceFound.title
+                            return service.title
                         }
                         return path;
                     }} />
                     <div className={"w-fit relative"}>
                         <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                        <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-6">{serviceFound.title}</motion.h1>
+                        <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-6">{service.title}</motion.h1>
                     </div>
                     <div className={"w-6/12 relative"}>
                         <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                        <motion.p variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}>{serviceFound.details.summary}</motion.p>
+                        <motion.p variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}>{service.details.summary}</motion.p>
                     </div>
                 </section>
 
@@ -86,7 +54,7 @@ export default function ServicePage({service} : InferGetServerSidePropsType<type
 
                             <div className={"mt-4 flex gap-10 flex-wrap mb-8 pr-8"}>
 
-                                {serviceFound.details.obj?.map((o, index) => {
+                                {service.details.obj?.map((o, index) => {
                                     return <div key={index}>
                                         <div>{o.title}</div>
                                         <div className={styles.childDescriptionList} dangerouslySetInnerHTML={{__html:o.value}} />
@@ -95,9 +63,9 @@ export default function ServicePage({service} : InferGetServerSidePropsType<type
                             </div>
 
                             <div className={styles.buttonsContainer}>
-                                {serviceFound.buyable &&
+                                {service.buyable &&
                                     <div className={"flex flex-row items-center gap-5"}>
-                                        <h5>€ {serviceFound.buyable.price}</h5>
+                                        <h5>€ {service.buyable.price}</h5>
                                         <Link href={"#acquista"} className={"btn black"}>Acquista</Link>
                                     </div>
                                 }
@@ -110,8 +78,8 @@ export default function ServicePage({service} : InferGetServerSidePropsType<type
                     <section id={"descrizione"}>
                         <div className={"flex flex-wrap justify-between"}>
                             <div className={"w-12/12 lg:w-7/12"}>
-                                <div className={"mt-8"} dangerouslySetInnerHTML={{__html:serviceFound.description}} />
-                                {serviceFound.obj?.map((o) =>{
+                                <div className={"mt-8"} dangerouslySetInnerHTML={{__html:service.description}} />
+                                {service.obj?.map((o) =>{
                                     return <div key={o.id} className={"mt-8"}>
                                         <h3 className={"mb-3"}>{o.title}</h3>
                                         <div dangerouslySetInnerHTML={{__html:o.value}} />
@@ -119,7 +87,7 @@ export default function ServicePage({service} : InferGetServerSidePropsType<type
                                 })}
                             </div>
                             <div className={"w-11/12 lg:w-4/12"}>
-                                <img className={"mt-8"} src={serviceFound.img} />
+                                <img className={"mt-8"} src={service.img} />
                             </div>
                         </div>
                     </section>
@@ -127,21 +95,21 @@ export default function ServicePage({service} : InferGetServerSidePropsType<type
 
 
 
-                    <section className={`my-12 flex flex-wrap flex-row ${serviceFound.buyable ? " justify-center lg:justify-between" : "justify-center"} items-start`}>
-                        {serviceFound.buyable && <div id={"acquista"} className={"bg-gray-200 flex  w-full md:w-11/12 lg:w-5/12 lg:sticky top-40"}>
+                    <section className={`my-12 flex flex-wrap flex-row ${service.buyable ? " justify-center lg:justify-between" : "justify-center"} items-start`}>
+                        {service.buyable && <div id={"acquista"} className={"bg-gray-200 flex  w-full md:w-11/12 lg:w-5/12 lg:sticky top-40"}>
                             <div className={"flex flex-row flex-wrap w-full justify-between"}>
                                 <div className={"w-full flex flex-row justify-between px-4 pt-6 pb-3"}>
                                     <div className={"w-6/12"}>
-                                        <h4 className={"mb-2"}>{serviceFound.buyable.title}</h4>
-                                        { serviceFound.buyable?.description && <div  dangerouslySetInnerHTML={{__html:serviceFound.buyable?.description}} /> }
+                                        <h4 className={"mb-2"}>{service.buyable.title}</h4>
+                                        { service.buyable?.description && <div  dangerouslySetInnerHTML={{__html:service.buyable?.description}} /> }
                                     </div>
                                     {
-                                        serviceFound.buyable?.discountPrice ?
+                                        service.buyable?.discountPrice ?
                                             <div className={"w-6/12 text-end"} >
-                                                <del className={"text-gray-600"}>{serviceFound.buyable?.price} €</del>
-                                                <h3>{serviceFound.buyable?.discountPrice} €</h3>
+                                                <del className={"text-gray-600"}>{service.buyable?.price} €</del>
+                                                <h3>{service.buyable?.discountPrice} €</h3>
                                             </div>  :
-                                            <h3 className={"w-6/12 text-end"}> {serviceFound.buyable?.price} €</h3>
+                                            <h3 className={"w-6/12 text-end"}> {service.buyable?.price} €</h3>
 
 
                                     }
@@ -151,8 +119,8 @@ export default function ServicePage({service} : InferGetServerSidePropsType<type
                         </div> }
                         <div id={"contattaci"} className={" w-12/12 lg:w-6/12 relative "}>
                             <div className={"mx-auto"}>
-                                <h3 className={`${serviceFound.buyable ? "text-left" : "text-center"}`}>{serviceFound.requestForm?.title}</h3>
-                                <p className={`max-w-xl  mt-2 ${serviceFound.buyable ? "text-left" : "text-center mx-auto"}`}>{serviceFound.requestForm?.text}</p>
+                                <h3 className={`${service.buyable ? "text-left" : "text-center"}`}>{service.requestForm?.title}</h3>
+                                <p className={`max-w-xl  mt-2 ${service.buyable ? "text-left" : "text-center mx-auto"}`}>{service.requestForm?.text}</p>
                             </div>
                             <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
                             <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"bg-gray-200 lg:p-12 md:p-8 px-6 py-4 mx-auto flex gap-x-9 gap-y-6 flex-2-1.5 flex-wrap mt-8"}>
@@ -206,19 +174,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const { slug } = context.query
 
-    let url ="http://localhost:1337";
-    const resService = await fetch(`${url}/api/services/${slug}?populate=*`);
-    const serviceData  =  await resService.json();
+    const productService = new ProductService();
 
-    if(!serviceData.data) {
-        return {
-            notFound: true,
-        }
-    }
+    if(!slug)
+        return NextjsUtils.returnNotFoundObject();
+
+    const serviceData = await productService.getBySlug(slug.toString());
+
+    if(!serviceData)
+        return NextjsUtils.returnNotFoundObject();
 
 
     const result: any = {
-        service: serviceData.data.attributes
+        service: serviceData
     }
 
 

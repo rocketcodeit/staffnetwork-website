@@ -1,11 +1,23 @@
-import {BaseStrapiService, StrapiResourceType} from "./base-strapi.service";
-import {IService} from "../models/IService";
+import {BaseStrapiService, BaseStrapiService2Types, StrapiResourceType} from "./base-strapi.service";
+import {IService, IServiceList} from "../models/IService";
 
-export class ProductService extends BaseStrapiService<IService> {
+export class ProductService extends BaseStrapiService2Types<IService, IServiceList> {
 
     constructor() {
         super("services", StrapiResourceType.collection);
     }
+
+    mapForFind(res: any): IServiceList {
+        return{
+            slug : res.attributes.slug,
+            title: res.attributes.title,
+            details:{
+                summary: res.attributes.summary
+            },
+            description: res.attributes.description
+        }
+    }
+
 
     mapForSingle(res: any): IService {
         return {

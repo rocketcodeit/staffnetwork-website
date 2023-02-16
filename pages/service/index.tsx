@@ -7,22 +7,69 @@ import {motion} from "framer-motion";
 import {ServiceList} from "../../components/Service/ServiceList";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {PostDetail} from "../../models/postDetail";
-import {IService} from "../../models/IService";
+import {IService, IServiceList} from "../../models/IService";
 import {Announcement} from "../../models/announcement";
 import {IArea} from "../../config/models/IArea";
 import Checkbox from "../../components/Checkbox/Checkbox";
 import {AnnouncementList} from "../../components/Announcement/AnnouncementList";
 import {PostCategory} from "../../models/post-category";
+import {useRouter} from "next/router";
+import {ProductService} from "../../services/service.service";
+import {NextjsUtils} from "../../services/nextjs-utils";
+import {PostCategoriesService} from "../../services/post-categories.service";
+import {AreaService} from "../../services/area.service";
 
-let url ="http://localhost:1337";
 
-export default function ServicesPage({data, pageCount, currentPage, areas} : InferGetServerSidePropsType<typeof getServerSideProps>){
+interface ServicesProps{
+    services: IService[],
+    pageCount?: number,
+    currentPage : number,
+    areas?: IArea[]
+}
+export default function ServicesPage({services, pageCount, currentPage, areas} : ServicesProps){
 
-    const [categories,setCategories] = useState<string[]>([]);
     const [effectivePage,setEffectivePage] = useState(currentPage);
     const [loading, setLoading] = useState(false);
+    const [firstLoad, setFirstLoad] = useState<boolean>(true);
+    const [data, setData] = useState<IService[]>(services);
+    const navigation = useRouter();
+    const [categories,setCategories] = useState<any[]>([areas]);
 
-    const castServicesData = (dataEntry : any) : IService[] => {
+
+    const [blogFilter, setBlogFilter] = useState<{category: any[], pageNumber: number}>({
+        category: [],
+        pageNumber: 1
+    })
+
+    useEffect(() => {
+        setData(services);
+    }, [services])
+
+    useEffect(() => {
+        if(!firstLoad) {
+            setLoading(true);
+            navigation.replace('?page=' + effectivePage)
+                .then(() => {
+                    setLoading(false);
+                })
+        } else {
+            setFirstLoad(false);
+        }
+    }, [effectivePage,categories])
+
+
+
+    const filterCategories = (event : any) => {
+        if (event.target.checked) {
+            setCategories(array => [...array, event.target.name]);
+        } else {
+            setCategories( categories.filter(element  => element !== event.target.name));
+        }
+
+    }
+/*
+
+const castServicesData = (dataEntry : any) : IService[] => {
         return dataEntry?.map((i : any) => {
             return {
                 title: i.attributes.title,
@@ -43,16 +90,7 @@ export default function ServicesPage({data, pageCount, currentPage, areas} : Inf
     }
 
     const servicesData = castServicesData(data);
-    const [services, setServices] = useState<IService[]>(servicesData);
 
-    const filterCategories = (event : any) => {
-        if (event.target.checked) {
-            setCategories(array => [...array, event.target.name]);
-        } else {
-            setCategories( categories.filter(element  => element !== event.target.name));
-        }
-
-    }
 
     useEffect(() => {
 
@@ -70,7 +108,7 @@ export default function ServicesPage({data, pageCount, currentPage, areas} : Inf
             });
 
     }, [effectivePage,categories])
-
+*/
 
     return (
         <>
@@ -131,45 +169,27 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
     // Fetch data from external API
     const {page} = context.query;
 
-    const effectivePage = page ?? 1;
-    let url ="http://localhost:1337";
-    const resService = await fetch(`${url}/api/services?populate=*&populate[0]=aree&pagination[page]=${effectivePage}`);
+    const currentPage = page ?? 1;
 
-    //const resPosts = await fetch(`${url}/api/posts?populate=*&pagination[page]=${effectivePage}&pagination[pageSize]=1`);
-    const serviceData  =  await resService.json();
-    const pageCount = serviceData.meta.pagination.pageCount;
-
-    const resAreas = await fetch(`${url}/api/areas?populate=*&sort=id&pagination[page]=${effectivePage}`);
-    const areasData  =  await resAreas.json();
+    const productsService = new ProductService();
+    const services = await productsService.find();
 
 
-    const areas :  IArea[] =  areasData.data.map((item : any) =>{
-        return {
-            slug : item.attributes.slug,
-            name : item.attributes.titolo,
-            short_description : item.attributes.summary,
-            description : item.attributes.description,
-
-        }
-    })
-
-    if(!serviceData.data) {
-        return {
-            notFound: true,
-        }
-    }
+    const areaProductService = new AreaService();
+    const areas = await areaProductService.find({ sort: ['id']});
 
 
-    const result: any = {
-        data: serviceData.data,
-        pageCount : pageCount,
-        currentPage: +effectivePage,
-        areas : areas
-    }
+    if(currentPage > (services?.paginationInfo.pageCount ?? 1))
+        return NextjsUtils.returnNotFoundObject();
 
+    if(currentPage === 1 && page)
+        return NextjsUtils.returnRedirectObject('/servizi');
 
-    // Pass data to the page via props
-    return {
-        props: result
-    };
+    return NextjsUtils.returnServerSidePropsObject({
+        services: services?.data,
+        pageCount : services?.paginationInfo.pageCount,
+        currentPage : currentPage,
+        areas : areas?.data
+    });
+
 }
