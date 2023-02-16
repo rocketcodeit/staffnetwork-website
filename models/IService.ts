@@ -1,10 +1,10 @@
 import {ServiceDetails} from "./service-details";
 import {ServiceArea} from "./service-area";
 
-export interface Service {
+export interface IService {
     title: string,
     slug: string,
-    area : ServiceArea[],
+    area?: ServiceArea[],
     img?: string
     details : ServiceDetails,
     description: string,

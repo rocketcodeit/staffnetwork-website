@@ -7,7 +7,7 @@ export class PostCategoriesService extends BaseStrapiService<PostCategory> {
         super("post-categories", StrapiResourceType.collection);
     }
 
-    mapServerResultToModel(res: any): PostCategory {
+    mapForFind(res: any): PostCategory {
         return {
             id: res.id,
             name: res.attributes.name,

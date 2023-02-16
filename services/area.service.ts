@@ -7,13 +7,19 @@ export class AreaService extends BaseStrapiService<IArea> {
         super("areas", StrapiResourceType.collection);
     }
 
-    mapServerResultToModel(res: any): IArea {
+    mapForFind(res: any): IArea {
         return {
             slug : res.attributes.slug,
             name : res.attributes.titolo,
             short_description : res.attributes.summary,
             description : res.attributes.description,
-
+            img : res.attributes.image.data && process.env.BACKEND_URL + res.attributes.image.data.attributes.url,
+            activities : res.attributes.servizi?.map((activity: any, index : number) =>{
+                return {
+                    title: activity.titolo,
+                    description: activity.descrizione
+                }
+            })
         }
     }
 }

@@ -7,14 +7,14 @@ import styles from "../../styles/Service.module.css";
 import {blockReveal, blockTextReveal, fadeInUp} from "../../animations";
 import Head from "next/head";
 
-import {Service} from "../../models/service";
+import {IService} from "../../models/IService";
 import moment from "moment";
 import Link from "next/link";
 let url ="http://localhost:1337";
 
 export default function ServicePage({service} : InferGetServerSidePropsType<typeof getServerSideProps>){
     console.log(service);
-    const serviceFound : Service = {
+    const serviceFound : IService = {
         title: service.title,
         slug: service.slug,
         img : service.image.data && url + service.image.data.attributes.url,

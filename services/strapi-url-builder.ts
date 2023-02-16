@@ -1,3 +1,5 @@
+import {FilterOperator} from "../models/strapi-query-params";
+
 export class StrapiUrlBuilder {
     private _resource: string;
     private _parameters: string[] | undefined = [];
@@ -5,6 +7,7 @@ export class StrapiUrlBuilder {
     private _populate: {value: string, level?: number}[] = [];
 
     private _sort: string[] = [];
+    private _filter: {fields:string[],operator: FilterOperator, value:string}[] = [];
 
     constructor(resource: string) {
         this._resource = resource;
@@ -25,6 +28,15 @@ export class StrapiUrlBuilder {
         return this;
     }
 
+    public addFilter(fields:string[],operator: FilterOperator, value:string){
+        this._filter?.push({
+                fields: fields,
+                operator: operator,
+                value: value
+        });
+        return this;
+    }
+
     public addSort(field?: string) {
 
         if(!field)
@@ -39,6 +51,15 @@ export class StrapiUrlBuilder {
             return this;
 
         this._populate = populate;
+        return this;
+    }
+
+    public setFilter(filters?: {fields:string[],operator: FilterOperator, value:string }[]) {
+
+        if(!filters)
+            return this;
+
+        this._filter = filters;
         return this;
     }
 
@@ -87,8 +108,24 @@ export class StrapiUrlBuilder {
             }
         }
 
-        url += queryParams.join('&');
+        if(this._filter.length > 0){
+           this._filter.forEach((filterValue, index) => {
+               if(filterValue.fields.length === 1){
+                   queryParams.push(`filters[${filterValue.fields[0]}][$${filterValue.operator}]=${filterValue.value}`)
+               }
+               else{
+                   let stringFilter = 'filters';
+                   filterValue.fields.forEach((field, index) => {
+                       stringFilter = stringFilter.concat(`[${field}]`);
+                   })
+                   stringFilter = stringFilter.concat(`[$${filterValue.operator}]=${filterValue.value}`);
+                   queryParams.push(stringFilter);
+               }
+           })
+        }
 
+        url += queryParams.join('&');
+        console.log(url);
         return url;
     }
 }

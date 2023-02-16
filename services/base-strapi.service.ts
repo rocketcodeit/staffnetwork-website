@@ -3,7 +3,7 @@ import httpClient from "./http-client";
 import {PaginatedResult} from "../models/paginated-result";
 import {StrapiQueryParams} from "../models/strapi-query-params";
 
-export abstract class BaseStrapiService<T> {
+export abstract class BaseStrapiService<T, K> {
     private _strapiResource: string;
     private readonly _resourceType: StrapiResourceType;
 
@@ -25,7 +25,7 @@ export abstract class BaseStrapiService<T> {
 
         return httpClient.get(url)
             .then((res: any) => {
-                return this.mapServerResultToModel(res.data.data);
+                return this.mapForSingle(res.data.data);
             })
             .catch(() => {
                 return undefined;
@@ -48,12 +48,21 @@ export abstract class BaseStrapiService<T> {
             })
         }
 
+
+        if(params?.filter && params.filter.length > 0){
+            params.filter.forEach((i, index) => {
+                urlBuilder.addFilter(i.field,i.operator,i.value);
+            })
+        }
+
+
+
         const url = urlBuilder.build();
 
 
         return httpClient.get(url)
             .then((res: any) => {
-                const data = res.data.data.map((member: any) => this.mapServerResultToModel(member));
+                const data = res.data.data.map((member: any) => this.mapForFind(member));
                 return {
                     data: data,
                     paginationInfo: res.data.meta.pagination
@@ -78,7 +87,7 @@ export abstract class BaseStrapiService<T> {
 
         return httpClient.get(url)
             .then((res: any) => {
-                const data = this.mapServerResultToModel(res.data.data);
+                const data = this.mapForSingle(res.data.data);
                 return data;
             })
             .catch((err) => {
@@ -86,7 +95,9 @@ export abstract class BaseStrapiService<T> {
             });
     }
 
-    abstract mapServerResultToModel(res: any): T;
+    abstract mapForFind(res: any): T;
+
+    abstract mapForSingle(res:any): T;
 }
 
 export enum StrapiResourceType {

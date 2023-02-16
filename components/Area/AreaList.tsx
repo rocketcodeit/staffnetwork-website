@@ -5,14 +5,14 @@ import {container, containerSlideUp} from "../../animations";
 import {motion, useInView} from "framer-motion";
 
 
-export interface IServiceProps{
+export interface IAreaProps{
     itemsCount? : number
     currentPage? : number,
-    services : IArea[]
+    areas : IArea[]
     //chiedere a ignazio
 }
 
-function AreaList (props : IServiceProps){
+function AreaList (props : IAreaProps){
     // Stato per tenere traccia dello stato del fetch dei dati
     const [loading, setLoading] = useState(true);
 
@@ -21,29 +21,12 @@ function AreaList (props : IServiceProps){
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true });
 
-
-    useEffect(() => {
-        let url = "/api/area"
-        if(props.itemsCount){
-            url+="?limit="+props.itemsCount;
-        }
-        fetch(url)
-            .then((res) => {
-                res.json().then((res2) =>{
-                    setServices(res2);
-                    setLoading(false);
-                })
-            })
-    },[loading]);
     return(
 
             <motion.div variants={containerSlideUp}
                         initial="hidden" whileInView="show" viewport={{once:true}}
-                        className="grid xl:grid-cols-3 md:grid-cols-2 gap-4"
-                        style={{
-                            opacity: isInView ? 1 : 0,
-                        }}>
-                {props.services.map((item, index) => {
+                        className="grid xl:grid-cols-3 md:grid-cols-2 gap-4">
+                {props.areas.map((item, index) => {
                     return <AreaItem key={index} {...item} />
                 })}
             </motion.div>

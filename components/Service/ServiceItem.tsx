@@ -1,5 +1,5 @@
 import React from "react";
-import {Service} from "../../models/service";
+import {IService} from "../../models/IService";
 import styles from "../../styles/Service.module.css"
 import {itemFade, itemSlideUp} from "../../animations";
 import {motion} from "framer-motion";
@@ -17,7 +17,6 @@ export function ServiceItem(props : IServiceItemProps){
     return(
 
         <motion.div variants={itemFade} className={styles.item}>
-            {props.img && <img className={styles.itemImg} src={props.img}/> }
             <div className={styles.itemBoxText}>
                 <Link className={"h-full block"} href={`${props.link}`}>
                     <h4 className={styles.itemTitle}>{props.title}</h4>

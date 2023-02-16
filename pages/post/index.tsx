@@ -17,7 +17,7 @@ export default function PostsPage({posts, pageCount,currentPage, categories} : I
     const [effectivePage,setEffectivePage] = useState(currentPage);
     const [loading, setLoading] = useState(false);
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
-    const [data, setData] = useState<PaginatedResult<Post>>(posts);
+    const [data, setData] = useState<Post[]>(posts);
     const navigation = useRouter();
 
     const [blogFilter, setBlogFilter] = useState<{category: any[], pageNumber: number}>({
@@ -51,7 +51,7 @@ export default function PostsPage({posts, pageCount,currentPage, categories} : I
                         }} />
                         <h1 className={"mb-6"}>Articoli</h1>
 
-                        <PostList posts={data.data} />
+                        <PostList posts={data!} />
 
                         <ul className={styles.paginationItems}>
                             {[...Array(pageCount)].map((e, i) =>
@@ -89,7 +89,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
         return NextjsUtils.returnRedirectObject('/blog');
 
     return NextjsUtils.returnServerSidePropsObject({
-        posts: posts,
+        posts: posts?.data,
         pageCount : posts?.paginationInfo.pageCount,
         currentPage : currentPage,
         categories : categories?.data

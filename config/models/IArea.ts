@@ -5,18 +5,18 @@ export interface IArea {
     img? : string,
     short_description : string,
     description? : string,
-    activities? : IServiceMethod[],
-    methods? : IServiceMethod[],
-    results? : IServiceResult[],
+    activities? : IAreaMethod[],
+    methods? : IAreaMethod[],
+    results? : IAreaResult[],
     url? : string
 }
 
-export interface IServiceMethod{
+export interface IAreaMethod{
     title: string,
-    description: string
+    description: any
 }
 
-export interface IServiceResult{
+export interface IAreaResult{
     number: number,
     term : string,
     title?: string

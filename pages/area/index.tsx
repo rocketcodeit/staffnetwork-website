@@ -5,12 +5,20 @@ import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import AreaList from "../../components/Area/AreaList";
 import {motion} from "framer-motion";
 import {blockReveal, blockTextReveal, opacityAnimation} from "../../animations";
-import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {Post} from "../../models/post";
+import {GetServerSideProps} from "next";
 import {IArea} from "../../config/models/IArea";
-import {PostCategory} from "../../models/post-category";
+import {AreaService} from "../../services/area.service";
+import {NextjsUtils} from "../../services/nextjs-utils";
 
-export default function AreasPage({areas} : InferGetServerSidePropsType<typeof getServerSideProps>){
+
+
+interface AreasProps {
+    areas: IArea[],
+}
+
+
+
+export default function AreasPage({areas} : AreasProps){
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}} className={styles.container}>
 
@@ -27,7 +35,7 @@ export default function AreasPage({areas} : InferGetServerSidePropsType<typeof g
                 </section>
 
                 <div className="container">
-                    <AreaList services={areas} />
+                    <AreaList areas={areas} />
                 </div>
 
             </main>
@@ -41,39 +49,25 @@ export default function AreasPage({areas} : InferGetServerSidePropsType<typeof g
 
 // This gets called on every request
 export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
-    // Fetch data from external API
+
     const {page} = context.query;
 
-    const effectivePage = page ?? 1;
-    let url ="http://localhost:1337";
-    const resAreas = await fetch(`${url}/api/areas?populate=*&sort=id&pagination[page]=${effectivePage}`);
-    const areasData  =  await resAreas.json();
-    //const pageCount = resServices.meta.pagination.pageCount; effectivePage > pageCount ||
+    const currentPage = +(page ?? 1);
+
+    const areaService = new AreaService();
+
+    const areas =  await areaService.find({ sort: ['id']});
+
+    if(currentPage > (areas?.paginationInfo.pageCount ?? 1) || !areas)
+        return NextjsUtils.returnNotFoundObject();
+
+    if(currentPage === 1 && page)
+        return NextjsUtils.returnRedirectObject('/aree');
 
 
-    if(effectivePage <= 0 ){
-        return {
-            notFound: true
-        }
-    }
-    const areas :  IArea[] =  areasData.data.map((item : any) =>{
-        return {
-            slug : item.attributes.slug,
-            name : item.attributes.titolo,
-            short_description : item.attributes.summary,
-            description : item.attributes.description,
+    return NextjsUtils.returnServerSidePropsObject({
+       areas: areas.data,
+       currentPage: currentPage
+    });
 
-        }
-    })
-
-
-    const result: any = {
-        areas: areas,
-        currentPage : +effectivePage,
-    }
-
-    // Pass data to the page via props
-    return {
-        props: result
-    };
 }

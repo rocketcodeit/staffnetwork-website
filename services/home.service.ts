@@ -8,7 +8,7 @@ export class HomeService extends BaseStrapiService<HomeData> {
         super("home", StrapiResourceType.single);
     }
 
-    mapServerResultToModel(res: any): HomeData {
+    mapForFind(res: any): HomeData {
         return {
             title: res.attributes.title,
             callToAction: res.attributes.callToAction,

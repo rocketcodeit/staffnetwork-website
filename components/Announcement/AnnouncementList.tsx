@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import styles from "../../styles/Service.module.css"
 import {containerSlideUp} from "../../animations";
 import {motion} from "framer-motion";
-import {Service} from "../../models/service";
+import {IService} from "../../models/IService";
 import {AnnouncementItem} from "./AnnouncementItem";
 import {Announcement} from "../../models/announcement";
 import moment from "moment/moment";

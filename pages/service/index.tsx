@@ -7,7 +7,7 @@ import {motion} from "framer-motion";
 import {ServiceList} from "../../components/Service/ServiceList";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {Post} from "../../models/post";
-import {Service} from "../../models/service";
+import {IService} from "../../models/IService";
 import {Announcement} from "../../models/announcement";
 import {IArea} from "../../config/models/IArea";
 import Checkbox from "../../components/Checkbox/Checkbox";
@@ -22,7 +22,7 @@ export default function ServicesPage({data, pageCount, currentPage, areas} : Inf
     const [effectivePage,setEffectivePage] = useState(currentPage);
     const [loading, setLoading] = useState(false);
 
-    const castServicesData = (dataEntry : any) : Service[] => {
+    const castServicesData = (dataEntry : any) : IService[] => {
         return dataEntry?.map((i : any) => {
             return {
                 title: i.attributes.title,
@@ -43,7 +43,7 @@ export default function ServicesPage({data, pageCount, currentPage, areas} : Inf
     }
 
     const servicesData = castServicesData(data);
-    const [services, setServices] = useState<Service[]>(servicesData);
+    const [services, setServices] = useState<IService[]>(servicesData);
 
     const filterCategories = (event : any) => {
         if (event.target.checked) {

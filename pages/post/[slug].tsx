@@ -1,9 +1,6 @@
 import React from "react";
 import {Post} from "../../models/post";
-import {useRouter} from "next/router";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {notFound} from "next/navigation";
-import {posts} from "../api/post/PostData";
 import moment from "moment/moment";
 import BreadCrumbs, {IBreadCrumbsMapLabel} from "../../components/Breadcrumbs/BreadCrumbs";
 import {config} from "../../config/breadcrumbs.config";
@@ -12,8 +9,6 @@ import styles from "../../styles/Post.module.css";
 import {blockReveal, blockTextReveal, fadeInUp} from "../../animations";
 import Head from "next/head";
 import configuration from "../../config/WebsiteConfig"
-import {IWebsiteConfiguration} from "../../config/models/IWebsiteConfiguration";
-import post from "../api/post";
 import Link from "next/link";
 import {PostCategory} from "../../models/post-category";
 

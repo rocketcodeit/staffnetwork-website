@@ -7,7 +7,7 @@ export class PostService extends BaseStrapiService<Post> {
         super("posts", StrapiResourceType.collection);
     }
 
-    mapServerResultToModel(res: any): Post {
+    mapForFind(res: any): Post {
         return {
             slug : res.attributes.slug,
             name : res.attributes.title,

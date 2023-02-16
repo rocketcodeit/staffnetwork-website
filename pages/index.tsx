@@ -60,7 +60,7 @@ export default function Home({posts, services, home, membersTeam, backendUrl} : 
                             </motion.div>
                         </div>
                         <div className="z-10 pr-0 container mb-[-96px]">
-                            <AreaList services={services} />
+                            <AreaList areas={services} />
                         </div>
 
 
