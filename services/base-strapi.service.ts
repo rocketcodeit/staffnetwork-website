@@ -3,7 +3,7 @@ import httpClient from "./http-client";
 import {PaginatedResult} from "../models/paginated-result";
 import {StrapiQueryParams} from "../models/strapi-query-params";
 
-export abstract class BaseStrapiService<T, K> {
+export abstract class BaseStrapiService2Types<TFull, TList> {
     private _strapiResource: string;
     private readonly _resourceType: StrapiResourceType;
 
@@ -12,7 +12,7 @@ export abstract class BaseStrapiService<T, K> {
         this._resourceType = resourceType;
     }
 
-    public getBySlug(slug: string, params?: StrapiQueryParams): Promise<T | undefined> {
+    public getBySlug(slug: string, params?: StrapiQueryParams): Promise<TFull | undefined> {
 
         if(this._resourceType == StrapiResourceType.single)
             throw new Error('Cannot call getBySlug with single resource type')
@@ -32,7 +32,7 @@ export abstract class BaseStrapiService<T, K> {
             });
     }
 
-    public find(params?: StrapiQueryParams): Promise<PaginatedResult<T> | undefined> {
+    public find(params?: StrapiQueryParams): Promise<PaginatedResult<TList> | undefined> {
 
         if(this._resourceType == StrapiResourceType.single)
             throw new Error('Cannot call getBySlug with single resource type')
@@ -55,10 +55,7 @@ export abstract class BaseStrapiService<T, K> {
             })
         }
 
-
-
         const url = urlBuilder.build();
-
 
         return httpClient.get(url)
             .then((res: any) => {
@@ -76,7 +73,7 @@ export abstract class BaseStrapiService<T, K> {
             });
     }
 
-    public getSingle(params?: StrapiQueryParams): Promise<T | undefined> {
+    public getSingle(params?: StrapiQueryParams): Promise<TFull | undefined> {
         if(this._resourceType == StrapiResourceType.collection)
             throw new Error('Cannot call getSingle with collection resource type')
 
@@ -95,9 +92,15 @@ export abstract class BaseStrapiService<T, K> {
             });
     }
 
-    abstract mapForFind(res: any): T;
+    abstract mapForFind(res: any): TList;
 
-    abstract mapForSingle(res:any): T;
+    abstract mapForSingle(res:any): TFull;
+}
+
+export abstract class BaseStrapiService<TFull> extends BaseStrapiService2Types<TFull, TFull>{
+    mapForFind(res: any): TFull {
+        return this.mapForSingle(res);
+    }
 }
 
 export enum StrapiResourceType {

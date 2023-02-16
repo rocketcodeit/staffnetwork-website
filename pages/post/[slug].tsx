@@ -1,5 +1,5 @@
 import React from "react";
-import {Post} from "../../models/post";
+import {PostDetail} from "../../models/postDetail";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import moment from "moment/moment";
 import BreadCrumbs, {IBreadCrumbsMapLabel} from "../../components/Breadcrumbs/BreadCrumbs";
@@ -76,7 +76,7 @@ export default function PostPage({post} : InferGetServerSidePropsType<typeof get
 }
 
 
-export const getServerSideProps: GetServerSideProps<{post : Post}> = async (context) => {
+export const getServerSideProps: GetServerSideProps<{post : PostDetail}> = async (context) => {
 
     const { slug } = context.query
     let url ="http://localhost:1337";
@@ -88,7 +88,7 @@ export const getServerSideProps: GetServerSideProps<{post : Post}> = async (cont
         }
     }
 
-    const postFound : Post = {
+    const postFound : PostDetail = {
         slug : data.data.attributes.slug,
         name : data.data.attributes.title,
         img : url + data.data.attributes.cover.data.attributes.url,

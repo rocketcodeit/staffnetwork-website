@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse} from "next";
-import {Post} from "../../../models/post";
+import {PostDetail} from "../../../models/postDetail";
 import {posts} from "./PostData"
 
 export default  (req:NextApiRequest, res:NextApiResponse) => {

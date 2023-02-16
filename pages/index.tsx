@@ -7,13 +7,13 @@ import {container, item, stagger, blockReveal, blockTextReveal} from "../animati
 import Link from "next/link";
 import {GetServerSideProps} from "next";
 import {BackendFacade} from "../services/backend-facade.service";
-import {Post} from "../models/post";
+import {PostDetail} from "../models/postDetail";
 import {IArea} from "../config/models/IArea";
 import {TeamMember} from "../models/team-member";
 import {HomeData} from "../models/home-data";
 
 interface HomeProps {
-    posts: Post[],
+    posts: PostDetail[],
     services: IArea[],
     home: HomeData,
     membersTeam: TeamMember[],

@@ -7,7 +7,7 @@ export class TeamMemberService extends BaseStrapiService<TeamMember> {
         super('members', StrapiResourceType.collection);
     }
 
-    public mapForFind(res: any): TeamMember {
+    public mapForSingle(res: any): TeamMember {
         const obj: TeamMember = {
             slug: res.attributes.slug,
             name: res.attributes.nome,

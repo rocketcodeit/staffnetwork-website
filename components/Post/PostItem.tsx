@@ -1,5 +1,5 @@
 import React from "react";
-import {Post} from "../../models/post";
+import {PostDetail} from "../../models/postDetail";
             import {ArrowRightIcon} from "@heroicons/react/24/outline";
 
             import moment from "moment";
@@ -8,7 +8,7 @@ import {Post} from "../../models/post";
             import {itemFade} from "../../animations";
             import styles from "../../styles/Post.module.css";
 
-            function PostItem(props : Post){
+            function PostItem(props : PostDetail){
 
             return(
             <motion.div animate variants={itemFade} className={styles.item}>

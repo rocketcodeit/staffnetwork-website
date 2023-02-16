@@ -5,7 +5,7 @@ import {config} from "../../config/breadcrumbs.config";
 import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {motion} from "framer-motion";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {Post} from "../../models/post";
+import {PostDetail} from "../../models/postDetail";
 import {PostService} from "../../services/post.service";
 import { useRouter } from 'next/router';
 import {PaginatedResult} from "../../models/paginated-result";
@@ -17,7 +17,7 @@ export default function PostsPage({posts, pageCount,currentPage, categories} : I
     const [effectivePage,setEffectivePage] = useState(currentPage);
     const [loading, setLoading] = useState(false);
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
-    const [data, setData] = useState<Post[]>(posts);
+    const [data, setData] = useState<PostDetail[]>(posts);
     const navigation = useRouter();
 
     const [blogFilter, setBlogFilter] = useState<{category: any[], pageNumber: number}>({

@@ -7,7 +7,7 @@ export class ConfigurationService extends BaseStrapiService<any> {
         super("configurazione", StrapiResourceType.single);
     }
 
-    mapForFind(res: any): any {
+    mapForSingle(res: any): any {
         return res;
     }
 }

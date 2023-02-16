@@ -7,7 +7,7 @@ import {ServiceList} from "../../components/Service/ServiceList";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {Announcement} from "../../models/announcement";
 import {AnnouncementList} from "../../components/Announcement/AnnouncementList";
-import {Post} from "../../models/post";
+import {PostDetail} from "../../models/postDetail";
 import Checkbox from "../../components/Checkbox/Checkbox";
 
 let url ="http://localhost:1337";

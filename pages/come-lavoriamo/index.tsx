@@ -23,7 +23,7 @@ import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {config} from "../../config/breadcrumbs.config";
 import React from "react";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {Post} from "../../models/post";
+import {PostDetail} from "../../models/postDetail";
 import {IArea} from "../../config/models/IArea";
 import {ReactSVG} from "react-svg";
 

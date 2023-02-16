@@ -1,5 +1,6 @@
 import {BaseStrapiService, StrapiResourceType} from "./base-strapi.service";
 import {PostCategory} from "../models/post-category";
+import {Post, PostDetail} from "../models/postDetail";
 
 export class PostCategoriesService extends BaseStrapiService<PostCategory> {
 
@@ -7,7 +8,7 @@ export class PostCategoriesService extends BaseStrapiService<PostCategory> {
         super("post-categories", StrapiResourceType.collection);
     }
 
-    mapForFind(res: any): PostCategory {
+    mapForSingle(res: any): PostCategory {
         return {
             id: res.id,
             name: res.attributes.name,

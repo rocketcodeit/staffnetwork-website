@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import PostItem from "./PostItem";
-import {Post} from "../../models/post";
+import {PostDetail} from "../../models/postDetail";
 import {motion, useInView} from "framer-motion";
 import {containerSlideUp} from "../../animations";
 import {posts} from "../../pages/api/post/PostData";
@@ -13,7 +13,7 @@ export interface IPostProps{
     pageCount?: number,
     currentPage? : number
     categories? : PostCategory[]
-    posts: Post[],
+    posts: PostDetail[],
     loading? : boolean
 }
 

@@ -7,7 +7,7 @@ export class AreaService extends BaseStrapiService<IArea> {
         super("areas", StrapiResourceType.collection);
     }
 
-    mapForFind(res: any): IArea {
+    mapForSingle(res: any): IArea {
         return {
             slug : res.attributes.slug,
             name : res.attributes.titolo,

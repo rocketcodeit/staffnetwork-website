@@ -7,12 +7,7 @@ export class ProductService extends BaseStrapiService<IService> {
         super("services", StrapiResourceType.collection);
     }
 
-
     mapForSingle(res: any): IService {
-        return this.mapForFind(res);
-    }
-
-    mapForFind(res: any): IService {
         return {
             slug : res.attributes.slug,
             title: res.attributes.title,

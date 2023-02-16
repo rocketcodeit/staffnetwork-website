@@ -3,7 +3,7 @@ import {PostService} from "./post.service";
 import {AreaService} from "./area.service";
 import {ConfigurationService} from "./configuration.service";
 import {HomeService} from "./home.service";
-import {Post} from "../models/post";
+import {PostDetail} from "../models/postDetail";
 import {IArea} from "../config/models/IArea";
 import {HomeData} from "../models/home-data";
 import {TeamMember} from "../models/team-member";
@@ -34,7 +34,7 @@ export class BackendFacade {
     private _configurationService = new ConfigurationService();
     private _homeService = new HomeService();
 
-    public async getHomeData(): Promise<{posts: Post[], services: IArea[], home: HomeData, layoutData: any, membersTeam: TeamMember[]}> {
+    public async getHomeData(): Promise<{posts: PostDetail[], services: IArea[], home: HomeData, layoutData: any, membersTeam: TeamMember[]}> {
         const postsPromise = this.postService.find({pagination: {page: 1, pageSize: 3}});
         const membersPromise = this.teamMemberService.find({pagination: {page: 1, pageSize: 4}});
         const areasPromise = this.areaService.find({pagination: {page: 1, pageSize: 6}, sort: ['id']});
@@ -53,7 +53,7 @@ export class BackendFacade {
             return NextjsUtils.returnNotFoundObject();
 
         const result: any = {
-            posts : (promiseResult[0] as (PaginatedResult<Post> | undefined))?.data,
+            posts : (promiseResult[0] as (PaginatedResult<PostDetail> | undefined))?.data,
             services : (promiseResult[1] as (PaginatedResult<IArea> | undefined))?.data,
             home : (promiseResult[2] as (HomeData | undefined)),
             layoutData : (promiseResult[3] as any).attributes,

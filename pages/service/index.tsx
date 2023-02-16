@@ -6,7 +6,7 @@ import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {motion} from "framer-motion";
 import {ServiceList} from "../../components/Service/ServiceList";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {Post} from "../../models/post";
+import {PostDetail} from "../../models/postDetail";
 import {IService} from "../../models/IService";
 import {Announcement} from "../../models/announcement";
 import {IArea} from "../../config/models/IArea";
