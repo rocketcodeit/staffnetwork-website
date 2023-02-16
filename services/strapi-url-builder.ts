@@ -2,7 +2,9 @@ export class StrapiUrlBuilder {
     private _resource: string;
     private _parameters: string[] | undefined = [];
     private _pagination: {page: number, pageSize: number} | undefined;
-    private _populate: string | undefined;
+    private _populate: {value: string, level?: number}[] = [];
+
+    private _sort: string[] = [];
 
     constructor(resource: string) {
         this._resource = resource;
@@ -18,7 +20,24 @@ export class StrapiUrlBuilder {
         return this;
     }
 
-    public setPopulate(populate: string) {
+    public addPopulate(populate: string, level?: number) {
+        this._populate?.push({value: populate, level: level});
+        return this;
+    }
+
+    public addSort(field?: string) {
+
+        if(!field)
+            return this;
+
+        this._sort.push(field);
+    }
+
+    public setPopulate(populate?: { value: string, level?: number }[]) {
+
+        if(!populate)
+            return this;
+
         this._populate = populate;
         return this;
     }
@@ -43,7 +62,7 @@ export class StrapiUrlBuilder {
 
         const queryParams: string[] = [];
 
-        if(this._pagination || this._populate)
+        if(this._pagination || this._populate || this._sort)
             url += '?';
         else
             return url;
@@ -51,8 +70,22 @@ export class StrapiUrlBuilder {
         if(this._pagination)
             queryParams.push(`pagination[page]=${this._pagination.page}&pagination[pageSize]=${this._pagination.pageSize}`);
 
-        if(this._populate)
-            queryParams.push(`populate=${this._populate}`);
+        if(this._populate.length > 0) {
+            this._populate.forEach((populateValue, i) => {
+                queryParams.push(populateValue.level !== undefined ? `populate[${populateValue.level}]=${populateValue.value}` : `populate=${populateValue.value}`);
+            })
+        }
+
+        if(this._sort.length > 0) {
+
+            if(this._sort.length === 1) {
+                queryParams.push(`sort=${this._sort[0]}`)
+            } else {
+                this._sort.forEach((sortValue, index) => {
+                    queryParams.push(`sort[${index}]=${sortValue}`)
+                })
+            }
+        }
 
         url += queryParams.join('&');
 

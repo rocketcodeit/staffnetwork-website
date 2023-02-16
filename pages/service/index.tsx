@@ -22,7 +22,6 @@ export default function ServicesPage({data, pageCount, currentPage, areas} : Inf
     const [effectivePage,setEffectivePage] = useState(currentPage);
     const [loading, setLoading] = useState(false);
 
-
     const castServicesData = (dataEntry : any) : Service[] => {
         return dataEntry?.map((i : any) => {
             return {

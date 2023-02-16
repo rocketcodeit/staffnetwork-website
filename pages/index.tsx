@@ -3,16 +3,25 @@ import TeamMemberList from '../components/TeamMember/TeamMemberList'
 import PostList from "../components/Post/PostList";
 import AreaList from "../components/Area/AreaList";
 import {motion} from "framer-motion";
-import {container, fadeInUp, item, stagger, blockReveal, blockTextReveal} from "../animations";
+import {container, item, stagger, blockReveal, blockTextReveal} from "../animations";
 import Link from "next/link";
-import {GetServerSideProps, InferGetServerSidePropsType} from "next";
+import {GetServerSideProps} from "next";
+import {BackendFacade} from "../services/backend-facade.service";
 import {Post} from "../models/post";
 import {IArea} from "../config/models/IArea";
-import {TeamMemberService} from "../services/team-member.service";
+import {TeamMember} from "../models/team-member";
+import {HomeData} from "../models/home-data";
 
+interface HomeProps {
+    posts: Post[],
+    services: IArea[],
+    home: HomeData,
+    membersTeam: TeamMember[],
+    backendUrl: string,
+}
 
-export default function Home({posts,services, home, layoutData,membersTeam} : InferGetServerSidePropsType<typeof getServerSideProps>) {
-    let url = "http://localhost:1337";
+export default function Home({posts, services, home, membersTeam, backendUrl} : HomeProps) {
+    let url = backendUrl;
 
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}}
@@ -139,67 +148,22 @@ export default function Home({posts,services, home, layoutData,membersTeam} : In
     )
 }
 
-
-
-// This gets called on every request
 export const getServerSideProps: GetServerSideProps<any> = async (context) => {
-    // Fetch data from external API
-    let url = "http://localhost:1337";
 
-    const resData = await fetch(url + "/api/posts?pagination[page]=1&pagination[pageSize]=3&populate=*");
-    const postsData = await resData.json();
-    const posts: Post[] = postsData.data.map((item: any) => {
-        return {
-            slug: item.attributes.slug,
-            name: item.attributes.title,
-            date: item.attributes.date,
-            img: url + item.attributes.cover.data.attributes.url,
-            description: item.attributes.content,
-            featured: item.attributes.featured,
-            categories :
-                item.attributes.post_categories.data.map((category : any) => {
-                    return {
-                        name: category.attributes.name,
-                        slug: category.attributes.slug
-                    }
-                })
-        }
-    })
+    const backendFacade = new BackendFacade();
+    const result = await backendFacade.getHomeData();
 
-    const resServices = await fetch(`${url}/api/areas?populate=*&sort=id`);
-    const servicesData  =  await resServices.json();
-    const areas :  IArea[] =  servicesData.data.map((item : any) =>{
-        return {
-            slug : item.attributes.slug,
-            name : item.attributes.titolo,
-            short_description : item.attributes.summary,
-            description : item.attributes.description,
-
-        }
-    })
-
-    const resConfigurazione = await fetch(`${url}/api/configurazione?populate=*`);
-    const configurazioneData  =  await resConfigurazione.json();
-
-
-    const resHome = await fetch(`${url}/api/home?populate=*&populate[0]=datiStatistici,staff,partnership,servizi,imgAboveTheFold,imgAree,imgDati,imgPartnership&populate[1]=datiStatistici.dati,partnership.link`);
-    const homeData = await resHome.json();
-
-
-    // Team Members
-    const teamMemberService = new TeamMemberService();
-    const members = await teamMemberService.find(4);
-
-    const result: any = {
-        posts : posts,
-        services : areas,
-        home : homeData.data.attributes,
-        layoutData : configurazioneData.data,
-        membersTeam : members
+    const returnObj: HomeProps = {
+        home: result.home,
+        membersTeam: result.membersTeam,
+        posts: result.posts,
+        services: result.services,
+        backendUrl: process.env.BACKEND_URL ?? '',
     }
 
-    // Pass data to the page via props
     return {
-        props: result
+        props: {
+            ...returnObj,
+        }
     };
 }

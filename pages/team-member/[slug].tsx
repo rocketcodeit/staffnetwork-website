@@ -10,6 +10,7 @@ import { RiLinkedinBoxLine } from "react-icons/ri";
 import Head from "next/head";
 import {TeamMemberService} from "../../services/team-member.service";
 import {TeamMember} from "../../models/team-member";
+import {NextjsUtils} from "../../services/nextjs-utils";
 
 interface MemberPageProps {
     member: TeamMember,
@@ -107,17 +108,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const teamMemberService = new TeamMemberService();
 
     if(!slug)
-        return { notFound: true }
+        return NextjsUtils.returnNotFoundObject();
 
     const memberData = await teamMemberService.getBySlug(slug.toString());
 
     if(!memberData)
-        return { notFound: true }
+        return NextjsUtils.returnNotFoundObject();
 
-    return {
-        props: {
-            member: memberData,
-        }
-    };
+    return NextjsUtils.returnServerSidePropsObject({member: memberData});
 }
 

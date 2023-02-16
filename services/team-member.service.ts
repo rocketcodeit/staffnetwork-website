@@ -1,49 +1,10 @@
-import httpClient from "./http-client";
 import {TeamMember} from "../models/team-member";
-import {StrapiUrlBuilder} from "./strapi-url-builder";
+import {BaseStrapiService, StrapiResourceType} from "./base-strapi.service";
 
-export class TeamMemberService {
+export class TeamMemberService extends BaseStrapiService<TeamMember> {
 
-    /**
-     * Get team member by slug
-     * @param slug Slug of team member, ex: pippo-rossi
-     */
-    public getBySlug(slug: string): Promise<TeamMember | undefined> {
-
-        const url =
-            new StrapiUrlBuilder("members")
-                .addPathParameter(slug)
-                .setPopulate('*')
-                .build();
-
-        return httpClient.get(url)
-            .then((res: any) => {
-                return this.mapServerResultToModel(res.data.data);
-            })
-            .catch(() => {
-                return undefined;
-            });
-    }
-
-    /**
-     * Get a list of team members
-     * @param limit limit the results
-     */
-    public find(limit?: number): Promise<TeamMember[] | undefined> {
-
-        const url =
-            new StrapiUrlBuilder("members")
-                .setPopulate('*')
-                .setPagination(limit ? {page: 1, pageSize: limit} : undefined)
-                .build();
-
-        return httpClient.get(url)
-            .then((res: any) => {
-                return res.data.data.map((member: any) => this.mapServerResultToModel(member));
-            })
-            .catch((err) => {
-                return [];
-            });
+    constructor() {
+        super('members', StrapiResourceType.collection);
     }
 
     public mapServerResultToModel(res: any): TeamMember {
