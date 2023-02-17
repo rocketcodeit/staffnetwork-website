@@ -8,7 +8,7 @@ import {ServiceList} from "../../components/Service/ServiceList";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {PostDetail} from "../../models/postDetail";
 import {IService, IServiceList} from "../../models/IService";
-import {Announcement} from "../../models/announcement";
+import {IAnnouncement} from "../../models/IAnnouncement";
 import {IArea} from "../../config/models/IArea";
 import Checkbox from "../../components/Checkbox/Checkbox";
 import {AnnouncementList} from "../../components/Announcement/AnnouncementList";

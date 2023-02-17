@@ -88,10 +88,4 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
     if(currentPage === 1 && page)
         return NextjsUtils.returnRedirectObject('/blog');
 
-    return NextjsUtils.returnServerSidePropsObject({
-        posts: posts?.data,
-        pageCount : posts?.paginationInfo.pageCount,
-        currentPage : currentPage,
-        categories : categories?.data
-    });
 }

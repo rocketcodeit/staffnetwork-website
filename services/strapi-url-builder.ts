@@ -125,7 +125,6 @@ export class StrapiUrlBuilder {
         }
 
         url += queryParams.join('&');
-        console.log(url);
         return url;
     }
 }

@@ -4,7 +4,7 @@ import {containerSlideUp} from "../../animations";
 import {motion} from "framer-motion";
 import {IService} from "../../models/IService";
 import {AnnouncementItem} from "./AnnouncementItem";
-import {Announcement} from "../../models/announcement";
+import {IAnnouncement} from "../../models/IAnnouncement";
 import moment from "moment/moment";
 import {ServiceArea} from "../../models/service-area";
 
@@ -13,7 +13,7 @@ export interface IAnnouncementListProps {
     pageCount?: number,
     currentPage? : number
     areaCategory? : ServiceArea
-    announcements: Announcement[],
+    announcements: IAnnouncement[],
     loading? : boolean
 }
 

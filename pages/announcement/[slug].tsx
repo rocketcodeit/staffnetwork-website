@@ -9,56 +9,23 @@ import Head from "next/head";
 
 import moment from "moment";
 import Link from "next/link";
-import {Announcement} from "../../models/announcement";
+import {IAnnouncement} from "../../models/IAnnouncement";
+import {AnnouncementService} from "../../services/announcement.service";
+import {NextjsUtils} from "../../services/nextjs-utils";
 
 let url ="http://localhost:1337";
 
-export default function AnnouncementPage({announcement} : InferGetServerSidePropsType<typeof getServerSideProps>){
-
-    const announcementFound : Announcement = {
-        title: announcement.titolo,
-        slug: announcement.slug,
-        img : announcement.image.data && url + announcement.image.data.attributes.url,
-        details:{
-            summary: announcement.summary,
-            startDate : announcement.inizio ?? announcement.inizio,
-            expirationDate : announcement.scadenza ??  announcement.scadenza,
-
-        },
-        description: announcement.descrizione,
-        recipients : announcement.destinatari.data?.map((d: any, index : number) => {
-            return {
-                id: d.id,
-                title: d.attributes.descrizione
-            }
-        }),
-        regions: announcement.regioni.data && announcement.regioni.data?.map((regione: any) => {
-            return regione.attributes.nome
-        }),
-        provinces : announcement.province.data && announcement.province.data?.map((provincia : any) => {
-            return provincia.attributes.nome
-        }),
-        investimentType : announcement.tipoInvestimento.data?.attributes.descrizione,
-        contributionType : announcement.tipoContributo.data?.attributes.descrizione,
-        buyable : announcement.prezzo && {
-            price : announcement.prezzo?.prezzo,
-            discountPrice : announcement.prezzo?.prezzoScontato,
-            currency : "€"
-        },
-
-        obj : announcement.specifiche.map((spec : any, index : number) => {
-            return{
-                id: index,
-                title : spec.titolo,
-                value : spec.descrizione,
-            }
-        })
+interface IAnnouncementPageProps{
+    announcement : IAnnouncement
 }
+
+export default function AnnouncementPage({announcement} : IAnnouncementPageProps){
+
 
     return(
         <motion.section initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 0.4,ease: "easeOut"}}>
             <Head>
-                <title>{announcementFound.title}</title>
+                <title>{announcement.title}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <main>
@@ -67,17 +34,17 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
                     <section id={"abo"} className={"mt-8"}>
                         <BreadCrumbs mappedPaths={config} showHome={true} transformDynamicPath={path => {
                             if(path === "[slug]"){
-                                return announcementFound.title
+                                return announcement.title
                             }
                             return path;
                         }} />
                         <div className={"w-fit relative"}>
                             <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                            <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-4">{announcementFound.title}</motion.h1>
+                            <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-4">{announcement.title}</motion.h1>
                         </div>
                         <div className={"w-6/12 relative"}>
                             <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                            <motion.div dangerouslySetInnerHTML={{__html:announcementFound.details.summary}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}/>
+                            <motion.div dangerouslySetInnerHTML={{__html:announcement.details.summary}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}/>
                         </div>
                     </section>
 
@@ -88,11 +55,11 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
 
                             <div className={"mt-4 flex gap-10 flex-wrap mb-8 pr-8"}>
 
-                                {(announcementFound.regions) &&
+                                {(announcement.regions) &&
                                 <div className={"regionsBox"}>
                                     <div className={"mb-1"}>Regione</div>
                                     {
-                                        announcementFound.regions?.map((t,i) => {
+                                        announcement.regions?.map((t,i) => {
                                             return  <h5 className={"mb-0.5"} key={i}>{t}</h5>
 
                                         })
@@ -100,11 +67,11 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
                                 </div>
                                 }
 
-                                {(announcementFound.provinces) &&
+                                {(announcement.provinces) &&
                                     <div className={"provincesBox"}>
                                         <div className={"mb-1"}>Provincie</div>
                                         {
-                                            announcementFound.provinces?.map((t,i) => {
+                                            announcement.provinces?.map((t,i) => {
                                                 return  <h5 className={"mb-0.5"} key={i}>{t}</h5>
 
                                             })
@@ -115,7 +82,7 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
                                 <div className={"recipientsBox"}>
                                     <div className={"mb-1"}>Destinatari</div>
                                     {
-                                        announcementFound.recipients?.map((t,i) => {
+                                        announcement.recipients?.map((t,i) => {
                                             return  <h5 className={"mb-0.5"} key={i}>{t.title}</h5>
 
                                         })
@@ -123,13 +90,13 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
                                 </div>
                                 <div className={"investimentTypeBox"}>
                                     <div>Tipologia di investimento</div>
-                                    <h5>{announcementFound.investimentType}</h5>
+                                    <h5>{announcement.investimentType}</h5>
                                 </div>
                                 <div className={"contributionTypeBox"}>
                                     <div>Tipo di contributo</div>
-                                    <h5>{announcementFound.contributionType}</h5>
+                                    <h5>{announcement.contributionType}</h5>
                                 </div>
-                                {announcementFound.details.other?.map((o, index) => {
+                                {announcement.details.other?.map((o, index) => {
                                     return <div key={index}>
                                         <div>{o.title}</div>
                                         <h5>{o.value}</h5>
@@ -138,9 +105,9 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
                             </div>
 
                             <div className={styles.buttonsContainer}>
-                                {announcementFound.buyable &&
+                                {announcement.buyable &&
                                     <div className={"flex flex-row items-center gap-5"}>
-                                        <h5>€ {announcementFound.buyable.price}</h5>
+                                        <h5>€ {announcement.buyable.price}</h5>
                                         <Link href={"#acquista"} className={"btn black"}>Acquista</Link>
                                     </div>
                                 }
@@ -154,8 +121,8 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
 
                         <div className={"flex flex-wrap justify-between"}>
                             <div className={"w-12/12 lg:w-7/12"}>
-                                <div className={"mt-8"} dangerouslySetInnerHTML={{__html:announcementFound.description}} />
-                                {announcementFound.obj?.map((o) =>{
+                                <div className={"mt-8"} dangerouslySetInnerHTML={{__html:announcement.description}} />
+                                {announcement.obj?.map((o) =>{
                                     return <div key={o.id} className={"mt-8"}>
                                         <h3 className={"mb-3"}>{o.title}</h3>
                                         <div dangerouslySetInnerHTML={{__html:o.value}} />
@@ -163,7 +130,7 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
                                 })}
                             </div>
                             <div className={"w-11/12 lg:w-4/12"}>
-                                <img className={"mt-8"} src={announcementFound.img} />
+                                <img className={"mt-8"} src={announcement.img} />
                             </div>
                         </div>
 
@@ -172,8 +139,8 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
 
 
 
-                    <section className={`my-12 flex flex-row ${announcementFound.buyable ? "justify-between" : "justify-center"} items-start`}>
-                        {announcementFound.buyable && <div id={"acquista"} className={"bg-gray-200 flex w-5/12 sticky top-40"}>
+                    <section className={`my-12 flex flex-row ${announcement.buyable ? "justify-between" : "justify-center"} items-start`}>
+                        {announcement.buyable && <div id={"acquista"} className={"bg-gray-200 flex w-5/12 sticky top-40"}>
                             <div className={"flex flex-row flex-wrap w-full justify-between"}>
                                 <div className={"w-full flex flex-row justify-between px-4 pt-6 pb-3"}>
                                     <div className={"w-6/12"}>
@@ -181,12 +148,12 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
                                     <p>Il prezzo è riferito al bando. </p>
                                     </div>
                                     {
-                                        announcementFound.buyable?.discountPrice ?
+                                        announcement.buyable?.discountPrice ?
                                             <div className={"w-6/12 text-end"} >
-                                                <del className={"text-gray-600"}>{announcementFound.buyable?.price} €</del>
-                                                <h3>{announcementFound.buyable?.discountPrice} €</h3>
+                                                <del className={"text-gray-600"}>{announcement.buyable?.price} €</del>
+                                                <h3>{announcement.buyable?.discountPrice} €</h3>
                                             </div>  :
-                                            <h3 className={"w-6/12 text-end"}> {announcementFound.buyable?.price} €</h3>
+                                            <h3 className={"w-6/12 text-end"}> {announcement.buyable?.price} €</h3>
 
 
                                     }
@@ -196,8 +163,8 @@ export default function AnnouncementPage({announcement} : InferGetServerSideProp
                         </div> }
                         <div id={"contattaci"} className={"md:w-10/12 lg:w-7/12 xl:w-6/12 relative "}>
                             <div className={"mx-auto"}>
-                                <h3 className={`${announcementFound.buyable ? "text-left" : "text-center"}`}>{announcementFound.requestForm?.title}</h3>
-                                <p className={`max-w-xl  mt-2 ${announcementFound.buyable ? "text-left" : "text-center mx-auto"}`}>{announcementFound.requestForm?.text}</p>
+                                <h3 className={`${announcement.buyable ? "text-left" : "text-center"}`}>{announcement.requestForm?.title}</h3>
+                                <p className={`max-w-xl  mt-2 ${announcement.buyable ? "text-left" : "text-center mx-auto"}`}>{announcement.requestForm?.text}</p>
                             </div>
                             <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
                             <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"bg-gray-200 lg:p-12 md:p-8 px-6 py-4 mx-auto flex gap-x-9 gap-y-6 flex-2-1.5 flex-wrap mt-8"}>
@@ -251,27 +218,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const { slug } = context.query
 
-    let url ="http://localhost:1337";
-    const resAnnouncement = await fetch(`${url}/api/announcements/${slug}?populate=*`);
-    const announcementData  =  await resAnnouncement.json();
+    const announcementService = new AnnouncementService();
 
+    if(!slug)
+        return NextjsUtils.returnNotFoundObject();
 
-    if(!announcementData.data) {
-        return {
-            notFound: true,
-        }
-    }
+    const announcementData = await announcementService.getBySlug(slug.toString());
 
+    if(!announcementData)
+        return NextjsUtils.returnNotFoundObject();
 
-    const result: any = {
-        announcement: announcementData.data.attributes
-    }
+    return NextjsUtils.returnServerSidePropsObject({announcement: announcementData});
 
-
-    // Pass data to the page via props
-    return {
-        props: result
-    };
-
-   // return {props : { a : 3 }}
 }

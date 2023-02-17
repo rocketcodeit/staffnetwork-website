@@ -3,15 +3,8 @@ import {AnnouncementaArea} from "./announcementa-area";
 import {AnnouncementeCost} from "./announcemente-cost";
 import {AnnouncementRecipient} from "./announcement-recipient";
 
-export interface Announcement {
-    title: string,
-    slug: string,
+export interface IAnnouncement extends IAnnouncementList{
     area? : AnnouncementaArea,
-    img?: string
-    details : AnnouncementDetails,
-    description: string,
-    recipients?: AnnouncementRecipient[],
-    regions? :  string[],
     provinces? :  string[],
     investimentType : string,
     contributionType : string,
@@ -55,3 +48,13 @@ export interface Announcement {
     }
 }
 
+
+export interface IAnnouncementList {
+    title: string,
+    slug: string,
+    img?: string
+    details : AnnouncementDetails,
+    description: string,
+    recipients?: AnnouncementRecipient[],
+    regions? :  string[],
+}
