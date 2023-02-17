@@ -13,13 +13,19 @@ import {config} from "../../config/breadcrumbs.config";
 import React from "react";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {TeamMember} from "../../models/team-member";
+import {ChiSiamoData} from "../../models/chi_siamo-data";
+import {ComeLavoriamoService} from "../../services/comeLavoriamo.service";
+import {ChiSiamoService} from "../../services/chiSiamo.service";
+import {NextjsUtils} from "../../services/nextjs-utils";
+import {TeamMemberService} from "../../services/team-member.service";
 
 let url = "http://localhost:1337";
 
-
-export default function ChiSiamo({data, membersTeam} : InferGetServerSidePropsType<typeof getServerSideProps>) {
-
-    console.log(membersTeam);
+interface ChiSiamoPage {
+    data : ChiSiamoData,
+    membersTeam : TeamMember[]
+}
+export default function ChiSiamo({data, membersTeam} : ChiSiamoPage) {
 
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeOut"}}>
@@ -37,7 +43,7 @@ export default function ChiSiamo({data, membersTeam} : InferGetServerSidePropsTy
                             }} />
                             <div className="relative w-fit">
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}> {data.titolo}</motion.h1>
+                                <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}> {data.title}</motion.h1>
                             </div>
                         </motion.div>
                     </motion.div>
@@ -46,7 +52,7 @@ export default function ChiSiamo({data, membersTeam} : InferGetServerSidePropsTy
                         <div className={"w-12/12 mx-auto"}>
                             <div className={"relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                <motion.img variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"w-full max-h-[32rem] mt-6 -mb-[20rem] object-cover"}  src={url + data.media.data.attributes.url}/>
+                                <motion.img variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"w-full max-h-[32rem] mt-6 -mb-[20rem] object-cover"}  src={data.img}/>
                             </div>
                         </div>
                     </motion.div>
@@ -54,7 +60,7 @@ export default function ChiSiamo({data, membersTeam} : InferGetServerSidePropsTy
                         <div className={"container"}>
                             <div className={"w-6/12 mx-auto relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-600"></motion.div>
-                                <motion.div dangerouslySetInnerHTML={{__html:data.descrizione}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-white text-center"} />
+                                <motion.div dangerouslySetInnerHTML={{__html:data.descriptionAboveTheFold}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-white text-center"} />
                             </div>
                         </div>
                     </motion.div>
@@ -68,14 +74,14 @@ export default function ChiSiamo({data, membersTeam} : InferGetServerSidePropsTy
                         <div className={"w-5/12 relative "}>
                             <div className={"w-fit relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{data.storia.titolo}</motion.h2>
+                                <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{data.story.title}</motion.h2>
 
                             </div>
                         </div>
                         <div className={"w-6/12"}>
                             <div className={"w-fit relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                <motion.div dangerouslySetInnerHTML={{__html:data.storia.descrizione}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} />
+                                <motion.div dangerouslySetInnerHTML={{__html:data.story.description}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} />
                             </div>
 
                         </div>
@@ -87,7 +93,7 @@ export default function ChiSiamo({data, membersTeam} : InferGetServerSidePropsTy
                         <div className={"w-8/12"}>
                             <div className={"w-fit relative mx-auto"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                                <motion.h3  variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-center z-20"}>{data.staff.titolo}</motion.h3>
+                                <motion.h3  variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-center z-20"}>{data.staff.title}</motion.h3>
                             </div>
                         </div>
                     </div>
@@ -97,10 +103,10 @@ export default function ChiSiamo({data, membersTeam} : InferGetServerSidePropsTy
                             </motion.div>
                             <div className="relative w-10/12 md:w-5/12 mb-6 mx-auto">
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                                <motion.div dangerouslySetInnerHTML={{__html:data.staff.descrizione}} variants={blockTextReveal} initial="initial" whileInView="final" className={"text-center"} viewport={{ once: true }} />
+                                <motion.div dangerouslySetInnerHTML={{__html:data.staff.description}} variants={blockTextReveal} initial="initial" whileInView="final" className={"text-center"} viewport={{ once: true }} />
                             </div>
                             <div className="w-12/12">
-                                <TeamMemberList members={membersTeam} />
+                                <TeamMemberList members={membersTeam!} />
                             </div>
                         </div>
 
@@ -122,28 +128,28 @@ export default function ChiSiamo({data, membersTeam} : InferGetServerSidePropsTy
 export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     // Fetch data from external API
 
-
-    const resChiSiamo = await fetch(`${url}/api/chi-siamo?populate=*`);
-    const chiSiamoData = await resChiSiamo.json();
-
-    const resMembers = await fetch(`${url}/api/members?populate=*`);
-    const membersData = await resMembers.json();
-
-    const members : TeamMember[] = membersData.data.map((item : any) =>{
-        return {
-            slug: item.attributes.slug,
-            name: item.attributes.nome,
-            surname : item.attributes.cognome,
-            img : url + item.attributes.image.data.attributes.url,
-            profession: item.attributes.ruolo
-        }
+    const chiSiamoService = new ChiSiamoService();
+    const chiSiamoData = await chiSiamoService.getSingle({
+        populate: [
+            {value: '*'}
+        ]
     })
-    const result: any = {
-        data : chiSiamoData.data.attributes,
-        membersTeam : members
-    }
-    // Pass data to the page via props
-    return {
-        props: result
-    };
+
+    if(!chiSiamoData)
+        return NextjsUtils.returnNotFoundObject();
+
+
+    const memberService = new TeamMemberService();
+    const membersData = await memberService.find({
+        populate : [ {value:"*"}]
+    })
+
+    if(!membersData)
+        return NextjsUtils.returnNotFoundObject();
+
+    return NextjsUtils.returnServerSidePropsObject({
+        data : chiSiamoData,
+        membersTeam : membersData.data
+    });
+
 }
