@@ -1,4 +1,3 @@
-import teamMemberItem from "../components/TeamMember/TeamMemberItem";
 import {TeamMember} from "./team-member";
 
 export interface ChiSiamoData {
@@ -12,6 +11,5 @@ export interface ChiSiamoData {
     staff: {
         title: string,
         description : string,
-        team?: TeamMember[]
     }
 }

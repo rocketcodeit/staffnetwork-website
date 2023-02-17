@@ -7,27 +7,30 @@ import React from "react";
 import Link from "next/link";
 import ReactMapboxGl, {Layer, Feature, Marker} from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { RiInstagramLine,RiFacebookBoxLine,RiTwitterLine} from "react-icons/ri";
-import { ReactSVG } from "react-svg";
-import NewLineText from "../../components/NewLineText/NewLineText";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
+import {ContattiData} from "../../models/contatti-data";
+import {ContattiService} from "../../services/contatti.service";
+import {NextjsUtils} from "../../services/nextjs-utils";
+import {ConfigurationService} from "../../services/configuration.service";
+import {ConfigurationData} from "../../models/configuration-data";
+import {ReactSVG} from "react-svg";
 
 
+interface ContattiPage{
+    data : ContattiData,
+    configData: ConfigurationData
+}
 
-let url = "http://localhost:1337";
-
-
-export default function Contatti({data} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Contatti({data, configData} : ContattiPage) {
 
     const Map = ReactMapboxGl({
-        accessToken:
-            'pk.eyJ1Ijoibmljb2xhY2lhbm8iLCJhIjoiY2t4cHYweGg3MWptaDJ2a28weTMzZWZ2bSJ9.X9i3oJ567Pl9OP3rjuyGxw'
+        accessToken: 'pk.eyJ1Ijoibmljb2xhY2lhbm8iLCJhIjoiY2t4cHYweGg3MWptaDJ2a28weTMzZWZ2bSJ9.X9i3oJ567Pl9OP3rjuyGxw'
     });
 
     return (
         <>
             <Head>
-                <title>Contatti</title>
+                <title>{data.title}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}}>
@@ -36,7 +39,7 @@ export default function Contatti({data} : InferGetServerSidePropsType<typeof get
                         <motion.div variants={fadeInUp} className="w-full order-1">
                             <div className={"w-fit relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                                <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"mb-4 mt-8"}>Contatti</motion.h1>
+                                <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"mb-4 mt-8"}>{data.title}</motion.h1>
                             </div>
                         </motion.div>
 
@@ -45,16 +48,16 @@ export default function Contatti({data} : InferGetServerSidePropsType<typeof get
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
                                 <motion.ul variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"flex flex-col gap-4"}>
                                     <li>
-                                        <motion.div dangerouslySetInnerHTML={{__html:data.indirizzo}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={""} />
+                                        <motion.div dangerouslySetInnerHTML={{__html:configData.positionOffice!}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={""} />
                                     </li>
                                     <li>
-                                        <motion.div dangerouslySetInnerHTML={{__html:data.orariApertura}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={""} />
+                                        <motion.div dangerouslySetInnerHTML={{__html:configData.openingDaysHours!}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={""} />
                                     </li>
-                                    {data.informazioniContatto.collegamenti.map((i : any, index: number) => {
+                                    {configData.contactLinks?.map((link : any, index: number) => {
                                         return <li key={index} className={"linkItem linkItemPrimary"}>
-                                            {i.beforeTitle ? i.beforeTitle : ""}
-                                            <Link  className="text-primary hover:text-primary-600" href={i.href}>{i.title}</Link>
-                                            {i.afterTitle ? i.afterTitle : ""}
+                                            {link.beforeTitle ? link.beforeTitle : ""}
+                                            <Link  className="text-primary hover:text-primary-600" href={link.href}>{link.title}</Link>
+                                            {link.afterTitle ? link.afterTitle : ""}
                                         </li>
 
                                     })}
@@ -63,13 +66,13 @@ export default function Contatti({data} : InferGetServerSidePropsType<typeof get
                             <div id={"social"} className={"w-fit relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
                                 <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="icons flex flex-row justify-start gap-5 items-center xs:p-0 mt-7 ">
-                                    {data.informazioniContatto.social.map((i : any, index: number) => {
-                                        return <Link key={index} href={i.href}>
-                                            {i.beforeTitle ? i.beforeTitle : ""}
+                                    {configData.socialLinks?.map((linkSocial : any, index: number) => {
+                                        return <Link key={index} href={linkSocial.href}>
+                                            {linkSocial.beforeTitle ? linkSocial.beforeTitle : ""}
                                             <ReactSVG beforeInjection={(svg) => {
                                                 svg.classList.add('stroke-primary')}}
-                                                      className={"text-primary stroke-primary"} src={url + i.icon.data.attributes.url} />
-                                            {i.afterTitle ? i.afterTitle : ""}
+                                                      className={"text-primary stroke-primary"} src={linkSocial.icon} />
+                                            {linkSocial.afterTitle ? linkSocial.afterTitle : ""}
                                         </Link>
 
                                     })}
@@ -79,9 +82,9 @@ export default function Contatti({data} : InferGetServerSidePropsType<typeof get
                         </motion.div>
                         <motion.div variants={fadeInUp} className={`w-full lg:w-5/12 backgroundRight bg-cover relative h-56 lg:h-auto order-last overflow-hidden lg:mt-0 mt-6`}>
                             <Map
-                                style="mapbox://styles/nicolaciano/clcg1dd5r00ay14n60tw7w1rm"
+                                style={data.map?.style}
                                 center={[16.55724,40.82673]}
-                                zoom={[16]}
+                                zoom={[data.map?.zoom]}
                                 containerStyle={{
                                     height: '500px',
                                     width: '100%'
@@ -101,11 +104,11 @@ export default function Contatti({data} : InferGetServerSidePropsType<typeof get
                         <div className={"lg:w-5/12 md:w-8/12  w-11/12 mx-auto"}>
                             <div className={"w-fit relative mx-auto"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                                <motion.h3 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-center mb-4"}>{data.titoloForm}</motion.h3>
+                               <motion.h3 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-center mb-4"}>{data.form.title}</motion.h3>
                             </div>
                             <div className={"w-fit relative mx-auto"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                                <motion.div dangerouslySetInnerHTML={{__html:data.descrizioneForm}} variants={blockTextReveal} className={"text-center"} initial="initial" whileInView="final" viewport={{ once: true }} />
+                                <motion.div dangerouslySetInnerHTML={{__html:data.form.description}} variants={blockTextReveal} className={"text-center"} initial="initial" whileInView="final" viewport={{ once: true }} />
 
                             </div>
                         </div>
@@ -161,18 +164,31 @@ export default function Contatti({data} : InferGetServerSidePropsType<typeof get
 export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     // Fetch data from external API
 
-    const resContatti = await fetch(`${url}/api/contatti?populate=*&populate[0]=informazioniContatto&populate[1]=informazioniContatto.collegamenti,informazioniContatto.social&populate[2]=informazioniContatto.social.icon`);
-    const contattiData = await resContatti.json();
+    const contattiService = new ContattiService();
+
+    const contattiData = await contattiService.getSingle({
+        populate:[
+            {value:'*'},
+        ]
+    })
+
+    const configService = new ConfigurationService();
+    const configData = await  configService.getSingle({
+        populate:[
+            {value:'*'},
+            {value:'socialLink,contattoLink', level:0},
+            {value:'socialLink.icon,contattoLink.icon', level:1}
+        ]
+    });
+
+    if(!contattiData || !configData)
+        return NextjsUtils.returnNotFoundObject();
 
 
-    const result: any = {
-        data : contattiData.data.attributes
-    }
-
-    // Pass data to the page via props
-    return {
-        props: result
-    };
+    return NextjsUtils.returnServerSidePropsObject({
+        data : contattiData,
+        configData : configData
+    });
 }
 
 
