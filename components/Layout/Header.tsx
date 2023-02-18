@@ -4,8 +4,12 @@ import {useRouter} from "next/router";
 import styles from "../../styles/Header.module.css"
 import { Cross as Hamburger } from 'hamburger-react'
 import Link from "next/link";
+import {ConfigurationData, ConfigurationDataFull} from "../../models/configuration-data";
 
-function Header(props : IHeaderConfiguration){
+interface HeaderProps {
+    data : ConfigurationDataFull
+}
+export function Header( props : HeaderProps){
     const [isActive, setIsActive] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [isOpen, setOpen] = useState(true);
@@ -46,22 +50,15 @@ function Header(props : IHeaderConfiguration){
                 <div className="flex flex-row justify-between">
                     <div className="lg:basis-2/12 basis-7/12">
                         <Link href={'/'} className={styles.imgLink}>
-                            <img src={props.logo} />
+                            <img src={props.data.headerLogo} />
                         </Link>
                     </div>
                     <div className="basis-4/12 lg:basis-10/12  flex justify-end items-center">
 
-                         <ul className={`${styles.menu} ${(isOpen && isMobile) ? styles.menuMobileOpen : ""}`}>
-                            { props.menuItems.map((item) => {
-                                return <li key={item.name}  className={`linkItem ${router.asPath == item.url ? "active" : ""}${item.subMenuItems ? styles.subMenuChild : "" }`} >
-                                    <Link href={item.url} >{item.name}</Link>
-                                    {item.subMenuItems &&
-                                        <ul className={`${styles.subMenu}`}>
-                                            {item.subMenuItems.map((subItem,index) => {
-                                                return <li className={`delay-[${index*75 + 175}ms]`} key={subItem.name}><Link href={subItem.url}>{subItem.name}</Link></li>
-                                            })}
-                                        </ul>
-                                    }
+                        <ul className={`${styles.menu} ${(isOpen && isMobile) ? styles.menuMobileOpen : ""}`}>
+                            { props.data.headerLinks?.map((item, index : number) => {
+                                return <li key={index}  className={`${item.button ? 'ml-4 btn' : 'linkItem' }  ${router.asPath == item.href ? 'active' : ''}`} >
+                                    <Link href={item.href} >{item.title}</Link>
                                 </li>
                             })}
                         </ul>
@@ -79,7 +76,6 @@ function Header(props : IHeaderConfiguration){
                                 }
                             }} />
                         }
-                        <HeaderButtonCta  name={"Contattaci"} link={"contatti"} />
                     </div>
 
                 </div>
@@ -105,4 +101,3 @@ function HeaderButtonCta(props : {name: string, link : string }){
         </button>
     )
 }
-export default Header;

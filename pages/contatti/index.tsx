@@ -81,9 +81,11 @@ export default function Contatti({data, configData} : ContattiPage) {
 
                         </motion.div>
                         <motion.div variants={fadeInUp} className={`w-full lg:w-5/12 backgroundRight bg-cover relative h-56 lg:h-auto order-last overflow-hidden lg:mt-0 mt-6`}>
+
                             <Map
+
                                 style={data.map?.style}
-                                center={[16.55724,40.82673]}
+                                center={[data.map?.position?.latitude,data.map?.position?.longitude]}
                                 zoom={[data.map?.zoom]}
                                 containerStyle={{
                                     height: '500px',
@@ -91,9 +93,8 @@ export default function Contatti({data, configData} : ContattiPage) {
                                 }}
                             >
                                 <Marker
-                                    coordinates={[16.55724,40.82673]}
+                                    coordinates={[data.map?.position?.latitude,data.map?.position?.longitude]}
                                     anchor="bottom">
-                                    <img src={"/assets/drawable/facebook.svg"}/>
                                 </Marker>
                             </Map>
                         </motion.div>
@@ -176,7 +177,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     const configData = await  configService.getSingle({
         populate:[
             {value:'*'},
-            {value:'socialLink,contattoLink', level:0},
+            {value:'socialLink,contattoLink,logoHeader', level:0},
             {value:'socialLink.icon,contattoLink.icon', level:1}
         ]
     });

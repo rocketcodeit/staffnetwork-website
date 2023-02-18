@@ -1,12 +1,12 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import Layout from "../components/Layout/Layout";
 import {AnimatePresence} from "framer-motion";
 import {useState} from "react";
-import {GetServerSideProps, InferGetServerSidePropsType} from "next";
+import {Layout} from "../components/Layout/Layout";
 
 
-export default function App({ Component, pageProps, router }: AppProps, {layoutData} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+
+export default function App({ Component, pageProps, router }: AppProps) {
     const [loading, setLoading] = useState(false);
     return(
         <Layout>
@@ -20,28 +20,5 @@ export default function App({ Component, pageProps, router }: AppProps, {layoutD
 }
 
 // This gets called on every request
-export const getServerSideProps: GetServerSideProps<any> = async (context) => {
-    // Fetch data from external API
-    let url = "http://localhost:1337";
 
 
-    const resConfigurazione = await fetch(`${url}/api/configurazione?populate=*`);
-    const configurazioneData  =  await resConfigurazione.json();
-
-
-    if(!configurazioneData.data) {
-        return {
-            notFound: true,
-        }
-    }
-
-    const result: any = {
-        layoutData : configurazioneData.data
-    }
-
-
-    // Pass data to the page via props
-    return {
-        props: result
-    };
-}

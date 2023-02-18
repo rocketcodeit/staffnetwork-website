@@ -2,8 +2,7 @@ import {IMenuItem} from "../config/models/IMenuItem";
 
 
 export interface ConfigurationData {
-    headerLinks?: any[],
-    footerLinks?: any[],
+
     positionOffice? : string,
     openingDaysHours? : string,
     emailContact?: Link,
@@ -12,7 +11,14 @@ export interface ConfigurationData {
     contactLinks?: Link[]
 }
 
+export interface ConfigurationDataFull extends ConfigurationData{
+    headerLogo: string,
 
+    footerLogo?: string,
+    headerLinks?: Link[],
+    footerLinks?: any[],
+    conditionLinks?: any[],
+}
 interface Link {
     href : string,
     id?: any
@@ -20,4 +26,5 @@ interface Link {
     title: string,
     icon?: string
     afterTitle?: string,
+    button?: boolean
 }

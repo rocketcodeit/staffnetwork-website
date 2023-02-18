@@ -20,8 +20,8 @@ export class ContattiService extends BaseStrapiService<ContattiData> {
                 style: res.attributes.mappa.style,
                 zoom: res.attributes.mappa.zoom,
                 position:{
-                    latitude: res.attributes.mappa.latitude,
-                    longitude: res.attributes.mappa.longitude
+                    latitude: res.attributes.mappa.latitudine,
+                    longitude: res.attributes.mappa.longitudine
                 }
             }
         };

@@ -9,6 +9,7 @@ import {HomeData} from "../models/home-data";
 import {TeamMember} from "../models/team-member";
 import {PaginatedResult} from "../models/paginated-result";
 import {NextjsUtils} from "./nextjs-utils";
+import {ConfigurationDataFull} from "../models/configuration-data";
 
 export class BackendFacade {
 
@@ -56,7 +57,7 @@ export class BackendFacade {
             posts : (promiseResult[0] as (PaginatedResult<PostDetail> | undefined))?.data,
             services : (promiseResult[1] as (PaginatedResult<IArea> | undefined))?.data,
             home : (promiseResult[2] as (HomeData | undefined)),
-            layoutData : (promiseResult[3] as any).attributes,
+            layoutData : (promiseResult[3] as (ConfigurationDataFull | undefined)),
             membersTeam : (promiseResult[4] as (PaginatedResult<TeamMember> | undefined))?.data
         }
 
