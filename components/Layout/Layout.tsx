@@ -47,7 +47,9 @@ export function Layout(props: LayoutProps){
     return (
 
         <React.Fragment>
-            <motion.div  transition={{ duration: 0.4 }} >
+            <motion.div initial={{ opacity: 0 }}
+                        animate={{ opacity: isVisible ? 1 : 0 }}
+                        transition={{ duration: 1 }} >
                 {data && <Header data={data} /> }
                 <main>{props.children}</main>
 

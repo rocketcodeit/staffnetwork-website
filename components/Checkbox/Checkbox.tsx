@@ -18,7 +18,7 @@ export default function Checkbox (props : CheckboxProps){
                     type="checkbox"
                     name={props.name}
                     onChange={props.handleChange}
-                    checked={props.checked ? false : props.checked}
+                    defaultChecked={props.checked ?? false}
                 />
                 <span></span>
                 <label htmlFor={props.name}>{props.title}</label>

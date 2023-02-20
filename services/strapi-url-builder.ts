@@ -110,17 +110,12 @@ export class StrapiUrlBuilder {
 
         if(this._filter.length > 0){
            this._filter.forEach((filterValue, index) => {
-               if(filterValue.fields.length === 1){
-                   queryParams.push(`filters[${filterValue.fields[0]}][$${filterValue.operator}]=${filterValue.value}`)
-               }
-               else{
-                   let stringFilter = 'filters';
-                   filterValue.fields.forEach((field, index) => {
-                       stringFilter = stringFilter.concat(`[${field}]`);
-                   })
-                   stringFilter = stringFilter.concat(`[$${filterValue.operator}]=${filterValue.value}`);
-                   queryParams.push(stringFilter);
-               }
+               let stringFilter = 'filters';
+               filterValue.fields.forEach((field, index) => {
+                   stringFilter = stringFilter.concat(`[${field}]`);
+               })
+               stringFilter = stringFilter.concat(`[$${filterValue.operator}]=${filterValue.value}`);
+               queryParams.push(stringFilter);
            })
         }
 

@@ -16,6 +16,7 @@ import {NextjsUtils} from "../../services/nextjs-utils";
 import {RegionService} from "../../services/region.service";
 import {useRouter} from "next/router";
 import {AnnouncementTerritory} from "../../models/announcement-territory";
+import {FilterOperator} from "../../models/strapi-query-params";
 
 let url ="http://localhost:1337";
 
@@ -24,43 +25,63 @@ interface AnnouncementsProps{
     announcements: IAnnouncement[],
     pageCount?: number,
     currentPage : number,
-    regions?: AnnouncementTerritory[]
+    regions?: AnnouncementTerritory[],
+    regionsFilterData : any
+
+
 }
 
-export default function AnnouncementPage({announcements, pageCount, currentPage, regions} : AnnouncementsProps){
+export default function AnnouncementPage({announcements,
+                                             pageCount, currentPage,
+                                             regions, regionsFilterData} : AnnouncementsProps){
 
     const [effectivePage,setEffectivePage] = useState(currentPage);
     const [loading, setLoading] = useState(false);
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const [data, setData] = useState<IAnnouncement[]>(announcements);
     const navigation = useRouter();
-    const [categories,setCategories] = useState<any[]>([regions]);
 
+    const [regionFilters,setRegionFilters] = useState<any[]>(regionsFilterData);
+
+
+    const queryParams = { page: '', regions: '' };
 
     useEffect(() => {
         setData(announcements);
     }, [announcements])
 
-    const filterCategories = (event : any) => {
-        if (event.target.checked) {
-            setCategories(array => [...array, event.target.name]);
-        } else {
-            setCategories( categories.filter(element  => element !== event.target.name));
-        }
 
+    const filterCategories = (event : any) => {
+        setEffectivePage(1);
+        if (event.target.checked) {
+            setRegionFilters(array => [...array, event.target.name]);
+        } else {
+            setRegionFilters( regionFilters.filter(element  => element !== event.target.name));
+        }
     }
 
     useEffect(() => {
         if(!firstLoad) {
             setLoading(true);
-            navigation.replace('?page=' + effectivePage)
+            queryParams.page = effectivePage.toString();
+            queryParams.regions = regionFilters.map((c) => c).join(',');
+
+
+            navigation.replace({
+                pathname: navigation.basePath,
+                query: { ...navigation.query, ...queryParams },
+            })
                 .then(() => {
                     setLoading(false);
                 })
+
         } else {
             setFirstLoad(false);
         }
-    }, [effectivePage,categories])
+
+
+    }, [effectivePage,regionFilters])
+
 
     return (
         <>
@@ -80,10 +101,13 @@ export default function AnnouncementPage({announcements, pageCount, currentPage,
                                                 <Checkbox
                                                     title={r.region}
                                                     name={r.region.toLowerCase()}
+                                                    checked={regionFilters.includes(r.region.toLowerCase())}
                                                     handleChange={filterCategories}
                                                 />
                                             </div>
                                         )}
+
+
                                     </div>
                                 </div>
                                 <div className={"w-full lg:w-8/12"}>
@@ -120,32 +144,38 @@ export default function AnnouncementPage({announcements, pageCount, currentPage,
 // This gets called on every request
 export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
     // Fetch data from external API
-    const {page} = context.query;
+    const {page,regions} = context.query;
 
     const currentPage = +(page ?? 1);
+    const currentRegionsFilter = regions ? regions.split(',') : [];
 
     const announcementService = new AnnouncementService();
+
+
     const announcements = await announcementService.find({
-        pagination:{page: currentPage, pageSize:3},
+        pagination:{page: currentPage, pageSize:1},
         populate:[
             {value:"*"}
-        ]
+        ],
+        filter : currentRegionsFilter?.map((item : any) => {
+            return{
+                field:["regioni","nome"],operator:FilterOperator.containsCaseInsensitive, value: item.toString()}
+        })
     })
 
     const regionService = new RegionService();
-    const regions = await regionService.find({populate:[{value:"*"}]});
+    const regionsData = await regionService.find({populate:[{value:"*"}]});
+
 
     if(currentPage > (announcements?.paginationInfo.pageCount ?? 1) || (!announcements))
         return NextjsUtils.returnNotFoundObject();
-
-    if(currentPage === 1 && page)
-        return NextjsUtils.returnRedirectObject('/bandi');
 
     return NextjsUtils.returnServerSidePropsObject({
         announcements: announcements?.data,
         pageCount : announcements?.paginationInfo.pageCount,
         currentPage : currentPage,
-        regions : regions?.data
+        regions : regionsData?.data,
+        regionsFilterData : currentRegionsFilter,
     });
 
 }
