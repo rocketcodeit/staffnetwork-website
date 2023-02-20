@@ -17,6 +17,7 @@ import {RegionService} from "../../services/region.service";
 import {useRouter} from "next/router";
 import {AnnouncementTerritory} from "../../models/announcement-territory";
 import {FilterOperator} from "../../models/strapi-query-params";
+import {CustomerTargetService, ICustomerTarget} from "../../services/customer-target.service";
 
 let url ="http://localhost:1337";
 
@@ -28,12 +29,15 @@ interface AnnouncementsProps{
     regions?: AnnouncementTerritory[],
     regionsFilterData : any
 
+    recipients?: ICustomerTarget[],
+    recipientsFilterData: any
 
 }
 
 export default function AnnouncementPage({announcements,
                                              pageCount, currentPage,
-                                             regions, regionsFilterData} : AnnouncementsProps){
+                                             regions, regionsFilterData,
+                                             recipients,recipientsFilterData} : AnnouncementsProps){
 
     const [effectivePage,setEffectivePage] = useState(currentPage);
     const [loading, setLoading] = useState(false);
@@ -42,9 +46,10 @@ export default function AnnouncementPage({announcements,
     const navigation = useRouter();
 
     const [regionFilters,setRegionFilters] = useState<any[]>(regionsFilterData);
+    const [recipientFilters,setRecipientFilters] = useState<any[]>(recipientsFilterData);
 
 
-    const queryParams = { page: '', regions: '' };
+    const queryParams = { page: '', regions: '', recipients: '' };
 
     useEffect(() => {
         setData(announcements);
@@ -60,12 +65,21 @@ export default function AnnouncementPage({announcements,
         }
     }
 
+    const filterRecipientsCategories = (event: any) =>{
+        setEffectivePage(1);
+        if (event.target.checked) {
+            setRecipientFilters(array => [...array, event.target.name]);
+        } else {
+            setRecipientFilters( recipientFilters.filter(element  => element !== event.target.name));
+        }
+    }
+
     useEffect(() => {
         if(!firstLoad) {
             setLoading(true);
             queryParams.page = effectivePage.toString();
             queryParams.regions = regionFilters.map((c) => c).join(',');
-
+            queryParams.recipients = recipientFilters.map((c) => c).join(',');
 
             navigation.replace({
                 pathname: navigation.basePath,
@@ -80,7 +94,7 @@ export default function AnnouncementPage({announcements,
         }
 
 
-    }, [effectivePage,regionFilters])
+    }, [effectivePage,regionFilters, recipientFilters])
 
 
     return (
@@ -106,6 +120,19 @@ export default function AnnouncementPage({announcements,
                                                 />
                                             </div>
                                         )}
+
+                                        <div className={"mt-4"}>
+                                            {recipients?.map((r: ICustomerTarget, index : number) =>
+                                                <div key={index}>
+                                                    <Checkbox
+                                                        title={r.description}
+                                                        name={r.description.toLowerCase()}
+                                                        checked={recipientFilters.includes(r.description.toLowerCase())}
+                                                        handleChange={filterRecipientsCategories}
+                                                    />
+                                                </div>
+                                            )}
+                                        </div>
 
 
                                     </div>
@@ -144,28 +171,44 @@ export default function AnnouncementPage({announcements,
 // This gets called on every request
 export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
     // Fetch data from external API
-    const {page,regions} = context.query;
+    const {page,regions,recipients} = context.query;
 
     const currentPage = +(page ?? 1);
+
     const currentRegionsFilter = regions ? regions.split(',') : [];
+    const currentRecipientsFilter = recipients ? recipients.split(',') : [];
 
     const announcementService = new AnnouncementService();
-
 
     const announcements = await announcementService.find({
         pagination:{page: currentPage, pageSize:1},
         populate:[
             {value:"*"}
         ],
-        filter : currentRegionsFilter?.map((item : any) => {
+        filter : [
+
+            ...(currentRegionsFilter ? currentRegionsFilter?.map((item : any) => {
             return{
-                field:["regioni","nome"],operator:FilterOperator.containsCaseInsensitive, value: item.toString()}
-        })
+                field:["regioni","nome"],
+                operator:FilterOperator.containsCaseInsensitive,
+                value: item.toString()}
+            }) : []),
+
+            ...(currentRecipientsFilter ? currentRecipientsFilter?.map((item : any) => {
+                return{
+                    field:["destinatari","descrizione"],
+                    operator:FilterOperator.containsCaseInsensitive,
+                    value: item.toString()}
+            }) : []),
+
+        ]
     })
 
     const regionService = new RegionService();
     const regionsData = await regionService.find({populate:[{value:"*"}]});
 
+    const recipientService = new CustomerTargetService();
+    const recipientsData = await recipientService.find();
 
     if(currentPage > (announcements?.paginationInfo.pageCount ?? 1) || (!announcements))
         return NextjsUtils.returnNotFoundObject();
@@ -174,8 +217,12 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
         announcements: announcements?.data,
         pageCount : announcements?.paginationInfo.pageCount,
         currentPage : currentPage,
+
         regions : regionsData?.data,
         regionsFilterData : currentRegionsFilter,
+
+        recipients: recipientsData?.data,
+        recipientsFilterData : currentRecipientsFilter,
     });
 
 }
