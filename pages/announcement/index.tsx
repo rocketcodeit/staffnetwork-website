@@ -18,6 +18,7 @@ import {useRouter} from "next/router";
 import {AnnouncementTerritory} from "../../models/announcement-territory";
 import {FilterOperator} from "../../models/strapi-query-params";
 import {CustomerTargetService, ICustomerTarget} from "../../services/customer-target.service";
+import Filter from "../../components/Filters/Filter";
 
 let url ="http://localhost:1337";
 
@@ -56,23 +57,18 @@ export default function AnnouncementPage({announcements,
     }, [announcements])
 
 
-    const filterCategories = (event : any) => {
+    const filterItems = (event: any, setFilters: React.Dispatch<React.SetStateAction<any[]>>) => {
         setEffectivePage(1);
-        if (event.target.checked) {
-            setRegionFilters(array => [...array, event.target.name]);
-        } else {
-            setRegionFilters( regionFilters.filter(element  => element !== event.target.name));
-        }
-    }
+        const filterValue = event.target.name;
+        setFilters((filters) => {
+            if (event.target.checked) {
+                return [...filters, filterValue];
+            } else {
+                return filters.filter((filter) => filter !== filterValue);
+            }
+        });
+    };
 
-    const filterRecipientsCategories = (event: any) =>{
-        setEffectivePage(1);
-        if (event.target.checked) {
-            setRecipientFilters(array => [...array, event.target.name]);
-        } else {
-            setRecipientFilters( recipientFilters.filter(element  => element !== event.target.name));
-        }
-    }
 
     useEffect(() => {
         if(!firstLoad) {
@@ -116,7 +112,7 @@ export default function AnnouncementPage({announcements,
                                                     title={r.region}
                                                     name={r.region.toLowerCase()}
                                                     checked={regionFilters.includes(r.region.toLowerCase())}
-                                                    handleChange={filterCategories}
+                                                    handleChange={(e : any) => filterItems(e, setRegionFilters)}
                                                 />
                                             </div>
                                         )}
@@ -128,12 +124,19 @@ export default function AnnouncementPage({announcements,
                                                         title={r.description}
                                                         name={r.description.toLowerCase()}
                                                         checked={recipientFilters.includes(r.description.toLowerCase())}
-                                                        handleChange={filterRecipientsCategories}
+                                                        handleChange={(e : any) => filterItems(e, setRecipientFilters)}
                                                     />
                                                 </div>
                                             )}
                                         </div>
+                                        <div className={"mt-4"}>
+                                            <Filter title={"Filtri"} categoriesFilter={
+                                                [
+                                                    { title:"Destinatari", items: recipients, listItemFiltered: recipientsFilterData,  functionToFilter: ((e : any) => filterItems(e, setRecipientFilters)) }
+                                                ]
+                                            } />
 
+                                        </div>
 
                                     </div>
                                 </div>
