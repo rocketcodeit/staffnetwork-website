@@ -21,7 +21,7 @@ import {PostDetail} from "../../models/postDetail";
 import {IArea} from "../../config/models/IArea";
 import {ReactSVG} from "react-svg";
 import {ComeLavoriamoData} from "../../models/come-lavoriamo-data";
-import {ComeLavoriamoService} from "../../services/comeLavoriamo.service";
+import {HowWeWorkService} from "../../services/how-we-work.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
 
 
@@ -96,7 +96,7 @@ export default function ComeLavoriamo({data} : ComeLavoriamo) {
 
                             </div>
                             <div className={`${styles.directiveBoxsContainer} `}>
-                                {data.bloccoDirettiva.direttiva.map((dir : any, index : number) =>{
+                                {data.bloccoDirettiva.direttiva?.map((dir : any, index : number) =>{
                                     return  <motion.div key={index} className={"directiveBox mb-6"}>
                                                 <div className={"w-fit relative"}>
                                                     <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
@@ -123,8 +123,8 @@ export default function ComeLavoriamo({data} : ComeLavoriamo) {
                             <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
                             {data.bloccoMetodo.description && <motion.div dangerouslySetInnerHTML={{__html:data.bloccoMetodo.description}} variants={blockTextReveal} className={"text-center"} initial="initial" whileInView="final" viewport={{ once: true }} /> }
                         </div>
-                        <div className={"flex flex-3 gap-0 flex-wrap w-full h-full mt-8"}>
-                            <div className={"md:basis-1/3 stepContainer"}>
+                        {data.bloccoMetodo.step && <div className={"flex flex-3 gap-0 flex-wrap w-full h-full mt-8"}>
+                             <div className={"md:basis-1/3 stepContainer"}>
                                 <div className={"w-fit relative"}>
                                     <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-700"></motion.div>
                                     <motion.div className={styles.stepBox}>
@@ -176,7 +176,7 @@ export default function ComeLavoriamo({data} : ComeLavoriamo) {
                                     </motion.div>
                                 </div>
                             </div>
-                        </div>
+                        </div> }
 
                     </div>
                 </section>
@@ -251,11 +251,11 @@ export default function ComeLavoriamo({data} : ComeLavoriamo) {
 export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     // Fetch data from external API
 
-    const comeLavoriamoService = new ComeLavoriamoService();
+    const comeLavoriamoService = new HowWeWorkService();
     const comeLavoriamoData = await comeLavoriamoService.getSingle({
         populate : [
             {value:'*'},
-            {value:'metodo,contatti,blocco1,staff,img', level: 0},
+            {value:'metodo,contatti,staff,img', level: 0},
             {value:'metodo.direttiva,' +
                     'metodo.step,' +
                     'metodo.imgDirettiva,' +

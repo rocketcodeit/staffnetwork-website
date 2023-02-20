@@ -9,7 +9,7 @@ import ReactMapboxGl, {Layer, Feature, Marker} from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {ContattiData} from "../../models/contatti-data";
-import {ContattiService} from "../../services/contatti.service";
+import {ContactsService} from "../../services/contacts.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
 import {ConfigurationService} from "../../services/configuration.service";
 import {ConfigurationData} from "../../models/configuration-data";
@@ -165,7 +165,7 @@ export default function Contatti({data, configData} : ContattiPage) {
 export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     // Fetch data from external API
 
-    const contattiService = new ContattiService();
+    const contattiService = new ContactsService();
 
     const contattiData = await contattiService.getSingle({
         populate:[
@@ -177,8 +177,8 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     const configData = await  configService.getSingle({
         populate:[
             {value:'*'},
-            {value:'socialLink,contattoLink,logoHeader', level:0},
-            {value:'socialLink.icon,contattoLink.icon', level:1}
+            {value: 'socialLink,contattoLink,logoHeader,logoFooter,headerLinks,footerLinks,conditionLinks', level: 0},
+            {value: 'socialLink.icon,contattoLink.icon', level : 1}
         ]
     });
 

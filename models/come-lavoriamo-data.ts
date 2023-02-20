@@ -1,13 +1,13 @@
 export interface ComeLavoriamoData {
     title: string,
-    descriptionAboveTheFold: any,
-    img : string,
+    descriptionAboveTheFold?: any,
+    img?: string,
     callToAction?: {link: string, title: string},
     bloccoMetodo: {
         title? : string,
         description? : any,
         img? : string,
-        step : {
+        step? : {
             img? : string,
             title: string,
             description : any,
@@ -17,7 +17,7 @@ export interface ComeLavoriamoData {
         title? : string,
         description : any,
         img? : string,
-        direttiva : {
+        direttiva?: {
             img? : string,
             title: string,
             description : any,

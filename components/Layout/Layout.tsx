@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Footer from './Footer';
-import WebsiteConfig from "../../config/WebsiteConfig";
-import {ConfigurationData, ConfigurationDataFull} from "../../models/configuration-data";
+import {ConfigurationDataFull} from "../../models/configuration-data";
 import {Header} from "./Header";
-import {GetServerSideProps, GetStaticProps} from "next";
 import {ConfigurationService} from "../../services/configuration.service";
-import {NextjsUtils} from "../../services/nextjs-utils";
+import { motion } from 'framer-motion';
+import {AppProviderContext} from "../Provider/AppContext";
 
 export interface LayoutProps{
     children : any
@@ -15,36 +14,47 @@ export interface LayoutProps{
 export function Layout(props: LayoutProps){
     const [data, setData] = useState<ConfigurationDataFull>()
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
-
+    const [isVisible, setIsVisible] = useState(false);
+    const {configuration} = useContext(AppProviderContext);
 
     useEffect( () => {
         if(firstLoad || !data) {
-            const configService = new ConfigurationService();
+            const configService = new ConfigurationService("http://localhost:1337");
 
-            fetch(`http://localhost:1337/api/configurazione?populate=*&populate[0]=socialLink,contattoLink,logoHeader,logoFooter,headerLinks,footerLinks,conditionLinks&populate[1]=socialLink.icon,contattoLink.icon`)
-                .then((res) => {
-
-                    res.json().then((dataConfiguration) => {
-                        let dataConfig = configService.mapForLayout(dataConfiguration.data);
-                        console.log(dataConfig);
-                        setData(dataConfig);
-                    })
-                });
-            setFirstLoad(false);
+            configService.getSingle({
+                populate:[
+                    {value:'*'},
+                    {value: 'socialLink,contattoLink,logoHeader,logoFooter,headerLinks,footerLinks,conditionLinks', level: 0},
+                    {value: 'socialLink.icon,contattoLink.icon', level : 1}
+                ]
+            }).then((res) =>{
+                setData(res);
+                setFirstLoad(false);
+            })
+        }
+        else{
+            setIsVisible(true);
         }
 
         //fetchData();
     }, [firstLoad,data])
 
-    console.log(data);
+
+    useEffect(() => {
+        console.log(configuration);
+    }, [configuration])
+
     return (
-        //only single element can be returned
-        // <> same React.Fragment
-        // <Header menuItems={WebsiteConfig.headerConfiguration.menuItems} />
+
         <React.Fragment>
-            {data && <Header data={data} /> }
-            <main>{props.children}</main>
-            {data && <Footer data={data} />}
+            <motion.div  transition={{ duration: 0.4 }} >
+                {data && <Header data={data} /> }
+                <main>{props.children}</main>
+
+                <motion.div >{configuration?.openingDaysHours}</motion.div>
+                {data && <Footer data={data} />}
+            </motion.div>
+
         </React.Fragment>
     )
 }

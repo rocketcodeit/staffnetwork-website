@@ -1,7 +1,7 @@
 import {BaseStrapiService, StrapiResourceType} from "./base-strapi.service";
 import {ContattiData} from "../models/contatti-data";
 
-export class ContattiService extends BaseStrapiService<ContattiData> {
+export class ContactsService extends BaseStrapiService<ContattiData> {
 
     constructor() {
         super("contatti", StrapiResourceType.single);

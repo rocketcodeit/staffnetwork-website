@@ -1,7 +1,7 @@
 import {BaseStrapiService, StrapiResourceType} from "./base-strapi.service";
 import {ChiSiamoData} from "../models/chi_siamo-data";
 
-export class ChiSiamoService extends BaseStrapiService<ChiSiamoData> {
+export class WhoWeAreService extends BaseStrapiService<ChiSiamoData> {
 
     constructor() {
         super("chi-siamo", StrapiResourceType.single);

@@ -14,8 +14,8 @@ import React from "react";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {TeamMember} from "../../models/team-member";
 import {ChiSiamoData} from "../../models/chi_siamo-data";
-import {ComeLavoriamoService} from "../../services/comeLavoriamo.service";
-import {ChiSiamoService} from "../../services/chiSiamo.service";
+import {HowWeWorkService} from "../../services/how-we-work.service";
+import {WhoWeAreService} from "../../services/who-we-are.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
 import {TeamMemberService} from "../../services/team-member.service";
 
@@ -128,7 +128,7 @@ export default function ChiSiamo({data, membersTeam} : ChiSiamoPage) {
 export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     // Fetch data from external API
 
-    const chiSiamoService = new ChiSiamoService();
+    const chiSiamoService = new WhoWeAreService();
     const chiSiamoData = await chiSiamoService.getSingle({
         populate: [
             {value: '*'}

@@ -6,10 +6,12 @@ import {StrapiQueryParams} from "../models/strapi-query-params";
 export abstract class BaseStrapiService2Types<TFull, TList> {
     private _strapiResource: string;
     private readonly _resourceType: StrapiResourceType;
+    protected readonly  _baseUrl : string | undefined = process.env.BACKEND_URL;
 
-    protected constructor(strapiResource: string, resourceType: StrapiResourceType) {
+    protected constructor(strapiResource: string, resourceType: StrapiResourceType, baseUrl?: string) {
         this._strapiResource = strapiResource;
         this._resourceType = resourceType;
+        this._baseUrl = baseUrl;
     }
 
     public getBySlug(slug: string, params?: StrapiQueryParams): Promise<TFull | undefined> {
@@ -82,7 +84,7 @@ export abstract class BaseStrapiService2Types<TFull, TList> {
                 .setPopulate(params?.populate ?? [{value: '*'}])
                 .build();
 
-        return httpClient.get(url)
+        return httpClient.get(this._baseUrl ? this._baseUrl + url : url )
             .then((res: any) => {
                 const data = this.mapForSingle(res.data.data);
                 return data;

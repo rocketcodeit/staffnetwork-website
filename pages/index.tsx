@@ -11,6 +11,8 @@ import {PostDetail} from "../models/postDetail";
 import {IArea} from "../config/models/IArea";
 import {TeamMember} from "../models/team-member";
 import {HomeData} from "../models/home-data";
+import {useContext, useEffect} from "react";
+import {AppProviderContext} from "../components/Provider/AppContext";
 
 interface HomeProps {
     posts: PostDetail[],
@@ -21,7 +23,12 @@ interface HomeProps {
 }
 
 export default function Home({posts, services, home, membersTeam, backendUrl} : HomeProps) {
-    let url = backendUrl;
+    const {configuration,setConfigurationData} = useContext(AppProviderContext);
+    const url = backendUrl;
+
+    useEffect(() => {
+            setConfigurationData();
+    },[])
 
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}}
