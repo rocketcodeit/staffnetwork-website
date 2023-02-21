@@ -56,20 +56,6 @@ export default function AnnouncementPage({announcements,
         setData(announcements);
     }, [announcements])
 
-
-    const filterItems = (event: any, setFilters: React.Dispatch<React.SetStateAction<any[]>>) => {
-        setEffectivePage(1);
-        const filterValue = event.target.name;
-        setFilters((filters) => {
-            if (event.target.checked) {
-                return [...filters, filterValue];
-            } else {
-                return filters.filter((filter) => filter !== filterValue);
-            }
-        });
-    };
-
-
     useEffect(() => {
         if(!firstLoad) {
             setLoading(true);
@@ -105,39 +91,33 @@ export default function AnnouncementPage({announcements,
                             <div className={"flex flex-row flex-wrap justify-between"}>
                                 <div className={"w-full lg:w-3/12 mb-6 lg:mb-0 relative h-fit"}>
                                     <div className={"filters containerLeftBefore"}>
-                                        <h4 className={"mb-3"}>Filtri</h4>
-                                        {regions?.map((r: AnnouncementTerritory, index : number) =>
-                                            <div key={index}>
-                                                <Checkbox
-                                                    title={r.region}
-                                                    name={r.region.toLowerCase()}
-                                                    checked={regionFilters.includes(r.region.toLowerCase())}
-                                                    handleChange={(e : any) => filterItems(e, setRegionFilters)}
-                                                />
-                                            </div>
-                                        )}
-
-                                        <div className={"mt-4"}>
-                                            {recipients?.map((r: ICustomerTarget, index : number) =>
-                                                <div key={index}>
-                                                    <Checkbox
-                                                        title={r.description}
-                                                        name={r.description.toLowerCase()}
-                                                        checked={recipientFilters.includes(r.description.toLowerCase())}
-                                                        handleChange={(e : any) => filterItems(e, setRecipientFilters)}
-                                                    />
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className={"mt-4"}>
-                                            <Filter title={"Filtri"} categoriesFilter={
-                                                [
-                                                    { title:"Destinatari", items: recipients, listItemFiltered: recipientsFilterData,  functionToFilter: ((e : any) => filterItems(e, setRecipientFilters)) }
-                                                ]
-                                            } />
-
-                                        </div>
-
+                                        <Filter title={"Filtri"}
+                                                setPage={setEffectivePage}
+                                                categoriesFilter={
+                                                    [
+                                                        {   title:"Regioni",
+                                                            items: regions?.map((text) => {
+                                                                    return {
+                                                                        title: text.region,
+                                                                    }
+                                                                }
+                                                            ),
+                                                            listItemFiltered: regionsFilterData,
+                                                            dataFilter: regionFilters,
+                                                            setDataFilter: setRegionFilters,
+                                                        },
+                                                        {   title:"Destinatari",
+                                                            items: recipients?.map((text) => {
+                                                                return{
+                                                                    title: text.description
+                                                                }
+                                                            }),
+                                                            listItemFiltered: recipientsFilterData,
+                                                            dataFilter: recipientFilters,
+                                                            setDataFilter: setRecipientFilters,
+                                                        }
+                                                    ]
+                                                } />
                                     </div>
                                 </div>
                                 <div className={"w-full lg:w-8/12"}>
@@ -178,8 +158,8 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
 
     const currentPage = +(page ?? 1);
 
-    const currentRegionsFilter = regions ? regions.split(',') : [];
-    const currentRecipientsFilter = recipients ? recipients.split(',') : [];
+    const currentRegionsFilter = regions ? (regions as string).split(',') : [];
+    const currentRecipientsFilter = recipients ? (recipients as string).split(',') : [];
 
     const announcementService = new AnnouncementService();
 
