@@ -17,12 +17,24 @@ export class HowWeWorkService extends BaseStrapiService<ComeLavoriamoData> {
             bloccoMetodo: {
                 title : res.attributes.metodo.titoloMetodo,
                 description : res.attributes.metodo.descrizioneMetodo,
+                step: res.attributes.metodo.step.map((i : any) => {
+                    return{
+                        title: i.titolo,
+                        description: i.descrizione
+                    }
+                })
 
             },
             bloccoDirettiva: {
                 title : res.attributes.metodo.titoloDirettive,
                 description : res.attributes.metodo.descrizioneDirettive,
-                img: process.env.BACKEND_URL + res.attributes.imgDirettiva.data.attributes.url,
+                img: process.env.BACKEND_URL + res.attributes.metodo.imgDirettiva.data.attributes.url,
+                direttiva: res.attributes.metodo.direttiva.map((i : any) => {
+                    return{
+                        title: i.titolo,
+                        description: i.descrizione
+                    }
+                })
             },
             contatti:{
                 title: res.attributes.contatti.titolo,
