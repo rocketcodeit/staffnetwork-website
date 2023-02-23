@@ -4,8 +4,7 @@ import React from "react";
 
 export interface FilterProps{
     id?: number,
-    title: string,
-    setPage : any
+    setPage : ((page: number) => {}) | any
     categoriesFilter: FilterOption[],
 }
 
@@ -38,7 +37,6 @@ export default function Filter(props : FilterProps){
 
     return (
         <div className={"filtersClass"} >
-            <h4 className={"mb-3"}>{props.title}</h4>
             {props.categoriesFilter?.map((filterGroup, index ) => {
                 return (
                     <div key={index} className={"mb-4"}>

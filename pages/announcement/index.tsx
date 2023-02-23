@@ -3,14 +3,10 @@ import styles from "../../styles/Home.module.css";
 import {config} from "../../config/breadcrumbs.config";
 import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {motion} from "framer-motion";
-import {ServiceList} from "../../components/Service/ServiceList";
-import {GetServerSideProps, InferGetServerSidePropsType} from "next";
+import {GetServerSideProps} from "next";
 import {IAnnouncement} from "../../models/IAnnouncement";
 import {AnnouncementList} from "../../components/Announcement/AnnouncementList";
-import {PostDetail} from "../../models/postDetail";
-import Checkbox from "../../components/Checkbox/Checkbox";
-import {IService} from "../../models/IService";
-import {IArea} from "../../config/models/IArea";
+
 import {AnnouncementService} from "../../services/announcement.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
 import {RegionService} from "../../services/region.service";
@@ -19,6 +15,8 @@ import {AnnouncementTerritory} from "../../models/announcement-territory";
 import {FilterOperator} from "../../models/strapi-query-params";
 import {CustomerTargetService, ICustomerTarget} from "../../services/customer-target.service";
 import Filter from "../../components/Filters/Filter";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import {ContributionTypeService, IContributionType} from "../../services/contribution-type.service";
 
 let url ="http://localhost:1337";
 
@@ -29,16 +27,22 @@ interface AnnouncementsProps{
     currentPage : number,
     regions?: AnnouncementTerritory[],
     regionsFilterData : any
-
     recipients?: ICustomerTarget[],
-    recipientsFilterData: any
+    recipientsFilterData: any,
+
+    contributionTypes?: IContributionType[],
+    contributionTypesFilterData: any,
+
+    titleFilterData : any
 
 }
 
 export default function AnnouncementPage({announcements,
                                              pageCount, currentPage,
                                              regions, regionsFilterData,
-                                             recipients,recipientsFilterData} : AnnouncementsProps){
+                                             recipients,recipientsFilterData,
+                                             contributionTypes,contributionTypesFilterData,
+                                             titleFilterData} : AnnouncementsProps){
 
     const [effectivePage,setEffectivePage] = useState(currentPage);
     const [loading, setLoading] = useState(false);
@@ -48,9 +52,12 @@ export default function AnnouncementPage({announcements,
 
     const [regionFilters,setRegionFilters] = useState<any[]>(regionsFilterData);
     const [recipientFilters,setRecipientFilters] = useState<any[]>(recipientsFilterData);
+    const [contributionTypeFilters,setContributionTypeFilters] = useState<any[]>(contributionTypesFilterData);
 
 
-    const queryParams = { page: '', regions: '', recipients: '' };
+    const [titleFilters, setTitleFilters] = useState<any>(titleFilterData);
+
+    const queryParams = { page: '', regions: '', recipients: '', contributionTypes: '', title:'' };
 
     useEffect(() => {
         setData(announcements);
@@ -62,6 +69,8 @@ export default function AnnouncementPage({announcements,
             queryParams.page = effectivePage.toString();
             queryParams.regions = regionFilters.map((c) => c).join(',');
             queryParams.recipients = recipientFilters.map((c) => c).join(',');
+            queryParams.contributionTypes =  contributionTypeFilters.map((c) => c).join(',');
+            queryParams.title = titleFilters;
 
             navigation.replace({
                 pathname: navigation.basePath,
@@ -76,7 +85,7 @@ export default function AnnouncementPage({announcements,
         }
 
 
-    }, [effectivePage,regionFilters, recipientFilters])
+    }, [effectivePage,regionFilters, recipientFilters,contributionTypeFilters, titleFilters])
 
 
     return (
@@ -90,9 +99,14 @@ export default function AnnouncementPage({announcements,
 
                             <div className={"flex flex-row flex-wrap justify-between"}>
                                 <div className={"w-full lg:w-3/12 mb-6 lg:mb-0 relative h-fit"}>
-                                    <div className={"filters containerLeftBefore"}>
-                                        <Filter title={"Filtri"}
-                                                setPage={setEffectivePage}
+                                    <div className={"filters containerLeftBefore flex flex-col gap-4"}>
+                                        <h3 className={"mb-2"}>Filtri</h3>
+                                        <SearchBar  placeholder={"Cerca"}
+                                                    setPage={setEffectivePage}
+                                                    setDataFilter={setTitleFilters}
+                                                    dataFilter={titleFilters}
+                                        />
+                                        <Filter setPage={setEffectivePage}
                                                 categoriesFilter={
                                                     [
                                                         {   title:"Regioni",
@@ -115,6 +129,16 @@ export default function AnnouncementPage({announcements,
                                                             listItemFiltered: recipientsFilterData,
                                                             dataFilter: recipientFilters,
                                                             setDataFilter: setRecipientFilters,
+                                                        },
+                                                        {   title:"Tipo di contributo",
+                                                            items: contributionTypes?.map((text) => {
+                                                                return{
+                                                                    title: text.description
+                                                                }
+                                                            }),
+                                                            listItemFiltered: contributionTypesFilterData,
+                                                            dataFilter: contributionTypeFilters ,
+                                                            setDataFilter: setContributionTypeFilters,
                                                         }
                                                     ]
                                                 } />
@@ -125,6 +149,8 @@ export default function AnnouncementPage({announcements,
                                                              className={"h-full w-full  flex l-0 bg-white items-center justify-center text-center justify-items-center"}>sta caricando..</motion.div>}
 
                                     {!loading &&  <AnnouncementList announcements={data!} /> }
+                                    {!loading && (data.length <= 0) && <motion.div  initial={{opacity:0}}  animate={{opacity:1}} transition={{duration:0.3}}
+                                                                                                                          className={"h-full w-full  flex l-0 bg-white items-center justify-center text-center justify-items-center"}>La ricerca non ha prodotto alcun risultato</motion.div>}
                                 </div>
 
                                 <div className={"w-full"}>
@@ -154,13 +180,15 @@ export default function AnnouncementPage({announcements,
 // This gets called on every request
 export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
     // Fetch data from external API
-    const {page,regions,recipients} = context.query;
+    const {page,regions,recipients,contributionTypes, title} = context.query;
 
     const currentPage = +(page ?? 1);
 
     const currentRegionsFilter = regions ? (regions as string).split(',') : [];
     const currentRecipientsFilter = recipients ? (recipients as string).split(',') : [];
+    const currentContributionTypesFilter = contributionTypes ? (contributionTypes as string).split(',') : [];
 
+    const currentTitleSearch = title ? (title as string).toLowerCase() : '';
     const announcementService = new AnnouncementService();
 
     const announcements = await announcementService.find({
@@ -183,6 +211,17 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
                     operator:FilterOperator.containsCaseInsensitive,
                     value: item.toString()}
             }) : []),
+            ...(currentContributionTypesFilter ? currentContributionTypesFilter?.map((item : any) => {
+                return{
+                    field:["tipoContributo","descrizione"],
+                    operator:FilterOperator.containsCaseInsensitive,
+                    value: item.toString()}
+            }) : []),
+            {
+                field:["titolo"],
+                operator: FilterOperator.containsCaseInsensitive,
+                value: currentTitleSearch
+            }
 
         ]
     })
@@ -193,8 +232,8 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
     const recipientService = new CustomerTargetService();
     const recipientsData = await recipientService.find();
 
-    if(currentPage > (announcements?.paginationInfo.pageCount ?? 1) || (!announcements))
-        return NextjsUtils.returnNotFoundObject();
+    const contributionTypeService = new ContributionTypeService();
+    const contributionTypesData = await contributionTypeService.find();
 
     return NextjsUtils.returnServerSidePropsObject({
         announcements: announcements?.data,
@@ -206,6 +245,11 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
 
         recipients: recipientsData?.data,
         recipientsFilterData : currentRecipientsFilter,
+
+        contributionTypes: contributionTypesData?.data,
+        contributionTypesFilterData : currentContributionTypesFilter,
+
+        titleFilterData : currentTitleSearch
     });
 
 }

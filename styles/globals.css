@@ -308,7 +308,7 @@ a {
 
 
 .floatingInputOutLineBox input{
-  @apply block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-600 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 bg-white
+  @apply block px-2.5 pb-2.5 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-sm border-[1.5px] border-gray-200 appearance-none dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-blue-600 bg-white
 }
 
 .floatingInputOutLineBox label {
