@@ -219,36 +219,36 @@ a {
   @apply relative no-underline
 }
 
-.linkItem  a::after,.linkItem div::after{
+.linkItem  a::after,.linkItem div:not(.subMenu)::after{
   content: "";
   transform: scale(0,1);
   @apply absolute left-0 w-full h-[1.15px] bg-black -bottom-[3.5px] transition duration-300 origin-top-right
 }
-.linkItem  a:hover::after,.linkItem div:hover::after{
+.linkItem > a:hover::after,.linkItem > div:not(.subMenu):hover::after{
   content: "";
   transform: scale(1,1);
   @apply origin-top-left
 }
 
-.linkItemWhite.linkItem a::after, .linkItemWhite.linkItem div::after{
+.linkItemWhite.linkItem a::after, .linkItemWhite.linkItem div:not(.subMenu)::after{
   content: "";
   @apply bg-white
 }
 
-.linkItemPrimary.linkItem a::after, .linkItemPrimary.linkItem div::after{
+.linkItemPrimary.linkItem a::after, .linkItemPrimary.linkItem div:not(.subMenu)::after{
   content: "";
   @apply bg-primary
 }
-.linkItemPrimary.linkItem a:hover::after .linkItemPrimary.linkItem div:hover::after{
+.linkItemPrimary.linkItem a:hover::after .linkItemPrimary.linkItem div:not(.subMenu):hover::after{
   content: "";
   @apply bg-primary-600
 }
 
-.linkItem.active a, .linkItem.active div{
+.linkItem.active > a, .linkItem.active > div{
   @apply text-primary
 }
 
-.linkItem.active a::after{
+.linkItem.active > a::after{
   content: "";
   transform: scale(1,1);
   @apply origin-top-left bg-primary

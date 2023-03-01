@@ -1,8 +1,5 @@
-import {IMenuItem} from "../config/models/IMenuItem";
-
 
 export interface ConfigurationData {
-
     positionOffice? : string,
     openingDaysHours? : string,
     emailContact?: Link,
@@ -26,5 +23,6 @@ interface Link {
     title: string,
     icon?: string
     afterTitle?: string,
-    button?: boolean
+    button?: boolean,
+    subItems?: Link[]
 }

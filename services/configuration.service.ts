@@ -17,6 +17,12 @@ export class ConfigurationService extends BaseStrapiService2Types<ConfigurationD
                     afterTitle:  headerLink.afterTitle,
                     beforeTitle: headerLink.beforeTitle,
                     button : headerLink.button,
+                    subItems : headerLink.subItems ? headerLink.subItems.map((subItem : any) => {
+                        return {
+                            href: subItem.href,
+                            title: subItem.title
+                        }
+                    }) : null
                 }
             }),
             footerLogo : this._baseUrl +  res.attributes.logoFooter.data.attributes.url,
@@ -71,6 +77,12 @@ export class ConfigurationService extends BaseStrapiService2Types<ConfigurationD
                     afterTitle:  headerLink.afterTitle,
                     beforeTitle: headerLink.beforeTitle,
                     button : headerLink.button,
+                    subItems : headerLink.subItems.map((subItem : any) => {
+                                return {
+                                    href: subItem.href,
+                                    title: subItem.title
+                                }
+                        })
                 }
             }),
             footerLogo : 'http://localhost:1337' + res.attributes.logoFooter.data.attributes.url,

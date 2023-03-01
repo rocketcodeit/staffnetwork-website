@@ -14,6 +14,7 @@ export function Header( props : HeaderProps){
     const [isMobile, setIsMobile] = useState(false);
     const [isOpen, setOpen] = useState(true);
 
+    const [isOpenSubMenu, setIsOpenSubMenu] = useState(-1);
     const router = useRouter();
 
 
@@ -39,6 +40,15 @@ export function Header( props : HeaderProps){
 
     }
 
+    function handleCloseMenuMobile(){
+        if(isMobile)
+            setOpen(false);
+    }
+
+    function openSubItemsMenu(index: number){
+        setIsOpenSubMenu((isOpenSubMenu === index)  ? -1 : index);
+    }
+
     const handleButtonClick  = () => {
         setIsActive(current => !current);
         //setMenuClass(current => !current      oppure direttamente active)
@@ -57,8 +67,19 @@ export function Header( props : HeaderProps){
 
                         <ul className={`${styles.menu} ${(isOpen && isMobile) ? styles.menuMobileOpen : ""}`}>
                             { props.data.headerLinks?.map((item, index : number) => {
-                                return <li key={index}  className={`${item.button ? 'ml-4 btn' : 'linkItem' }  ${router.asPath == item.href ? 'active' : ''}`} >
-                                    <Link href={item.href} >{item.title}</Link>
+                                return <li key={index}  className={`${item.button ? ' ml-4 btn ' : 'linkItem' } ${router.asPath == item.href ? 'active' : ''} ${item.subItems ? styles.subMenuChild : "" }`} >
+                                     <Link  onMouseOver={() => openSubItemsMenu(index)} onClick={handleCloseMenuMobile} className={`${styles.elementsLink}`} href={item.href} >{item.title}</Link>
+                                    {(!isMobile && item.subItems) &&
+                                            <div className={`${styles.subMenu} ${isOpenSubMenu === index ? styles.show : ''}`}>
+                                                <ul>
+                                                    {item.subItems.map((subItem,num) => {
+                                                        return  <li className={`delay-[${index*75 + 175}ms] linkItem  ${router.asPath == subItem.href ? 'active' : ''}`} key={num}>
+                                                            <Link onClick={handleCloseMenuMobile} href={subItem.href}>{subItem.title}</Link>
+                                                        </li>
+                                                    })}
+                                                </ul>
+                                            </div>
+                                    }
                                 </li>
                             })}
                         </ul>

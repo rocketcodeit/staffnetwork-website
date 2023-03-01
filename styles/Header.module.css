@@ -6,21 +6,22 @@
 }
 .menu {
     @apply  lg:flex flex-row lg:h-full lg:mr-8 transition lg:relative lg:top-0 lg:justify-end lg:w-full lg:px-0 lg:opacity-100 h-full lg:overflow-visible
-            absolute top-16 left-0 container bg-white z-20 h-screen transition-all h-0 overflow-hidden
+            absolute top-16 left-0 right-0 bg-white z-20 h-screen  transition-all h-0 overflow-hidden
+
 }
 .menu.menuMobileOpen{
-    @apply  h-screen
+    @apply  h-screen flex flex-col flex-wrap
 }
 .menu > li  {
-    @apply flex items-center lg:w-auto
+    @apply flex items-center lg:w-auto lg:max-w-full container lg:m-0 lg:p-0 lg:max-w-full
             w-full;
 }
-.menu > li a {
+.menu > li a, .menu > li .elementsLink {
     @apply  flex items-center p-3 lg:w-auto
             w-full justify-end;
 }
 
-.menu > li a::after {
+.menu > li a::after, .menu > li .elementsLink::after {
     @apply  bottom-1;
 }
 
@@ -45,20 +46,32 @@
     width: 125%;
 }
 
+
+.subMenu{
+    @apply after:!content-[none]
+}
 .subMenuChild{
    @apply lg:flex-row flex-col lg:!items-center  !items-start
 }
-.subMenuChild:hover  .subMenu{
+
+
+ .subMenu.show{
     @apply opacity-100 scale-y-100 pointer-events-auto flex
 }
 
 
-.subMenuChild:hover  .subMenu > li{
+.subMenuChild:hover  .subMenu ul > li, .subMenu.show ul > li{
     @apply opacity-100
 }
 .subMenu{
-    @apply lg:flex flex-col items-start lg:p-4 lg:absolute lg:top-16  bg-white opacity-0 lg:w-fit
+    @apply lg:flex flex-col items-start lg:p-4 lg:!absolute lg:top-16  bg-white opacity-0 lg:w-fit
     transition-all scale-y-0 origin-top pointer-events-none relative top-0 hidden p-2 w-full
+}
+.subMenu.hide{
+    @apply !scale-y-0 !opacity-0
+}
+ .subMenu ul {
+    @apply w-full lg:w-auto
 }
 
 .subMenu li{

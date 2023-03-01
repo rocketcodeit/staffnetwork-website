@@ -41,8 +41,8 @@ export function Layout(props: LayoutProps){
 
 
     useEffect(() => {
-        console.log(configuration);
-    }, [configuration])
+        console.log(data);
+    }, [data])
 
     return (
 
