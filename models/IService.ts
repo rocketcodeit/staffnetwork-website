@@ -32,7 +32,7 @@ export interface IService {
     requestForm?:{
         title:string,
         text: string,
-        field:{
+        field?:{
             id: string,
             type: string,
             size: 100 | 50 | 33,
@@ -49,7 +49,7 @@ export interface IService {
                 }[]
             }
         }[]
-        button:{
+        button?:{
             id:string,
             type:string,
             text:string,

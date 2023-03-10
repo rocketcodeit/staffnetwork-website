@@ -15,7 +15,7 @@
 }
 
 .itemDescription{
-    @apply mt-3 max-w-4xl
+    @apply mt-3 max-w-4xl flex-auto sm:flex-16-1.5
 }
 
 .itemBoxText{
@@ -24,7 +24,7 @@
 }
 
 .itemLink{
-    @apply absolute right-6 bottom-6
+    @apply flex-auto sm:flex-6-1.5 min-w-fit flex justify-end items-end
 }
 
 .list{

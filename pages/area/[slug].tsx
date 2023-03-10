@@ -15,6 +15,7 @@ import {AreaService} from "../../services/area.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
 import {ProductService} from "../../services/service.service";
 import {FilterOperator} from "../../models/strapi-query-params";
+import Head from "next/head";
 
 let url = "http://localhost:1337";
 
@@ -28,6 +29,10 @@ export default function AreaPage({area,services} : AreaPageProps){
     console.log(stringToConcat.concat("fds"))
     return(
         <motion.section variants={opacityAnimation} initial="initial" animate="final" className="overflow-hidden mt-4 mb-12">
+            <Head>
+                <title>{area.name}</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <section id={"abo"}>
                 <motion.div className="containerRight flex flex-wrap justify-between">
                     <motion.div variants={fadeInUp} className="w-full order-1">
@@ -100,7 +105,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
     const services = await productService
         .find({
             populate: [ {value: "aree,dettagli", level: 0 }],
-            filter : [{field:["aree","slug"],operator:FilterOperator.containsCaseInsensitive, value:"amministrazione"}]
+            filter : [{field:["aree","slug"],operator:FilterOperator.containsCaseInsensitive, value:slug.toString()}]
         })
 
 

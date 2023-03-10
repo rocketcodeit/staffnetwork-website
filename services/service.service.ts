@@ -14,7 +14,13 @@ export class ProductService extends BaseStrapiService2Types<IService, IServiceLi
             details:{
                 summary: res.attributes.summary
             },
-            description: res.attributes.description
+            description: res.attributes.description,
+            area: res.attributes.aree && res.attributes.aree.data?.map((area : any) => {
+                return{
+                    slug:area.attributes.slug,
+                    title:area.attributes.titolo
+                }
+            }),
         }
     }
 
@@ -55,6 +61,10 @@ export class ProductService extends BaseStrapiService2Types<IService, IServiceLi
                 discountPrice : res.attributes.prezzo?.prezzoScontato,
                 currency : "€"
             },
+            requestForm:{
+                title: res.attributes.titoloForm,
+                text: res.attributes.descrizioneForm
+            }
         }
     }
 }

@@ -25,6 +25,12 @@
     @apply  bottom-1;
 }
 
+.menu > li.btnHeader{
+    @apply ml-0 lg:ml-4
+}
+ .elementsLink.btnHeaderLink{
+    @apply !p-5 h-full
+}
 .hamburgerButton{
     @apply w-8 h-8
 }

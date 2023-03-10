@@ -48,6 +48,9 @@ export function Header( props : HeaderProps){
     function openSubItemsMenu(index: number){
         setIsOpenSubMenu((isOpenSubMenu === index)  ? -1 : index);
     }
+    function closeSubItemsMenu(){
+        setIsOpenSubMenu( -1);
+    }
 
     const handleButtonClick  = () => {
         setIsActive(current => !current);
@@ -67,8 +70,8 @@ export function Header( props : HeaderProps){
 
                         <ul className={`${styles.menu} ${(isOpen && isMobile) ? styles.menuMobileOpen : ""}`}>
                             { props.data.headerLinks?.map((item, index : number) => {
-                                return <li key={index}  className={`${item.button ? ' ml-4 btn ' : 'linkItem' } ${router.asPath == item.href ? 'active' : ''} ${item.subItems ? styles.subMenuChild : "" }`} >
-                                     <Link  onMouseOver={() => openSubItemsMenu(index)} onClick={handleCloseMenuMobile} className={`${styles.elementsLink}`} href={item.href} >{item.title}</Link>
+                                return <li key={index}  className={`${item.button ? 'btn '+ styles.btnHeader : 'linkItem' } ${router.asPath == item.href ? 'active' : ''} ${item.subItems ? styles.subMenuChild : "" }`} >
+                                     <Link  onMouseOver={() => openSubItemsMenu(index)} onMouseOut={closeSubItemsMenu} onClick={handleCloseMenuMobile} className={`${styles.elementsLink} ${item.button ? styles.btnHeaderLink : ''}`} href={item.href} >{item.title}</Link>
                                     {(!isMobile && item.subItems) &&
                                             <div className={`${styles.subMenu} ${isOpenSubMenu === index ? styles.show : ''}`}>
                                                 <ul>
@@ -85,17 +88,7 @@ export function Header( props : HeaderProps){
                         </ul>
 
                         { isMobile &&
-                            <Hamburger toggled={isOpen} toggle={setOpen} direction="right" size={26} rounded onToggle={toggled => {
-                                if(toggled){
-
-                                    console.log("menu aperto");
-                                    //open a menu
-                                }
-                                else{
-                                    //close a menu
-                                    console.log("menu chiuso");
-                                }
-                            }} />
+                            <Hamburger toggled={isOpen} toggle={setOpen} direction="right" size={24} rounded />
                         }
                     </div>
 

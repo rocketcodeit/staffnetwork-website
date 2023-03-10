@@ -120,7 +120,7 @@ export default function ServicePage({service} : ServicePageProps){
                         <div id={"contattaci"} className={" w-12/12 lg:w-6/12 relative "}>
                             <div className={"mx-auto"}>
                                 <h3 className={`${service.buyable ? "text-left" : "text-center"}`}>{service.requestForm?.title}</h3>
-                                <p className={`max-w-xl  mt-2 ${service.buyable ? "text-left" : "text-center mx-auto"}`}>{service.requestForm?.text}</p>
+                                <div className={`max-w-xl  mt-2 ${service.buyable ? "text-left" : "text-center mx-auto"}`} dangerouslySetInnerHTML={{__html:service.requestForm?.text || ''}} />
                             </div>
                             <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
                             <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"bg-gray-200 lg:p-12 md:p-8 px-6 py-4 mx-auto flex gap-x-9 gap-y-6 flex-2-1.5 flex-wrap mt-8"}>
