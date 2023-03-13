@@ -40,10 +40,6 @@ export function Layout(props: LayoutProps){
     }, [firstLoad,data])
 
 
-    useEffect(() => {
-        console.log(data);
-    }, [data])
-
     return (
 
         <React.Fragment>

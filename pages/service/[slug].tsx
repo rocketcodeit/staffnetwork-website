@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {config} from "../../config/breadcrumbs.config";
@@ -13,6 +13,7 @@ import Link from "next/link";
 import {IArea} from "../../config/models/IArea";
 import {ProductService} from "../../services/service.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
+import {CartContextProvider, CartProviderContext} from "../../components/Provider/CartProvider";
 let url ="http://localhost:1337";
 
 interface ServicePageProps{
@@ -20,7 +21,15 @@ interface ServicePageProps{
 }
 
 export default function ServicePage({service} : ServicePageProps){
+    const cartProvider = useContext(CartProviderContext);
+    const handleAddToCart = () => {
+        cartProvider.addCartItem(service);
+    };
 
+    useEffect(() => {
+        console.log(cartProvider.getCartItems());
+
+    }, [cartProvider])
     return(
         <motion.section initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 0.4,ease: "easeOut"}}>
             <Head>
@@ -114,7 +123,7 @@ export default function ServicePage({service} : ServicePageProps){
 
                                     }
                                 </div>
-                                <Link href={""} className={"btn w-full text-center"}>Acquista</Link>
+                                <button onClick={handleAddToCart} className={"btn w-full text-center"}>Acquista</button>
                             </div>
                         </div> }
                         <div id={"contattaci"} className={" w-12/12 lg:w-6/12 relative "}>

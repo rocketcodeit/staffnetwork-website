@@ -17,9 +17,7 @@ import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {config} from "../../config/breadcrumbs.config";
 import React from "react";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {PostDetail} from "../../models/postDetail";
-import {IArea} from "../../config/models/IArea";
-import {ReactSVG} from "react-svg";
+
 import {ComeLavoriamoData} from "../../models/come-lavoriamo-data";
 import {HowWeWorkService} from "../../services/how-we-work.service";
 import {NextjsUtils} from "../../services/nextjs-utils";

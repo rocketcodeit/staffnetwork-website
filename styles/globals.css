@@ -231,7 +231,9 @@ a {
   transform: scale(1,1);
   @apply origin-top-left
 }
-
+.linkItemWhite{
+  @apply text-white
+}
 .linkItemWhite.linkItem a::after, .linkItemWhite.linkItem div:not(.subMenu)::after{
   content: "";
   @apply bg-white
@@ -308,7 +310,7 @@ a {
 }
 
 
-
+/*#region Input Field */
 .floatingInputOutLineBox input{
   @apply block px-2.5 pb-2.5 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-sm border-[1.5px] border-gray-200 appearance-none dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-blue-600 bg-white
 }
@@ -333,6 +335,47 @@ a {
   @apply absolute duration-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]
   text-gray-400
 }
+/*endregion*/
+
+/*#region Radio Field */
+
+.radioGroup{
+  @apply flex gap-3 flex-col
+}
+.radioItem {
+  @apply flex items-center
+}
+.radioItem input[type='radio']{
+  @apply   w-5 h-5 relative cursor-pointer
+          after:content-[''] after:absolute after:w-full after:h-full after:text-white after:bg-white after:rounded-full after:flex after:items-center after:justify-center after:transition-all
+          after:border-2 after:border-zinc-300
+}
+.radioItem input[type='radio']:hover{
+  @apply  after:border-primary-200
+}
+
+.radioItem input[type='radio']:checked{
+  @apply  after:content-['•'] after:bg-primary after:rounded-full
+          after:border-2 after:border-primary
+}
+
+/*endregion*/
+
+/*#region Radio Button */
+.radioButton{
+  @apply flex max-h-12 items-center bg-primary-50 relative
+}
+.radioButton input[type='radio']{
+  @apply w-full h-full absolute cursor-pointer top-0 left-0 opacity-0
+}
+input[type='radio']:checked + .boxRadioButton {
+  @apply border-primary-400
+}
+
+.boxRadioButton{
+  @apply flex items-center w-full h-full py-3 px-5 border-2 border-primary-50 transition-all
+}
+/*endregion*/
 
 /*#region Filters Elements */
 .filters{

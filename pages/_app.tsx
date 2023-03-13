@@ -4,6 +4,7 @@ import {AnimatePresence} from "framer-motion";
 import {useContext, useState} from "react";
 import {Layout} from "../components/Layout/Layout";
 import {AppProvider, AppProviderContext} from "../components/Provider/AppContext";
+import {CartContextProvider} from "../components/Provider/CartProvider";
 
 
 
@@ -13,7 +14,10 @@ import {AppProvider, AppProviderContext} from "../components/Provider/AppContext
 export default function App({ Component, pageProps, router }: AppProps) {
     return(
         <AppProvider>
-            <AppInner pageProps={pageProps} Component={Component} router={router} />
+            <CartContextProvider>
+                <AppInner pageProps={pageProps} Component={Component} router={router} />
+            </CartContextProvider>
+
         </AppProvider>
     );
 }
