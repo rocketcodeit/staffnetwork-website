@@ -1,27 +1,19 @@
 import {motion} from "framer-motion";
-import {blockTextReveal} from "../../animations";
-import {RiBuildingLine, RiUser3Line} from "react-icons/ri";
+import {blockTextReveal, itemFade} from "../../animations";
+import {RiBuildingLine, RiMailCloseLine, RiMailSendLine, RiUser3Line} from "react-icons/ri";
 import React, {useEffect, useState} from "react";
 import {IService} from "../../models/IService";
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 import {processEnv} from "@next/env";
+import {IDataForm, IDataQuote} from "../../models/dataForm";
+import {CartService} from "../../services/cart.service";
 
 export interface FieldCheckoutProps{
     services : IService[],
-    categorySelected : string
 }
 
-export interface IDataForm{
-    name?: string,
-    surname?: string,
-    email: string,
-    phone: string,
-    vatNumber?: string,
-    fiscalCode?:string,
-    companyName?:string
 
-}
-export default function Checkout(props : any){
+export default function Checkout(props : FieldCheckoutProps){
 
 
     let emptyFields : IDataForm = {
@@ -31,42 +23,35 @@ export default function Checkout(props : any){
         phone: '',
         vatNumber: '',
         fiscalCode : '',
-        companyName: ''
+        companyName: '',
     }
 
-    const [selectedOption, setSelectedOption] = useState("");
-    const [categorySelectedOption, setCategorySelectedOption] = useState("");
-    const [status,setStatus] = useState();
+    const [selectedOption, setSelectedOption] = useState("bonifico");
+    const [categorySelectedOption, setCategorySelectedOption] = useState("personaFisica");
+    const [status,setStatus] = useState<number>(-1);
+    const [isVisible, setIsVisible] = useState<boolean>(true);
+
     const [dataForm, setDataForm] = useState<IDataForm>(
         {
             email: '',
-            phone: ''
+            phone: '',
         }
     );
 
 
     const handleSubmit = async (e : any) => {
+        setIsVisible(false);
         e.preventDefault();
+        /**
+         * @warning Va eliminata la gestione del baseUrl dal component
+         */
+        const dataCart =  new CartService("http://localhost:1337");
+        const dataInfo = dataCart.bindData(dataForm, props.services);
+        const responsePost = await dataCart.postData(dataInfo);
 
-        const DataInfo = {
-            name: dataForm.name,
-            surname: dataForm.surname,
-            email: dataForm.email,
-            phone: dataForm.phone,
-            CodiceFiscale: dataForm.fiscalCode,
-            PartitaIva: dataForm.vatNumber,
-            RagioneSociale: dataForm.companyName
-        }
+        setStatus((responsePost as AxiosResponse).status);
+        console.log(responsePost);
 
-        await axios
-            .post("http://localhost:1337/api/preventivis", { data: DataInfo })
-            .then((response) => {
-                setStatus(response.status);
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
     }
 
     const handleInputChange = (event : any) => {
@@ -80,19 +65,26 @@ export default function Checkout(props : any){
     }
 
     useEffect(() => {
-        if(status == 200)
-            setDataForm(emptyFields)
+        setDataForm(emptyFields)
+        const timer = setTimeout(() => {
+            setStatus(0);
+            setIsVisible(true);
+        }, 4000);
+        return () => clearTimeout(timer);
+
     },[status])
 
 
      return (
-        <div>
-            <div>
+        <div className={"relative"}>
+            <motion.div variants={itemFade}
+                        initial={isVisible ? "show" : "hidden"}
+                        animate={isVisible ? "show" : "hidden"}>
                 <h3 className={"mb-4"}>Dettagli di fatturazione</h3>
                 <motion.form onSubmit={handleSubmit} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"mx-auto flex gap-6 flex-wrap mt-8 justify-between"}>
                     <div className="relative md:flex-2-1.5 flex-auto z-0">
                         <div className={"radioButton"}>
-                            <input type={"radio"} id="personaFisica" name="categoriaUtente" value="personaFisica" onChange={handleCategoryChange} />
+                            <input type={"radio"} id="personaFisica" name="categoriaUtente" value="personaFisica" defaultChecked={categorySelectedOption === "personaFisica" ?? false } onChange={handleCategoryChange} />
                             <div className={`boxRadioButton`}>
                                 <RiUser3Line className={"w-6 h-6 text-primary"}/>
                                 <label htmlFor="personaFisica" className={"ml-2"}>Persona Fisica</label>
@@ -101,7 +93,7 @@ export default function Checkout(props : any){
                     </div>
                     <div className="relative md:flex-2-1.5 flex-auto z-0">
                         <div className={"radioButton"}>
-                            <input type={"radio"} id="societa" name="categoriaUtente" value="societa" onChange={handleCategoryChange} />
+                            <input type={"radio"} id="societa" name="categoriaUtente" value="societa" defaultChecked={categorySelectedOption === "societa" ?? false } onChange={handleCategoryChange} />
                             <div className={`boxRadioButton`}>
                                 <RiBuildingLine className={"w-6 h-6 text-primary"}/>
                                 <label htmlFor="societa" className={"ml-2"}>Società</label>
@@ -140,7 +132,7 @@ export default function Checkout(props : any){
                         <label htmlFor="floating_standard"  className=" peer-focus:left-0 peer-focus:text-primary-light peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Telefono*</label>
                     </div>
                     <div className="relative md:flex-2-1.5 flex-auto z-0 floatingInput">
-                        <input type="email" id="floating_standard" className="peer" placeholder=" " name="email"  value={dataForm.email} onChange={handleInputChange}/>
+                        <input type="email" id="floating_standard" className="peer" placeholder=" " name="email"  value={dataForm.email} required onChange={handleInputChange}/>
                         <label htmlFor="floating_standard"  className=" peer-focus:left-0 peer-focus:text-primary-light peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email*</label>
                     </div>
 
@@ -148,12 +140,8 @@ export default function Checkout(props : any){
                         <h4 className={"mb-3"}>Modalità di pagamento</h4>
                         <fieldset className={"radioGroup"}>
                             <div className={"radioItem"}>
-                                <input type={"radio"} id="bonificoBancario" name="paymentMethod" value="bonifico" onChange={(e) => setSelectedOption(e.target.value)} />
+                                <input type={"radio"} id="bonificoBancario" name="paymentMethod" value="bonifico" checked onChange={(e) => setSelectedOption(e.target.value)} />
                                 <label htmlFor="bonificoBancario" className={"ml-2"}>Bonifico bancario</label>
-                            </div>
-                            <div className={"radioItem"}>
-                                <input type={"radio"} id="paypal" name="paymentMethod" value="paypal" onChange={(e) => setSelectedOption(e.target.value)} />
-                                <label htmlFor="paypal" className={"ml-2"}>Paypal</label>
                             </div>
                         </fieldset>
                         <div className={"infoPaymentMethod overflow-hidden mt-5"}>
@@ -170,13 +158,26 @@ export default function Checkout(props : any){
                     </div>
 
                 </motion.form>
-            </div>
+            </motion.div>
 
-            {status== 200 &&
-                <div>
-                    Operazione effettuata con successo
-                </div>
+            {
+                (status >= 200 && status <= 299) &&
+                <motion.div initial={{opacity:0}} animate={{opacity:1}} className={"absolute w-full h-full bg-white flex items-center flex-col flex-wrap justify-start z-10 top-0 gap-5"}>
+                    <RiMailSendLine className={"w-12 h-12 text-green-800"} />
+                    <h4>Operazione effettuata con successo</h4>
+                </motion.div>
             }
+
+
+            {
+                (status >= 400 && status <= 599) &&
+                <motion.div initial={{opacity:0}} animate={{opacity:1}} className={"absolute w-full h-full bg-white flex items-center flex-col flex-wrap justify-start z-10 top-0 gap-5"}>
+                    <RiMailCloseLine className={"w-12 h-12 text-red-800"} />
+                    <h4>Operazione fallita </h4>
+                </motion.div>
+            }
+
+
 
 
         </div>

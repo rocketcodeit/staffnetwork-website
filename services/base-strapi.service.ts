@@ -2,6 +2,7 @@ import {StrapiUrlBuilder} from "./strapi-url-builder";
 import httpClient from "./http-client";
 import {PaginatedResult} from "../models/paginated-result";
 import {StrapiQueryParams} from "../models/strapi-query-params";
+import {AxiosError, AxiosResponse} from "axios";
 
 export abstract class BaseStrapiService2Types<TFull, TList> {
     private _strapiResource: string;
@@ -94,6 +95,18 @@ export abstract class BaseStrapiService2Types<TFull, TList> {
             });
     }
 
+    public postData(data: TFull) : Promise<AxiosResponse<any> | void>{
+        const url = new StrapiUrlBuilder(this._strapiResource)
+                .build();
+
+        return httpClient.post(this._baseUrl ? this._baseUrl + url : url, {data})
+            .then((response) => {
+                return response;
+            })
+            .catch((err : any) => {
+                console.log(err)
+            });
+    }
     abstract mapForFind(res: any): TList;
 
     abstract mapForSingle(res:any): TFull;

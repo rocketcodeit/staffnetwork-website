@@ -154,6 +154,13 @@ a {
   @apply bg-gray-800
 }
 
+.btn.delete{
+  @apply bg-red-800
+}
+.btn.delete:after{
+  @apply bg-red-600
+}
+
 /*endregion */
 
 .btn-arrow{
@@ -398,3 +405,16 @@ input[type='radio']:checked + .boxRadioButton {
     @apply bg-primary-600 text-white
   }
 /*endregion */
+
+
+.btnCart{
+  @apply p-4 block bg-primary-100 transition-all origin-center origin-right
+}
+
+.btnCart:hover{
+  @apply p-4 block scale-95
+}
+
+.btnCart.active{
+  @apply bg-black text-white
+}

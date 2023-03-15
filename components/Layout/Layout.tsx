@@ -5,20 +5,39 @@ import {Header} from "./Header";
 import {ConfigurationService} from "../../services/configuration.service";
 import { motion } from 'framer-motion';
 import {AppProviderContext} from "../Provider/AppContext";
+import {CartProviderContext} from "../Provider/CartProvider";
+import {RiShoppingCartLine} from "react-icons/ri";
+import Link from "next/link";
+import {useRouter} from "next/router";
 
 export interface LayoutProps{
     children : any
     isVisible? : boolean,
 }
 
+export const CART_URL = '/cart';
+
 export function Layout(props: LayoutProps){
     const [data, setData] = useState<ConfigurationDataFull>()
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const [isVisible, setIsVisible] = useState(false);
     const {configuration} = useContext(AppProviderContext);
+    const cartProvider = useContext(CartProviderContext);
+    const [isVisibleCart, setIsVisibleCart] = useState(false);
+
+    const router = useRouter();
+    useEffect(() => {
+        if(cartProvider.getCartItems().length > 0)
+            setIsVisibleCart(true);
+        else
+            setIsVisibleCart(false);
+    },[cartProvider])
 
     useEffect( () => {
         if(firstLoad || !data) {
+            /**
+             * @warning Va eliminata la gestione del baseUrl dal component
+             */
             const configService = new ConfigurationService("http://localhost:1337");
 
             configService.getSingle({
@@ -48,8 +67,11 @@ export function Layout(props: LayoutProps){
                         transition={{ duration: 1 }} >
                 {data && <Header data={data} /> }
                 <main>{props.children}</main>
-
-                <motion.div >{configuration?.openingDaysHours}</motion.div>
+                <motion.div  className={"fixed top-1/2 right-0"} initial={{opacity: 0}}  animate={{ opacity: isVisibleCart ? 1 : 0, x: isVisibleCart ? 0 : 100}} transition={{duration: 0.4, delay: 0.2, ease: "easeInOut"}}>
+                   <Link href={CART_URL} className={`btnCart ${router.asPath == CART_URL ? 'active' : ''}`}>
+                       <RiShoppingCartLine />
+                   </Link>
+                </motion.div>
                 {data && <Footer data={data} />}
             </motion.div>
 

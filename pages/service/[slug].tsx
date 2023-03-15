@@ -14,6 +14,8 @@ import {IArea} from "../../config/models/IArea";
 import {ProductService} from "../../services/service.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
 import {CartContextProvider, CartProviderContext} from "../../components/Provider/CartProvider";
+import {redirect} from "next/navigation";
+import {useRouter} from "next/router";
 let url ="http://localhost:1337";
 
 interface ServicePageProps{
@@ -22,14 +24,12 @@ interface ServicePageProps{
 
 export default function ServicePage({service} : ServicePageProps){
     const cartProvider = useContext(CartProviderContext);
+    const router = useRouter();
+
     const handleAddToCart = () => {
         cartProvider.addCartItem(service);
+        router.push('/cart');
     };
-
-    useEffect(() => {
-        console.log(cartProvider.getCartItems());
-
-    }, [cartProvider])
     return(
         <motion.section initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 0.4,ease: "easeOut"}}>
             <Head>

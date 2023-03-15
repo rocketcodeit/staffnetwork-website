@@ -20,8 +20,6 @@ export interface IServiceListProps {
 export function ServiceList (props : IServiceListProps){
 
 
-    console.log(props.cartList ? "si" : "no");
-
     return(
         <motion.div variants={containerSlideUp} initial="hidden" whileInView="show" viewport={{once:true}} className={styles.list} >
 
