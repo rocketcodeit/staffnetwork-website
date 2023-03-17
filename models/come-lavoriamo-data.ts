@@ -28,4 +28,9 @@ export interface ComeLavoriamoData {
         title: string,
         description : any,
     },
+
+    dataSeo?:{
+        title: string,
+        description:string
+    }
 }

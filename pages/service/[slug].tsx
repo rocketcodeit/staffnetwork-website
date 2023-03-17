@@ -16,6 +16,7 @@ import {NextjsUtils} from "../../services/nextjs-utils";
 import {CartContextProvider, CartProviderContext} from "../../components/Provider/CartProvider";
 import {redirect} from "next/navigation";
 import {useRouter} from "next/router";
+import Form, {TypeCategory} from "../../components/FormRequest/FormRequest";
 let url ="http://localhost:1337";
 
 interface ServicePageProps{
@@ -126,47 +127,9 @@ export default function ServicePage({service} : ServicePageProps){
                                 <button onClick={handleAddToCart} className={"btn w-full text-center"}>Acquista</button>
                             </div>
                         </div> }
-                        <div id={"contattaci"} className={" w-12/12 lg:w-6/12 relative "}>
-                            <div className={"mx-auto"}>
-                                <h3 className={`${service.buyable ? "text-left" : "text-center"}`}>{service.requestForm?.title}</h3>
-                                <div className={`max-w-xl  mt-2 ${service.buyable ? "text-left" : "text-center mx-auto"}`} dangerouslySetInnerHTML={{__html:service.requestForm?.text || ''}} />
-                            </div>
-                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                            <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"bg-gray-200 lg:p-12 md:p-8 px-6 py-4 mx-auto flex gap-x-9 gap-y-6 flex-2-1.5 flex-wrap mt-8"}>
-                                <div className="relative md:flex-2-1.5 flex-auto z-0 floatingInput">
-                                    <input type="text" id="floating_standard" className="peer" placeholder=" "/>
-                                    <label htmlFor="floating_standard"  className=" peer-focus:left-0 peer-focus:text-primary-light peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nome</label>
-                                </div>
-                                <div className="relative md:flex-2-1.5 flex-auto z-0 floatingInput">
-                                    <input type="text" id="floating_standard" className="peer" placeholder=" "/>
-                                    <label htmlFor="floating_standard"  className=" peer-focus:left-0 peer-focus:text-primary-light peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Cognome</label>
-                                </div>
-                                <div className="relative md:flex-2-1.5 flex-auto z-0 floatingInput">
-                                    <input type="tel" id="floating_standard" className="peer" placeholder=" "/>
-                                    <label htmlFor="floating_standard"  className=" peer-focus:left-0 peer-focus:text-primary-light peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Telefono*</label>
-                                </div>
-                                <div className="relative md:flex-2-1.5 flex-auto z-0 floatingInput">
-                                    <input type="email" id="floating_standard" className="peer" placeholder=" "/>
-                                    <label htmlFor="floating_standard"  className=" peer-focus:left-0 peer-focus:text-primary-light peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email*</label>
-                                </div>
-                                <div className="relative w-full z-0 floatingInput">
-                                    <select id="underline_select" className="peer">
-                                        <option selected>In quale categoria ti riconosci?</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                </div>
-                                <div className="relative w-full z-0 floatingInput">
-                                    <textarea id="floating_standard" className={"w-full"} placeholder="Richiesta"></textarea>
-                                </div>
-
-                                <div className={"w-fit mx-auto mt-2"}>
-                                    <button type={"submit"} className={"btn"}>Invia</button>
-                                </div>
-
-                            </motion.div>
+                        <div id={"contattaci"} className={"w-12/12 lg:w-6/12 relative "}>
+                            <Form title={service.requestForm?.title} description={service.requestForm?.text} page={"Servizio - " + service.title}
+                                  typePage={service.buyable ? TypeCategory.purchasableItem : TypeCategory.item}/>
                         </div>
                     </section>
 

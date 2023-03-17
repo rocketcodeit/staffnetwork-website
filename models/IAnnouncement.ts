@@ -7,7 +7,7 @@ export interface IAnnouncement extends IAnnouncementList{
     area? : AnnouncementaArea,
     provinces? :  string[],
     investimentType : string,
-    contributionType : string,
+    contributionType : string[],
     link?: {
         text: string,
         href: string

@@ -5,18 +5,13 @@ import {config} from "../../config/breadcrumbs.config";
 import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {motion} from "framer-motion";
 import {ServiceList} from "../../components/Service/ServiceList";
-import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {PostDetail} from "../../models/postDetail";
-import {IService, IServiceList} from "../../models/IService";
-import {IAnnouncement} from "../../models/IAnnouncement";
+import {GetServerSideProps} from "next";
+import {IService} from "../../models/IService";
 import {IArea} from "../../config/models/IArea";
 import Checkbox from "../../components/Checkbox/Checkbox";
-import {AnnouncementList} from "../../components/Announcement/AnnouncementList";
-import {PostCategory} from "../../models/post-category";
 import {useRouter} from "next/router";
 import {ProductService} from "../../services/service.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
-import {PostCategoriesService} from "../../services/post-categories.service";
 import {AreaService} from "../../services/area.service";
 
 

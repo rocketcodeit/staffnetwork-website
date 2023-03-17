@@ -56,7 +56,9 @@ export class AnnouncementService extends BaseStrapiService2Types<IAnnouncement, 
                 return provincia.attributes.nome
             }),
             investimentType : res.attributes.tipoInvestimento.data?.attributes.descrizione,
-            contributionType : res.attributes.tipoContributo.data?.attributes.descrizione,
+            contributionType : res.attributes.tipoContributo && res.attributes.tipoContributo.data?.map((contribute : any) => {
+                return contribute.attributes.descrizione
+            }),
 
             obj : res.attributes.specifiche.map((spec : any, index : number) => {
                 return{

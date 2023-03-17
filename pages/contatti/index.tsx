@@ -12,6 +12,7 @@ import {NextjsUtils} from "../../services/nextjs-utils";
 import {ConfigurationService} from "../../services/configuration.service";
 import {ConfigurationData} from "../../models/configuration-data";
 import {ReactSVG} from "react-svg";
+import Form from "../../components/FormRequest/FormRequest";
 
 
 interface ContattiPage{
@@ -98,59 +99,7 @@ export default function Contatti({data, configData} : ContattiPage) {
                     </motion.div>
                 </section>
                 <section id={"form"} className={"lg:mt-20 mt-10"}>
-                    <motion.div>
-                        <div className={"lg:w-5/12 md:w-8/12  w-11/12 mx-auto"}>
-                            <div className={"w-fit relative mx-auto"}>
-                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                               <motion.h3 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-center mb-4"}>{data.form.title}</motion.h3>
-                            </div>
-                            <div className={"w-fit relative mx-auto"}>
-                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                                <motion.div dangerouslySetInnerHTML={{__html:data.form.description}} variants={blockTextReveal} className={"text-center"} initial="initial" whileInView="final" viewport={{ once: true }} />
-
-                            </div>
-                        </div>
-                        <div className={"w-fit relative mx-auto"}>
-                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                            <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"xl:w-7/12 lg:w-8/12 w-11/12 bg-gray-200 lg:p-12 md:p-8 px-6 py-4 mx-auto flex gap-x-9 gap-y-6 flex-2-1.5 flex-wrap mt-8 mb-20"}>
-
-
-                                <div className="relative md:flex-2-1.5 flex-auto z-0 floatingInput">
-                                    <input type="text" id="floating_standard" className="peer" placeholder=" "/>
-                                    <label htmlFor="floating_standard"  className=" peer-focus:left-0 peer-focus:text-primary-light peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nome</label>
-                                </div>
-                                <div className="relative md:flex-2-1.5 flex-auto z-0 floatingInput">
-                                    <input type="text" id="floating_standard" className="peer" placeholder=" "/>
-                                    <label htmlFor="floating_standard"  className=" peer-focus:left-0 peer-focus:text-primary-light peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Cognome</label>
-                                </div>
-                                <div className="relative md:flex-2-1.5 flex-auto z-0 floatingInput">
-                                    <input type="tel" id="floating_standard" className="peer" placeholder=" "/>
-                                    <label htmlFor="floating_standard"  className=" peer-focus:left-0 peer-focus:text-primary-light peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Telefono*</label>
-                                </div>
-                                <div className="relative md:flex-2-1.5 flex-auto z-0 floatingInput">
-                                    <input type="email" id="floating_standard" className="peer" placeholder=" "/>
-                                    <label htmlFor="floating_standard"  className=" peer-focus:left-0 peer-focus:text-primary-light peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email*</label>
-                                </div>
-                                <div className="relative w-full z-0 floatingInput">
-                                    <select id="underline_select" className="peer">
-                                        <option selected>In quale categoria ti riconosci?</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                </div>
-                                <div className="relative w-full z-0 floatingInput">
-                                    <textarea id="floating_standard" className={"w-full"} placeholder="Richiesta"></textarea>
-                                </div>
-                                <div className={"w-fit mx-auto mt-2"}>
-                                    <button type={"submit"} className={"btn"}>Invia</button>
-                                </div>
-                            </motion.div>
-                        </div>
-
-
-                    </motion.div>
+                    <Form title={data.form.title} description={data.form.description} page={data.title} />
                 </section>
             </motion.div>
         </>
