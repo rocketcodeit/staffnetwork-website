@@ -22,7 +22,8 @@
     "react-mapbox-gl": "^5.1.1",
     "react-query": "^3.39.3",
     "react-select": "^5.7.0",
-    "react-svg": "^15.1.17"
+    "react-svg": "^15.1.17",
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.2",
