@@ -1,13 +1,11 @@
 import Head from 'next/head'
-import styles from '../../styles/Contatti.module.css'
 import {motion} from "framer-motion";
-import configuration from "../../config/WebsiteConfig";
-import {container, fadeInUp, item, stagger, blockReveal, blockTextReveal} from "../../animations";
+import {fadeInUp, blockReveal, blockTextReveal} from "../../animations";
 import React from "react";
 import Link from "next/link";
-import ReactMapboxGl, {Layer, Feature, Marker} from 'react-mapbox-gl';
+import ReactMapboxGl, {Marker} from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import {GetServerSideProps, InferGetServerSidePropsType} from "next";
+import {GetServerSideProps} from "next";
 import {ContattiData} from "../../models/contatti-data";
 import {ContactsService} from "../../services/contacts.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
@@ -83,10 +81,9 @@ export default function Contatti({data, configData} : ContattiPage) {
                         <motion.div variants={fadeInUp} className={`w-full lg:w-5/12 backgroundRight bg-cover relative h-56 lg:h-auto order-last overflow-hidden lg:mt-0 mt-6`}>
 
                             <Map
-
                                 style={data.map?.style}
-                                center={[data.map?.position?.latitude,data.map?.position?.longitude]}
-                                zoom={[data.map?.zoom]}
+                                center={[data.map?.position?.latitude ?? 0,data.map?.position?.longitude ?? 0]}
+                                zoom={[data.map?.zoom ?? 0]}
                                 containerStyle={{
                                     height: '500px',
                                     width: '100%'
