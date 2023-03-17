@@ -69,6 +69,7 @@ export function Layout(props: LayoutProps){
                         transition={{ duration: 1 }} >
                 <Head>
                     <link rel="icon" type="image/x-icon" href={data?.faviconLogo} />
+                    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 </Head>
                 {data && <Header data={data} /> }
                 <main>{props.children}</main>

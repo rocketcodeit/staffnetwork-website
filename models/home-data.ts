@@ -1,3 +1,5 @@
+import {HeadData} from "./head-data";
+
 export interface HomeData {
     title: string,
     descriptionAboveTheFold: string,
@@ -10,4 +12,5 @@ export interface HomeData {
     imgAree: any,
     imgDati: any,
     imgPartnership: any
+    dataSeo : HeadData
 }

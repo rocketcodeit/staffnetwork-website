@@ -62,51 +62,10 @@ export default function ServicesPage({services, pageCount, currentPage, areas} :
         }
 
     }
-/*
 
-const castServicesData = (dataEntry : any) : IService[] => {
-        return dataEntry?.map((i : any) => {
-            return {
-                title: i.attributes.title,
-                slug: i.attributes.slug,
-                area:
-                    i.attributes.aree.data.map((area : any) => {
-                        return{
-                            slug:area.attributes.slug,
-                            title:area.attributes.title
-                        }
-                    }),
-                details:{
-                    summary: i.attributes.summary
-                },
-                description: i.attributes.description
-            }
-        })
-    }
-
-    const servicesData = castServicesData(data);
-
-
-    useEffect(() => {
-
-        setLoading(true);
-
-        fetch(`${url}/api/services?populate=*${categories?.map((i: any) => `&filters[aree][titolo][$containsi]=${i}`).join('')}&pagination[page]=${effectivePage}`)
-            .then((res) => {
-
-                res.json().then((dataFiltered) => {
-
-                    const servicesFiltered = castServicesData(dataFiltered.data);
-                    setServices(servicesFiltered);
-                    setLoading(false);
-                })
-            });
-
-    }, [effectivePage,categories])
-*/
 
     return (
-        <>
+        <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}}>
 
                 <div className={styles.container}>
                     <section className={"mt-8"}>
@@ -154,7 +113,7 @@ const castServicesData = (dataEntry : any) : IService[] => {
 
                     </section>
                 </div>
-        </>
+        </motion.div>
     );
 }
 

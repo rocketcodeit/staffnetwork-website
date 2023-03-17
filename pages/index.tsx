@@ -13,6 +13,7 @@ import {TeamMember} from "../models/team-member";
 import {HomeData} from "../models/home-data";
 import {useContext, useEffect} from "react";
 import {AppProviderContext} from "../components/Provider/AppContext";
+import Head from "next/head";
 
 interface HomeProps {
     posts: PostDetail[],
@@ -33,6 +34,9 @@ export default function Home({posts, services, home, membersTeam, backendUrl} : 
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}}
                     className={styles.container}>
+            <Head>
+                <title>{home.dataSeo.title}</title>
+            </Head>
             <section>
                 <div className={styles.aboveTheFold}>
                     <div className={`h-full`} style={{ backgroundImage: `url("${url + home.imgAboveTheFold.data.attributes.url}")`}}></div>
@@ -152,6 +156,7 @@ export default function Home({posts, services, home, membersTeam, backendUrl} : 
                 </div>
             </section>
         </motion.div>
+
     )
 }
 
