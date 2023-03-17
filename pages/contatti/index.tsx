@@ -1,13 +1,11 @@
 import Head from 'next/head'
-import styles from '../../styles/Contatti.module.css'
 import {motion} from "framer-motion";
-import configuration from "../../config/WebsiteConfig";
-import {container, fadeInUp, item, stagger, blockReveal, blockTextReveal} from "../../animations";
+import {fadeInUp, blockReveal, blockTextReveal} from "../../animations";
 import React from "react";
 import Link from "next/link";
-import ReactMapboxGl, {Layer, Feature, Marker} from 'react-mapbox-gl';
+import ReactMapboxGl, {Marker} from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import {GetServerSideProps, InferGetServerSidePropsType} from "next";
+import {GetServerSideProps} from "next";
 import {ContattiData} from "../../models/contatti-data";
 import {ContactsService} from "../../services/contacts.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
