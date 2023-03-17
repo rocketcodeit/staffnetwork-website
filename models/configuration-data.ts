@@ -10,7 +10,7 @@ export interface ConfigurationData {
 
 export interface ConfigurationDataFull extends ConfigurationData{
     headerLogo: string,
-
+    faviconLogo?: string
     footerLogo?: string,
     headerLinks?: Link[],
     footerLinks?: any[],

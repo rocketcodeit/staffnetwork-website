@@ -55,6 +55,7 @@ export class ConfigurationService extends BaseStrapiService2Types<ConfigurationD
             }),
 
             headerLogo : this._baseUrl  + res.attributes.logoHeader.data.attributes.url,
+            faviconLogo : this._baseUrl + res.attributes.favicon.data.attributes.url,
             positionOffice : res.attributes.indirizzo,
             openingDaysHours: res.attributes.orariApertura,
             contactLinks : res.attributes.contattoLink.map((contact : any,index: number) => {

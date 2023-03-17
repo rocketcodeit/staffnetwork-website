@@ -1,20 +1,32 @@
 import {motion} from "framer-motion";
 import {blockTextReveal, itemFade} from "../../animations";
 import {RiBuildingLine, RiMailCloseLine, RiMailSendLine, RiUser3Line} from "react-icons/ri";
-import React, {useEffect, useState} from "react";
+import React, {Dispatch, useEffect, useState} from "react";
 import {IService} from "../../models/IService";
 import axios, {AxiosResponse} from "axios";
 import {processEnv} from "@next/env";
 import {IDataForm, IDataQuote} from "../../models/dataForm";
 import {CartService} from "../../services/cart.service";
+import {useRouter} from "next/router";
 
 export interface FieldCheckoutProps{
     services : IService[],
+    confirmAction : React.Dispatch<boolean>
 }
 
 
 export default function Checkout(props : FieldCheckoutProps){
+    const router = useRouter();
+    const confirmSendSuccess = (status: number) => {
+        if(status >= 200 && status <= 299){
+            props.confirmAction(true);
+            router.push("/");
+        }
+        else{
+            props.confirmAction(false);
+        }
 
+    }
 
     let emptyFields : IDataForm = {
         name: '',
@@ -50,7 +62,6 @@ export default function Checkout(props : FieldCheckoutProps){
         const responsePost = await dataCart.postData(dataInfo);
 
         setStatus((responsePost as AxiosResponse).status);
-        console.log(responsePost);
 
     }
 
@@ -67,8 +78,10 @@ export default function Checkout(props : FieldCheckoutProps){
     useEffect(() => {
         setDataForm(emptyFields)
         const timer = setTimeout(() => {
+            confirmSendSuccess(status);
             setStatus(0);
             setIsVisible(true);
+
         }, 4000);
         return () => clearTimeout(timer);
 

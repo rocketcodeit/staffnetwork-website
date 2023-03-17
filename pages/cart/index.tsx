@@ -15,11 +15,20 @@ export default function CartPage(props: any) {
     const [selectedOption, setSelectedOption] = useState("");
     const [categorySelectedOption, setCategorySelectedOption] = useState("");
     const [isVisible, setIsVisible] = useState<boolean>(cartProvider.getCartItems.length > 0);
-
+    const [quoteSended, setQuoteSended] = useState<boolean>(false);
     const handleRemoveAllToCart = () => {
         cartProvider.removeAllCartItem();
         setIsVisible(false);
     }
+
+    const handleQuoteSendedChange = (value: boolean) => {
+        setQuoteSended(value);
+    };
+
+    useEffect(() => {
+        if(quoteSended)
+            cartProvider.removeAllCartItem();
+    },[quoteSended])
 
     useEffect(() => {
         if(cartProvider.getCartItems().length > 0)
@@ -63,7 +72,7 @@ export default function CartPage(props: any) {
 
                                     </div>
                                     <div className={"w-full lg:w-7/12 mt-12 lg:mt-0"}>
-                                        <Checkout services={cartProvider.getCartItems()}/>
+                                        <Checkout services={cartProvider.getCartItems()} confirmAction={handleQuoteSendedChange}/>
                                     </div>
                                 </div>
                             </div>
