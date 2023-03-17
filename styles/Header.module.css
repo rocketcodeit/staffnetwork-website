@@ -5,7 +5,7 @@
     @apply lg:max-h-20  max-h-16 py-3
 }
 .menu {
-    @apply  lg:flex flex-row lg:h-full lg:mr-8 transition lg:relative lg:top-0 lg:justify-end lg:w-full lg:px-0 lg:opacity-100 h-full lg:overflow-visible
+    @apply  lg:flex flex-row lg:h-full transition lg:relative lg:top-0 lg:justify-end lg:w-full lg:px-0 lg:opacity-100 h-full lg:overflow-visible
             absolute top-16 left-0 right-0 bg-white z-20 h-screen  transition-all h-0 overflow-hidden
 
 }
@@ -61,7 +61,7 @@
 }
 
 
- .subMenu.show{
+ .subMenu.show, .subMenuChild:hover .subMenu{
     @apply opacity-100 scale-y-100 pointer-events-auto flex
 }
 

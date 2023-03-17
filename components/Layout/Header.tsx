@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {IHeaderConfiguration} from "../../config/models/IHeaderConfiguration";
 import {useRouter} from "next/router";
 import styles from "../../styles/Header.module.css"
 import { Cross as Hamburger } from 'hamburger-react'
 import Link from "next/link";
-import {ConfigurationData, ConfigurationDataFull} from "../../models/configuration-data";
+import {ConfigurationDataFull} from "../../models/configuration-data";
 
 interface HeaderProps {
     data : ConfigurationDataFull
@@ -71,7 +70,7 @@ export function Header( props : HeaderProps){
                         <ul className={`${styles.menu} ${(isOpen && isMobile) ? styles.menuMobileOpen : ""}`}>
                             { props.data.headerLinks?.map((item, index : number) => {
                                 return <li key={index}  className={`${item.button ? 'btn '+ styles.btnHeader : 'linkItem' } ${router.asPath == item.href ? 'active' : ''} ${item.subItems ? styles.subMenuChild : "" }`} >
-                                     <Link  onMouseOver={() => openSubItemsMenu(index)} onMouseOut={closeSubItemsMenu} onClick={handleCloseMenuMobile} className={`${styles.elementsLink} ${item.button ? styles.btnHeaderLink : ''}`} href={item.href} >{item.title}</Link>
+                                     <Link  onClick={handleCloseMenuMobile} className={`${styles.elementsLink} ${item.button ? styles.btnHeaderLink : ''}`} href={item.href} >{item.title}</Link>
                                     {(!isMobile && item.subItems) &&
                                             <div className={`${styles.subMenu} ${isOpenSubMenu === index ? styles.show : ''}`}>
                                                 <ul>
