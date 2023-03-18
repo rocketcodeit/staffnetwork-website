@@ -75,7 +75,16 @@ export default function ServicePage({service} : ServicePageProps){
                             <div className={styles.buttonsContainer}>
                                 {service.buyable &&
                                     <div className={"flex flex-row items-center gap-5"}>
-                                        <h5>€ {service.buyable.price}</h5>
+                                        {
+                                            service.buyable?.discountPrice ?
+                                                <div className={"text-end"} >
+                                                    <del className={"text-gray-600"}>{service.buyable?.price} €</del>
+                                                    <h3>{service.buyable?.discountPrice} €</h3>
+                                                </div>  :
+                                                <h5> {service.buyable?.price} €</h5>
+
+
+                                        }
                                         <Link href={"#acquista"} className={"btn black"}>Acquista</Link>
                                     </div>
                                 }

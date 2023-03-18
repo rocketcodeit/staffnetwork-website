@@ -40,9 +40,10 @@ export class HowWeWorkService extends BaseStrapiService<ComeLavoriamoData> {
                 title: res.attributes.contatti.titolo,
                 description:  res.attributes.contatti.descrizione,
             },
-            dataSeo:{
-                title: res.attributes.datiSeo.title,
-                description: res.attributes.datiSeo.description
+            dataSeo: {
+                title : res.attributes.datiSeo.title,
+                description: res.attributes.datiSeo.description,
+                keyWords : res.attributes.datiSeo.keyWords?.map((item : any) =>  item.keyWord)
             }
         };
 

@@ -1,3 +1,5 @@
+import {HeadData} from "./head-data";
+
 export interface ComeLavoriamoData {
     title: string,
     descriptionAboveTheFold?: any,
@@ -29,8 +31,5 @@ export interface ComeLavoriamoData {
         description : any,
     },
 
-    dataSeo?:{
-        title: string,
-        description:string
-    }
+    dataSeo?: HeadData
 }
