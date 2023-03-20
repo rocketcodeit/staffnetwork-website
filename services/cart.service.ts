@@ -7,8 +7,8 @@ import {StrapiQueryParams} from "../models/strapi-query-params";
 
 
 export class CartService extends BaseStrapiService<IDataQuote>{
-    constructor(baseUrl? : string) {
-        super("preventivis", StrapiResourceType.collection, baseUrl);
+    constructor() {
+        super("preventivis", StrapiResourceType.collection);
     }
 
     mapForSingle(res: any): IDataQuote {

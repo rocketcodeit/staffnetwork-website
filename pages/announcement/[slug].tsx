@@ -14,8 +14,6 @@ import {AnnouncementService} from "../../services/announcement.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
 import Form, {TypeCategory} from "../../components/FormRequest/FormRequest";
 
-let url = "http://localhost:1337";
-
 interface IAnnouncementPageProps {
     announcement: IAnnouncement
 }

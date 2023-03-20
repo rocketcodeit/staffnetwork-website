@@ -1,6 +1,7 @@
 import {createContext, useEffect, useState} from "react";
 import {ConfigurationDataFull} from "../../models/configuration-data";
 import {ConfigurationService} from "../../services/configuration.service";
+import getConfig from 'next/config'
 
 export interface AppProviderProps{
     configuration?: ConfigurationDataFull,
@@ -17,8 +18,7 @@ export function AppProvider(props:any){
 
     const [configuration, setConfiguration] = useState<ConfigurationDataFull | undefined>( undefined);
 
-
-    const configurationService = new ConfigurationService("http://localhost:1337");
+    const configurationService = new ConfigurationService();
 
     const setConfigurationData = () => {
         configurationService.getSingle().then((res) => {

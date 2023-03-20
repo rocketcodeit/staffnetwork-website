@@ -17,8 +17,6 @@ import {ProductService} from "../../services/service.service";
 import {FilterOperator} from "../../models/strapi-query-params";
 import Head from "next/head";
 
-let url = "http://localhost:1337";
-
 interface AreaPageProps{
     area : IArea,
     services :  IService[]

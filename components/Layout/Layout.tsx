@@ -39,7 +39,7 @@ export function Layout(props: LayoutProps){
             /**
              * @warning Va eliminata la gestione del baseUrl dal component
              */
-            const configService = new ConfigurationService("http://localhost:1337");
+            const configService = new ConfigurationService();
 
             configService.getSingle({
                 populate:[

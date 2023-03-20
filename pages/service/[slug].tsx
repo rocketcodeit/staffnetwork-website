@@ -17,7 +17,6 @@ import {CartContextProvider, CartProviderContext} from "../../components/Provide
 import {redirect} from "next/navigation";
 import {useRouter} from "next/router";
 import Form, {TypeCategory} from "../../components/FormRequest/FormRequest";
-let url ="http://localhost:1337";
 
 interface ServicePageProps{
     service : IService,

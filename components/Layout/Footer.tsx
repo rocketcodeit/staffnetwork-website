@@ -6,8 +6,6 @@ import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {ConfigurationDataFull} from "../../models/configuration-data";
 import {ReactSVG} from "react-svg";
 
-let url = "http://localhost:1337";
-
 interface FooterProps {
     data : ConfigurationDataFull
 }

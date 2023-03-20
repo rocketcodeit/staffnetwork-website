@@ -4,8 +4,8 @@ import {AxiosResponse} from "axios/index";
 import {IService} from "../models/IService";
 
 export class RequestsService extends BaseStrapiService<IDataRequest>{
-    constructor(baseUrl? : string) {
-        super("requests", StrapiResourceType.collection, baseUrl);
+    constructor() {
+        super("requests", StrapiResourceType.collection);
     }
 
     mapForSingle(res: any): IDataRequest {

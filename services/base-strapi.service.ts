@@ -3,16 +3,21 @@ import httpClient from "./http-client";
 import {PaginatedResult} from "../models/paginated-result";
 import {StrapiQueryParams} from "../models/strapi-query-params";
 import {AxiosError, AxiosResponse} from "axios";
+import getConfig from "next/config";
 
 export abstract class BaseStrapiService2Types<TFull, TList> {
     private _strapiResource: string;
     private readonly _resourceType: StrapiResourceType;
-    protected readonly  _baseUrl : string | undefined = process.env.BACKEND_URL;
+    protected readonly  _baseUrl : string;
 
-    protected constructor(strapiResource: string, resourceType: StrapiResourceType, baseUrl?: string) {
+    protected constructor(strapiResource: string, resourceType: StrapiResourceType) {
+
+        const { publicRuntimeConfig } = getConfig();
+        const backendUrl = publicRuntimeConfig.backendUrl;
+
         this._strapiResource = strapiResource;
         this._resourceType = resourceType;
-        this._baseUrl = baseUrl;
+        this._baseUrl = backendUrl;
     }
 
     public getBySlug(slug: string, params?: StrapiQueryParams): Promise<TFull | undefined> {

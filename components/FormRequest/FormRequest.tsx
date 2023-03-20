@@ -53,7 +53,7 @@ export default function Form(props: FormProps) {
         /**
          * @warning Va eliminata la gestione del baseUrl dal component
          */
-        const dataRequest =  new RequestsService("http://localhost:1337");
+        const dataRequest =  new RequestsService();
         const dataInfoSended = dataRequest.bindData(dataForm);
         const responsePost = await dataRequest.postData(dataInfoSended);
         console.log(responsePost);

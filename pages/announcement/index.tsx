@@ -18,9 +18,6 @@ import Filter from "../../components/Filters/Filter";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import {ContributionTypeService, IContributionType} from "../../services/contribution-type.service";
 
-let url ="http://localhost:1337";
-
-
 interface AnnouncementsProps{
     announcements: IAnnouncement[],
     pageCount?: number,

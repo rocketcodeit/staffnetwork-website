@@ -19,8 +19,6 @@ import {WhoWeAreService} from "../../services/who-we-are.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
 import {TeamMemberService} from "../../services/team-member.service";
 
-let url = "http://localhost:1337";
-
 interface ChiSiamoPage {
     data : ChiSiamoData,
     membersTeam : TeamMember[]

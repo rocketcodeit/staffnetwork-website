@@ -57,7 +57,7 @@ export default function Checkout(props : FieldCheckoutProps){
         /**
          * @warning Va eliminata la gestione del baseUrl dal component
          */
-        const dataCart =  new CartService("http://localhost:1337");
+        const dataCart =  new CartService();
         const dataInfo = dataCart.bindData(dataForm, props.services);
         const responsePost = await dataCart.postData(dataInfo);
 

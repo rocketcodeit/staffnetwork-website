@@ -1,11 +1,12 @@
 import {BaseStrapiService, BaseStrapiService2Types, StrapiResourceType} from "./base-strapi.service";
 import {ConfigurationData, ConfigurationDataFull} from "../models/configuration-data";
+import getConfig from "next/config";
 
 export class ConfigurationService extends BaseStrapiService2Types<ConfigurationDataFull, ConfigurationData> {
 
 
-    constructor(baseUrl? : string) {
-        super("configurazione", StrapiResourceType.single, baseUrl);
+    constructor() {
+        super("configurazione", StrapiResourceType.single);
     }
 
     mapForSingle(res: any): ConfigurationDataFull {
@@ -41,7 +42,7 @@ export class ConfigurationService extends BaseStrapiService2Types<ConfigurationD
                     beforeTitle: social.beforeTitle,
                     title: social.title,
                     afterTitle: social.afterTitle,
-                    icon: 'http://localhost:1337' + social.icon.data.attributes.url
+                    icon: this._baseUrl + social.icon.data.attributes.url
                 }
             }),
             conditionLinks : res.attributes.conditionLinks.map((conditionLink : any) => {
@@ -86,7 +87,7 @@ export class ConfigurationService extends BaseStrapiService2Types<ConfigurationD
                         })
                 }
             }),
-            footerLogo : 'http://localhost:1337' + res.attributes.logoFooter.data.attributes.url,
+            footerLogo : this._baseUrl + res.attributes.logoFooter.data.attributes.url,
             footerLinks : res.attributes.footerLinks.map((footerLink : any) => {
                 return{
                     href: footerLink.href,
@@ -102,7 +103,7 @@ export class ConfigurationService extends BaseStrapiService2Types<ConfigurationD
                     beforeTitle: social.beforeTitle,
                     title: social.title,
                     afterTitle: social.afterTitle,
-                    icon: 'http://localhost:1337' + social.icon.data.attributes.url
+                    icon: this._baseUrl + social.icon.data.attributes.url
                 }
             }),
             conditionLinks : res.attributes.conditionLinks.map((conditionLink : any) => {
