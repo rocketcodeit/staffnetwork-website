@@ -22,9 +22,8 @@ export class HomeService extends BaseStrapiService<HomeData> {
             servizi: res.attributes.servizi,
             staff: res.attributes.staff,
             dataSeo: {
-                title : res.attributes.datiSeo.title,
-                description: res.attributes.datiSeo.description,
-                keyWords : res.attributes.datiSeo.keyWords?.map((item : any) =>  item.keyWord)
+                title : res.attributes.datiHomeSeo.title,
+                description: res.attributes.datiHomeSeo.description,
             }
         };
     }
