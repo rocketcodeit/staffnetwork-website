@@ -199,7 +199,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     const comeLavoriamoData = await comeLavoriamoService.getSingle({
         populate : [
             {value:'*'},
-            {value:'metodo,contatti,staff,img,datiSeo', level: 0},
+            {value:'metodo,contatti,staff,img,datiComeLavoriamoSeo', level: 0},
             {value:'metodo.direttiva,' +
                     'metodo.step,' +
                     'metodo.imgDirettiva,' +
