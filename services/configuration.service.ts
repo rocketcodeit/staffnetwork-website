@@ -26,7 +26,7 @@ export class ConfigurationService extends BaseStrapiService2Types<ConfigurationD
                     }) : null
                 }
             }),
-            footerLogo : this._baseUrl +  res.attributes.logoFooter.data.attributes.url,
+            footerLogo : res.attributes.logoFooter.data.attributes.url,
             footerLinks : res.attributes.footerLinks.map((footerLink : any) => {
                 return{
                     href: footerLink.href,
@@ -42,7 +42,7 @@ export class ConfigurationService extends BaseStrapiService2Types<ConfigurationD
                     beforeTitle: social.beforeTitle,
                     title: social.title,
                     afterTitle: social.afterTitle,
-                    icon: this._baseUrl + social.icon.data.attributes.url
+                    icon: social.icon.data.attributes.url
                 }
             }),
             conditionLinks : res.attributes.conditionLinks.map((conditionLink : any) => {
@@ -55,8 +55,8 @@ export class ConfigurationService extends BaseStrapiService2Types<ConfigurationD
                 }
             }),
 
-            headerLogo : this._baseUrl  + res.attributes.logoHeader.data.attributes.url,
-            faviconLogo : this._baseUrl + res.attributes.favicon.data.attributes.url,
+            headerLogo : res.attributes.logoHeader.data.attributes.url,
+            faviconLogo : res.attributes.favicon.data.attributes.url,
             positionOffice : res.attributes.indirizzo,
             openingDaysHours: res.attributes.orariApertura,
             contactLinks : res.attributes.contattoLink.map((contact : any,index: number) => {
@@ -87,7 +87,7 @@ export class ConfigurationService extends BaseStrapiService2Types<ConfigurationD
                         })
                 }
             }),
-            footerLogo : this._baseUrl + res.attributes.logoFooter.data.attributes.url,
+            footerLogo : res.attributes.logoFooter.data.attributes.url,
             footerLinks : res.attributes.footerLinks.map((footerLink : any) => {
                 return{
                     href: footerLink.href,
@@ -103,7 +103,7 @@ export class ConfigurationService extends BaseStrapiService2Types<ConfigurationD
                     beforeTitle: social.beforeTitle,
                     title: social.title,
                     afterTitle: social.afterTitle,
-                    icon: this._baseUrl + social.icon.data.attributes.url
+                    icon: social.icon.data.attributes.url
                 }
             }),
             conditionLinks : res.attributes.conditionLinks.map((conditionLink : any) => {
