@@ -11,7 +11,7 @@ export class WhoWeAreService extends BaseStrapiService<ChiSiamoData> {
         return {
             title: res.attributes.titolo,
             descriptionAboveTheFold: res.attributes.descrizione,
-            img: res.attributes.media.data.attributes.url,
+            img: res.attributes.media.data && res.attributes.media.data.attributes.url,
             story:{
                 title: res.attributes.storia.titolo,
                 description: res.attributes.storia.descrizione

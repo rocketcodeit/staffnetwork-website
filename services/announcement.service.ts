@@ -11,7 +11,7 @@ export class AnnouncementService extends BaseStrapiService2Types<IAnnouncement, 
         return {
             slug: res.attributes.slug,
             title: res.attributes.titolo,
-            img : res.attributes.image.data.attributes.url,
+            img : res.attributes.image.data && res.attributes.image.data.attributes.url,
             details:{
                 summary: res.attributes.summary,
                 startDate : res.attributes.inizio ?? res.attributes.inizio,
@@ -35,7 +35,7 @@ export class AnnouncementService extends BaseStrapiService2Types<IAnnouncement, 
         return {
             slug: res.attributes.slug,
             title: res.attributes.titolo,
-            img : res.attributes.image.data.attributes.url,
+            img : res.attributes.image.data && res.attributes.image.data.attributes.url,
             details:{
                 summary: res.attributes.summary,
                 startDate : res.attributes.inizio ?? res.attributes.inizio,

@@ -43,7 +43,7 @@ export default function AnnouncementPage({announcement}: IAnnouncementPageProps)
                             <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final"
                                        viewport={{once: true}} className="mb-4">{announcement.title}</motion.h1>
                         </div>
-                        <div className={"w-6/12 relative"}>
+                        <div className={"w-full lg:w-6/12 relative"}>
                             <motion.div variants={blockReveal} whileInView="final" viewport={{once: true}}
                                         className="blockOverText bg-gray-200"></motion.div>
                             <motion.div dangerouslySetInnerHTML={{__html: announcement.details.summary}}
@@ -71,7 +71,7 @@ export default function AnnouncementPage({announcement}: IAnnouncementPageProps)
                                     </div>
                                 }
 
-                                {(announcement.provinces) &&
+                                {(announcement.provinces && announcement.provinces.length > 0) &&
                                     <div className={"provincesBox"}>
                                         <div className={"mb-1"}>Provincie</div>
                                         {

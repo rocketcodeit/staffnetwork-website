@@ -57,7 +57,7 @@ export default function ServicePage({service} : ServicePageProps){
                 </section>
 
 
-                    <section id={"dettagli"}>
+                    {( (service.details?.obj && service.details?.obj?.length > 0) || service.buyable) && <section id={"dettagli"}>
                         <div className={"w-12/12 bg-gray-200 p-6 pb-0 pr-0  mt-4" }>
                             <h4 className={""}>Dettagli del servizio</h4>
 
@@ -76,7 +76,7 @@ export default function ServicePage({service} : ServicePageProps){
                                     <div className={"flex flex-row items-center gap-5"}>
                                         {
                                             service.buyable?.discountPrice ?
-                                                <div className={"text-end"} >
+                                                <div className={"text-end flex flex-row items-center gap-3"} >
                                                     <del className={"text-gray-600"}>{service.buyable?.price} €</del>
                                                     <h3>{service.buyable?.discountPrice} €</h3>
                                                 </div>  :
@@ -91,12 +91,12 @@ export default function ServicePage({service} : ServicePageProps){
                             </div>
 
                         </div>
-                    </section>
+                    </section> }
 
                     <section id={"descrizione"}>
                         <div className={"flex flex-wrap justify-between"}>
-                            <div className={"w-12/12 lg:w-7/12"}>
-                                <div className={"mt-8"} dangerouslySetInnerHTML={{__html:service.description}} />
+                            <div className={`w-12/12 lg:w-7/12 ${styles.content}`}>
+                                <div className={`mt-8`} dangerouslySetInnerHTML={{__html:service.description}} />
                                 {service.obj?.map((o) =>{
                                     return <div key={o.id} className={"mt-8"}>
                                         <h3 className={"mb-3"}>{o.title}</h3>

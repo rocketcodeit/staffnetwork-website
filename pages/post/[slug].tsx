@@ -11,6 +11,8 @@ import Head from "next/head";
 import configuration from "../../config/WebsiteConfig"
 import Link from "next/link";
 import {PostCategory} from "../../models/post-category";
+import {PostService} from "../../services/post.service";
+import {NextjsUtils} from "../../services/nextjs-utils";
 
 export default function PostPage({post} : InferGetServerSidePropsType<typeof getServerSideProps>){
     //const dataConfiguration : IWebsiteConfiguration = configuration;
@@ -79,36 +81,17 @@ export default function PostPage({post} : InferGetServerSidePropsType<typeof get
 export const getServerSideProps: GetServerSideProps<{post : PostDetail}> = async (context) => {
 
     const { slug } = context.query
-    let url ="http://localhost:1337";
-    const res = await fetch(url+"/api/posts/"+slug+"?populate=*");
-    const data  =  await res.json();
-    if(!data.data) {
-        return {
-            notFound: true,
-        }
-    }
 
-    const postFound : PostDetail = {
-        slug : data.data.attributes.slug,
-        name : data.data.attributes.title,
-        img : url + data.data.attributes.cover.data.attributes.url,
-        description : data.data.attributes.content,
-        featured : data.data.attributes.featured,
-        categories :
-            data.data.attributes.post_categories.data.map((category : any) => {
-                return {
-                    name: category.attributes.name,
-                    slug: category.attributes.slug
-                }
-            })
-    }
+    const postService = new PostService();
 
+    if (!slug)
+        return NextjsUtils.returnNotFoundObject();
 
-    return{
-        props : {
-            post : postFound
-        }
-    }
+    const postData = await postService.getBySlug(slug.toString());
 
+    if (!postData)
+        return NextjsUtils.returnNotFoundObject();
+
+    return NextjsUtils.returnServerSidePropsObject({post: postData});
 
 }

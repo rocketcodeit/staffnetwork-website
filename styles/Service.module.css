@@ -39,6 +39,10 @@
 
 }
 
-.childDescriptionList p{
+.childDescriptionList p, .childDescriptionList ul li{
     @apply text-1.5xl
+}
+
+.content ul{
+    @apply px-4
 }

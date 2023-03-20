@@ -46,7 +46,7 @@ export class ProductService extends BaseStrapiService2Types<IService, IServiceLi
                 })
             },
             description : res.attributes.description,
-            img : res.attributes.image.data.attributes.url,
+            img : res.attributes.image.data && res.attributes.image.data.attributes.url,
             obj : res.attributes.specifiche?.map((spec : any, index : number) => {
                 return{
                     id: index,

@@ -13,7 +13,7 @@ export class AreaService extends BaseStrapiService<IArea> {
             name : res.attributes.titolo,
             short_description : res.attributes.summary,
             description : res.attributes.description,
-            img : res.attributes.image.data.attributes.url,
+            img : res.attributes.image.data && res.attributes.image.data.attributes.url,
             activities : res.attributes.servizi?.map((activity: any, index : number) =>{
                 return {
                     title: activity.titolo,

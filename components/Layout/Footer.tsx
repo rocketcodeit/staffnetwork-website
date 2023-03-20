@@ -48,9 +48,8 @@ function Footer(props : FooterProps){
                                     {props.data.socialLinks?.map((linkSocial : any, index: number) => {
                                         return <Link key={index} href={linkSocial.href}>
                                             {linkSocial.beforeTitle ? linkSocial.beforeTitle : ""}
-                                            <ReactSVG beforeInjection={(svg) => {
-                                                svg.classList.add('stroke-white')}}
-                                                      className={"text-white stroke-white"} src={linkSocial.icon} />
+                                            <img src={linkSocial.icon} />
+
                                             {linkSocial.afterTitle ? linkSocial.afterTitle : ""}
                                         </Link>
 

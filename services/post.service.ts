@@ -26,7 +26,7 @@ export class PostService extends BaseStrapiService2Types<PostDetail, Post> {
             slug : res.attributes.slug,
             name : res.attributes.title,
             date : res.attributes.date,
-            img: res.attributes.cover.data.attributes.url,
+            img: res.attributes.cover.data && res.attributes.cover.data.attributes.url,
             description : res.attributes.content,
             featured : res.attributes.featured,
         }
