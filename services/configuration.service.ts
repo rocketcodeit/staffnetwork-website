@@ -132,7 +132,7 @@ export class ConfigurationService extends BaseStrapiService2Types<ConfigurationD
                     beforeTitle: social.beforeTitle,
                     title: social.title,
                     afterTitle: social.afterTitle,
-                    icon: process.env.BACKEND_URL + social.icon.data.attributes.url
+                    icon: social.icon.data.attributes.url
                 }
             })
         }

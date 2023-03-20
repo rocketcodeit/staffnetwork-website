@@ -12,7 +12,7 @@ export class TeamMemberService extends BaseStrapiService<TeamMember> {
             slug: res.attributes.slug,
             name: res.attributes.nome,
             surname: res.attributes.cognome,
-            img: res.attributes.image.data && process.env.BACKEND_URL + res.attributes.image.data.attributes.url,
+            img: res.attributes.image.data.attributes.url,
             profession: res.attributes.ruolo,
             link: res.attributes.links?.map((link: any, index: number) => {
                 return {

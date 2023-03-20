@@ -13,7 +13,7 @@ export class HowWeWorkService extends BaseStrapiService<ComeLavoriamoData> {
         const data : ComeLavoriamoData = {
             title: res.attributes.titolo,
             descriptionAboveTheFold: res.attributes.descrizione,
-            img : process.env.BACKEND_URL + res.attributes.img.data.attributes.url,
+            img : res.attributes.img.data.attributes.url,
             bloccoMetodo: {
                 title : res.attributes.metodo.titoloMetodo,
                 description : res.attributes.metodo.descrizioneMetodo,
@@ -28,7 +28,7 @@ export class HowWeWorkService extends BaseStrapiService<ComeLavoriamoData> {
             bloccoDirettiva: {
                 title : res.attributes.metodo.titoloDirettive,
                 description : res.attributes.metodo.descrizioneDirettive,
-                img: process.env.BACKEND_URL + res.attributes.metodo.imgDirettiva.data.attributes.url,
+                img: res.attributes.metodo.imgDirettiva.data.attributes.url,
                 direttiva: res.attributes.metodo.direttiva.map((i : any) => {
                     return{
                         title: i.titolo,
