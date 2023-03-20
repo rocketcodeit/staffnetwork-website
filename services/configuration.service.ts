@@ -4,7 +4,6 @@ import getConfig from "next/config";
 
 export class ConfigurationService extends BaseStrapiService2Types<ConfigurationDataFull, ConfigurationData> {
 
-
     constructor() {
         super("configurazione", StrapiResourceType.single);
     }

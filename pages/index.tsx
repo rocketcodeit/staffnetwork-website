@@ -20,12 +20,10 @@ interface HomeProps {
     services: IArea[],
     home: HomeData,
     membersTeam: TeamMember[],
-    backendUrl: string,
 }
 
-export default function Home({posts, services, home, membersTeam, backendUrl} : HomeProps) {
+export default function Home({posts, services, home, membersTeam} : HomeProps) {
     const {configuration,setConfigurationData} = useContext(AppProviderContext);
-    const url = backendUrl;
 
     useEffect(() => {
             setConfigurationData();
@@ -39,7 +37,7 @@ export default function Home({posts, services, home, membersTeam, backendUrl} : 
             </Head>
             <section>
                 <div className={styles.aboveTheFold}>
-                    <div className={`h-full`} style={{ backgroundImage: `url("${url + home.imgAboveTheFold.data.attributes.url}")`}}></div>
+                    <div className={`h-full`} style={{ backgroundImage: `url("${home.imgAboveTheFold.data.attributes.url}")`}}></div>
                     <motion.div variants={stagger} initial="initial" animate="final" className="drop-shadow-xl bg-zinc-900/80 absolute max-h-full lg:top-48 md:top-24 top-16 left-0 right-36 lg:w-9/12 md:w-10/12 w-11/12 lg:p-20  md:p-12 p-8">
                         <div  className=" relative w-fit overflow-hidden mb-6">
                             <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-700"></motion.div>
@@ -58,7 +56,7 @@ export default function Home({posts, services, home, membersTeam, backendUrl} : 
                 <div className={`${styles.containerLeft} `}>
                     <div
                         className="lg:bg-[url('/assets/img/pexels-faris-al-orfali-1697160%202.png')] bg-none w-full bg-primary-dark flex flex-flow flex-wrap justify-between bg-no-repeat bg-contain bg-right"
-                        style={{backgroundImage: `url("${url + home.imgAree.data.attributes.url}")`}}>
+                        style={{backgroundImage: `url("${home.imgAree.data.attributes.url}")`}}>
                         <div className="xl:w-5/12 lg:w-7/12 w-11/12 lg:pt-32 md:pt-20 pt-12 container ml-0 mb-8">
                             <div className="relative w-fit">
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-600"></motion.div>
@@ -88,7 +86,7 @@ export default function Home({posts, services, home, membersTeam, backendUrl} : 
                     </div>
                 </div>
                 <div className={`${styles.containerRight} flex flex-flow  flex-wrap lg:flex-nowrap `}>
-                    <div className={`${styles.bgListItemDigits} object-cover bg-cover no-repeat `}  style={{backgroundImage: `url("${url + home.imgDati.data.attributes.url}")`}}>
+                    <div className={`${styles.bgListItemDigits} object-cover bg-cover no-repeat `}  style={{backgroundImage: `url("${home.imgDati.data.attributes.url}")`}}>
 
                     </div>
                     <motion.div variants={container} initial="hidden" animate="show" className={`${styles.containerRightBefore}  lg:w-6/12 w-11/12 mb-20 bg-gray-200 lg:ml-[-8.333%] lg:pl-16 lg:py-12  pl-12 py-8 relative`}>
@@ -139,7 +137,7 @@ export default function Home({posts, services, home, membersTeam, backendUrl} : 
                     {home.partnership.link.map((a : any) => <a key={a.id} className="btn block w-fit mt-4" href={a.href}>{a.title}</a>
                         )}
                     </div>
-                    <div className="lg:w-6/12 w-full h-32 lg:h-auto bg-cover bg-[url('/assets/img/pexels-gustavo-fring-628510.png')] bg-center"  style={{backgroundImage: `url("${url + home.imgPartnership.data.attributes.url}")`}}>
+                    <div className="lg:w-6/12 w-full h-32 lg:h-auto bg-cover bg-[url('/assets/img/pexels-gustavo-fring-628510.png')] bg-center"  style={{backgroundImage: `url("${home.imgPartnership.data.attributes.url}")`}}>
                     </div>
                 </div>
             </section>
@@ -170,7 +168,6 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
         membersTeam: result.membersTeam,
         posts: result.posts,
         services: result.services,
-        backendUrl: process.env.BACKEND_URL ?? '',
     }
 
     return {
