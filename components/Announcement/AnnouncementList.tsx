@@ -28,7 +28,7 @@ export function AnnouncementList (props : IAnnouncementListProps){
                 return <AnnouncementItem key={index}
                                          link={`/bandi/${item.slug}`}
                                          title={item.title}
-                                         subtitle={item.contributionType}
+                                         subtitle={item.contributionType ? item.contributionType.join(',') : ''}
                                          date={item.details.expirationDate ? moment(item.details.expirationDate).format('DD.MM.yyyy') : "Nessuna scadenza"}
                                          summary={item.details.summary}
                                          list={listsTitle}
