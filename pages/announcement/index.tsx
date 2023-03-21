@@ -95,6 +95,19 @@ export default function AnnouncementPage({announcements,
                             <h1 className="mb-6">Bandi</h1>
 
                             <div className={"flex flex-row flex-wrap justify-between"}>
+
+                                <div className={"w-full"}>
+                                    <ul className={'paginationItems'}>
+                                        {[...Array(pageCount)].map((e, i) =>
+                                            <li onClick={() => {
+                                                setEffectivePage(i+1)
+                                            }} className={` paginationItem ${effectivePage==(i+1) ? 'selected' : ''}`} key={i}>
+                                                <div className="w-full" >{i+1}</div>
+                                            </li>)
+                                        }
+                                    </ul>
+                                </div>
+
                                 <div className={"w-full lg:w-3/12 mb-6 lg:mb-0 relative h-fit"}>
                                     <div className={"filters containerLeftBefore flex flex-col gap-4"}>
                                         <h3 className={"mb-2"}>Filtri</h3>

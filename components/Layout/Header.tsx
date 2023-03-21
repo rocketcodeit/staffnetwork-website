@@ -70,13 +70,13 @@ export function Header( props : HeaderProps){
                         <ul className={`${styles.menu} ${(isOpen && isMobile) ? styles.menuMobileOpen : ""}`}>
                             { props.data.headerLinks?.map((item, index : number) => {
                                 return <li key={index}  className={`${item.button ? 'btn '+ styles.btnHeader : 'linkItem' } ${router.asPath == item.href ? 'active' : ''} ${item.subItems ? styles.subMenuChild : "" }`} >
-                                     <Link  onClick={handleCloseMenuMobile} className={`${styles.elementsLink} ${item.button ? styles.btnHeaderLink : ''}`} href={item.href} >{item.title}</Link>
+                                     <a  onClick={handleCloseMenuMobile} className={`${styles.elementsLink} ${item.button ? styles.btnHeaderLink : ''}`} href={item.href} >{item.title}</a>
                                     {(!isMobile && item.subItems) &&
                                             <div className={`${styles.subMenu} ${isOpenSubMenu === index ? styles.show : ''}`}>
                                                 <ul>
                                                     {item.subItems.map((subItem,num) => {
                                                         return  <li className={`delay-[${index*75 + 175}ms] linkItem  ${router.asPath == subItem.href ? 'active' : ''}`} key={num}>
-                                                            <Link onClick={handleCloseMenuMobile} href={subItem.href}>{subItem.title}</Link>
+                                                            <a onClick={handleCloseMenuMobile} href={subItem.href}>{subItem.title}</a>
                                                         </li>
                                                     })}
                                                 </ul>

@@ -393,7 +393,7 @@ input[type='radio']:checked + .boxRadioButton {
 
 /*#region Pagination Elements */
   .paginationItems{
-    @apply flex flex-row items-center w-full gap-5 my-5
+    @apply flex flex-row items-center w-full gap-5 my-5 justify-end
   }
 
   .paginationItem div{

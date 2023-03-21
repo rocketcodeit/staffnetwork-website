@@ -23,8 +23,7 @@ interface AreaPageProps{
 }
 
 export default function AreaPage({area,services} : AreaPageProps){
-    let stringToConcat ="bello";
-    console.log(stringToConcat.concat("fds"))
+
     return(
         <motion.section variants={opacityAnimation} initial="initial" animate="final" className="overflow-hidden mt-4 mb-12">
             <Head>
