@@ -160,7 +160,13 @@ export default function Checkout(props : FieldCheckoutProps){
                         <div className={"infoPaymentMethod overflow-hidden mt-5"}>
                             {selectedOption === "bonifico" &&
                                 <motion.div initial={{opacity:0, y:-30}} animate={{opacity:1, y:0}}>
-                                    <div>Intestatario: Nicola Ciano <br/> IBAN: IT25B0306916103100000010927 </div>
+                                    <div>
+                                        Intestatario: Elaborazione Dati Staff S.r.l <br/>
+                                        IBAN: IT66 L070 5641 3300 0001 0108 078 <br/>
+                                        BANCA: BANCA DELL'ALTA MURGIA CREDITO COOPERATIVO <br/>
+                                        BIC: CCRTIT2TMUR <br/>
+                                        CAUSALE: N° Ordine
+                                    </div>
                                 </motion.div>}
                         </div>
 
