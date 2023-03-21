@@ -213,7 +213,8 @@ a {
 /*endregion */
 
 .breadCrumb{
-  @apply flex flex-row
+  @apply flex flex-row;
+  margin-bottom: 32px;
 }
 
 .breadCrumb .breadCrumb__element:after{

@@ -189,7 +189,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
     const announcementService = new AnnouncementService();
 
     const announcements = await announcementService.find({
-        pagination:{page: currentPage, pageSize:1},
+        pagination:{page: currentPage, pageSize:10},
         populate:[
             {value:"*"}
         ],
