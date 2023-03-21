@@ -14,8 +14,8 @@ function TeamMemberItem(props : TeamMemberItemProps){
       <motion.div variants={itemFade} className={styles.item}>
         <img src={props.member.img}/>
         <Link href={`/team-member/${props.member.slug}`}>
-            <h4 className={styles.item__name}>{props.member.name +" "+ props.member.surname}</h4>
-            <h5 className={styles.item__profession}>{props.member.profession}</h5>
+            <h4 className={styles.name}>{props.member.name +" "+ props.member.surname}</h4>
+            <h5 className={styles.profession}>{props.member.profession}</h5>
         </Link>
       </motion.div>
     );

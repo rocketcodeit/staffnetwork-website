@@ -8,7 +8,10 @@
 .item img{
     @apply max-h-[650px] object-cover
 }
-.item__profession{
+.name{
+    @apply text-center lg:text-left
+}
+.profession{
     @apply text-primary-700
 }
 

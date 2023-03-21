@@ -40,7 +40,7 @@ export function AnnouncementItem(props : IAnnouncementItemProps){
 
                     <div className={"flex flex-row justify-between align-bottom items-end gap-8"}>
                         <div className={styles.itemDescription} dangerouslySetInnerHTML={{__html:props.summary}} />
-                        <div className={`linkItem linkItemPrimary text-end w-2/12`}>
+                        <div className={`linkItem linkItemPrimary text-end w-4/12 sm:w-3/12 lg:w-2/12`}>
                             <div className={"text-primary-600 w-fit mr-0 ml-auto"}>Scopri di più</div>
                         </div>
                     </div>

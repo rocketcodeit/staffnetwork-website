@@ -60,7 +60,7 @@ function Footer(props : FooterProps){
                     </div>
                     <div className="lg:w-1/12 w-0"></div>
                     <div className="sm:w-4/12 w-6/12 lg:mt-0 mt-6 pr-3">
-                        <ul className="text-white grid  md:grid-rows-3 grid-flow-col gap-2">
+                        <ul className="text-white grid  md:grid-rows-3 grid-flow-row md:grid-flow-col gap-2">
                             { props.data.footerLinks?.map((item, i) => {
                                 return <li key={i} className="linkItemWhite linkItem ">
                                     <Link href={item.href}>{item.title}</Link> </li>

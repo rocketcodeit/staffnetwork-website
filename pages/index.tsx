@@ -55,7 +55,7 @@ export default function Home({posts, services, home, membersTeam} : HomeProps) {
             <section className="mt-24">
                 <div className={`${styles.containerLeft} `}>
                     <div
-                        className="lg:bg-[url('/assets/img/pexels-faris-al-orfali-1697160%202.png')] bg-none w-full bg-primary-dark flex flex-flow flex-wrap justify-between bg-no-repeat bg-contain bg-right"
+                        className="lg:bg-[url('/assets/img/pexels-faris-al-orfali-1697160%202.png')] bg-none w-full bg-primary-dark flex flex-flow flex-wrap justify-between bg-no-repeat bg-contain bg-right-bottom"
                         style={{backgroundImage: `url("${home.imgAree.data.attributes.url}")`}}>
                         <div className="xl:w-5/12 lg:w-7/12 w-11/12 lg:pt-32 md:pt-20 pt-12 container ml-0 mb-8">
                             <div className="relative w-fit">

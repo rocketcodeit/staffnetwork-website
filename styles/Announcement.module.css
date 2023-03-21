@@ -21,7 +21,7 @@
     @apply mt-3 w-10/12
 }
 .itemDescription p{
-    @apply line-clamp-4
+    @apply line-clamp-3
 }
 
 .itemBoxText{
