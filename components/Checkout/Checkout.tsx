@@ -163,7 +163,7 @@ export default function Checkout(props : FieldCheckoutProps){
                                     <div>
                                         Intestatario: Elaborazione Dati Staff S.r.l <br/>
                                         IBAN: IT66 L070 5641 3300 0001 0108 078 <br/>
-                                        BANCA: BANCA DELL'ALTA MURGIA CREDITO COOPERATIVO <br/>
+                                        BANCA: BANCA DELL&apos;ALTA MURGIA CREDITO COOPERATIVO <br/>
                                         BIC: CCRTIT2TMUR <br/>
                                         CAUSALE: N° Ordine
                                     </div>

@@ -69,20 +69,24 @@ export function Header( props : HeaderProps){
 
                         <ul className={`${styles.menu} ${(isOpen && isMobile) ? styles.menuMobileOpen : ""}`}>
                             { props.data.headerLinks?.map((item, index : number) => {
-                                return <li key={index}  className={`${item.button ? 'btn '+ styles.btnHeader : 'linkItem' } ${router.asPath == item.href ? 'active' : ''} ${item.subItems ? styles.subMenuChild : "" }`} >
-                                     <a  onClick={handleCloseMenuMobile} className={`${styles.elementsLink} ${item.button ? styles.btnHeaderLink : ''}`} href={item.href} >{item.title}</a>
-                                    {(!isMobile && item.subItems) &&
+                                return (
+                                    <li key={index}  className={`${item.button ? 'btn '+ styles.btnHeader : 'linkItem' } ${router.asPath == item.href ? 'active' : ''} ${item.subItems ? styles.subMenuChild : "" }`} >
+                                        <a onClick={handleCloseMenuMobile} className={`${styles.elementsLink} ${item.button ? styles.btnHeaderLink : ''}`} href={item.href} >{item.title}</a>
+                                        {(!isMobile && item.subItems) &&
                                             <div className={`${styles.subMenu} ${isOpenSubMenu === index ? styles.show : ''}`}>
                                                 <ul>
                                                     {item.subItems.map((subItem,num) => {
-                                                        return  <li className={`delay-[${index*75 + 175}ms] linkItem  ${router.asPath == subItem.href ? 'active' : ''}`} key={num}>
-                                                            <a onClick={handleCloseMenuMobile} href={subItem.href}>{subItem.title}</a>
-                                                        </li>
+                                                        return  (
+                                                            <li className={`delay-[${index*75 + 175}ms] linkItem  ${router.asPath == subItem.href ? 'active' : ''}`} key={num}>
+                                                                <a onClick={handleCloseMenuMobile} href={subItem.href}>{subItem.title}</a>
+                                                            </li>
+                                                        )
                                                     })}
                                                 </ul>
                                             </div>
-                                    }
-                                </li>
+                                        }
+                                    </li>
+                                )
                             })}
                         </ul>
 
