@@ -22,7 +22,7 @@ function PostList (props : IPostProps){
 
     return(
         <motion.div variants={containerSlideUp} initial="hidden" whileInView="show"
-                    className="PostListArray grid min-h-[600px] lg:grid-cols-3 grid-cols-1 gap-5">
+                    className="PostListArray grid lg:grid-cols-3 grid-cols-1 gap-5">
 
             {props.posts.map((item, index) =>{
                     return <PostItem key={index} {...item} />

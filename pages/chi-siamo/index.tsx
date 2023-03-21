@@ -7,14 +7,12 @@ import {
     blockReveal,
     blockTextReveal,
     lineLeftToRight} from "../../animations";
-import Link from "next/link";
 import BreadCrumbs from "../../components/Breadcrumbs/BreadCrumbs";
 import {config} from "../../config/breadcrumbs.config";
 import React from "react";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {TeamMember} from "../../models/team-member";
 import {ChiSiamoData} from "../../models/chi_siamo-data";
-import {HowWeWorkService} from "../../services/how-we-work.service";
 import {WhoWeAreService} from "../../services/who-we-are.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
 import {TeamMemberService} from "../../services/team-member.service";
@@ -68,15 +66,15 @@ export default function ChiSiamo({data, membersTeam} : ChiSiamoPage) {
                     <motion.div className={"containerRight"}>
                         <motion.div variants={lineLeftToRight} initial="initial" whileInView="final" viewport={{ once: true }}  className={"lineDivisor"}></motion.div>
                     </motion.div>
-                    <div className={"container flex flex-row justify-between py-6"}>
-                        <div className={"w-5/12 relative "}>
+                    <div className={"container flex flex-row justify-between flex-wrap py-6"}>
+                        <div className={"w-full lg:w-5/12 relative mb-4 lg:mb-0"}>
                             <div className={"w-fit relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
                                 <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} >{data.story.title}</motion.h2>
 
                             </div>
                         </div>
-                        <div className={"w-6/12"}>
+                        <div className={"w-full lg:w-6/12"}>
                             <div className={"w-fit relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
                                 <motion.div dangerouslySetInnerHTML={{__html:data.story.description}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} />
