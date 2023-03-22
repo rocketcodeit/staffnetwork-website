@@ -203,7 +203,7 @@ export const scaleDownAnimation = {
 
 export const filterAnimation = {
     initial: {
-        left: -100,
+        left: -800,
         opacity:0.4,
     },
     visible:{
@@ -211,8 +211,8 @@ export const filterAnimation = {
         opacity: 1,
         transition:{
             duration:0.5,
-            ease: [.6,-.05,.01,.99],
-            delay:0.8
+            ease: 'easeInOut',
+            delay:0.2
         }
     }
 }

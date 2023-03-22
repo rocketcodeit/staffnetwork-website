@@ -166,7 +166,7 @@ export default function AnnouncementPage({
                                     }
                                 </div>}
 
-                            {isOpen && <motion.div variants={filterAnimation} initial="initial" animate={isOpen ? "visible" : "initial"} exit="initial" className={"filtersContainer"}>
+                             <motion.div variants={filterAnimation} initial="initial" animate={isOpen ? "visible" : "initial"} exit="initial"  className={"filtersContainer"}>
 
                                 <div className={"filters containerLeftBefore flex flex-col gap-4"}>
                                     <div className={'flex justify-between items-center mb-2'}>
@@ -227,7 +227,7 @@ export default function AnnouncementPage({
                                         {(isMobile && fieldSetted) && <button onClick={ () => setIsOpen(false)} className={'btn'}>Visualizza i risultati</button> }
                                     </div>
                                 </div>
-                            </motion.div>}
+                            </motion.div>
                             <div className={"w-full lg:w-8/12 mt-6 lg:mt-0"}>
                                 {loading && <motion.div initial={{opacity: 0}} animate={{opacity: 1}}
                                                         transition={{duration: 0.3}}
