@@ -33,7 +33,7 @@ export default function ChiSiamo({data, membersTeam} : ChiSiamoPage) {
             <main>
                 <section>
                     <motion.div className="containerRight flex flex-wrap justify-between mt-8">
-                        <motion.div variants={fadeInUp} className="w-full order-1">
+                        <motion.div variants={fadeInUp} className="w-full pr-3 order-1">
                             <BreadCrumbs  mappedPaths={config} showHome={true} transformDynamicPath={path => {
                                 return path;
                             }} />
@@ -48,13 +48,13 @@ export default function ChiSiamo({data, membersTeam} : ChiSiamoPage) {
                         <div className={"w-12/12 mx-auto"}>
                             <div className={"relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                <motion.img variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"w-full max-h-[32rem] mt-6 -mb-[20rem] object-cover"}  src={data.img}/>
+                                <motion.img variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"w-full max-h-[32rem] mt-6 -mb-[12rem] md:-mb-[20rem] object-cover"}  src={data.img}/>
                             </div>
                         </div>
                     </motion.div>
-                    <motion.div className={"bg-primary-700 pt-[23rem] pb-12"}>
+                    <motion.div className={"bg-primary-700 pt-56 md:pt-[23rem] pb-14 md:pb-12"}>
                         <div className={"container"}>
-                            <div className={"w-6/12 mx-auto relative"}>
+                            <div className={"w-full lg:w-6/12 mx-auto relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-600"></motion.div>
                                 <motion.div dangerouslySetInnerHTML={{__html:data.descriptionAboveTheFold}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-white text-center"} />
                             </div>

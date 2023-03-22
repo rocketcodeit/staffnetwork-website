@@ -18,7 +18,7 @@
 }
 
 .itemDescription{
-    @apply mt-3 w-10/12
+    @apply mt-3 w-full lg:w-9/12
 }
 .itemDescription p{
     @apply line-clamp-3
@@ -38,7 +38,7 @@
 }
 
 .itemDetails{
-    @apply flex flex-row flex-wrap gap-5 mt-5
+    @apply flex flex-row flex-wrap gap-1 sm:gap-2 md:gap-5 mt-5
 }
 .itemSingleDetail{
     @apply flex gap-2 items-center bg-primary-100 p-2 w-fit

@@ -12,7 +12,7 @@
     @apply text-center lg:text-left
 }
 .profession{
-    @apply text-primary-700
+    @apply text-primary-700 text-center lg:text-left
 }
 
 .imgCover{

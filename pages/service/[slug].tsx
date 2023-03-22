@@ -50,7 +50,7 @@ export default function ServicePage({service} : ServicePageProps){
                         <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
                         <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-6">{service.title}</motion.h1>
                     </div>
-                    <div className={"w-6/12 relative"}>
+                    <div className={"w-full sm:w-6/12 relative"}>
                         <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
                         <motion.p variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}>{service.details.summary}</motion.p>
                     </div>
@@ -84,10 +84,10 @@ export default function ServicePage({service} : ServicePageProps){
 
 
                                         }
-                                        <Link href={"#acquista"} className={"btn black"}>Acquista</Link>
+                                        <Link href={"#acquista"} className={"btn black min-w-[120px] text-center"}>Acquista</Link>
                                     </div>
                                 }
-                                 <Link href={"#contattaci"} className={"btn"}>Contattaci</Link>
+                                 <Link href={"#contattaci"} className={"btn min-w-[120px] text-center"}>Contattaci</Link>
                             </div>
 
                         </div>
@@ -135,7 +135,7 @@ export default function ServicePage({service} : ServicePageProps){
                                 <button onClick={handleAddToCart} className={"btn w-full text-center"}>Acquista</button>
                             </div>
                         </div> }
-                        <div id={"contattaci"} className={"w-12/12 lg:w-6/12 relative "}>
+                        <div id={"contattaci"} className={"w-12/12 lg:w-6/12 relative mt-6 lg:mt-0 "}>
                             <Form title={service.requestForm?.title} description={service.requestForm?.text} page={"Servizio - " + service.title}
                                   typePage={service.buyable ? TypeCategory.purchasableItem : TypeCategory.item}/>
                         </div>

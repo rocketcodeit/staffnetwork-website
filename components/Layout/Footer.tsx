@@ -59,8 +59,8 @@ function Footer(props : FooterProps){
                         </div>
                     </div>
                     <div className="lg:w-1/12 w-0"></div>
-                    <div className="sm:w-4/12 w-6/12 lg:mt-0 mt-6 pr-3">
-                        <ul className="text-white grid  md:grid-rows-3 grid-flow-row md:grid-flow-col gap-2">
+                    <div className="sm:w-4/12 w-full lg:mt-0 mt-6 pr-3">
+                        <ul className="text-white grid grid-cols-2 md:grid-rows-3 grid-flow-row md:grid-flow-col gap-2">
                             { props.data.footerLinks?.map((item, i) => {
                                 return <li key={i} className="linkItemWhite linkItem ">
                                     <Link href={item.href}>{item.title}</Link> </li>
@@ -71,7 +71,7 @@ function Footer(props : FooterProps){
                 </div>
                 <div className="w-full flex justify-end mt-6 mb-12">
                     <div className="w-full">
-                        <ul className="text-white flex xs:flex-row flex-col justify-end 2xs:flex-nowrap flex-wrap items-end gap-4">
+                        <ul className="text-white flex justify-end gap-4 flex-wrap sm:flex-nowrap flex-col xs:flex-row items-end">
                             { props.data.conditionLinks?.map((item, i) => {
                                 return <li key={i} className="text-sm linkItemWhite linkItem" >
                                     <Link href={item.href}>{item.title}</Link>

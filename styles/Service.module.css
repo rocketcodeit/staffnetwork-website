@@ -32,7 +32,7 @@
 }
 
 .buttonsContainer{
-    @apply flex items-end justify-end relative
+    @apply flex items-end justify-end relative flex-wrap items-end
 }
 
 .childDescriptionList{

@@ -15,7 +15,7 @@
   position: absolute;
   width: 300%;
 
-  @apply bg-primary-700 absolute h-full right-12  -z-10
+  @apply bg-primary-700 absolute h-full sm:right-8 lg:right-12  -z-10
 
 }
 

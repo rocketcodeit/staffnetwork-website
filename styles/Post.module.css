@@ -1,14 +1,14 @@
 /*#region POST ITEM */
 
 .item{
-    @apply bg-gray-200 pb-4
+    @apply bg-gray-200 pb-0 sm:pb-4
 }
 
 .imgItem{
-    @apply max-h-[300px] w-full object-cover pr-8
+    @apply max-h-[300px] w-full object-cover  pr-4 sm:pr-6 lg:pr-8
 }
 .textItem{
-    @apply px-8 pt-6
+    @apply px-4 sm:px-6 lg:px-8 pt-6
 }
 
 .linkItem{

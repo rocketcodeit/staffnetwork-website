@@ -42,7 +42,7 @@ export default function ComeLavoriamo({data} : ComeLavoriamo) {
             <main>
                 <section>
                     <motion.div className="containerRight flex flex-wrap justify-between mt-8">
-                        <motion.div variants={fadeInUp} className="w-full order-1">
+                        <motion.div variants={fadeInUp} className="w-full pr-3 order-1">
                             <BreadCrumbs  mappedPaths={config} showHome={true} transformDynamicPath={path => {
                                 return path;
                             }} />

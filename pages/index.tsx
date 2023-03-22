@@ -89,7 +89,7 @@ export default function Home({posts, services, home, membersTeam} : HomeProps) {
                     <div className={`${styles.bgListItemDigits} object-cover bg-cover no-repeat `}  style={{backgroundImage: `url("${home.imgDati.data.attributes.url}")`}}>
 
                     </div>
-                    <motion.div variants={container} initial="hidden" animate="show" className={`${styles.containerRightBefore}  lg:w-6/12 w-11/12 mb-20 bg-gray-200 lg:ml-[-8.333%] lg:pl-16 lg:py-12  pl-12 py-8 relative`}>
+                    <motion.div variants={container} initial="hidden" animate="show" className={`${styles.containerRightBefore} lg:w-6/12 w-11/12 mb-20 bg-gray-200 lg:ml-[-8.333%] pl-6 sm:pl-12 lg:pl-16 lg:py-12  py-8 relative`}>
                         {home.datiStatistici.dati.map((stat : any) =>{
                             return (<motion.div key={stat.id} variants={item} initial="hidden" whileInView="show"  viewport={{ once: true }} className="counter flex flex-flow items-center mb-4">
                                 <h4 className="font-medium text-4xl mr-2">{stat.numero}</h4>
@@ -142,7 +142,7 @@ export default function Home({posts, services, home, membersTeam} : HomeProps) {
                 </div>
             </section>
 
-            <section className="lg:my-24 mt-12 ">
+            <section className="lg:my-24 my-12 ">
                 <div className="container">
                     <div className="relative w-fit">
                         <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
