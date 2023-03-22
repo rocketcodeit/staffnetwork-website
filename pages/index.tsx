@@ -3,7 +3,7 @@ import TeamMemberList from '../components/TeamMember/TeamMemberList'
 import PostList from "../components/Post/PostList";
 import AreaList from "../components/Area/AreaList";
 import {motion} from "framer-motion";
-import {container, item, stagger, blockReveal, blockTextReveal} from "../animations";
+import {container, item, stagger, blockReveal, blockTextReveal, fadeInUp} from "../animations";
 import Link from "next/link";
 import {GetServerSideProps} from "next";
 import {BackendFacade} from "../services/backend-facade.service";
@@ -37,18 +37,26 @@ export default function Home({posts, services, home, membersTeam} : HomeProps) {
             </Head>
             <section>
                 <div className={styles.aboveTheFold}>
-                    <div className={`h-full`} style={{ backgroundImage: `url("${home.imgAboveTheFold.data.attributes.url}")`}}></div>
-                    <motion.div variants={stagger} initial="initial" animate="final" className="drop-shadow-xl bg-zinc-900/80 absolute max-h-full lg:top-48 md:top-24 top-16 left-0 right-36 lg:w-9/12 md:w-10/12 w-11/12 lg:p-20  md:p-12 p-8">
-                        <div  className=" relative w-fit overflow-hidden mb-6">
-                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-700"></motion.div>
-                            <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" className="text-white ">{home.title}</motion.h1>
-                        </div>
-                        <div className=" relative lg:w-9/12 w-full mb-6 overflow-hidden">
-                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} transition={{delay:0.3}} className="blockOverText bg-gray-700"></motion.div>
-                            <motion.div dangerouslySetInnerHTML={{__html:home.descriptionAboveTheFold}} variants={blockTextReveal} initial="initial"  whileInView="final" className="text-white" />
-                        </div>
-                        <Link className="btn block w-fit mt-6" href={home.callToAction.link}>{home.callToAction.title}</Link>
-                    </motion.div>
+
+                    <motion.video className={`${styles.video}`} src={`https://${home.imgAboveTheFold.data.attributes.url}`} autoPlay muted loop />
+
+                    {home.sliderShow?.map((itemSlider, index) => {
+                        return(
+                        <motion.div key={index} variants={stagger} initial="initial" animate="final" className="drop-shadow-xl bg-zinc-900/80 absolute max-h-full lg:top-48 md:top-24 top-16 left-0 right-36 lg:w-9/12 md:w-10/12 w-11/12 lg:p-20  md:p-12 p-8">
+                            <div  className=" relative w-fit overflow-hidden mb-6">
+                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-700"></motion.div>
+                                <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" className="text-white ">{itemSlider.title}</motion.h1>
+                            </div>
+                            <div className=" relative lg:w-9/12 w-full mb-6 overflow-hidden">
+                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} transition={{delay:0.3}} className="blockOverText bg-gray-700"></motion.div>
+                                <motion.div dangerouslySetInnerHTML={{__html:itemSlider.description}} variants={blockTextReveal} initial="initial"  whileInView="final" className="text-white" />
+                            </div>
+                            {itemSlider.buttons.map((itemBtn, index) => <Link key={index} className="btn block w-fit mt-6" href={itemBtn.link}>{itemBtn.title}</Link>)}
+
+                        </motion.div>
+                        )
+
+                    })}
                 </div>
 
             </section>

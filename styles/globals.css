@@ -384,9 +384,13 @@ input[type='radio']:checked + .boxRadioButton {
 }
 /*endregion*/
 
-/*#region Filters Elements */
+/*#region Filters  */
 .filters{
   @apply bg-gray-200 px-4 py-6
+}
+.filtersContainer{
+  @apply w-full lg:w-3/12 lg:relative lg:h-fit
+          fixed top-0 left-0 h-screen z-[9999999999999]
 }
 /*endregion*/
 

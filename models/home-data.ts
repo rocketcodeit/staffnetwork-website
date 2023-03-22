@@ -12,5 +12,11 @@ export interface HomeData {
     imgAree: any,
     imgDati: any,
     imgPartnership: any
-    dataSeo : HeadData
+    dataSeo : HeadData,
+
+    sliderShow?: {
+       title: string,
+       description: string,
+       buttons : {link: string, title: string}[]
+    }[]
 }

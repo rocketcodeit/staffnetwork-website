@@ -43,8 +43,8 @@ export class BackendFacade {
         const homePromise = this.homeService.getSingle({
                 populate: [
                     {value: '*'},
-                    {value: 'datiStatistici,staff,partnership,servizi,datiHomeSeo,imgAboveTheFold,imgAree,imgDati,imgPartnership', level: 0},
-                    {value: 'datiStatistici.dati,partnership.link', level: 1}
+                    {value: 'datiStatistici,staff,partnership,servizi,sliderShow,datiHomeSeo,imgAboveTheFold,imgAree,imgDati,imgPartnership', level: 0},
+                    {value: 'datiStatistici.dati,partnership.link,sliderShow.button', level: 1}
                 ]
             });
 

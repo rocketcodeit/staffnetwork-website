@@ -24,7 +24,19 @@ export class HomeService extends BaseStrapiService<HomeData> {
             dataSeo: {
                 title : res.attributes.datiHomeSeo.title,
                 description: res.attributes.datiHomeSeo.description,
-            }
+            },
+            sliderShow: res.attributes.sliderShow && res.attributes.sliderShow.map((itemSlider : any) => {
+                return{
+                    title: itemSlider.title,
+                    description: itemSlider.description,
+                    buttons : itemSlider.button.map((itemBtn : any) => {
+                        return{
+                            title: itemBtn.title,
+                            link: itemBtn.href
+                        }
+                    })
+                }
+            })
         };
     }
 }
