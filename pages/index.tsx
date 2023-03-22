@@ -38,7 +38,7 @@ export default function Home({posts, services, home, membersTeam}: HomeProps) {
 
     useEffect(() => {
         setConfigurationData();
-        let idSlider: any = setChangeSlider(4000)
+        let idSlider: any = setChangeSlider(8000)
 
         console.log("primo :"+ idSlider);
 
@@ -64,7 +64,7 @@ export default function Home({posts, services, home, membersTeam}: HomeProps) {
         clearInterval(intervalId);
         setSliderShowed(index);
 
-        let idSlider: any = setChangeSlider(4000)
+        let idSlider: any = setChangeSlider(8000)
 
         console.log("secondo :"+ idSlider)
 
