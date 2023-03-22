@@ -173,7 +173,7 @@ a {
 /*#region .container */
 
 .containerRight{
-  @apply container pr-0 relative
+  @apply container lg:pr-0 relative
 }
 
 .containerLeft{
@@ -392,6 +392,11 @@ input[type='radio']:checked + .boxRadioButton {
   @apply w-full lg:w-3/12 lg:relative lg:h-fit
           fixed top-0 left-0 h-screen z-[9999999999999]
 }
+
+.buttonAction{
+  @apply  flex items-center content-end justify-end gap-5 absolute bottom-8 right-8 flex-wrap xs:flex-nowrap
+          lg:content-start lg:justify-start lg:relative  lg:bottom-0 lg:right-0
+}
 /*endregion*/
 
 /*#region Pagination Elements */
@@ -422,3 +427,8 @@ input[type='radio']:checked + .boxRadioButton {
 .btnCart.active{
   @apply bg-black text-white
 }
+
+.initial{
+  position: initial;
+}
+

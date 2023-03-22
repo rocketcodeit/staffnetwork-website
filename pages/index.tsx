@@ -42,12 +42,12 @@ export default function Home({posts, services, home, membersTeam} : HomeProps) {
 
                     {home.sliderShow?.map((itemSlider, index) => {
                         return(
-                        <motion.div key={index} variants={stagger} initial="initial" animate="final" className="drop-shadow-xl bg-zinc-900/80 absolute max-h-full lg:top-48 md:top-24 top-16 left-0 right-36 lg:w-9/12 md:w-10/12 w-11/12 lg:p-20  md:p-12 p-8">
+                        <motion.div key={index} variants={stagger} initial="initial" animate="final" className="drop-shadow-xl bg-primary-800/80 absolute max-h-full lg:top-48 md:top-24 top-16 left-0 right-36 lg:w-9/12 md:w-10/12 w-11/12 lg:p-20  md:p-12 p-8">
                             <div  className=" relative w-fit overflow-hidden mb-6">
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-700"></motion.div>
                                 <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" className="text-white ">{itemSlider.title}</motion.h1>
                             </div>
-                            <div className=" relative lg:w-9/12 w-full mb-6 overflow-hidden">
+                            <div className="relative lg:w-9/12 w-full mb-6 overflow-hidden">
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} transition={{delay:0.3}} className="blockOverText bg-gray-700"></motion.div>
                                 <motion.div dangerouslySetInnerHTML={{__html:itemSlider.description}} variants={blockTextReveal} initial="initial"  whileInView="final" className="text-white" />
                             </div>
@@ -73,7 +73,7 @@ export default function Home({posts, services, home, membersTeam} : HomeProps) {
 
                             <motion.div className="mt-5 text-white relative">
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-600"></motion.div>
-                                <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="relative" dangerouslySetInnerHTML={{__html:home.servizi.descrizione}} />
+                                <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={styles.areasDescription} dangerouslySetInnerHTML={{__html:home.servizi.descrizione}} />
                             </motion.div>
                         </div>
                         <div className="z-10 pr-0 container mb-[-96px]">
@@ -86,12 +86,41 @@ export default function Home({posts, services, home, membersTeam} : HomeProps) {
                 </div>
             </section>
 
-            <section className="mt-48 overflow-hidden">
-                <div className="lg:w-6/12 container ml-0">
-                    <div className="relative w-fit">
-                        <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                        <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-8">{home.datiStatistici.titolo}</motion.h2>
+            <section className="bg-primary-100 mt-48 relative -z-20 overflow-hidden">
+                <div className="container flex flex-flow justify-between flex-wrap flex-wrap relative ">
+                    <div className="lg:w-5/12 w-full flex flex-row items-center content-start lg:content-center flex-wrap">
+                        <div className="relative w-fit mt-8">
+                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-50"></motion.div>
+                            <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"mb-5"}>{home.datiStatistici.titolo}</motion.h2>
+                        </div>
+                        <div className="relative w-fit">
+                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-50"></motion.div>
+                            <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-8" dangerouslySetInnerHTML={{__html:home.datiStatistici.descrizione}} />
+                        </div>
                     </div>
+                    <div className={`${styles.containerRightBefore} lg:w-6/12 w-full bg-gray-200 relative lg:initial`}>
+                        <motion.div variants={container} initial="hidden" animate="show" className={`pl-6 lg:pl-12 py-8 lg:py-12 relative grid grid-cols-1 sm:grid-cols-2 md:grid-rows-3`}>
+                            {home.datiStatistici.dati.map((stat : any) =>{
+                                return (<motion.div key={stat.id} variants={item} initial="hidden" whileInView="show"  viewport={{ once: true }} className="counter flex flex-flow items-center mb-4">
+                                    <h4 className="font-medium text-3xl lg:text-4xl mr-2">{stat.numero}</h4>
+                                    <p className="text-xl">{stat.descrizione}</p>
+                                </motion.div>)
+                            })}
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {false && <section className="mt-48 overflow-hidden">
+                <div className="lg:w-6/12 container ml-0">
+                    <motion.div className="relative w-fit">
+                        <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                        <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}>{home.datiStatistici.titolo}</motion.h2>
+                    </motion.div>
+                    <motion.div className="mt-3 relative">
+                        <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                        <motion.div variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-8" dangerouslySetInnerHTML={{__html:home.datiStatistici.descrizione}} />
+                    </motion.div>
                 </div>
                 <div className={`${styles.containerRight} flex flex-flow  flex-wrap lg:flex-nowrap `}>
                     <div className={`${styles.bgListItemDigits} object-cover bg-cover no-repeat `}  style={{backgroundImage: `url("${home.imgDati.data.attributes.url}")`}}>
@@ -108,7 +137,7 @@ export default function Home({posts, services, home, membersTeam} : HomeProps) {
 
                     </motion.div>
                 </div>
-            </section>
+            </section> }
 
             <section className="mt-24">
                 <div className="container mb-10">

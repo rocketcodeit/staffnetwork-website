@@ -30,9 +30,9 @@ export default function AreaPage({area,services} : AreaPageProps){
                 <title>{area.name}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <section id={"abo"}>
+            <section className={"bg-gray-100 py-4 lg:py-0"} id={"abo"}>
                 <motion.div className="containerRight flex flex-wrap justify-between">
-                    <motion.div variants={fadeInUp} className="w-full order-1">
+                    <motion.div variants={fadeInUp} className="w-full lg:w-6/12 order-1 py-8">
                         <BreadCrumbs  mappedPaths={config} showHome={true} transformDynamicPath={path => {
                             if(path === "[slug]"){
                                 return area.slug
@@ -43,8 +43,6 @@ export default function AreaPage({area,services} : AreaPageProps){
                             <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
                             <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}> {area.name}</motion.h1>
                         </div>
-                    </motion.div>
-                    <motion.div variants={fadeInUp} className="w-full lg:w-6/12 order-2 lg:order-2">
                         <div className={"w-fit relative mt-2"}>
                             <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
                             <motion.div dangerouslySetInnerHTML={{__html:area.description ? area.description : ""}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={""} />
@@ -61,17 +59,17 @@ export default function AreaPage({area,services} : AreaPageProps){
                                 </li>
                             })}</ul>
                         </div>
-
                     </motion.div>
+
                     <motion.div variants={fadeInUp} className={"w-full relative lg:w-5/12 bg-cover bg-center flex flex-row items-start order-last lg:order-3"}>
-                        <img className={"max-h-[500px] w-full object-cover"} src={area.img} />
+                        <img className={"max-h-[200px] lg:max-h-[500px] w-full object-cover"} src={area.img} />
                     </motion.div>
                 </motion.div>
             </section>
 
             <section id={"services"} className={"mt-16"}>
                 <div className={"container"}>
-                    <div className={"w-full lg:w-8/12"}>
+                    <div className={"w-full"}>
                         <motion.h3 className={"mb-3"}>Servizi</motion.h3>
                         <ServiceList services={services} />
                     </div>

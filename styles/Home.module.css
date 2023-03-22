@@ -15,7 +15,7 @@
   position: absolute;
   width: 300%;
 
-  @apply bg-primary-700 absolute h-full sm:right-8 lg:right-12  -z-10
+  @apply bg-primary-700 absolute h-full right-5 sm:right-8 lg:right-12  -z-10
 
 }
 
@@ -167,4 +167,11 @@
 
 .video{
   @apply w-full h-full object-cover
+}
+
+.areasDescription{
+  @apply relative
+}
+.areasDescription p{
+  @apply text-lg
 }

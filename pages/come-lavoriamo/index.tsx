@@ -40,34 +40,24 @@ export default function ComeLavoriamo({data} : ComeLavoriamo) {
             </Head>
 
             <main>
-                <section>
-                    <motion.div className="containerRight flex flex-wrap justify-between mt-8">
-                        <motion.div variants={fadeInUp} className="w-full pr-3 order-1">
+                <section className={"bg-primary-800 py-4 lg:py-0"}>
+                    <motion.div className="containerRight flex flex-wrap justify-between items-center bg-primary-800">
+                        <motion.div variants={fadeInUp} className="w-full pr-5 sm:w-11/12 lg:w-6/12 order-2 lg:order-2 text-white">
                             <BreadCrumbs  mappedPaths={config} showHome={true} transformDynamicPath={path => {
                                 return path;
                             }} />
                             <div className="relative w-fit">
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}> {data.title}</motion.h1>
+                                <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-white"}> {data.title}</motion.h1>
+                            </div>
+                            <div className={"w-fit relative mt-4"}>
+                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                                <motion.div dangerouslySetInnerHTML={{__html:data.descriptionAboveTheFold}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-left"} />
                             </div>
                         </motion.div>
-                    </motion.div>
-
-                    <motion.div className="container">
-                        <div className={"w-12/12 mx-auto"}>
-                            <div className={"relative"}>
-                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                                <motion.img variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"w-full max-h-[32rem] mt-6 -mb-[12rem] md:-mb-[20rem] object-cover"} src={data.img} />
-                            </div>
-                        </div>
-                    </motion.div>
-                    <motion.div className={"bg-primary-700 pt-56 md:pt-[23rem] pb-14 md:pb-12"}>
-                        <div className={"container"}>
-                            <div className={"w-full lg:w-6/12 mx-auto relative"}>
-                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-primary-600"></motion.div>
-                                <motion.div dangerouslySetInnerHTML={{__html:data.descriptionAboveTheFold}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-white text-center"} />
-                            </div>
-                        </div>
+                        <motion.div variants={fadeInUp} className={"w-full relative lg:w-5/12 bg-cover bg-center flex flex-row items-start order-last lg:order-3"}>
+                            <img className={"mt-5 lg:mt-0 max-h-[500px] w-full object-cover"} src={data.img} />
+                        </motion.div>
                     </motion.div>
                 </section>
 
@@ -111,7 +101,7 @@ export default function ComeLavoriamo({data} : ComeLavoriamo) {
 
                     </div>
                 </section>
-                <section id={"step"} className={"mt-12"}>
+                <section id={"step"} className={"mt-12 bg-gray-100 py-12"}>
                     <div className={"container"}>
                         <div className={"w-fit relative mx-auto"}>
                             <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>

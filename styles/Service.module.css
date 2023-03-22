@@ -1,5 +1,6 @@
 .item{
-    @apply flex flex-row items-stretch
+    @apply lg:w-4/12 md:w-6/12 w-full flex flex-row items-stretch
+    lg:flex-3-1.25 md:flex-2-1
 }
 
 .itemImg{
@@ -15,7 +16,7 @@
 }
 
 .itemDescription{
-    @apply mt-3 max-w-4xl flex-auto sm:flex-16-1.5
+    @apply mt-3 max-w-4xl flex-auto sm:flex-16-1.5 pb-6
 }
 
 .itemBoxText{
@@ -24,11 +25,11 @@
 }
 
 .itemLink{
-    @apply flex-auto sm:flex-6-1.5 min-w-fit flex justify-end items-end
+    @apply flex-auto sm:flex-6-1.5 min-w-fit flex justify-end items-end mr-0 ml-auto bottom-0 right-0 absolute
 }
 
 .list{
-    @apply flex flex-col gap-4
+    @apply flex flex-row gap-4 flex-wrap
 }
 
 .buttonsContainer{

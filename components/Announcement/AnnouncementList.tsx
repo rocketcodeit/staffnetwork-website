@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import styles from "../../styles/Service.module.css"
+import styles from "../../styles/Announcement.module.css"
 import {containerSlideUp} from "../../animations";
 import {motion} from "framer-motion";
 import {IService} from "../../models/IService";

@@ -1,6 +1,6 @@
 import {AnnouncementTerritory} from "../../models/announcement-territory";
 import Checkbox from "../Checkbox/Checkbox";
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 export interface FilterProps{
     id?: number,
@@ -34,8 +34,7 @@ const filterItems = (event: any, setFilters: React.Dispatch<React.SetStateAction
 };
 
 export default function Filter(props : FilterProps){
-
-    return (
+        return (
         <div className={"filtersClass"} >
             {props.categoriesFilter?.map((filterGroup, index ) => {
                 return (

@@ -18,7 +18,7 @@ export function ServiceItem(props : IServiceItemProps){
 
         <motion.div variants={itemFade} className={styles.item}>
             <div className={styles.itemBoxText}>
-                <Link className={"h-full block"} href={`${props.link}`}>
+                <Link className={"h-full block relative"} href={`${props.link}`}>
                     <h4 className={styles.itemTitle}>{props.title}</h4>
                     {props.subtitle && <h5  className={styles.itemArea}>{props.subtitle}</h5>}
 

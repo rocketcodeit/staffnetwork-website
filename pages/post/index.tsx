@@ -8,7 +8,6 @@ import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {PostDetail} from "../../models/postDetail";
 import {PostService} from "../../services/post.service";
 import { useRouter } from 'next/router';
-import {PaginatedResult} from "../../models/paginated-result";
 import {NextjsUtils} from "../../services/nextjs-utils";
 import {PostCategoriesService} from "../../services/post-categories.service";
 
@@ -40,6 +39,7 @@ export default function PostsPage({posts, pageCount,currentPage, categories} : I
             setFirstLoad(false);
         }
     }, [effectivePage])
+
 
     return (
         <>

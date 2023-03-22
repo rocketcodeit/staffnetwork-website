@@ -12,7 +12,7 @@ interface FooterProps {
 
 function Footer(props : FooterProps){
     return (
-        <section className="bg-stone-800">
+        <section className="bg-primary-800">
             <div className="container flex flex-wrap">
                 <div className="w-full flex">
                     <div className="lg:w-5/12 w-full lg:mt-8 mt-4">
