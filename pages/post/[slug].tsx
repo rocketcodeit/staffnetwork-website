@@ -63,7 +63,7 @@ export default function PostPage({post} : InferGetServerSidePropsType<typeof get
                             <div className={styles.categories}>
                                 {
                                     post.categories.map((category : PostCategory, index : any) => {
-                                        return  <motion.div key={index} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={styles.category}> {category.slug} </motion.div>
+                                        return  <motion.div key={index} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={styles.category}> {category.name} </motion.div>
                                     })
                                 }
                             </div>

@@ -15,9 +15,12 @@ export class PostService extends BaseStrapiService2Types<PostDetail, Post> {
             img: res.attributes.cover.data.attributes.url,
             description : res.attributes.content,
             featured : res.attributes.featured,
-            categories: [
-                {name: '', slug: '', description: '', id: 2}
-            ]
+            categories: res.attributes.post_categories.data.map((category : any) => {
+                return {
+                    name : category.attributes.name,
+                    slug : category.attributes.slug,
+                }
+            })
         }
     }
 

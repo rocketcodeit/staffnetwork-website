@@ -5,7 +5,7 @@
 }
 
 .imgItem{
-    @apply max-h-[300px] w-full object-cover  pr-4 sm:pr-6 lg:pr-8
+    @apply h-40 lg:h-64 w-full object-cover  pr-4 sm:pr-6 lg:pr-8
 }
 .textItem{
     @apply px-4 sm:px-6 lg:px-8 pt-6
