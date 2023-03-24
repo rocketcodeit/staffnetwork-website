@@ -61,8 +61,8 @@ export default function AreaPage({area,services} : AreaPageProps){
                         </div>
                     </motion.div>
 
-                    <motion.div variants={fadeInUp} className={"w-full relative lg:w-5/12 bg-cover bg-center flex flex-row items-start order-last lg:order-3"}>
-                        <img className={"max-h-[200px] lg:max-h-[500px] w-full object-cover"} src={area.img} />
+                    <motion.div variants={fadeInUp} className={"w-full relative lg:w-5/12 bg-none lg:bg-cover bg-center flex flex-row items-start order-last lg:order-3"} style={{backgroundImage: `url("${area.img}")`}}>
+                        <img className={"max-h-[200px] block lg:hidden w-full object-cover"} src={area.img} />
                     </motion.div>
                 </motion.div>
             </section>
