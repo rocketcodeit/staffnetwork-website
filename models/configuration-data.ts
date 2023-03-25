@@ -5,7 +5,8 @@ export interface ConfigurationData {
     emailContact?: Link,
     phoneContact?: Link,
     socialLinks?: Link[],
-    contactLinks?: Link[]
+    contactLinks?: Link[],
+    shareLinks?: Link[],
 }
 
 export interface ConfigurationDataFull extends ConfigurationData{

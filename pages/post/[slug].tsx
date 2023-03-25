@@ -13,8 +13,14 @@ import Link from "next/link";
 import {PostCategory} from "../../models/post-category";
 import {PostService} from "../../services/post.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
+import {ConfigurationService} from "../../services/configuration.service";
+import {ConfigurationData} from "../../models/configuration-data";
 
-export default function PostPage({post} : InferGetServerSidePropsType<typeof getServerSideProps>){
+interface  PostPageProps{
+    post : PostDetail,
+    configData : ConfigurationData
+}
+export default function PostPage({post, configData} : PostPageProps){
     //const dataConfiguration : IWebsiteConfiguration = configuration;
 
     return(
@@ -44,8 +50,8 @@ export default function PostPage({post} : InferGetServerSidePropsType<typeof get
                             <div className={"flex flex-row justify-between items-center mb-4"}>
                                 <div className={styles.date}>{moment(post.date).format('DD.MM.yyyy')}</div>
                                 <div className={styles.shareLinks}>
-                                    {configuration.shareSocial?.map((item,index) => {
-                                        return <Link key={index} href={item.url}><img className="mx-auto" src={item.name} /> </Link>
+                                    {configData.shareLinks?.map((item,index) => {
+                                        return <Link key={index} href={item.href + post.slug} target="_blank"><img className="mx-auto" src={item.icon} /> </Link>
                                     })}
 
                                 </div>
@@ -84,14 +90,27 @@ export const getServerSideProps: GetServerSideProps<{post : PostDetail}> = async
 
     const postService = new PostService();
 
+    const configService = new ConfigurationService();
+
     if (!slug)
         return NextjsUtils.returnNotFoundObject();
 
     const postData = await postService.getBySlug(slug.toString());
 
-    if (!postData)
+    const configData = await  configService.getSingle({
+        populate:[
+            {value:'*'},
+            {value: 'socialLink,contattoLink,logoHeader,logoFooter,shareLinks,headerLinks,favicon,footerLinks,conditionLinks', level: 0},
+            {value: 'socialLink.icon,contattoLink.icon,shareLinks.icon', level : 1}
+        ]
+    });
+
+    if (!postData || !configData)
         return NextjsUtils.returnNotFoundObject();
 
-    return NextjsUtils.returnServerSidePropsObject({post: postData});
+    return NextjsUtils.returnServerSidePropsObject({
+        post: postData,
+        configData : configData
+    });
 
 }

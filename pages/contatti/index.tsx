@@ -123,8 +123,8 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
     const configData = await  configService.getSingle({
         populate:[
             {value:'*'},
-            {value: 'socialLink,contattoLink,logoHeader,logoFooter,headerLinks,favicon,footerLinks,conditionLinks', level: 0},
-            {value: 'socialLink.icon,contattoLink.icon', level : 1}
+            {value: 'socialLink,contattoLink,logoHeader,logoFooter,headerLinks,favicon,shareLinks,footerLinks,conditionLinks', level: 0},
+            {value: 'socialLink.icon,contattoLink.icon,shareLinks.icon', level : 1}
         ]
     });
 

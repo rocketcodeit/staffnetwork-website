@@ -44,8 +44,8 @@ export function Layout(props: LayoutProps){
             configService.getSingle({
                 populate:[
                     {value:'*'},
-                    {value: 'socialLink,contattoLink,logoHeader,logoFooter,favicon,headerLinks,footerLinks,conditionLinks', level: 0},
-                    {value: 'socialLink.icon,contattoLink.icon', level : 1}
+                    {value: 'socialLink,contattoLink,logoHeader,logoFooter,favicon,headerLinks,footerLinks,shareLinks,conditionLinks', level: 0},
+                    {value: 'socialLink.icon,contattoLink.icon,shareLinks.icon', level : 1}
                 ]
             }).then((res) =>{
                 setData(res);

@@ -44,6 +44,15 @@ export class ConfigurationService extends BaseStrapiService2Types<ConfigurationD
                     icon: social.icon.data && social.icon.data.attributes.url
                 }
             }),
+            shareLinks: res.attributes.shareLinks.map((shareLink: any, index: number) => {
+                return {
+                    href: shareLink.href,
+                    beforeTitle: shareLink.beforeTitle,
+                    title: shareLink.title,
+                    afterTitle: shareLink.afterTitle,
+                    icon: shareLink.icon.data.attributes.url
+                }
+            }),
             conditionLinks : res.attributes.conditionLinks.map((conditionLink : any) => {
                 return{
                     href: conditionLink.href,
@@ -133,6 +142,15 @@ export class ConfigurationService extends BaseStrapiService2Types<ConfigurationD
                     title: social.title,
                     afterTitle: social.afterTitle,
                     icon: social.icon.data.attributes.url
+                }
+            }),
+            shareLinks: res.attributes.shareLinks.map((shareLink: any, index: number) => {
+                return {
+                    href: shareLink.href,
+                    beforeTitle: shareLink.beforeTitle,
+                    title: shareLink.title,
+                    afterTitle: shareLink.afterTitle,
+                    icon: shareLink.icon.data.attributes.url
                 }
             })
         }
