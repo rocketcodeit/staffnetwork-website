@@ -14,7 +14,7 @@ export interface IServiceBuyableProps{
 
 export function ServiceBuyableItem(props: IServiceBuyableProps){
     return (
-        <motion.div variants={itemFade} className={styles.item}>
+        <motion.div variants={itemFade} className={styles.itemBuyable}>
             <div className={styles.itemBoxText}>
                 <Link className={"h-full block"} href={`${props.link}`}>
                     <h4 className={styles.itemTitle}>{props.title}</h4>

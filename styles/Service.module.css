@@ -2,6 +2,10 @@
     @apply lg:w-4/12 md:w-6/12 w-full flex flex-row items-stretch
     lg:flex-3-1.25 md:flex-2-1
 }
+.itemBuyable {
+    @apply w-full flex-auto
+}
+.itemList
 
 .itemImg{
 
@@ -45,5 +49,5 @@
 }
 
 .content ul{
-    @apply px-4
+    @apply px-4 list-disc
 }

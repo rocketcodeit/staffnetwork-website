@@ -18,7 +18,7 @@ function PostItem(props: PostDetail) {
                 <div className={styles.textItem}>
                     <span>{moment(props.date).format('DD.MM.yyyy')}</span>
                     <h4 className="text-2xl font-medium">{props.name}</h4>
-                    <div dangerouslySetInnerHTML={{__html: props.description}} className="line-clamp-3 mt-3"/>
+                    <div dangerouslySetInnerHTML={{__html: props.except ?? props.description}} className="line-clamp-3 mt-3"/>
 
                     <div className={styles.linkItem}>
                         <p>Continua a leggere </p>

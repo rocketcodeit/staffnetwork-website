@@ -7,6 +7,7 @@ export interface PostDetail extends Post{
 export interface Post {
     slug: string,
     name : string,
+    except?: string,
     date? : string,
     img : string,
     description : string,
