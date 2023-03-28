@@ -49,5 +49,11 @@
 }
 
 .content ul{
-    @apply px-4 list-disc
+    @apply px-4 list-disc mt-2
+}
+.content li{
+    @apply mb-1
+}
+.content ol{
+    @apply px-4 list-decimal mt-2
 }
