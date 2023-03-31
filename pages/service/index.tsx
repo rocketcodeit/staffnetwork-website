@@ -126,7 +126,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
     const currentPage = page ?? 1;
 
     const productsService = new ProductService();
-    const services = await productsService.find();
+    const services = await productsService.find({ sort: ['ordine']});
 
 
     const areaProductService = new AreaService();
