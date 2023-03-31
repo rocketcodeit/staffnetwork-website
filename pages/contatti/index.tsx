@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import {motion} from "framer-motion";
-import {fadeInUp, blockReveal, blockTextReveal} from "../../animations";
+import {blockReveal, blockTextReveal, fadeInUp} from "../../animations";
 import React from "react";
 import Link from "next/link";
 import ReactMapboxGl, {Marker} from 'react-mapbox-gl';
@@ -12,7 +12,7 @@ import {NextjsUtils} from "../../services/nextjs-utils";
 import {ConfigurationService} from "../../services/configuration.service";
 import {ConfigurationData} from "../../models/configuration-data";
 import {ReactSVG} from "react-svg";
-import Form from "../../components/FormRequest/FormRequest";
+import Form, {TypeCategory} from "../../components/FormRequest/FormRequest";
 
 
 interface ContattiPage{
@@ -33,16 +33,20 @@ export default function Contatti({data, configData} : ContattiPage) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration: 0.4, ease: "easeInOut"}}>
+
                 <section>
-                    <motion.div className="containerRight flex flex-wrap justify-between">
+                    <motion.div className="container flex flex-wrap justify-between">
                         <motion.div variants={fadeInUp} className="w-full order-1">
                             <div className={"w-fit relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
                                 <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"mb-4 mt-8"}>{data.title}</motion.h1>
                             </div>
                         </motion.div>
-
                         <motion.div variants={fadeInUp} className="w-full lg:w-6/12 order-last flex flex-col lg:order-2 order-2 justify-center">
+                            <Form title={data.form.title} description={data.form.description} page={data.title} typePage={TypeCategory.purchasableItem} />
+
+                        </motion.div>
+                        <motion.div variants={fadeInUp} className={`w-full lg:w-5/12 backgroundRight bg-cover relative min-h-56 lg:h-auto order-last overflow-hidden lg:mt-0 my-6`}>
                             <div className={"w-fit relative"}>
                                 <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
                                 <motion.ul variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"flex flex-col gap-4"}>
@@ -77,16 +81,12 @@ export default function Contatti({data, configData} : ContattiPage) {
                                     })}
                                 </motion.div>
                             </div>
-
-                        </motion.div>
-                        <motion.div variants={fadeInUp} className={`w-full lg:w-5/12 backgroundRight bg-cover relative h-56 lg:h-auto order-last overflow-hidden lg:mt-0 mt-6`}>
-
                             <Map
                                 style={data.map?.style}
                                 center={[data.map?.position?.latitude ?? 0,data.map?.position?.longitude ?? 0]}
                                 zoom={[data.map?.zoom ?? 0]}
                                 containerStyle={{
-                                    height: '500px',
+                                    height: '300px',
                                     width: '100%'
                                 }}
                             >
@@ -98,9 +98,7 @@ export default function Contatti({data, configData} : ContattiPage) {
                         </motion.div>
                     </motion.div>
                 </section>
-                <section id={"form"} className={"lg:mt-20 mt-10"}>
-                    <Form title={data.form.title} description={data.form.description} page={data.title} />
-                </section>
+
             </motion.div>
         </>
     )

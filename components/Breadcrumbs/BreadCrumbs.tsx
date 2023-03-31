@@ -92,14 +92,14 @@ export default function BreadCrumbs(props : IBreadCrumbsProps){
     return(
         <div className="breadCrumb">
             {
-                paths.map((path,index) =>{
+                /*paths.map((path,index) =>{
                     return (
                         <div key={index} className="breadCrumb__element">
                             <a  href={path.url}>{path.label}</a>
                         </div>
                         )
 
-                })
+                })*/
             }
         </div>
 
