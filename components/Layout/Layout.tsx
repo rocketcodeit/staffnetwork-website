@@ -10,6 +10,7 @@ import {RiShoppingCartLine} from "react-icons/ri";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import Head from 'next/head';
+import Script from "next/script";
 
 export interface LayoutProps{
     children : any
@@ -70,6 +71,10 @@ export function Layout(props: LayoutProps){
                 <Head>
                     <link rel="icon" type="image/x-icon" href={data?.faviconLogo} />
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                    <Script type={"text/javascript"}  src="/static/cookie_policy-iubenda.js" />
+                    <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charSet="UTF-8"
+                            async></script>
+
                 </Head>
                 {data && <Header data={data} /> }
                 <main>{props.children}</main>
@@ -78,6 +83,7 @@ export function Layout(props: LayoutProps){
                        <RiShoppingCartLine />
                    </Link>
                 </motion.div>
+
                 {data && <Footer data={data} />}
             </motion.div>
 
