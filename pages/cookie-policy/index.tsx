@@ -39,7 +39,8 @@ export default function CookiePolicyPage({data}: any) {
                             <a href="https://www.iubenda.com/privacy-policy/34652697/cookie-policy"
                                className="iubenda-white no-brand iubenda-noiframe iubenda-embed iubenda-noiframe iub-body-embed"
                                title="Cookie Policy">Cookie Policy</a>
-                            <Script type={"text/javascript"} src="/static/cookie_policy-iubenda.js"/></div>
+                            <script type={"text/javascript"} src="/static/cookie_policy-iubenda.js" async />
+                        </div>
                     </div>
 
                 </motion.div>

@@ -39,7 +39,7 @@ export default function PrivacyPolicyPage({data}: any) {
                             <a href="https://www.iubenda.com/privacy-policy/34652697"
                                className="iubenda-white no-brand iubenda-noiframe iubenda-embed iubenda-noiframe iub-body-embed"
                                title="Privacy Policy">Privacy Policy</a>
-                            <Script type={"text/javascript"}  src="/static/privacy_policy-iubenda.js" />
+                            <script type={"text/javascript"}  src="/static/privacy_policy-iubenda.js" async />
                         </div>
                     </div>
 

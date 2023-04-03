@@ -63,7 +63,7 @@ function Footer(props : FooterProps){
                         <ul className="text-white grid grid-cols-2 md:grid-rows-3 grid-flow-row md:grid-flow-col gap-2">
                             { props.data.footerLinks?.map((item, i) => {
                                 return <li key={i} className="linkItemWhite linkItem ">
-                                    <Link href={item.href}>{item.title}</Link> </li>
+                                    <a href={item.href}>{item.title}</a> </li>
                             })}
                         </ul>
                     </div>
@@ -74,7 +74,7 @@ function Footer(props : FooterProps){
                         <ul className="text-white flex justify-end gap-4 flex-wrap sm:flex-nowrap flex-col xs:flex-row items-end">
                             { props.data.conditionLinks?.map((item, i) => {
                                 return <li key={i} className="text-sm linkItemWhite linkItem" >
-                                    <Link href={item.href}>{item.title}</Link>
+                                    <a href={item.href}>{item.title}</a>
                                 </li>
                             })}
                         </ul>

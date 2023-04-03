@@ -64,18 +64,16 @@ export function Layout(props: LayoutProps){
     return (
 
         <React.Fragment>
+            <Head key={'privacy-policy'}>
+                <link rel="icon" type="image/x-icon" href={data?.faviconLogo} />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <script type={"text/javascript"}  src="/static/cookie_banner-iubenda.js" async />
+                <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charSet="UTF-8" async />
+            </Head>
 
             <motion.div initial={{ opacity: 0 }}
                         animate={{ opacity: isVisible ? 1 : 0 }}
                         transition={{ duration: 1 }} >
-                <Head>
-                    <link rel="icon" type="image/x-icon" href={data?.faviconLogo} />
-                    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                    <Script type={"text/javascript"}  src="/static/cookie_policy-iubenda.js" />
-                    <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charSet="UTF-8"
-                            async></script>
-
-                </Head>
                 {data && <Header data={data} /> }
                 <main>{props.children}</main>
                 <motion.div  className={"fixed top-1/2 right-0"} initial={{opacity: 0}}  animate={{ opacity: isVisibleCart ? 1 : 0, x: isVisibleCart ? 0 : 100}} transition={{duration: 0.4, delay: 0.2, ease: "easeInOut"}}>
