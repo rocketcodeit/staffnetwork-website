@@ -30,23 +30,26 @@ export default function AreaPage({area,services} : AreaPageProps){
                 <title>{area.name}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <section className={"bg-gray-100 py-4 lg:py-0"} id={"abo"}>
-                <motion.div className="containerRight flex flex-wrap justify-between">
-                    <motion.div variants={fadeInUp} className="w-full lg:w-6/12 order-1 py-8">
+            <section className={"lg:py-24 py-12 relative before:block before:absolute before:w-full before:h-full before:top-0 before:bg-black before:opacity-40 bg-cover bg-center"} style={{backgroundImage: `url("${area.img}")`}} id={"abo"}>
+                <motion.div className="container flex flex-wrap justify-between">
+                    <motion.div variants={fadeInUp} className="w-full order-1">
                         <BreadCrumbs  mappedPaths={config} showHome={true} transformDynamicPath={path => {
                             if(path === "[slug]"){
                                 return area.slug
                             }
                             return path;
                         }} />
-                        <div className="relative w-fit">
-                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                            <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}> {area.name}</motion.h1>
+                        <div>
+                            <div className="relative w-fit mx-auto">
+                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                                <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" className={"text-center text-white"} viewport={{ once: true }}> {area.name}</motion.h1>
+                            </div>
+                            <div className={"w-fit max-w-[600px] relative mt-2 mx-auto"}>
+                                <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
+                                <motion.div dangerouslySetInnerHTML={{__html:area.description ? area.description : ""}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={"text-white text-center"} />
+                            </div>
                         </div>
-                        <div className={"w-fit relative mt-2"}>
-                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
-                            <motion.div dangerouslySetInnerHTML={{__html:area.description ? area.description : ""}} variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className={""} />
-                        </div>
+
                         <div className={"w-fit relative mt-2"}>
                             <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-100"></motion.div>
                             <ul className={styles.activities}>{area.activities?.map((activity : any, index : number) =>{
