@@ -58,7 +58,7 @@
 /*#region AreaItem */
 
 .item{
-    @apply bg-gray-200 min-h-[12rem] flex flex-col justify-end  py-0 pr-0
+    @apply bg-gray-200 min-h-[12rem] flex flex-col justify-start  py-0 pr-0
 }
 .item .title{
     @apply pr-4 mb-1 mt-4

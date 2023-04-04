@@ -123,7 +123,7 @@ export default function ServicePage({service} : ServicePageProps){
                                         <button onClick={handleAddToCart} className={"btn w-full text-center"}>Acquista</button>
                                     </div>
                                 </div> }
-                                <div id={"contattaci"} className={"w-full relative mt-6 lg:mt-0 "}>
+                                <div id={"contattaci"} className={"w-full relative mt-6 lg:mt-12 "}>
                                     <Form title={service.requestForm?.title} description={service.requestForm?.text} page={"Servizio - " + service.title}
                                           typePage={service.buyable ? TypeCategory.purchasableItem : TypeCategory.item}/>
                                 </div>
