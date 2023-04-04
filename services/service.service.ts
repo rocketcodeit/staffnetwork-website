@@ -11,6 +11,7 @@ export class ProductService extends BaseStrapiService2Types<IService, IServiceLi
         return{
             slug : res.attributes.slug,
             title: res.attributes.title,
+            img : res.attributes.image.data && res.attributes.image.data.attributes.url,
             details:{
                 summary: res.attributes.summary
             },

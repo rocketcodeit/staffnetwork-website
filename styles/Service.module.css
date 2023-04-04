@@ -1,14 +1,13 @@
 .item{
-    @apply lg:w-4/12 md:w-6/12 w-full flex flex-row items-stretch
+    @apply lg:w-4/12 md:w-6/12 w-full flex flex-col items-stretch
     lg:flex-3-1.25 md:flex-2-1
 }
 .itemBuyable {
     @apply w-full flex-auto
 }
-.itemList
 
 .itemImg{
-
+    @apply max-h-[128px] w-full object-cover
 }
 
 .itemTitle{

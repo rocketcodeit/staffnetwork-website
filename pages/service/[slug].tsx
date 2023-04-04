@@ -8,13 +8,10 @@ import {blockReveal, blockTextReveal, fadeInUp} from "../../animations";
 import Head from "next/head";
 
 import {IService} from "../../models/IService";
-import moment from "moment";
 import Link from "next/link";
-import {IArea} from "../../config/models/IArea";
 import {ProductService} from "../../services/service.service";
 import {NextjsUtils} from "../../services/nextjs-utils";
 import {CartContextProvider, CartProviderContext} from "../../components/Provider/CartProvider";
-import {redirect} from "next/navigation";
 import {useRouter} from "next/router";
 import Form, {TypeCategory} from "../../components/FormRequest/FormRequest";
 
@@ -39,20 +36,20 @@ export default function ServicePage({service} : ServicePageProps){
             <main>
                 <div className="container">
 
-                <section className={"mt-8"}>
+                <section className={"mt-8 py-12 relative before:block before:absolute before:w-full before:h-full before:top-0 before:bg-black before:opacity-40 bg-cover"} style={{backgroundImage: `url("${service.img}")`}}>
                     <BreadCrumbs mappedPaths={config} showHome={true} transformDynamicPath={path => {
                         if(path === "[slug]"){
                             return service.title
                         }
                         return path;
                     }} />
-                    <div className={"w-fit relative"}>
+                    <div className={"w-fit relative mx-auto"}>
                         <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                        <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-6">{service.title}</motion.h1>
+                        <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-6 text-white text-center">{service.title}</motion.h1>
                     </div>
-                    <div className={"w-full sm:w-6/12 relative"}>
+                    <div className={"w-full sm:w-6/12 relative mx-auto"}>
                         <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                        <motion.p variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }}>{service.details.summary}</motion.p>
+                        <motion.p variants={blockTextReveal} initial="initial" whileInView="final" className="text-center text-white" viewport={{ once: true }}>{service.details.summary}</motion.p>
                     </div>
                 </section>
 
@@ -95,7 +92,7 @@ export default function ServicePage({service} : ServicePageProps){
 
                     <section id={"descrizione"}>
                         <div className={"flex flex-wrap justify-between"}>
-                            <div className={`w-12/12 lg:w-7/12 ${styles.content}`}>
+                            <div className={`w-12/12 lg:w-6/12 ${styles.content}`}>
                                 <div className={`mt-8`} dangerouslySetInnerHTML={{__html:service.description}} />
                                 {service.obj?.map((o) =>{
                                     return <div key={o.id} className={"mt-8"}>
@@ -104,8 +101,32 @@ export default function ServicePage({service} : ServicePageProps){
                                     </div>
                                 })}
                             </div>
-                            <div className={"w-11/12 lg:w-4/12"}>
-                                <img className={"mt-8"} src={service.img} />
+                            <div className={"w-11/12 lg:w-5/12"}>
+                                {service.buyable && <div id={"acquista"} className={"bg-gray-200 flex w-full mt-12 mb-8 "}>
+                                    <div className={"flex flex-row flex-wrap w-full justify-between"}>
+                                        <div className={"w-full flex flex-row justify-between px-4 pt-6 pb-3"}>
+                                            <div className={"w-6/12"}>
+                                                <h4 className={"mb-2"}>{service.buyable.title}</h4>
+                                                { service.buyable?.description && <div  dangerouslySetInnerHTML={{__html:service.buyable?.description}} /> }
+                                            </div>
+                                            {
+                                                service.buyable?.discountPrice ?
+                                                    <div className={"w-6/12 text-end"} >
+                                                        <del className={"text-gray-600"}>{service.buyable?.price} €</del>
+                                                        <h3>{service.buyable?.discountPrice} €</h3>
+                                                    </div>  :
+                                                    <h3 className={"w-6/12 text-end"}> {service.buyable?.price} €</h3>
+
+
+                                            }
+                                        </div>
+                                        <button onClick={handleAddToCart} className={"btn w-full text-center"}>Acquista</button>
+                                    </div>
+                                </div> }
+                                <div id={"contattaci"} className={"w-full relative mt-6 lg:mt-0 "}>
+                                    <Form title={service.requestForm?.title} description={service.requestForm?.text} page={"Servizio - " + service.title}
+                                          typePage={service.buyable ? TypeCategory.purchasableItem : TypeCategory.item}/>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -114,31 +135,6 @@ export default function ServicePage({service} : ServicePageProps){
 
 
                     <section className={`my-12 flex flex-wrap flex-row ${service.buyable ? " justify-center lg:justify-between" : "justify-center"} items-start`}>
-                        {service.buyable && <div id={"acquista"} className={"bg-gray-200 flex  w-full md:w-11/12 lg:w-5/12 lg:sticky top-40"}>
-                            <div className={"flex flex-row flex-wrap w-full justify-between"}>
-                                <div className={"w-full flex flex-row justify-between px-4 pt-6 pb-3"}>
-                                    <div className={"w-6/12"}>
-                                        <h4 className={"mb-2"}>{service.buyable.title}</h4>
-                                        { service.buyable?.description && <div  dangerouslySetInnerHTML={{__html:service.buyable?.description}} /> }
-                                    </div>
-                                    {
-                                        service.buyable?.discountPrice ?
-                                            <div className={"w-6/12 text-end"} >
-                                                <del className={"text-gray-600"}>{service.buyable?.price} €</del>
-                                                <h3>{service.buyable?.discountPrice} €</h3>
-                                            </div>  :
-                                            <h3 className={"w-6/12 text-end"}> {service.buyable?.price} €</h3>
-
-
-                                    }
-                                </div>
-                                <button onClick={handleAddToCart} className={"btn w-full text-center"}>Acquista</button>
-                            </div>
-                        </div> }
-                        <div id={"contattaci"} className={"w-12/12 lg:w-6/12 relative mt-6 lg:mt-0 "}>
-                            <Form title={service.requestForm?.title} description={service.requestForm?.text} page={"Servizio - " + service.title}
-                                  typePage={service.buyable ? TypeCategory.purchasableItem : TypeCategory.item}/>
-                        </div>
                     </section>
 
 

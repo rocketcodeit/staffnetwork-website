@@ -6,13 +6,24 @@ import {motion} from "framer-motion";
 import Link from "next/link";
 import {ArrowRightIcon} from "@heroicons/react/24/outline";
 
-function AreaItem(props : IArea){
+interface IAreaItemProps{
+    img?: string | null,
+    link: string,
+    title:string,
+    subtitle?: string,
+    summary:string
+}
+function AreaItem(props : IAreaItemProps){
     return(
 
             <motion.div variants={itemSlideUp} className={styles.item}>
-                <h4 className={styles.title}>{props.name}</h4>
-                <motion.div className={styles.except} dangerouslySetInnerHTML={{__html:props.short_description}}/>
-                <Link href={`/aree/${props.slug}`} className={`btn-arrow ${styles.button}`}>
+                {props.img && <img src={props.img} /> }
+                <div className={"lg:px-8 px-6"}>
+                    <h4 className={styles.title}>{props.title}</h4>
+                    <motion.div className={styles.except} dangerouslySetInnerHTML={{__html:props.summary}}/>
+                </div>
+
+                <Link href={`${props.link}`} className={`btn-arrow ${styles.button}`}>
                     <p>Scopri di più</p>
                     <ArrowRightIcon className="w-6 stroke-primary-600"/>
                 </Link>

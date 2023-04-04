@@ -40,7 +40,6 @@ export default function Home({posts, services, home, membersTeam}: HomeProps) {
         setConfigurationData();
         let idSlider: any = setChangeSlider(8000)
 
-        console.log("primo :"+ idSlider);
 
         return () => clearInterval(idSlider);
 
@@ -66,13 +65,8 @@ export default function Home({posts, services, home, membersTeam}: HomeProps) {
 
         let idSlider: any = setChangeSlider(8000)
 
-        console.log("secondo :"+ idSlider)
 
     }
-
-    useEffect(() => {
-        console.log(sliderShowed);
-    }, [sliderShowed])
     return (
         <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}
                     transition={{duration: 0.4, ease: "easeInOut"}}

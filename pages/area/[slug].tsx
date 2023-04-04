@@ -99,7 +99,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
     const productService = new ProductService();
     const services = await productService
         .find({
-            populate: [ {value: "aree,dettagli", level: 0 }],
+            populate: [ {value: "aree,dettagli,image", level: 0 }],
             sort: ['ordine','title'],
             filter : [{field:["aree","slug"],operator:FilterOperator.containsCaseInsensitive, value:slug.toString()}]
         })

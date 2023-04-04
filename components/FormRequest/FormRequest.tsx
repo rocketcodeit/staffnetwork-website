@@ -43,7 +43,6 @@ export default function Form(props: FormProps) {
 
     const handleInputChange = (event : any) => {
         const { name, value } = event.target;
-        console.log(name + ": " + value);
         setDataForm({ ...dataForm, [name]: value });
     }
 
@@ -56,7 +55,6 @@ export default function Form(props: FormProps) {
         const dataRequest =  new RequestsService();
         const dataInfoSended = dataRequest.bindData(dataForm);
         const responsePost = await dataRequest.postData(dataInfoSended);
-        console.log(responsePost);
         setStatus((responsePost as AxiosResponse).status);
 
     }

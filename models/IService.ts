@@ -62,6 +62,7 @@ export interface IService {
 export interface IServiceList{
     title: string,
     slug: string,
+    img? : string,
     area?: ServiceArea[],
     details : ServiceDetails,
     description: string,

@@ -35,7 +35,7 @@ export default function AreasPage({areas} : AreasProps){
                 </section>
 
                 <div className="container">
-                    <AreaList areas={areas} />
+                    <AreaList areas={areas} imgVisible={true} />
                 </div>
 
             </main>

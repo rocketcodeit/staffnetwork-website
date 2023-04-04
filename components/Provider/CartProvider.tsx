@@ -111,7 +111,6 @@ export function CartContextProvider(props:any){
         if (storedCartItems) {
             const parsed = JSON.parse(storedCartItems);
             setServices(parsed);
-            console.log(services.length);
         }
     }, []);
 
