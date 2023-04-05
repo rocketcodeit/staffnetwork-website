@@ -40,7 +40,9 @@ export default function Checkout(props : FieldCheckoutProps){
 
     const [selectedOption, setSelectedOption] = useState("bonifico");
     const [categorySelectedOption, setCategorySelectedOption] = useState("personaFisica");
-    const [status,setStatus] = useState<number>(-1);
+    const [response,setResponse] = useState<AxiosResponse | null>();
+    const [errors, setErrors] = useState<any>();
+
     const [isVisible, setIsVisible] = useState<boolean>(true);
 
     const [dataForm, setDataForm] = useState<IDataForm>(
@@ -59,9 +61,12 @@ export default function Checkout(props : FieldCheckoutProps){
          */
         const dataCart =  new CartService();
         const dataInfo = dataCart.bindData(dataForm, props.services);
-        const responsePost = await dataCart.postData(dataInfo);
-
-        setStatus((responsePost as AxiosResponse).status);
+        try{
+            const responsePost = await dataCart.postData(dataInfo);
+            setResponse(responsePost as AxiosResponse);
+        }catch (err){
+            setErrors(err?.toString());
+        }
 
     }
 
@@ -78,14 +83,15 @@ export default function Checkout(props : FieldCheckoutProps){
     useEffect(() => {
         setDataForm(emptyFields)
         const timer = setTimeout(() => {
-            confirmSendSuccess(status);
-            setStatus(0);
+            confirmSendSuccess(response?.status ?? 0);
+            setResponse(null);
+            setErrors(null);
             setIsVisible(true);
 
         }, 4000);
         return () => clearTimeout(timer);
 
-    },[status])
+    },[response,errors])
 
 
      return (
@@ -180,7 +186,7 @@ export default function Checkout(props : FieldCheckoutProps){
             </motion.div>
 
             {
-                (status >= 200 && status <= 299) &&
+                (response && response.status >= 200 && response.status <= 299) &&
                 <motion.div initial={{opacity:0}} animate={{opacity:1}} className={"absolute w-full h-full bg-white flex items-center flex-col flex-wrap justify-start z-10 top-0 gap-5"}>
                     <RiMailSendLine className={"w-12 h-12 text-green-800"} />
                     <h4>Operazione effettuata con successo</h4>
@@ -189,10 +195,11 @@ export default function Checkout(props : FieldCheckoutProps){
 
 
             {
-                (status >= 400 && status <= 599) &&
+                (errors  || (response && response.status >= 400 && response.status <= 599)) &&
                 <motion.div initial={{opacity:0}} animate={{opacity:1}} className={"absolute w-full h-full bg-white flex items-center flex-col flex-wrap justify-start z-10 top-0 gap-5"}>
                     <RiMailCloseLine className={"w-12 h-12 text-red-800"} />
                     <h4>Operazione fallita </h4>
+                    {errors && <div>{errors}</div>}
                 </motion.div>
             }
 

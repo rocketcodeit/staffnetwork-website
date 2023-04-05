@@ -31,7 +31,8 @@ export default function Form(props: FormProps) {
         pageFrom: props.page
     }
 
-    const [status,setStatus] = useState<number>(-1);
+    const [response,setResponse] = useState<AxiosResponse | null>();
+    const [errors, setErrors] = useState<any>();
     const [isVisible, setIsVisible] = useState<boolean>(true);
     const [dataForm, setDataForm] = useState<IDataForm>(
         {
@@ -54,20 +55,26 @@ export default function Form(props: FormProps) {
          */
         const dataRequest =  new RequestsService();
         const dataInfoSended = dataRequest.bindData(dataForm);
-        const responsePost = await dataRequest.postData(dataInfoSended);
-        setStatus((responsePost as AxiosResponse).status);
+        try{
+            const responsePost = await dataRequest.postData(dataInfoSended);
+            setResponse(responsePost as AxiosResponse);
+        }catch (err){
+            setErrors(err?.toString());
+        }
+
 
     }
 
     useEffect(() => {
         setDataForm(emptyFields)
         const timer = setTimeout(() => {
-            setStatus(0);
+            setResponse(null);
+            setErrors(null);
             setIsVisible(true);
         }, 4000);
         return () => clearTimeout(timer);
 
-    },[status])
+    },[response, errors])
 
 
     return (
@@ -129,13 +136,13 @@ export default function Form(props: FormProps) {
                             <textarea id="floating_standard" className={"w-full"} name="message" value={dataForm.message} onChange={handleInputChange} placeholder="Richiesta"></textarea>
                         </div>
                         <div className={"w-fit mx-auto mt-2"}>
-                            <button type={"submit"} className={"btn"}>Invia</button>
+                            <button type={"submit"} className={"btn"} >Invia</button>
                         </div>
                     </motion.div>
                 </motion.form>
 
                 {
-                    (status >= 200 && status <= 299) &&
+                    (response && response.status >= 200 && response.status <= 299) &&
                     <motion.div initial={{opacity:0}} animate={{opacity:1}} className={"absolute w-full h-full bg-white flex items-center flex-col flex-wrap justify-start z-10 top-0 gap-5"}>
                         <RiMailSendLine className={"w-12 h-12 text-green-800"} />
                         <h4>Operazione effettuata con successo</h4>
@@ -144,10 +151,11 @@ export default function Form(props: FormProps) {
 
 
                 {
-                    (status >= 400 && status <= 599) &&
+                    (errors  || (response && response.status >= 400 && response.status <= 599)) &&
                     <motion.div initial={{opacity:0}} animate={{opacity:1}} className={"absolute w-full h-full bg-white flex items-center flex-col flex-wrap justify-start z-10 top-0 gap-5"}>
                         <RiMailCloseLine className={"w-12 h-12 text-red-800"} />
                         <h4>Operazione fallita </h4>
+                        {errors && <div>{errors}</div>}
                     </motion.div>
                 }
             </div>

@@ -100,7 +100,7 @@ export abstract class BaseStrapiService2Types<TFull, TList> {
             });
     }
 
-    public postData(data: TFull) : Promise<AxiosResponse<any> | void>{
+    public postData(data: TFull) : Promise<AxiosResponse<any> | void >{
         const url = new StrapiUrlBuilder(this._strapiResource)
                 .build();
 
@@ -108,8 +108,9 @@ export abstract class BaseStrapiService2Types<TFull, TList> {
             .then((response) => {
                 return response;
             })
-            .catch((err : any) => {
-                console.log(err)
+            .catch((err : AxiosError) => {
+                throw err;
+
             });
     }
     abstract mapForFind(res: any): TList;
