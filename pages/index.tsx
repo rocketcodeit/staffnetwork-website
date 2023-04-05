@@ -67,6 +67,7 @@ export default function Home({posts, services, home, membersTeam}: HomeProps) {
 
 
     }
+
     return (
         <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}
                     transition={{duration: 0.4, ease: "easeInOut"}}
@@ -85,7 +86,7 @@ export default function Home({posts, services, home, membersTeam}: HomeProps) {
                             return (
                                 <motion.div key={index} variants={sliderShowAnimation} initial="initial"
                                             animate={sliderShowed === index ? "visible" : "hidden"} exit="hidden"
-                                            className={"row-start-1 col-start-1"}>
+                                            className={`row-start-1 col-start-1 ${sliderShowed === index ? 'pointer-events-auto' : 'pointer-events-none'}`}>
                                     <div className=" relative w-fit overflow-hidden mb-6">
                                         <motion.div variants={blockReveal} whileInView="final" viewport={{once: true}}
                                                     className="blockOverText bg-gray-700"></motion.div>
@@ -107,7 +108,8 @@ export default function Home({posts, services, home, membersTeam}: HomeProps) {
                             )
 
                         })}
-                        <div className={"flex lg:flex-col flex-row gap-2 absolute  lg:top-1/2 top-auto bottom-8 lg:bottom-auto right-8"}>
+                        <div
+                            className={"flex lg:flex-col flex-row gap-2 absolute  lg:top-1/2 top-auto bottom-8 lg:bottom-auto right-8"}>
                             {home.sliderShow?.map((count, index) => {
                                 return <div key={index} onClick={() => handleResetInterval(index)}
                                             className={`w-3 h-3 ${sliderShowed === index ? 'bg-white' : 'bg-white/60'} aspect-square rounded-full`}></div>
