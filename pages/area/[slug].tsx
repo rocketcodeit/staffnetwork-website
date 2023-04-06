@@ -33,7 +33,7 @@ export default function AreaPage({area, services}: AreaPageProps) {
             <section
                 className={"relative before:block before:absolute before:w-full before:h-full before:top-0 before:bg-black before:opacity-40 bg-cover bg-center"}
                 style={{backgroundImage: `url("${area.img}")`}} id={"abo"}>
-                <motion.div className="lg:py-24 py-12 backdrop-blur-md">
+                <motion.div className="lg:py-24 py-12 backdrop-blur-md min-h-fit lg:min-h-[416px]">
                     <motion.div className={"container flex flex-wrap justify-between"}>
                         <motion.div variants={fadeInUp} className="w-full order-1">
                             <BreadCrumbs mappedPaths={config} showHome={true} transformDynamicPath={path => {
@@ -76,11 +76,6 @@ export default function AreaPage({area, services}: AreaPageProps) {
                             </div>
                         </motion.div>
 
-                        <motion.div variants={fadeInUp}
-                                    className={"w-full relative lg:w-5/12 bg-none lg:bg-cover bg-center flex flex-row items-start order-last lg:order-3"}
-                                    style={{backgroundImage: `url("${area.img}")`}}>
-                            <img className={"max-h-[200px] block lg:hidden w-full object-cover"} src={area.img}/>
-                        </motion.div>
                     </motion.div>
 
                 </motion.div>

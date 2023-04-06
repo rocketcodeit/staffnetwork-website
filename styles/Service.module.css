@@ -1,5 +1,5 @@
 .item{
-    @apply lg:w-4/12 md:w-6/12 w-full flex flex-col items-stretch
+    @apply lg:w-4/12 md:w-6/12 w-full flex flex-col items-stretch md:min-h-[350px]
     lg:flex-3-1.25 md:flex-2-1
 }
 .itemBuyable {
@@ -19,7 +19,7 @@
 }
 
 .itemDescription{
-    @apply mt-3 max-w-4xl flex-auto sm:flex-16-1.5 pb-6
+    @apply mt-3 max-w-4xl flex-auto sm:flex-16-1.5 pb-6 line-clamp-4
 }
 
 .itemBoxText{
