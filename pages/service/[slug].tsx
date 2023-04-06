@@ -36,21 +36,24 @@ export default function ServicePage({service} : ServicePageProps){
             <main>
                 <div className="container">
 
-                <section className={"mt-8 lg:py-24 py-12 relative before:block before:absolute before:w-full before:h-full before:top-0 before:bg-black before:opacity-40 bg-cover"} style={{backgroundImage: `url("${service.img}")`}}>
-                    <BreadCrumbs mappedPaths={config} showHome={true} transformDynamicPath={path => {
-                        if(path === "[slug]"){
-                            return service.title
-                        }
-                        return path;
-                    }} />
-                    <div className={"w-fit relative mx-auto"}>
-                        <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                        <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-6 text-white text-center">{service.title}</motion.h1>
+                <section className={"mt-8 relative before:block before:absolute before:w-full before:h-full before:top-0 before:bg-black before:opacity-40 bg-cover"} style={{backgroundImage: `url("${service.img}")`}}>
+                    <div className={"lg:py-24 py-12 backdrop-blur-md"}>
+                        <BreadCrumbs mappedPaths={config} showHome={true} transformDynamicPath={path => {
+                            if(path === "[slug]"){
+                                return service.title
+                            }
+                            return path;
+                        }} />
+                        <div className={"w-fit relative mx-auto"}>
+                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
+                            <motion.h1 variants={blockTextReveal} initial="initial" whileInView="final" viewport={{ once: true }} className="mb-6 text-white text-center">{service.title}</motion.h1>
+                        </div>
+                        <div className={"w-full sm:w-6/12 relative mx-auto"}>
+                            <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
+                            <motion.p variants={blockTextReveal} initial="initial" whileInView="final" className="text-center text-white" viewport={{ once: true }}>{service.details.summary}</motion.p>
+                        </div>
                     </div>
-                    <div className={"w-full sm:w-6/12 relative mx-auto"}>
-                        <motion.div variants={blockReveal} whileInView="final" viewport={{ once: true }} className="blockOverText bg-gray-200"></motion.div>
-                        <motion.p variants={blockTextReveal} initial="initial" whileInView="final" className="text-center text-white" viewport={{ once: true }}>{service.details.summary}</motion.p>
-                    </div>
+
                 </section>
 
 

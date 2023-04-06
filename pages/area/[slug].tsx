@@ -31,9 +31,9 @@ export default function AreaPage({area, services}: AreaPageProps) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
             </Head>
             <section
-                className={"lg:py-24 py-12 relative before:block before:absolute before:w-full before:h-full before:top-0 before:bg-black before:opacity-40 bg-cover bg-center"}
+                className={"relative before:block before:absolute before:w-full before:h-full before:top-0 before:bg-black before:opacity-40 bg-cover bg-center"}
                 style={{backgroundImage: `url("${area.img}")`}} id={"abo"}>
-                <motion.div className="container flex flex-wrap justify-between">
+                <motion.div className="container flex flex-wrap justify-between lg:py-24 py-12 backdrop-blur-md">
                     <motion.div variants={fadeInUp} className="w-full order-1">
                         <BreadCrumbs mappedPaths={config} showHome={true} transformDynamicPath={path => {
                             if (path === "[slug]") {
