@@ -37,7 +37,7 @@ export default function ServicePage({service} : ServicePageProps){
                 <div className="container">
 
                 <section className={"mt-8 relative before:block before:absolute before:w-full before:h-full before:top-0 before:bg-black before:opacity-40 bg-cover"} style={{backgroundImage: `url("${service.img}")`}}>
-                    <div className={"lg:py-24 py-12 backdrop-blur min-h-fit lg:min-h-[416px] flex flex-col justify-center"}>
+                    <div className={"lg:py-24 py-12 backdrop-blur-[6px] min-h-fit lg:min-h-[416px] flex flex-col justify-center"}>
                         <BreadCrumbs mappedPaths={config} showHome={true} transformDynamicPath={path => {
                             if(path === "[slug]"){
                                 return service.title
