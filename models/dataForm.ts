@@ -9,7 +9,6 @@ export interface IDataForm{
     message?:string
     category?:string,
     pageFrom?: string
-
 }
 
 export interface IDataQuote{
@@ -36,5 +35,4 @@ export interface IDataRequest{
     Telefono: string,
     Messaggio?: string,
     Categoria?: string,
-
 }

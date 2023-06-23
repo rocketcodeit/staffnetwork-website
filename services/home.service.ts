@@ -27,8 +27,10 @@ export class HomeService extends BaseStrapiService<HomeData> {
             },
             sliderShow: res.attributes.sliderShow && res.attributes.sliderShow.map((itemSlider : any) => {
                 return{
+                    preTitle: itemSlider.preTitle,
                     title: itemSlider.title,
                     description: itemSlider.description,
+                    img: itemSlider.img.data.attributes.url,
                     buttons : itemSlider.button.map((itemBtn : any) => {
                         return{
                             title: itemBtn.title,

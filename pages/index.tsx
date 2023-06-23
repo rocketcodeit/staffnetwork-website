@@ -23,6 +23,7 @@ import {HomeData} from "../models/home-data";
 import {useContext, useEffect, useState} from "react";
 import {AppProviderContext} from "../components/Provider/AppContext";
 import Head from "next/head";
+import Carousel from "../components/Carousel/Carousel";
 
 interface HomeProps {
     posts: PostDetail[],
@@ -76,7 +77,7 @@ export default function Home({posts, services, home, membersTeam}: HomeProps) {
                 <title>{home.dataSeo.title}</title>
             </Head>
             <section>
-                <div className={styles.aboveTheFold}>
+                {false && <div className={styles.aboveTheFold}>
 
                     <motion.video className={`${styles.video}`}
                                   src={`https://${home.imgAboveTheFold.data.attributes.url}`} autoPlay muted loop/>
@@ -116,8 +117,17 @@ export default function Home({posts, services, home, membersTeam}: HomeProps) {
                             })}</div>
                     </motion.div>
 
-                </div>
+                </div>}
 
+
+                {home.sliderShow &&
+                    <Carousel carouselItem={home.sliderShow.map((item) => ({
+                        preTitle: item.preTitle,
+                        title: item.title,
+                        description: item.description,
+                        image: item.img
+                        }))}/>
+                }
             </section>
             <section className="mt-24">
                 <div className={`${styles.containerLeft} `}>

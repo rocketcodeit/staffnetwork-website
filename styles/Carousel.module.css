@@ -1,0 +1,45 @@
+.outerContainer{
+    height: calc(100vh - 96px);
+    @apply  relative max-h-[500px]
+}
+
+.innerContainer{
+   @apply grid grid-cols-1 h-full overflow-hidden
+}
+.item{
+    @apply row-start-1 col-start-1 h-full w-full flex items-end justify-center transition-all bg-cover bg-no-repeat
+}
+
+.itemContent{
+    @apply  bg-primary-800/80 w-10/12 px-5 py-12 text-left text-white
+}
+.itemContent > * {
+    @apply text-white ;
+}
+.itemContent h2{
+    @apply w-10/12;
+}
+.itemContent .description{
+    @apply mt-3 w-8/12;
+}
+.itemContent .description p{
+    @apply text-white;
+}
+.item.visible{
+    @apply bg-green-500 opacity-100 pointer-events-auto
+}
+.item.hidden{
+    @apply opacity-100 pointer-events-none
+}
+
+.button{
+    @apply absolute h-full top-0 px-5 z-20
+}
+
+.button.left{
+    @apply left-0
+}
+
+.button.right{
+    @apply right-0
+}

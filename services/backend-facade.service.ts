@@ -44,7 +44,7 @@ export class BackendFacade {
                 populate: [
                     {value: '*'},
                     {value: 'datiStatistici,staff,partnership,servizi,sliderShow,datiHomeSeo,imgAboveTheFold,imgAree,imgDati,imgPartnership', level: 0},
-                    {value: 'datiStatistici.dati,partnership.link,sliderShow.button', level: 1}
+                    {value: 'datiStatistici.dati,partnership.link,sliderShow.button,sliderShow.img', level: 1}
                 ]
             });
 

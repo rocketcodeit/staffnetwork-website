@@ -15,6 +15,8 @@ export interface HomeData {
     dataSeo : HeadData,
 
     sliderShow?: {
+       preTitle: string,
+       img: string,
        title: string,
        description: string,
        buttons : {link: string, title: string}[]
