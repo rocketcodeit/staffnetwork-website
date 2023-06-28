@@ -125,7 +125,8 @@ export default function Home({posts, services, home, membersTeam}: HomeProps) {
                         preTitle: item.preTitle,
                         title: item.title,
                         description: item.description,
-                        image: item.img
+                        image: item.img,
+                        buttons: item.buttons
                         }))}/>
                 }
             </section>

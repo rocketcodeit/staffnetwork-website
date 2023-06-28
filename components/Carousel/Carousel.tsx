@@ -3,16 +3,20 @@ import styles from '../../styles/Carousel.module.css'
 import {motion} from "framer-motion";
 import {cardAnimation, sliderShowAnimation} from "../../animations";
 import {RiArrowLeftSLine, RiArrowRightSLine} from "react-icons/ri";
+import Link from "next/link";
 
-interface CarouselProps{
+interface CarouselProps {
     carouselItem: {
-        preTitle:string,
+        preTitle: string,
         title: string,
-        description:string,
-        image: string
+        description: string,
+        image: string,
+        buttons: { link: string, title: string }[]
+
     }[];
 }
-export default function Carousel(props: CarouselProps){
+
+export default function Carousel(props: CarouselProps) {
 
     const [cards, setCards] = useState(0);
     const [intervalId, setIntervalId] = useState<NodeJS.Timeout | undefined>(undefined);
@@ -28,8 +32,8 @@ export default function Carousel(props: CarouselProps){
 
     function setChangeSlider(ms: number): any {
         const interval = setInterval(() => {
-                let maxSize = props.carouselItem.length;
-                setCards(sliderShowed => (sliderShowed + 1) % maxSize);
+            let maxSize = props.carouselItem.length;
+            setCards(sliderShowed => (sliderShowed + 1) % maxSize);
         }, ms);
         intervalIdRef.current = interval;
         setIntervalId(interval);
@@ -42,9 +46,8 @@ export default function Carousel(props: CarouselProps){
         clearInterval(intervalId);
 
 
-
-
     }
+
     const handleNext = () => {
         handleResetInterval();
         setCards((prevIndex) =>
@@ -59,28 +62,34 @@ export default function Carousel(props: CarouselProps){
         );
     };
 
-    return(
+    return (
         <div className={styles.outerContainer}>
-            <button className={`${styles.button} ${styles.left}`} onClick={handlePrev}><RiArrowLeftSLine /></button>
+            <button className={`${styles.button} ${styles.left}`} onClick={handlePrev}><RiArrowLeftSLine/></button>
 
             <div className={styles.innerContainer}>
                 {props.carouselItem.map((item, index) => {
-                       return (
-                           <motion.div variants={cardAnimation} initial="initial" animate={cards === index ? "visible" : "hidden"} exit="hidden"
-                                       key={index}  style={{backgroundImage: `url("${item.image}")`}}
-                                       className={`${styles.item} ${cards === index ? styles.visible : styles.hidden}`}>
+                    return (
+                        <motion.div variants={cardAnimation} initial="initial"
+                                    animate={cards === index ? "visible" : "hidden"} exit="hidden"
+                                    key={index} style={{backgroundImage: `url("${item.image}")`}}
+                                    className={`${styles.item} ${cards === index ? styles.visible : styles.hidden}`}>
 
-                               <div className={styles.itemContent}>
-                                   <span>{item.preTitle}</span>
-                                   <h2>{item.title}</h2>
-                                   <div className={styles.description} dangerouslySetInnerHTML={{__html: item.description}} />
-                                   </div>
-                           </motion.div>
-                           )
+                            <div className={styles.itemContent}>
+                                <span>{item.preTitle}</span>
+                                <h2>{item.title}</h2>
+                                <div className={styles.description}
+                                     dangerouslySetInnerHTML={{__html: item.description}}/>
+                                {item.buttons.map((itemBtn, index) => <Link key={index}
+                                                                            className="btn block w-fit mt-6"
+                                                                            href={itemBtn.link}>{itemBtn.title}</Link>)}
+                            </div>
+
+                        </motion.div>
+                    )
 
                 })}
             </div>
-            <button className={`${styles.button} ${styles.right}`} onClick={handleNext}><RiArrowRightSLine /></button>
+            <button className={`${styles.button} ${styles.right}`} onClick={handleNext}><RiArrowRightSLine/></button>
 
         </div>
     )
