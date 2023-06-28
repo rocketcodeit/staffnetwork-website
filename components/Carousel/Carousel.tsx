@@ -38,9 +38,10 @@ export default function Carousel(props: CarouselProps){
     }
 
     function handleResetInterval() {
+        let idTimeSlider: any = setChangeSlider(8000)
         clearInterval(intervalId);
 
-        let idSlider: any = setChangeSlider(8000)
+
 
 
     }
