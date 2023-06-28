@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import styles from '../../styles/Carousel.module.css'
 import {motion} from "framer-motion";
 import {cardAnimation, sliderShowAnimation} from "../../animations";
+import {RiArrowLeftSLine, RiArrowRightSLine} from "react-icons/ri";
 
 interface CarouselProps{
     carouselItem: {
@@ -22,10 +23,7 @@ export default function Carousel(props: CarouselProps){
 
         let idTimeSlider: any = setChangeSlider(8000)
 
-
         return () => clearInterval(idTimeSlider);
-
-
     }, [])
 
     function setChangeSlider(ms: number): any {
@@ -34,37 +32,35 @@ export default function Carousel(props: CarouselProps){
                 setCards(sliderShowed => (sliderShowed + 1) % maxSize);
         }, ms);
         intervalIdRef.current = interval;
+        setIntervalId(interval);
 
         return interval;
     }
 
     function handleResetInterval() {
-        if (intervalIdRef.current) {
-            clearInterval(intervalIdRef.current);
-        }
-        let idTimeSlider = setChangeSlider(8000);
+        clearInterval(intervalId);
+
+        let idSlider: any = setChangeSlider(8000)
 
 
     }
     const handleNext = () => {
+        handleResetInterval();
         setCards((prevIndex) =>
             prevIndex === (props.carouselItem.length - 1) ? 0 : prevIndex + 1
         );
-        handleResetInterval();
-
     };
 
     const handlePrev = () => {
+        handleResetInterval();
         setCards((prevIndex) =>
             prevIndex === 0 ? props.carouselItem.length - 1 : prevIndex - 1
         );
-        handleResetInterval();
-
     };
 
     return(
         <div className={styles.outerContainer}>
-            <button className={`${styles.button} ${styles.left}`} onClick={handlePrev}>Previous</button>
+            <button className={`${styles.button} ${styles.left}`} onClick={handlePrev}><RiArrowLeftSLine /></button>
 
             <div className={styles.innerContainer}>
                 {props.carouselItem.map((item, index) => {
@@ -83,7 +79,7 @@ export default function Carousel(props: CarouselProps){
 
                 })}
             </div>
-            <button className={`${styles.button} ${styles.right}`} onClick={handleNext}>Next</button>
+            <button className={`${styles.button} ${styles.right}`} onClick={handleNext}><RiArrowRightSLine /></button>
 
         </div>
     )
