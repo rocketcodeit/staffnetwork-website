@@ -79,7 +79,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) =>{
     const postService = new PostService();
     const postCategoriesService = new PostCategoriesService();
 
-    const posts = await postService.find({pagination: {page: currentPage, pageSize: 10},sort: ['createdAt:DESC'] });
+    const posts = await postService.find({pagination: {page: currentPage, pageSize: 10},sort: ['date:DESC'] });
     const categories = await postCategoriesService.find();
 
     if(currentPage > (posts?.paginationInfo.pageCount ?? 1))
