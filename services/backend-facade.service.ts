@@ -36,7 +36,7 @@ export class BackendFacade {
     private _homeService = new HomeService();
 
     public async getHomeData(): Promise<{posts: PostDetail[], services: IArea[], home: HomeData, layoutData: any, membersTeam: TeamMember[]}> {
-        const postsPromise = this.postService.find({pagination: {page: 1, pageSize: 3}});
+        const postsPromise = this.postService.find({pagination: {page: 1, pageSize: 3}, sort: ['date:DESC']});
         const membersPromise = this.teamMemberService.find({pagination: {page: 1, pageSize: 4}});
         const areasPromise = this.areaService.find({pagination: {page: 1, pageSize: 6}, sort: ['id']});
         const configurationPromise = this.configurationService.getSingle();
@@ -56,10 +56,12 @@ export class BackendFacade {
         const result: any = {
             posts : (promiseResult[0] as (PaginatedResult<PostDetail> | undefined))?.data,
             services : (promiseResult[1] as (PaginatedResult<IArea> | undefined))?.data,
-            home : (promiseResult[2] as (HomeData | undefined)),
             layoutData : (promiseResult[3] as (ConfigurationDataFull | undefined)),
-            membersTeam : (promiseResult[4] as (PaginatedResult<TeamMember> | undefined))?.data
+            membersTeam : (promiseResult[4] as (PaginatedResult<TeamMember> | undefined))?.data,
+            home : (promiseResult[2] as (HomeData | undefined))
         }
+
+        console.log(result)
 
         return result;
     }
