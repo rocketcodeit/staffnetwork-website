@@ -293,12 +293,12 @@ export default function Home({posts, services, home, membersTeam}: HomeProps) {
                         <motion.div variants={blockReveal} whileInView="final" viewport={{once: true}}
                                     className="blockOverText bg-gray-100"></motion.div>
                         <motion.h2 variants={blockTextReveal} initial="initial" whileInView="final"
-                                   viewport={{once: true}} className="mb-5">Le Risorse
+                                   viewport={{once: true}} className="mb-5">Articoli
                         </motion.h2>
                     </div>
 
                     <PostList posts={posts}/>
-                    <Link className="btn block w-fit mt-8 mx-auto" href="/blog">Vai alle risorse</Link>
+                    <Link className="btn block w-fit mt-8 mx-auto" href="/blog">Vai agli articoli</Link>
                 </div>
             </section>
         </motion.div>
