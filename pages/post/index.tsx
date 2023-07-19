@@ -49,7 +49,7 @@ export default function PostsPage({posts, pageCount,currentPage, categories} : I
                         <BreadCrumbs mappedPaths={config} showHome={true} transformDynamicPath={path => {
                             return path;
                         }} />
-                        <h1 className={"mb-6"}>Articoli</h1>
+                        <h1 className={"mb-6"}>News</h1>
 
                         <PostList posts={data!} />
 
